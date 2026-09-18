@@ -15,10 +15,12 @@ lanes have passed their gate.
 | | |
 |---|---|
 | **Current stage** | **Stage 1 - Real data, real surface** |
+| **Lane A** | Luka - curriculum domain, matching engine, evaluation |
+| **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | `S1-A1` (not started) |
 | **Person B is on** | `S1-B1` (not started) |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-18 - scaffold |
+| **Last updated** | 2026-09-18 - lanes assigned |
 
 ### Stage ladder
 
