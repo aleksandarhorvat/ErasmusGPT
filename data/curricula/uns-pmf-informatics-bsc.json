@@ -1,0 +1,126 @@
+{
+  "programme_id": "uns-pmf-informatics-bsc",
+  "institution_id": "uns-pmf",
+  "institution_name": "University of Novi Sad, Faculty of Sciences",
+  "country": "RS",
+  "programme_name": "BSc Informatics",
+  "level": "bachelor",
+  "language": "en",
+  "total_ects": 180,
+  "academic_year": "2025/2026",
+  "source_url": "https://www.pmf.uns.ac.rs/en/studies/study-programs/informatics/",
+  "scraped_at": null,
+  "_note": "SAMPLE DATA - placeholder so the stub matcher returns something. Person A replaces this in S1-A1 with the full scraped curriculum.",
+  "courses": [
+    {
+      "code": "I101",
+      "title": "Introduction to Programming",
+      "ects": 8.0,
+      "year": 1, "semester": 1, "mandatory": true, "module": null, "language": "en",
+      "description": "Basic concepts of imperative programming. Data types, expressions, control flow, functions, arrays and pointers. Program decomposition, debugging and testing. Practical work in C.",
+      "learning_outcomes": ["Write, compile and debug small imperative programs", "Decompose a problem into functions"],
+      "topics": ["control flow", "functions", "arrays", "pointers"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "I102",
+      "title": "Data Structures and Algorithms",
+      "ects": 8.0,
+      "year": 1, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "Abstract data types and their implementations: lists, stacks, queues, trees, hash tables and graphs. Algorithm design techniques and asymptotic complexity analysis. Sorting and searching algorithms.",
+      "learning_outcomes": ["Choose an appropriate data structure for a problem", "Analyse the asymptotic complexity of an algorithm"],
+      "topics": ["complexity", "trees", "hashing", "graphs", "sorting"],
+      "prerequisites": ["I101"],
+      "url": null
+    },
+    {
+      "code": "I203",
+      "title": "Object-Oriented Programming",
+      "ects": 7.0,
+      "year": 2, "semester": 1, "mandatory": true, "module": null, "language": "en",
+      "description": "Classes, objects, encapsulation, inheritance and polymorphism. Interfaces and abstract classes, generics, exception handling, collections. Design principles and common design patterns. Practical work in Java.",
+      "learning_outcomes": ["Design a class hierarchy", "Apply standard design patterns"],
+      "topics": ["inheritance", "polymorphism", "generics", "design patterns"],
+      "prerequisites": ["I101"],
+      "url": null
+    },
+    {
+      "code": "I204",
+      "title": "Databases 1",
+      "ects": 7.0,
+      "year": 2, "semester": 1, "mandatory": true, "module": "Information Technologies", "language": "en",
+      "description": "The relational data model, relational algebra and SQL. Conceptual modelling with entity-relationship diagrams, functional dependencies and normalisation up to BCNF. Introduction to transactions and indexing.",
+      "learning_outcomes": ["Design a normalised relational schema", "Write non-trivial SQL queries"],
+      "topics": ["relational algebra", "SQL", "normalisation", "ER modelling"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "I205",
+      "title": "Operating Systems",
+      "ects": 6.0,
+      "year": 2, "semester": 2, "mandatory": true, "module": "Information Technologies", "language": "en",
+      "description": "Processes and threads, scheduling, synchronisation and deadlock. Virtual memory and paging. File systems, input/output subsystems and device drivers. Practical work with system calls on Unix-like systems.",
+      "learning_outcomes": ["Explain how an operating system schedules and isolates processes", "Write programs using system calls and threads"],
+      "topics": ["processes", "scheduling", "synchronisation", "virtual memory", "file systems"],
+      "prerequisites": ["I101"],
+      "url": null
+    },
+    {
+      "code": "I206",
+      "title": "Computer Networks",
+      "ects": 6.0,
+      "year": 2, "semester": 2, "mandatory": true, "module": "Information Technologies", "language": "en",
+      "description": "Layered network architectures, the TCP/IP stack, addressing and routing. Reliable transport, congestion control, application protocols such as HTTP and DNS. Basics of network security. Socket programming.",
+      "learning_outcomes": ["Explain the function of each layer of the TCP/IP stack", "Implement a simple client-server application over sockets"],
+      "topics": ["TCP/IP", "routing", "HTTP", "DNS", "sockets"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "I307",
+      "title": "Formal Languages and Automata",
+      "ects": 6.0,
+      "year": 3, "semester": 1, "mandatory": false, "module": "Computer Science", "language": "en",
+      "description": "Regular languages, finite automata and regular expressions. Context-free grammars and pushdown automata. The Chomsky hierarchy, Turing machines, decidability and the limits of computation. Applications to lexical analysis and parsing.",
+      "learning_outcomes": ["Construct automata and grammars for given languages", "Argue about decidability of simple problems"],
+      "topics": ["finite automata", "grammars", "Turing machines", "decidability"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "I308",
+      "title": "Artificial Intelligence",
+      "ects": 6.0,
+      "year": 3, "semester": 1, "mandatory": false, "module": "Computer Science", "language": "en",
+      "description": "Problem solving by search, heuristic search and adversarial search. Knowledge representation and logical inference. Introduction to machine learning: supervised learning, evaluation, and neural networks. Practical work in Python.",
+      "learning_outcomes": ["Implement informed search algorithms", "Train and evaluate a simple classifier"],
+      "topics": ["search", "heuristics", "knowledge representation", "machine learning"],
+      "prerequisites": ["I102"],
+      "url": null
+    },
+    {
+      "code": "I309",
+      "title": "Software Engineering",
+      "ects": 6.0,
+      "year": 3, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "The software development lifecycle, requirements elicitation and specification, architectural and detailed design, version control, testing strategies, code review and agile process models. Team project work.",
+      "learning_outcomes": ["Elicit and document requirements", "Work effectively in a version-controlled team project"],
+      "topics": ["requirements", "architecture", "testing", "agile", "version control"],
+      "prerequisites": ["I203"],
+      "url": null
+    },
+    {
+      "code": "I310",
+      "title": "Web Programming",
+      "ects": 6.0,
+      "year": 3, "semester": 2, "mandatory": false, "module": "Information Technologies", "language": "en",
+      "description": "Client-side technologies: HTML, CSS and JavaScript, the DOM and asynchronous requests. Server-side programming, REST APIs, templating, sessions and authentication. Deployment of a complete web application.",
+      "learning_outcomes": ["Build a client-server web application", "Design and consume a REST API"],
+      "topics": ["HTML", "JavaScript", "REST", "authentication"],
+      "prerequisites": ["I203"],
+      "url": null
+    }
+  ]
+}

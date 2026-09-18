@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: erasmusgpt-backend:local
+    environment:
+      # stub = instant fake matches (no models). real = the actual pipeline.
+      MATCHER_IMPL: "${MATCHER_IMPL:-real}"
+      BI_ENCODER: "bge-small"
+      CROSS_ENCODER: "ms-marco-l6"
+      DATABASE_URL: "sqlite:////data/erasmusgpt.db"
+    volumes:
+      # Curricula and the gold set are read from the repo so they can be edited
+      # without rebuilding the image.
+      - ./data:/srv/data
+      - backend-db:/data
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE: "/api/v1"
+    image: erasmusgpt-frontend:local
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+
+volumes:
+  backend-db:

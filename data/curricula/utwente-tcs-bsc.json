@@ -1,0 +1,115 @@
+{
+  "programme_id": "utwente-tcs-bsc",
+  "institution_id": "utwente",
+  "institution_name": "University of Twente",
+  "country": "NL",
+  "programme_name": "BSc Technical Computer Science",
+  "level": "bachelor",
+  "language": "en",
+  "total_ects": 180,
+  "academic_year": "2025/2026",
+  "source_url": "https://utwente.osiris-student.nl/onderwijscatalogus/extern/cursus",
+  "scraped_at": null,
+  "_note": "SAMPLE DATA - placeholder so the stub matcher returns something. Person A replaces this in S1-A2 with the scraped catalogue.",
+  "courses": [
+    {
+      "code": "TCS-M1",
+      "title": "Software Systems",
+      "ects": 15.0,
+      "year": 1, "semester": 1, "mandatory": true, "module": null, "language": "en",
+      "description": "An introduction to programming and software construction. Imperative and object-oriented programming in Java, program decomposition, unit testing, and a first look at how a software system is designed and built by a team. Includes a project in which a working application is delivered.",
+      "learning_outcomes": ["Write structured object-oriented programs", "Test and document a small software system"],
+      "topics": ["Java", "object orientation", "unit testing", "project work"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M2",
+      "title": "Algorithms and Data Structures",
+      "ects": 15.0,
+      "year": 1, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "Fundamental data structures such as lists, trees, heaps, hash tables and graphs, together with the algorithms that operate on them. Algorithm design paradigms including divide and conquer, greedy methods and dynamic programming. Analysis of running time and correctness proofs.",
+      "learning_outcomes": ["Select and implement suitable data structures", "Prove correctness and derive the complexity of algorithms"],
+      "topics": ["graphs", "dynamic programming", "complexity", "sorting"],
+      "prerequisites": ["TCS-M1"],
+      "url": null
+    },
+    {
+      "code": "TCS-M3",
+      "title": "Data and Information",
+      "ects": 15.0,
+      "year": 2, "semester": 1, "mandatory": true, "module": null, "language": "en",
+      "description": "Storing and querying structured data. Conceptual modelling, the relational model, relational algebra, SQL, schema design and normal forms. Transactions, concurrency control and physical storage. A project in which an information system is modelled and implemented.",
+      "learning_outcomes": ["Model a domain and derive a normalised relational schema", "Write and optimise SQL queries"],
+      "topics": ["relational model", "SQL", "normal forms", "transactions"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M4",
+      "title": "Computer Systems",
+      "ects": 15.0,
+      "year": 2, "semester": 1, "mandatory": true, "module": null, "language": "en",
+      "description": "How a computer executes programs, from the instruction set architecture upwards. Memory hierarchy and caching, concurrency, processes and threads, scheduling, and the services an operating system provides. Practical assignments in C on a Unix-like system.",
+      "learning_outcomes": ["Explain the memory hierarchy and its effect on performance", "Write concurrent programs using processes and threads"],
+      "topics": ["architecture", "caching", "processes", "scheduling", "concurrency"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M5",
+      "title": "Network Systems",
+      "ects": 15.0,
+      "year": 2, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "The architecture of computer networks and the internet. Protocol layering, link and network layers, routing, reliable transport and congestion control, application layer protocols, and an introduction to network security and distributed systems.",
+      "learning_outcomes": ["Analyse protocol behaviour at each layer", "Build a networked application"],
+      "topics": ["protocols", "routing", "transport", "distributed systems", "security"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M6",
+      "title": "Theory of Computation",
+      "ects": 15.0,
+      "year": 2, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "Models of computation and the languages they recognise. Finite state machines and regular expressions, context-free grammars and parsing, Turing machines, computability and undecidable problems, and an introduction to complexity classes.",
+      "learning_outcomes": ["Construct machines and grammars for formal languages", "Classify problems as decidable or undecidable"],
+      "topics": ["automata", "grammars", "computability", "complexity classes"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M7",
+      "title": "Intelligent Interaction Design",
+      "ects": 15.0,
+      "year": 3, "semester": 1, "mandatory": false, "module": null, "language": "en",
+      "description": "Designing systems that reason and learn. Search and planning, probabilistic reasoning, supervised machine learning and evaluation methodology, combined with human-centred design and usability evaluation of the resulting system.",
+      "learning_outcomes": ["Apply search and learning techniques to a design problem", "Evaluate a system with users"],
+      "topics": ["search", "machine learning", "usability", "evaluation"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M8",
+      "title": "Web Science",
+      "ects": 15.0,
+      "year": 3, "semester": 1, "mandatory": false, "module": null, "language": "en",
+      "description": "The web as an engineered and social system. Web application architecture, client and server technologies, REST services, information retrieval and search engines, link analysis, and the analysis of large web data sets.",
+      "learning_outcomes": ["Build and deploy a web application with a REST back end", "Explain how a search engine ranks documents"],
+      "topics": ["web architecture", "REST", "information retrieval", "link analysis"],
+      "prerequisites": [],
+      "url": null
+    },
+    {
+      "code": "TCS-M9",
+      "title": "Software Design and Engineering Project",
+      "ects": 15.0,
+      "year": 3, "semester": 2, "mandatory": true, "module": null, "language": "en",
+      "description": "A large team project covering the full engineering lifecycle: requirements elicitation with a real client, architectural design, implementation with version control and continuous integration, systematic testing, and delivery with documentation.",
+      "learning_outcomes": ["Manage requirements and architecture for a realistic system", "Deliver working software as a team"],
+      "topics": ["requirements", "architecture", "continuous integration", "testing", "teamwork"],
+      "prerequisites": ["TCS-M1"],
+      "url": null
+    }
+  ]
+}

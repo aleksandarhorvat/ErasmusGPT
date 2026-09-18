@@ -1,0 +1,70 @@
+# Partner universities and curriculum sources
+
+Owner: **Person A**
+
+## Selection criteria
+
+A partner programme is only usable for this project if it satisfies all four:
+
+1. **Course descriptions published in English.** UNS PMF publishes its Informatics
+   programme in English too, so the whole pipeline stays monolingual - no multilingual
+   model, no translation step, no extra failure mode. (ADR-0001)
+2. **A public, structured course catalogue** - an HTML page per course with title,
+   ECTS, content and learning outcomes. No PDF-only catalogues, no logins.
+3. **Comparable level.** UNS PMF Informatics is a 3-year, 180-ECTS **bachelor**.
+   Matching a BSc course to an MSc course is a different (harder) task; keep the MVP
+   BSc<->BSc and treat the one MSc catalogue below as a deliberate stress test.
+4. **Plausible as a real Erasmus+ destination** for a University of Novi Sad student.
+   Serbia is an Erasmus+ programme country, so EU/EEA institutions are all in scope.
+
+## Home programme
+
+| | |
+|---|---|
+| Institution | University of Novi Sad, Faculty of Sciences (PMF), Department of Mathematics and Informatics |
+| Programme | BSc Informatics, 180 ECTS, 3 years |
+| Modules | *Computer Science* (algorithm analysis, formal and programming languages, intelligent systems) and *Information Technologies* (architecture and networks, databases, operating systems, software engineering, information systems) |
+| Structure | 8 compulsory courses (72 ECTS) + 11 module electives (~84 ECTS) + a pool of 33 electives |
+| Source | <https://www.pmf.uns.ac.rs/en/studies/study-programs/informatics/> - each course links to a syllabus with lecture/exercise hours and ECTS |
+| `institution_id` | `uns-pmf` |
+
+Ingest **both** modules: ~50-60 courses total. That is the left-hand side of every match.
+
+## Recommended partner shortlist (MVP = the first two, then add outward)
+
+| # | Institution | Programme | Why it is a good test case | Catalogue |
+|---|---|---|---|---|
+| 1 | **University of Twente** (NL) | BSc Technical Computer Science | Fully English-taught BSc, public Osiris catalogue with long structured descriptions. **Hard case on purpose:** Twente teaches in 10-week "modules" that bundle several subjects, so one home course often maps to *part* of a host module - exactly the ambiguity a cross-encoder should resolve better than cosine similarity. | <https://utwente.osiris-student.nl/onderwijscatalogus/extern/cursus> |
+| 2 | **Masaryk University, Faculty of Informatics** (CZ) | BSc Informatics / Programming and Computer Technology | The realistic destination: a very common Erasmus target for Serbian students, curriculum structurally close to PMF's, catalogue fully available in English. Expect high scores here. If this pair scores badly, something is broken. | <https://www.fi.muni.cz/catalogue-current/?lang=en> - <https://www.muni.cz/en/bachelors-and-masters-study-programmes/faculty-of-informatics> |
+| 3 | **TU Wien** (AT) | BSc Media Informatics / Software & Information Engineering | Geographically the obvious partner for Novi Sad. TISS publishes English course pages with content and outcomes. Naming conventions differ a lot from PMF's -> good lexical-vs-semantic contrast (BM25 fails, dense wins). | <https://tiss.tuwien.ac.at/curriculum/> |
+| 4 | **University of Ljubljana, Faculty of Computer and Information Science (FRI)** (SI) | BSc Computer Science and Informatics | Regional partner, very similar course structure, English descriptions published for exchange students. | <https://fri.uni-lj.si/en/studies> |
+| 5 | **Technical University of Denmark (DTU)** (DK) | BEng/BSc Software Technology courses | `kurser.dtu.dk` is the cleanest machine-readable catalogue in Europe: stable URLs, explicit "Learning objectives" and "Content" sections, ECTS on every page. Cheapest to ingest - do this one when you need a fourth programme fast. | <https://www.dtu.dk/english/education/course-base> |
+| 6 | **EPFL** (CH) - *stretch / stress test* | MSc Computer Science | Included because it was the original inspiration, but note: the **BSc is largely in French**, only the MSc is reliably English. Use it as the deliberate level-mismatch case in the error analysis (S6-A2): an MSc catalogue *should* produce lower and more uncertain matches, and if the system reports that honestly, that is a result worth writing up. | <https://edu.epfl.ch/studyplan/en/master/computer-science/> |
+
+**Suggestion:** ship M1-M3 with **UNS PMF + Twente + Masaryk**. Three programmes give
+you two host catalogues, one easy and one hard, which is enough to show the
+cross-encoder's improvement. Add 4-6 during M4 only if ingestion is already automated.
+
+## Ingestion policy
+
+- Scrape once, commit the result as JSON under `data/curricula/`. **Never scrape at
+  request time** - the demo must run offline inside Docker.
+- One scraper script per institution: `backend/scripts/scrape_<institution_id>.py`.
+  Each writes a file conforming to `docs/03-data-schema.md` and nothing else.
+- Record in each JSON file: `source_url`, `scraped_at`, `academic_year`. Graders and
+  coordinators will ask where the data came from.
+- Be polite: `time.sleep(1)` between requests, a real User-Agent, and honour robots.txt.
+  If a site disallows scraping, copy the 30-60 courses by hand - it is one afternoon
+  and it is not a research contribution either way.
+
+## Known data hazards (write these into the error analysis)
+
+- **Granularity mismatch** - Twente 15-ECTS modules vs PMF 6-ECTS courses.
+- **Level collision** - "Databases 1" at PMF vs "Advanced Databases" at the host.
+- **Same name, different content** - "Software Engineering" means requirements
+  engineering at one school and a team project at another.
+- **Different name, same content** - "Formal Languages and Automata" vs
+  "Theory of Computation" vs "Berechenbarkeit". This is where dense retrieval earns
+  its place over BM25, and it is the headline example for the defence.
+- **Empty or one-line descriptions** - some catalogues give only a title. Fall back to
+  title + programme context, and flag the match as low-confidence in the UI.

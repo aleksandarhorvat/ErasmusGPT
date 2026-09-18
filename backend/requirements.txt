@@ -1,0 +1,17 @@
+# Shared contract file - changing it needs a note in PROGRESS.md
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+SQLAlchemy==2.0.36
+numpy==2.2.1
+rank-bm25==0.2.2
+sentence-transformers==3.3.1
+# torch is installed separately in the Dockerfile from the CPU wheel index
+huggingface-hub==0.27.0
+python-multipart==0.0.20
+
+# dev
+pytest==8.3.4
+httpx==0.28.1
+ruff==0.8.4
