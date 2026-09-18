@@ -68,12 +68,14 @@ The backend reads the same `.env`, so `MATCHER_IMPL=stub` there applies here too
 Before every commit:
 
 ```bash
-python scripts/check_style.py     # writing style, CONTEXT.md section 11
+python scripts/check_style.py        # writing style, CONTEXT.md section 11
+ruff check backend eval scripts      # lint, including the 100-character line limit
 cd backend && pytest tests -q
 cd frontend && npm run build
 ```
 
-CI runs the same three plus `ruff check backend`.
+CI runs exactly these four, plus a smoke test that starts the whole stack. Run them all
+before you push: a docstring one character too long fails the build.
 
 ## How it works
 

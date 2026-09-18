@@ -1,4 +1,6 @@
-"""Reciprocal Rank Fusion. Owner: Person A. Stage 3, task S3-A2. The function below is already written; wiring it into the pipeline is the task.
+"""Reciprocal Rank Fusion. Owner: Person A. Stage 3, task S3-A2.
+
+The function below is already written; wiring it into the pipeline is the task.
 
     RRF(d) = sum over lists of 1 / (k + rank_in_that_list(d)),  k = settings.rrf_k
 

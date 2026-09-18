@@ -14,6 +14,33 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-18 - [B] Fix the lint failure CI caught, and close the gap that let it through
+
+**Who:** Person B
+**Stage:** 1. Housekeeping.
+**Commit:** `[B] fix E501 in fusion.py and lint eval and scripts in ci`
+**Tasks touched:** none
+
+### Done
+- `backend/app/matching/fusion.py` had a 144-character docstring first line, left behind
+  when the task IDs were renamed to stage IDs. Split across two lines.
+- The real problem was that the documented pre-commit list in `README.md` deliberately
+  left `ruff` out and said "CI runs the same three plus `ruff check backend`". Nothing
+  local caught it. `ruff` is now in the local list and in the definition of done in
+  `AGENTS.md`.
+- CI linted only `backend`. It now lints `backend eval scripts`, so `eval/run_eval.py`
+  and `scripts/check_style.py` are covered too. Both pass.
+
+### Decisions
+- Whatever CI runs, the README tells you to run locally, in the same order and with the
+  same arguments. A check that only exists in CI is a check nobody runs before pushing.
+
+### Next
+- **B:** `S1-B1`, then `S1-B2`.
+- **A:** `S1-A1`.
+
+---
+
 ## 2026-09-18 - [B] Second consistency pass
 
 **Who:** Person B

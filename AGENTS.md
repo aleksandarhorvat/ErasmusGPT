@@ -83,7 +83,7 @@ own LLM agent. They are called **Person A** and **Person B**.
 
 - Code runs via `docker compose up --build` with no network access to huggingface.co.
 - `python scripts/check_style.py` passes.
-- `pytest backend/tests` passes.
+- `ruff check backend eval scripts` and `pytest backend/tests` pass.
 - Docs updated if behaviour changed.
 - The task is `done` in `TASKS.md` and the *Project state* block is current.
 - PROGRESS.md entry appended, naming the stage.
