@@ -37,9 +37,24 @@ BAKE_MODELS=1
 ```
 
 and rebuild. That build takes 5 to 10 minutes and pulls about 1 GB once, because it
-downloads the models and bakes them into the image. Builds after that are cached, and
-the container then runs **fully offline**: `HF_HUB_OFFLINE=1`, no network at run time,
-no GPU, CPU only.
+downloads the models and bakes them into the image. Builds after that are cached.
+
+### Offline
+
+Building needs the network: pip, npm and the model download all reach out. **Running does
+not.** Build once, then
+
+```bash
+docker compose up        # note: no --build
+```
+
+works with the network disconnected. Neither Dockerfile carries a `# syntax=` directive,
+so BuildKit never asks Docker Hub for a frontend image, and the backend runs with
+`HF_HUB_OFFLINE=1` and `TRANSFORMERS_OFFLINE=1`, so nothing reaches huggingface.co.
+No GPU either: CPU only.
+
+To prove it: build, stop the stack, disconnect, `docker compose up`, use the app at
+:8080. Running `--build` while disconnected fails, and that is expected.
 
 ## Working on the code
 

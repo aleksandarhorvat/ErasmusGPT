@@ -30,10 +30,13 @@ def _default_data_dir() -> Path:
     for candidate in (BACKEND_ROOT / "data", REPO_ROOT / "data"):
         if (candidate / "curricula").is_dir():
             return candidate
-    log.warning(
-        "no data/curricula found under %s or %s; set DATA_DIR explicitly",
+    # During `docker build` the data volume is not mounted yet, so this is expected.
+    # At runtime it means the mount or DATA_DIR is wrong, and loader.py logs an error.
+    log.debug(
+        "no data/curricula under %s or %s; falling back to %s",
         BACKEND_ROOT,
         REPO_ROOT,
+        REPO_ROOT / "data",
     )
     return REPO_ROOT / "data"
 

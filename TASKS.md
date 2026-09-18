@@ -18,16 +18,16 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | `S1-A1` (not started) |
-| **Person B is on** | `S1-B1` (not started) |
+| **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-18 - lanes assigned |
+| **Last updated** | 2026-09-18 - lane B gate passed |
 
 ### Stage ladder
 
 | Stage | Lane A | Lane B | Gate |
 |---|---|---|---|
 | 0 - Scaffold | done | done | closed |
-| 1 - Real data, real surface | todo | todo | todo |
+| 1 - Real data, real surface | todo | done | todo |
 | 2 - Dense retrieval | todo | todo | todo |
 | 3 - Lexical + hybrid | todo | todo | todo |
 | 4 - Cross-encoder rerank | todo | todo | todo |
@@ -78,13 +78,13 @@ running from a Docker image with the models already inside it. Matches are still
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S1-B1` | todo | Finish the UI happy path: two programme dropdowns, match button, results table, loading and error states, wired to `get_matcher()` | picking two programmes and clicking Match renders a table in the browser | - |
-| `S1-B2` | todo | Make `docker compose up --build` actually work offline: models baked in, `HF_HUB_OFFLINE=1`, healthcheck green, nginx proxy correct | fresh clone -> `docker compose up --build` -> UI at :8080 with **no** network access to huggingface.co | - |
-| `S1-B3` | todo | `GET /api/v1/programmes/{id}/courses` rendered as a "browse this curriculum" panel, so data problems are visible without hitting `/match` | clicking a programme lists its courses with ECTS | A's data helps but is not required (samples work) |
+| `S1-B1` | done | Finish the UI happy path: two programme dropdowns, match button, results table, loading and error states, wired to `get_matcher()` | picking two programmes and clicking Match renders a table in the browser | - |
+| `S1-B2` | done | Build once with the network, then **run** offline: models baked in, `HF_HUB_OFFLINE=1`, healthcheck green, nginx proxy correct, no image-registry lookups at run time | `docker compose up --build` once, then network off, `docker compose up` -> UI at :8080 still serves matches. Verified 2026-09-18 | - |
+| `S1-B3` | done | `GET /api/v1/programmes/{id}/courses` rendered as a "browse this curriculum" panel, so data problems are visible without hitting `/match`. Flags courses with an empty description, which is `S1-A1`'s acceptance criterion | clicking a programme lists its courses with ECTS | - |
 
-**Lane B gate:** [ ] one command starts the whole thing offline and shows a table.
+**Lane B gate:** [x] one command starts the whole thing offline and shows a table.
 
-**Stage gate:** [ ] A   [ ] B - a stranger can clone, run one command, and see real PMF course
+**Stage gate:** [ ] A   [x] B - a stranger can clone, run one command, and see real PMF course
 titles next to real Twente course titles.
 
 ---

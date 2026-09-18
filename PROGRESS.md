@@ -14,6 +14,107 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-18 - [B] Offline run verified. Lane B gate for stage 1 passed
+
+**Who:** Person B
+**Stage:** 1 - Real data, real surface. **Lane B gate passed.** Stage stays open until
+lane A passes; A is on `S1-A1`.
+**Commit:** `[B] drop the syntax directive and document the offline story`
+**Tasks touched:** `S1-B2` (done)
+
+### Verified on a real machine
+Two runs. First, built with `MATCHER_IMPL=real` and `BAKE_MODELS=1`: the models
+downloaded into the image in 34 s, the healthcheck went green and the nginx proxy served
+the API same-origin. Then the network was disconnected and the stack started cold with
+`docker compose up`, no `--build`:
+
+- both containers started with no registry lookup,
+- `loaded 2 programmes (19 courses) from /srv/data/curricula`,
+- the backend healthcheck passed and compose reported the container healthy,
+- the UI loaded at :8080 and `/programmes`, `/strategies`, `/health` and two
+  `POST /match` calls all returned 200.
+
+That is the acceptance criterion met with nothing reaching the network.
+
+### Two findings
+
+**1. `# syntax=docker/dockerfile:1` broke the offline build.** BuildKit resolves that
+frontend image from Docker Hub on every build, so with the network off the build failed
+before it reached a single instruction. We use nothing the built-in Dockerfile frontend
+lacks, so the directive is removed from both Dockerfiles.
+
+**2. The acceptance criterion for `S1-B2` was impossible as written.** It asked for
+`docker compose up --build` to work with no network, but pip, npm and the model download
+all need it. Only the *run* can be offline. Criterion rewritten: build once with the
+network, then `docker compose up` without `--build` serves with the network disconnected.
+The README now separates the two explicitly and gives the recipe for proving it.
+
+### Also
+- `GET /` on port 8000 returned a bare 404. It now redirects to `/docs`.
+
+### Broken / known issues
+- `MATCHER_IMPL=real` currently logs `NotImplementedError: S2-A3` and falls back to the
+  stub. That is the fallback working as designed, not a fault: `PipelineMatcher` is
+  Person A's stage 2 task. It does mean one thing is still unproven, namely that
+  **loading real models offline** works, because there is no code loading them yet. Once
+  `S2-A3` lands, repeat the offline check before calling it settled.
+
+### Next
+- **B:** stage 1 lane B is done. Next in my lane is `S2-B1` (strategy selector), which I
+  can start early while A works on the curricula.
+- **A:** `S1-A1`, then `S1-A2` and `S1-A3` to close the stage.
+
+---
+
+## 2026-09-18 - [B] Stage 1 lane B: the UI happy path and the curriculum browser
+
+**Who:** Person B
+**Stage:** 1 - Real data, real surface
+**Commit:** `[B] finish the ui happy path and the curriculum browser`
+**Tasks touched:** `S1-B1` (done), `S1-B3` (done), `S1-B2` (in progress)
+
+### Done
+- Split `App.tsx` into `ProgrammePicker`, `ResultsTable` and `CourseBrowser`. `App.tsx`
+  is now a state machine with four phases: booting, ready, matching, failed.
+- `lib/api.ts`: added `health()` and `courses()`, and gave every call an abort-based
+  timeout. 20 s for the small endpoints, 150 s for `/match`, because a whole programme
+  through the cross-encoder is slow by design. Network failures and aborts turn into
+  sentences a person can act on rather than "Failed to fetch".
+- Match runs show elapsed seconds, so a 40-second request does not read as a hang.
+- Three states that used to fail silently now say what is wrong: fewer than two
+  curricula loaded (names the `DATA_DIR` and the mount), the same programme picked on
+  both sides, and the backend running the stub (says which two lines of `.env` to change).
+- `CourseBrowser` (`S1-B3`) lists a programme's courses with expandable descriptions and
+  **counts the courses whose description is empty**, listing their codes. That is exactly
+  `S1-A1`'s acceptance criterion, so Person A can see his ingestion pass or fail in the
+  browser without touching the matching code.
+- A swap button between the two dropdowns, and a footer showing backend version, active
+  matcher and whether models are loaded.
+- `frontend/Dockerfile` now copies `package-lock.json` and runs `npm ci` instead of
+  `npm install`, so the image build is reproducible.
+- The config path fallback logs at debug rather than warning: it fires during
+  `docker build`, before the data volume exists, and a warning there is misleading.
+
+### Verified
+- `ruff check backend eval scripts`, `scripts/check_style.py`, 11 backend tests, `tsc`
+  and `npm run build` all clean.
+- Drove the built bundle in a headless browser against mocked API responses: the stub
+  warning, the footer, the browser panel and its empty-description warning, the
+  same-programme guard disabling the button, the busy label, the elapsed timer, the
+  results table, the "no candidate" row and the evidence panel. No console errors.
+
+### Broken / known issues
+- `S1-B2` is not finished. Everything in the repository is in place, but nobody has yet
+  run the real build with `BAKE_MODELS=1` and confirmed the container serves with the
+  network disconnected. That run is the remaining work, and it cannot be done from CI
+  because CI builds with `BAKE_MODELS=0`.
+
+### Next
+- **B:** `S1-B2`, the offline build verification.
+- **A:** `S1-A1`. The browser panel will tell you whether the descriptions came through.
+
+---
+
 ## 2026-09-18 - [B] Fix the lint failure CI caught, and close the gap that let it through
 
 **Who:** Person B
