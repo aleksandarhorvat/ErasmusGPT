@@ -22,7 +22,11 @@ COPY app/core/config.py app/core/config.py
 COPY app/__init__.py app/__init__.py
 COPY app/core/__init__.py app/core/__init__.py
 COPY scripts/download_models.py scripts/download_models.py
-RUN python scripts/download_models.py
+# CI builds with BAKE_MODELS=0 and MATCHER_IMPL=stub so the end-to-end smoke test does
+# not have to download 220 MB of models. Any real run leaves this at 1.
+ARG BAKE_MODELS=1
+RUN if [ "$BAKE_MODELS" = "1" ]; then python scripts/download_models.py; \
+    else echo "BAKE_MODELS=0: skipping model download, MATCHER_IMPL=stub only"; fi
 
 COPY . .
 

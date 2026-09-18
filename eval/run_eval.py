@@ -8,7 +8,7 @@ Usage:
     python eval/run_eval.py --host-programme utwente-tcs-bsc --out eval/report
 
 Produces eval/report/results.md and results.csv with, per configuration:
-    Recall@5, Recall@25, MRR@10, nDCG@10, P@1, ms/query
+    Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query
 plus 95% bootstrap CIs and a paired test against the dense-minilm baseline.
 Protocol: docs/05-evaluation.md
 """
@@ -26,12 +26,51 @@ CONFIGS = ["bm25", "dense-minilm", "dense-bge", "hybrid", "hybrid+ce"]
 
 
 def load_gold(path: Path = GOLD) -> dict[str, dict[str, int]]:
-    """home_uid -> {host_uid: label}. Unlabelled pairs count as 0 (state this in the report)."""
+    """home_uid -> {host_uid: label}, human-checked rows only.
+
+    Rows with checked != yes are machine proposals nobody has read, so they must not
+    reach the metrics (docs/05-evaluation.md). Unlabelled pairs count as 0, which is a
+    property of the pooled collection and belongs in the report.
+    """
     gold: dict[str, dict[str, int]] = defaultdict(dict)
+    skipped = 0
     with path.open(encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
+            if row.get("checked", "").strip().lower() != "yes":
+                skipped += 1
+                continue
             gold[row["home_uid"]][row["host_uid"]] = int(row["label"])
+    if skipped:
+        print(f"note: skipped {skipped} unchecked rows in {path.name}")
     return dict(gold)
+
+
+def correction_rate(
+    prelabels: Path = REPO_ROOT / "data" / "gold" / "llm_prelabels.csv",
+    final: Path = GOLD,
+) -> tuple[int, int]:
+    """(corrections, compared) between the frozen pre-labels and the checked labels.
+
+    This is the number the report quotes as evidence that the human pass was real.
+    """
+    if not prelabels.exists():
+        return (0, 0)
+    with prelabels.open(encoding="utf-8") as handle:
+        proposed = {
+            (r["home_uid"], r["host_uid"]): int(r["llm_label"])
+            for r in csv.DictReader(handle)
+            if r.get("llm_label", "").strip() != ""
+        }
+    corrections = compared = 0
+    with final.open(encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("checked", "").strip().lower() != "yes":
+                continue
+            key = (row["home_uid"], row["host_uid"])
+            if key in proposed:
+                compared += 1
+                corrections += int(proposed[key] != int(row["label"]))
+    return (corrections, compared)
 
 
 # --- metrics (pure functions, unit-tested in backend/tests/test_matching_metrics.py) ---

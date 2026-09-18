@@ -1,6 +1,10 @@
 # syntax=docker/dockerfile:1
 FROM node:20-alpine AS build
 WORKDIR /app
+# Baked in at build time by Vite. Defaults to the same-origin path nginx proxies,
+# so the app never carries a hardcoded backend host.
+ARG VITE_API_BASE=/api/v1
+ENV VITE_API_BASE=$VITE_API_BASE
 COPY package.json ./
 RUN npm install
 COPY . .

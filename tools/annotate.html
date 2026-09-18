@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ErasmusGPT annotator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --paper:#eaeef2; --surface:#fff; --surface-2:#f5f8fa;
+  --ink:#16222e; --ink-2:#56687a; --ink-3:#7d8e9d;
+  --rule:#c9d4dd; --rule-soft:#dde5eb;
+  --home:#0f6560; --home-soft:#dcefec;
+  --host:#453ab0; --host-soft:#e5e3f8;
+  --ok:#22684a; --ok-soft:#d9ece1; --warn:#8a5a00; --warn-soft:#fdf0d5;
+  --no:#8c2f2f; --no-soft:#f7dede;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:#0c141c; --surface:#151f2a; --surface-2:#1a2733;
+    --ink:#e3ebf2; --ink-2:#94a6b6; --ink-3:#74879a;
+    --rule:#2a3846; --rule-soft:#223040;
+    --home:#5cc2ba; --home-soft:#0e312f;
+    --host:#a49bf5; --host-soft:#1f1c44;
+    --ok:#5fbd8a; --ok-soft:#12301f; --warn:#d7a53e; --warn-soft:#332714;
+    --no:#e08585; --no-soft:#361d1d;
+  }
+}
+* { box-sizing:border-box; }
+/* #setup sets display:grid, which beats the user-agent rule for [hidden]. */
+[hidden] { display:none !important; }
+html,body { height:100%; }
+body {
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.5;
+  display:flex; flex-direction:column;
+}
+button, select { font:inherit; }
+code { font-family:var(--mono); }
+
+.bar {
+  position:sticky; top:0; z-index:5;
+  display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
+  padding:.6rem 1rem; background:var(--surface);
+  border-bottom:1px solid var(--rule);
+}
+.brand { font-family:var(--mono); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+.bar .spacer { flex:1; }
+.stat { font-family:var(--mono); font-size:.78rem; color:var(--ink-2); }
+.stat b { color:var(--ink); font-variant-numeric:tabular-nums; }
+.bar button {
+  border:1px solid var(--rule); background:var(--surface-2); color:var(--ink);
+  border-radius:3px; padding:.3rem .65rem; cursor:pointer; font-size:.85rem;
+}
+.bar button:hover { border-color:var(--ink-3); }
+.bar button.primary { background:var(--ink); color:var(--surface); border-color:var(--ink); }
+.bar button:disabled { opacity:.4; cursor:not-allowed; }
+
+main { flex:1; width:100%; max-width:1180px; margin:0 auto; padding:1.2rem 16px 2rem; }
+
+#setup { max-width:70ch; display:grid; gap:1rem; }
+#setup h1 { font-size:1.4rem; margin:0; }
+#setup p { margin:0; color:var(--ink-2); }
+.drop {
+  border:2px dashed var(--rule); border-radius:5px; padding:1.4rem;
+  background:var(--surface); display:grid; gap:.7rem;
+}
+.drop.hot { border-color:var(--home); background:var(--home-soft); }
+.filelist { font-family:var(--mono); font-size:.8rem; color:var(--ink-2); display:grid; gap:.2rem; }
+.filelist .bad { color:var(--no); }
+label.filebtn {
+  display:inline-block; border:1px solid var(--rule); background:var(--surface-2);
+  border-radius:3px; padding:.35rem .7rem; cursor:pointer; font-size:.88rem;
+}
+input[type=file] { display:none; }
+
+.progress { height:4px; background:var(--rule-soft); border-radius:2px; overflow:hidden; margin-bottom:1rem; }
+.progress > div { height:100%; background:var(--ok); width:0; transition:width .15s; }
+
+.qline { display:flex; align-items:baseline; gap:.8rem; flex-wrap:wrap; margin-bottom:.7rem; }
+.qline .n { font-family:var(--mono); font-size:.8rem; color:var(--ink-3); }
+.qline .flag { font-family:var(--mono); font-size:.72rem; padding:.05rem .4rem; border-radius:2px; }
+.flag.checked { background:var(--ok-soft); color:var(--ok); }
+.flag.corrected { background:var(--warn-soft); color:var(--warn); }
+
+.pair { display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start; }
+.card {
+  background:var(--surface); border:1px solid var(--rule-soft);
+  border-top:3px solid var(--rule); border-radius:4px; padding:.9rem 1rem 1.1rem;
+}
+.card.home { border-top-color:var(--home); }
+.card.host { border-top-color:var(--host); }
+.card .who { font-family:var(--mono); font-size:.7rem; letter-spacing:.11em; text-transform:uppercase; }
+.card.home .who { color:var(--home); }
+.card.host .who { color:var(--host); }
+.card h2 { font-size:1.08rem; margin:.25rem 0 .1rem; line-height:1.25; }
+.card .meta { font-family:var(--mono); font-size:.74rem; color:var(--ink-3); margin-bottom:.7rem; }
+.card .body { font-size:.92rem; color:var(--ink); }
+.card .sub { font-family:var(--mono); font-size:.68rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); margin:.8rem 0 .25rem; }
+.card ul { margin:.1rem 0; padding-left:1.1rem; font-size:.9rem; }
+.card .missing { color:var(--no); font-size:.9rem; }
+
+.verdict { margin-top:1.1rem; background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:.9rem 1rem; display:grid; gap:.75rem; }
+.proposed { font-size:.9rem; color:var(--ink-2); }
+.proposed b { font-family:var(--mono); color:var(--ink); }
+.choices { display:flex; gap:.5rem; flex-wrap:wrap; }
+.choices button {
+  flex:1 1 180px; text-align:left; cursor:pointer;
+  border:1px solid var(--rule); background:var(--surface-2); color:var(--ink);
+  border-radius:3px; padding:.5rem .7rem; font-size:.9rem;
+}
+.choices button .k { font-family:var(--mono); font-size:.72rem; color:var(--ink-3); display:block; }
+.choices button[aria-pressed="true"][data-l="0"] { background:var(--no-soft); border-color:var(--no); color:var(--no); }
+.choices button[aria-pressed="true"][data-l="1"] { background:var(--warn-soft); border-color:var(--warn); color:var(--warn); }
+.choices button[aria-pressed="true"][data-l="2"] { background:var(--ok-soft); border-color:var(--ok); color:var(--ok); }
+.actions { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+.actions button { border:1px solid var(--ink); background:var(--ink); color:var(--surface); border-radius:3px; padding:.45rem .9rem; cursor:pointer; }
+.actions button.ghost { background:transparent; color:var(--ink); border-color:var(--rule); }
+.hint { font-family:var(--mono); font-size:.74rem; color:var(--ink-3); }
+.rubric { margin-top:1.4rem; font-size:.85rem; color:var(--ink-2); max-width:78ch; }
+.rubric code { background:var(--surface); border:1px solid var(--rule-soft); border-radius:2px; padding:0 .25rem; }
+.toast {
+  position:fixed; bottom:1rem; left:50%; transform:translateX(-50%);
+  background:var(--ink); color:var(--paper); padding:.5rem .9rem; border-radius:4px;
+  font-size:.85rem; opacity:0; transition:opacity .2s; pointer-events:none; z-index:10;
+}
+.toast.show { opacity:1; }
+@media (max-width:780px) { .pair { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span class="brand">ErasmusGPT annotator</span>
+  <span class="stat" id="counts"></span>
+  <span class="spacer"></span>
+  <button id="prev" disabled>Back</button>
+  <button id="jump" disabled>Next unchecked</button>
+  <button id="save" class="primary" disabled>Save CSV</button>
+</div>
+
+<main>
+  <section id="setup">
+    <h1>Load the data</h1>
+    <p>Everything stays in this browser. Nothing is uploaded anywhere.</p>
+    <div class="drop" id="drop">
+      <p><b>Drop files here</b>, or pick them below.</p>
+      <div>
+        <label class="filebtn">Curricula JSON
+          <input type="file" id="fJson" accept=".json" multiple>
+        </label>
+        <label class="filebtn">Pairs CSV
+          <input type="file" id="fCsv" accept=".csv">
+        </label>
+        <button id="pickCsv" class="filebtn" style="border-color:var(--rule)">Open CSV for in-place saving</button>
+      </div>
+      <div class="filelist" id="files"></div>
+    </div>
+    <p class="hint">
+      Curricula: every <code>data/curricula/*.json</code> the pairs refer to.<br>
+      Pairs: <code>data/gold/llm_prelabels.csv</code> to start, or a part-finished
+      <code>data/gold/gold_pairs.csv</code> to carry on.
+    </p>
+    <p class="hint" id="fsNote"></p>
+  </section>
+
+  <section id="work" hidden>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="qline">
+      <span class="n" id="pos"></span>
+      <span class="flag checked" id="flagChecked" hidden>checked</span>
+      <span class="flag corrected" id="flagCorrected" hidden>corrected</span>
+    </div>
+
+    <div class="pair">
+      <article class="card home" id="cardHome"></article>
+      <article class="card host" id="cardHost"></article>
+    </div>
+
+    <div class="verdict">
+      <p class="proposed" id="proposed"></p>
+      <div class="choices">
+        <button data-l="0" aria-pressed="false"><span class="k">0</span>not a match</button>
+        <button data-l="1" aria-pressed="false"><span class="k">1</span>partial or arguable</button>
+        <button data-l="2" aria-pressed="false"><span class="k">2</span>recognised outright</button>
+      </div>
+      <div class="actions">
+        <button id="accept">Accept and next</button>
+        <button id="skip" class="ghost">Skip</button>
+        <span class="hint">0 1 2 set the label &nbsp; Enter accepts &nbsp; arrows move &nbsp; Ctrl+S saves</span>
+      </div>
+    </div>
+
+    <p class="rubric">
+      <b>The question:</b> would a home-faculty coordinator sign off on the host course in
+      place of the home course? <code>2</code> the host course covers the substance of the
+      home course, broader is still fine. <code>1</code> overlapping but not sufficient on
+      its own, including one host module spanning two home courses. <code>0</code> not a
+      match, including same title, different content. ECTS is not part of the judgement.
+    </p>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="annotate.js"></script>
+</body>
+</html>

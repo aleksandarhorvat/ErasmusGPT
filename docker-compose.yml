@@ -3,12 +3,16 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        BAKE_MODELS: "${BAKE_MODELS:-1}"
     image: erasmusgpt-backend:local
     environment:
       # stub = instant fake matches (no models). real = the actual pipeline.
       MATCHER_IMPL: "${MATCHER_IMPL:-real}"
       BI_ENCODER: "bge-small"
       CROSS_ENCODER: "ms-marco-l6"
+      # Must match the ./data mount below. Pinned so the two cannot drift apart.
+      DATA_DIR: "/srv/data"
       DATABASE_URL: "sqlite:////data/erasmusgpt.db"
     volumes:
       # Curricula and the gold set are read from the repo so they can be edited

@@ -71,17 +71,61 @@ name. They are strong lexical distractors and they are more useful as post-filte
 and as displayed metadata than as embedding content. ECTS difference is shown in the
 UI and used for the confidence band, not for ranking. (ADR-0004)
 
-## Gold set - `data/gold/gold_pairs.csv`
+## Gold set
+
+Two files. The split exists so that one annotation pass produces both the labels and the
+statistic that justifies how they were made.
+
+### `data/gold/llm_prelabels.csv` - written once, never edited
+
+The raw output of the pre-labelling run. Commit it and leave it alone.
 
 ```csv
-home_uid,host_uid,label,annotator,note
-uns-pmf:I101,utwente:202001032,2,A,"same content, host is broader"
-uns-pmf:I101,utwente:202001045,0,A,""
+home_uid,host_uid,llm_label,llm_reason
+uns-pmf:I102,utwente:TCS-M2,2,"both cover data structures and complexity analysis"
+uns-pmf:I203,utwente:TCS-M1,2,"host module teaches object-oriented programming in Java"
 ```
 
-- `label`: `2` = would be recognised outright, `1` = partial / arguable, `0` = not a match.
-- Annotate **positives exhaustively** per home course (every host course that deserves
-  a 1 or 2), plus hard negatives. You do not need to label all nxm pairs; unlabelled
-  pairs count as 0 for the metrics, and that must be stated in the report.
-- Both people annotate an overlapping slice of ~30 pairs so Cohen's kappa can be reported.
-  Inter-annotator agreement tells the reader how reliable the labels themselves are.
+### `data/gold/gold_pairs.csv` - the working file
+
+Starts as a copy of the pre-labels, with `llm_label` renamed to `label` and `llm_reason`
+dropped. Person A reads every row, corrects `label` where he disagrees, and sets
+`checked` to `yes`. Four columns, no free text: use `tools/annotate.html`.
+
+```csv
+home_uid,host_uid,label,checked
+uns-pmf:I102,utwente:TCS-M2,2,yes
+uns-pmf:I203,utwente:TCS-M1,1,yes
+uns-pmf:I102,utwente:TCS-M8,0,yes
+```
+
+- `label`: the authoritative judgement, and the only column the metrics read.
+  `2` = would be recognised outright, `1` = partial or arguable, `0` = not a match.
+- `checked`: `yes` once a human has read the row and accepted or corrected the label.
+  **Rows with `checked=no` are excluded from every reported number**, so an unfinished
+  pass can never silently contaminate the results.
+
+Agreement between the model and the expert is computed by diffing the two files. No
+per-row bookkeeping during annotation, and the statistic survives the corrections. The
+reasoning behind a correction belongs in the error analysis (`eval/report/errors.md`),
+not in a column nobody will read back.
+
+### Which pairs to label
+
+Do not label all n x m pairs. Use pooling: take the union of the top 10 from `dense` and
+`hybrid+ce` per home course. Pool depth 10 is all that Recall@5, MRR@10 and nDCG@10
+require, and about 40 home courses is enough to make the metrics meaningful. That is
+roughly 400 pairs, not several thousand.
+
+Unlabelled pairs count as 0, which slightly favours the strategies that contributed to
+the pool. State that in the report in one sentence; it is a known property of pooled
+collections, not a flaw specific to this project.
+
+### Inter-annotator agreement
+
+Person B labels an overlapping slice of about 30 pairs **cold**, from
+`data/gold/gold_pairs_b.csv`, without seeing the LLM labels or Person A's file. Cohen's
+kappa is computed against Person A's final labels on those rows.
+
+This slice has to stay cold. If both people review the same LLM suggestions, kappa
+measures how similarly two humans anchor on a machine, which is not a useful number.

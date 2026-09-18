@@ -48,8 +48,9 @@ own LLM agent. They are called **Person A** and **Person B**.
   and `docs/04-api-contract.md` are *shared*. Changing them requires a `CONTRACT CHANGE`
   block in PROGRESS.md explaining what broke and why, plus an update to all three.
 - **No new heavyweight dependencies** without recording an ADR in `docs/adr/`.
-- **No model larger than ~500 MB on disk.** The demo must run on CPU inside Docker.
-  See `docs/02-models.md`.
+- **Nothing baked into the image larger than ~200 MB, and under 400 MB in total.** The
+  demo must run on CPU inside Docker. Bigger models are allowed in `notebooks/` on Colab
+  and never ship. See `docs/02-models.md`.
 - **Models are baked into the Docker image at build time** and the runtime is offline
   (`HF_HUB_OFFLINE=1`). Never add code that downloads a model at request time.
 - Keep commits small and scoped. Commit message prefix: `[A]` or `[B]`. Run
@@ -76,6 +77,7 @@ own LLM agent. They are called **Person A** and **Person B**.
 | `data/` | Curriculum JSON files and the gold-standard evaluation set |
 | `scripts/check_style.py` | Writing-style check (CONTEXT.md section 11), also run in CI |
 | `eval/` | Offline evaluation harness (the "measurable improvement" part of the grade) |
+| `tools/` | `annotate.html`, the gold-set annotator. Not part of the application |
 
 ## Definition of done for any task
 

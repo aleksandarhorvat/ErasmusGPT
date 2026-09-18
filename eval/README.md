@@ -6,5 +6,6 @@ Owner: **Person A**. Protocol: `docs/05-evaluation.md`.
 python eval/run_eval.py --host-programme utwente-tcs-bsc --out eval/report
 ```
 
-`report/` holds the generated tables. `results.csv` is git-ignored; commit
-`results.md` so the numbers are reviewable in a diff and end up in the defence.
+`report/` holds the generated tables. Commit both `results.md` and `results.csv`: the
+Markdown so the numbers are reviewable in a diff, the CSV because `S5-B3` renders it as
+the evaluation page in the app.

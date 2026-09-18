@@ -6,10 +6,13 @@ The JSON files under data/curricula/ are the source of truth; SQLite is only a c
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from app.schemas.programme import CourseSummary, ProgrammeSummary
+
+log = logging.getLogger(__name__)
 
 
 @dataclass
@@ -30,9 +33,25 @@ class CurriculumStore:
         self._programmes.clear()
         self._courses.clear()
         if not self.dir.exists():
+            log.error(
+                "curricula directory %s does not exist. The API will report zero "
+                "programmes and the dropdowns will be empty. Check DATA_DIR and the "
+                "./data volume mount in docker-compose.yml.",
+                self.dir,
+            )
             return
-        for path in sorted(self.dir.glob("*.json")):
+        files = sorted(self.dir.glob("*.json"))
+        if not files:
+            log.error("no *.json curricula found in %s", self.dir)
+            return
+        for path in files:
             self._load_file(path)
+        log.info(
+            "loaded %d programmes (%d courses) from %s",
+            len(self._programmes),
+            len(self._courses),
+            self.dir,
+        )
 
     def _load_file(self, path: Path) -> None:
         data = json.loads(path.read_text(encoding="utf-8"))

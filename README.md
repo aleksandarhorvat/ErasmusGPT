@@ -21,19 +21,25 @@ docker compose up --build
 - UI: <http://localhost:8080>
 - API docs: <http://localhost:8000/docs>
 
-That is the whole setup. The first build takes 5 to 10 minutes because it downloads the
-models and bakes them into the image, and it pulls about 1 GB (CPU torch wheels plus
-roughly 220 MB of models). Every build after that is cached, and the container then runs
-**fully offline**: `HF_HUB_OFFLINE=1`, no network needed at run time, no GPU required.
+Everything is configured in `.env`. Compose reads that file by itself, so you never put
+variables in front of the command: `VAR=x docker compose up` is bash syntax and does
+nothing in PowerShell or CMD.
 
-In a hurry, or working on the front end? Skip the models entirely:
+`.env.example` ships with the fast settings, `MATCHER_IMPL=stub` and `BAKE_MODELS=0`:
+the build takes about a minute, skips the model download, and the app returns fake but
+plausible matches. That is what you want for front-end, API and Docker work.
 
-```bash
-MATCHER_IMPL=stub docker compose up --build
+When you want the real pipeline, change two lines in `.env`:
+
+```dotenv
+MATCHER_IMPL=real
+BAKE_MODELS=1
 ```
 
-The stub returns fake but plausible matches instantly, so the UI, the API and the whole
-Docker path can be built and tested before any model exists.
+and rebuild. That build takes 5 to 10 minutes and pulls about 1 GB once, because it
+downloads the models and bakes them into the image. Builds after that are cached, and
+the container then runs **fully offline**: `HF_HUB_OFFLINE=1`, no network at run time,
+no GPU, CPU only.
 
 ## Working on the code
 
@@ -46,7 +52,7 @@ python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1
 pip install -r requirements.txt
-MATCHER_IMPL=stub uvicorn app.main:app --reload    # http://localhost:8000
+uvicorn app.main:app --reload                       # http://localhost:8000
 
 # frontend - terminal 2
 cd frontend
@@ -57,11 +63,13 @@ npm run dev                                         # http://localhost:5173
 The Vite dev server proxies `/api` to port 8000, so the front end uses the same relative
 paths in development as it does behind nginx in Docker.
 
+The backend reads the same `.env`, so `MATCHER_IMPL=stub` there applies here too.
+
 Before every commit:
 
 ```bash
 python scripts/check_style.py     # writing style, CONTEXT.md section 11
-cd backend && MATCHER_IMPL=stub pytest tests -q
+cd backend && pytest tests -q
 cd frontend && npm run build
 ```
 
@@ -93,13 +101,14 @@ in the API, and the evaluation harness runs the identical code path. Numbers:
 | `AGENTS.md` | Start here if you are an AI coding agent |
 | `CONTEXT.md` | Architecture, contracts, ownership between the two authors |
 | `PROGRESS.md` | Running log of what each author did |
-| `TASKS.md` | Backlog |
+| `TASKS.md` | Staged board: project state, per-stage lane A / lane B tasks |
 | `docs/00-map.md` | Diagrams: request path, ownership boundary, stage graph |
 | `docs/` | Universities, models, data schema, API contract, evaluation protocol, ADRs |
 | `backend/` | FastAPI service and the matching pipeline |
 | `frontend/` | React + Vite UI |
 | `data/` | Curriculum JSON + the labelled gold set |
 | `eval/` | Evaluation harness and report |
+| `tools/` | `annotate.html`, the gold-set annotator |
 | `scripts/` | Repository checks (writing style, curriculum validation) |
 
 ## Development without Docker

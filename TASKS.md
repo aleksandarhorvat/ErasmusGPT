@@ -186,9 +186,10 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S5-A1` | todo | Build the gold set: >= 100 labelled pairs over >= 2 host programmes, exhaustive positives per home course | `data/gold/gold_pairs.csv` has >= 100 rows and no duplicate `(home_uid, host_uid)` | Stage 4 |
-| `S5-A2` | todo | Finish `eval/run_eval.py`: every configuration, Recall@5/@25, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
-| `S5-A3` | todo | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm` | the report states whether the gain is significant, honestly | `S5-A2` |
+| `S5-A0` | todo | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
+| `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
+| `S5-A2` | todo | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
+| `S5-A3` | todo | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
 | `S5-A4` | todo | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
 
 **Lane A gate:** [ ] `eval/report/results.md` is committed with real numbers and CIs.
@@ -197,7 +198,8 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S5-B1` | todo | **Both people annotate** an overlapping slice of ~30 pairs so Cohen's kappa can be reported. B annotates independently, in `data/gold/gold_pairs_b.csv` | the overlap file exists; A merges and computes kappa | `S5-A1` starts first |
+| `S5-B0` | done (early) | Annotation tool `tools/annotate.html`: side-by-side course cards, keyboard labelling, saves back to the CSV in place | the tool loads curricula and a pairs CSV and writes checked rows back | - |
+| `S5-B1` | todo | Label ~30 of the pooled pairs **cold**, without seeing the LLM labels or A's file, into `data/gold/gold_pairs_b.csv`, so Cohen's kappa measures two humans rather than two people anchoring on a machine | the file exists; A computes kappa against his final labels | `S5-A0` |
 | `S5-B2` | todo | CI green: `ruff`, `pytest` with `MATCHER_IMPL=stub`, frontend build, curriculum validator | the badge is green on `main` | `S1-A3` |
 | `S5-B3` | todo | Serve the evaluation table in the UI (read `eval/report/results.csv`) as an "About / how well does this work" page | the numbers are one click away during the defence | `S5-A2` |
 

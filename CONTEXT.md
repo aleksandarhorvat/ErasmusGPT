@@ -33,6 +33,12 @@ No file upload in the MVP.
 | Dockerised, minimal effort to run | `docker compose up --build`, models baked into the image |
 | IR content | BM25 lexical baseline + dense retrieval + reranking + IR metrics (Recall@k, MRR, nDCG@10) |
 
+**On Lucene.** The assignment allows Lucene *or* the transformers ecosystem. We take the
+transformers branch. BM25 here is `rank_bm25`, a small pure-Python package used as the
+lexical baseline and as half of the hybrid candidate list; it is not Lucene or PyLucene,
+and there is no index, no JVM. Worth saying out loud at the defence, because BM25 is the
+ranking function Lucene is known for and the question will come up.
+
 ## 4. Pipeline
 
 ```
@@ -97,7 +103,7 @@ small enough for that. GPU is used only in `notebooks/` for evaluation sweeps.
 ```
 
 **Embedding cache.** Course embeddings are computed once per curriculum version and
-stored as a `.npy` file next to the curriculum plus a row in SQLite. Startup loads
+stored as a `.npy` file under `data/.cache/` plus a row in SQLite. Startup loads
 them; a cache miss triggers a one-off encode. Matching a pair of programmes must not
 re-encode anything.
 
@@ -131,6 +137,8 @@ backend/app/api/**
 backend/app/core/**
 backend/app/db/**
 frontend/**
+tools/**
+scripts/**                     (repository checks)
 docker-compose.yml
 backend/Dockerfile
 frontend/Dockerfile
@@ -142,7 +150,7 @@ backend/tests/test_api_*.py
 
 ### Shared (change only with a `CONTRACT CHANGE` note in PROGRESS.md)
 ```
-AGENTS.md  CONTEXT.md  PROGRESS.md  TASKS.md
+AGENTS.md  CONTEXT.md  PROGRESS.md  TASKS.md  docs/00-map.md
 backend/app/schemas/**
 backend/app/matching/interface.py
 backend/requirements.txt
@@ -178,12 +186,12 @@ file is authoritative, this is the one-paragraph summary.
 
 | Stage | What exists at the end of it |
 |---|---|
-| 0 - Scaffold | repo, docs, frozen contract, stub matcher, compose files done |
+| 0 - Scaffold | repo, docs, frozen contract, stub matcher, compose files (closed) |
 | 1 - Real data, real surface | two real curricula, one-command offline Docker run, a table in the browser (matches still fake) |
 | 2 - Dense retrieval | the first real NLP: bi-encoder embeddings + cosine, `strategy=dense` |
 | 3 - Lexical + hybrid | BM25 baseline, RRF fusion, calibrated scores, CSV export |
 | 4 - Cross-encoder rerank | `hybrid+ce` as the default, evidence sentences, side-by-side compare |
-| 5 - Gold set + evaluation | >=100 labelled pairs, metrics with confidence intervals, kappa, green CI |
+| 5 - Gold set + evaluation | ~500 checked pairs over 40 home courses, metrics with confidence intervals, kappa, green CI |
 | 6 - Scale out + polish | >=4 host programmes, error analysis, verified clean-machine run |
 | 7 - Defence | slides, offline demo rehearsal, who answers which questions |
 

@@ -1,11 +1,11 @@
-home_uid,host_uid,label,annotator,note
-uns-pmf:I102,utwente:TCS-M2,2,A,"same content: data structures + complexity analysis"
-uns-pmf:I307,utwente:TCS-M6,2,A,"different name, same content - the headline example"
-uns-pmf:I204,utwente:TCS-M3,2,A,"host module is broader (adds transactions + a project)"
-uns-pmf:I205,utwente:TCS-M4,1,A,"partial: host bundles OS with computer architecture"
-uns-pmf:I206,utwente:TCS-M5,2,A,""
-uns-pmf:I310,utwente:TCS-M8,1,A,"partial: host adds information retrieval and link analysis"
-uns-pmf:I309,utwente:TCS-M9,2,A,""
-uns-pmf:I308,utwente:TCS-M7,1,A,"partial: host mixes AI with interaction design"
-uns-pmf:I101,utwente:TCS-M1,2,A,"host module also covers OOP, so I203 overlaps too"
-uns-pmf:I203,utwente:TCS-M1,1,A,"granularity mismatch: 15 ECTS host module covers I101 + I203"
+home_uid,host_uid,label,checked
+uns-pmf:I102,utwente:TCS-M2,2,yes
+uns-pmf:I307,utwente:TCS-M6,2,yes
+uns-pmf:I204,utwente:TCS-M3,2,yes
+uns-pmf:I205,utwente:TCS-M4,1,yes
+uns-pmf:I206,utwente:TCS-M5,2,yes
+uns-pmf:I310,utwente:TCS-M8,1,yes
+uns-pmf:I309,utwente:TCS-M9,2,yes
+uns-pmf:I308,utwente:TCS-M7,1,yes
+uns-pmf:I101,utwente:TCS-M1,2,yes
+uns-pmf:I203,utwente:TCS-M1,1,yes

@@ -36,3 +36,32 @@ jobs:
         working-directory: frontend
       - run: npm run build
         working-directory: frontend
+
+  smoke:
+    # Catches the class of bug where the app works from a checkout but not inside the
+    # image: wrong paths, a missing volume mount, a broken proxy.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the stack without models
+        env:
+          BAKE_MODELS: "0"
+          MATCHER_IMPL: stub
+        run: docker compose up -d --build
+      - name: Wait for the backend to report healthy
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:8000/api/v1/health; then exit 0; fi
+            sleep 5
+          done
+          docker compose logs backend
+          exit 1
+      - name: The API must serve the curricula, not an empty list
+        run: |
+          count=$(curl -fsS http://localhost:8000/api/v1/programmes | python -c "import json,sys; print(len(json.load(sys.stdin)))")
+          echo "programmes: $count"
+          test "$count" -ge 2 || { docker compose logs backend; exit 1; }
+      - name: The frontend must be served
+        run: curl -fsS -o /dev/null http://localhost:8080/
+      - if: always()
+        run: docker compose down -v

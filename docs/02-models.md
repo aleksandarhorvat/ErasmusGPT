@@ -33,8 +33,8 @@ Practical notes:
   *symmetric* (course <-> course), so **encode both sides with no prefix** and say so in
   the report. If you change this, re-run the whole eval - it moves numbers.
 - Normalise embeddings once, then cosine similarity is a dot product.
-- Cache: `data/curricula/<programme_id>.<model_tag>.npy`, invalidated by a hash of the
-  course documents. Encoding must never happen inside a `/match` request.
+- Cache: `data/.cache/<programme_id>.<model_tag>.npy`, invalidated by a hash of the
+  course documents. Never inside `data/curricula/`, which is committed. Encoding must never happen inside a `/match` request.
 
 ### Cross-encoder - reranking
 
@@ -52,6 +52,10 @@ principled fix if there is time.
 
 ### What we are NOT using, and why
 
+- **Lucene or PyLucene.** The assignment allows either base and we chose transformers.
+  `rank_bm25` gives us the same ranking function in about 200 lines of Python, with no
+  JVM and no index files to ship in the Docker image. With 30 to 120 documents per
+  corpus there is nothing for a search engine to do.
 - **No generative LLM in the matching path.** It would be slow, unreproducible and
   ungradeable, and it would hide the IR contribution. If a natural-language explanation
   of a match is wanted, produce it extractively: return the sentence pair with the
@@ -66,9 +70,14 @@ principled fix if there is time.
 
 ```dockerfile
 ENV HF_HOME=/models
-RUN python scripts/download_models.py          # snapshot_download of every model in MODELS
+ARG BAKE_MODELS=1
+RUN if [ "$BAKE_MODELS" = "1" ]; then python scripts/download_models.py; fi
 ENV HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 ```
+
+`BAKE_MODELS=0` skips the download so the CI smoke test and stub-only runs build in
+about a minute. It is only valid with `MATCHER_IMPL=stub`, because the real pipeline has
+nothing to load. Both switches live in `.env`.
 
 The model list lives in one place, `backend/app/core/config.py`, and both the downloader
 and the runtime read it from there, so the two cannot drift apart.
