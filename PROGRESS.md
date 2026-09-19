@@ -14,6 +14,37 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-19 - [A] Curriculum validator
+
+**Who:** Person A
+**Stage:** 1 - Real data, real surface
+**Commit:** `[A] add the curriculum validator`
+**Tasks touched:** `S1-A3` (done)
+
+### Done
+- `backend/scripts/validate_curricula.py`: checks every `data/curricula/*.json` (or the
+  files named on the command line) against `docs/03-data-schema.md`. It checks field
+  presence and types, with no nulls in string or list fields, and that `programme_id`
+  equals the file name. It also rejects duplicate codes, non-ASCII codes, non-positive
+  ECTS and prerequisites that name no course in the programme. Standard library only.
+- `backend/tests/test_matching_curricula.py`: the committed PMF file validates and meets
+  the S1-A1 bar, and each broken variant (duplicate code, null description, renamed
+  file, dangling prerequisite) is caught.
+
+### Broken / known issues
+- The validator currently exits 1, on purpose: `utwente-tcs-bsc.json` is still the sample
+  with `scraped_at: null`. It goes green when `S1-A2` replaces that file.
+
+### Request to B
+- Add `python backend/scripts/validate_curricula.py` as a step in the `backend` job of
+  `.github/workflows/ci.yml`, after `S1-A2` lands. Adding it before then turns CI red on
+  the Twente sample.
+
+### Next
+- **A:** `S1-A2`. After it, lane A passes its stage 1 gate.
+
+---
+
 ## 2026-09-19 - [A] Real UNS PMF curriculum, 50 courses
 
 **Who:** Person A

@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S1-A1` done; `S1-A2` (Twente scrape) next |
+| **Person A is on** | `S1-A2` (Twente scrape), the last task in lane A for stage 1 |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-19 - `S1-A1` done, real PMF curriculum (50 courses) |
+| **Last updated** | 2026-09-19 - `S1-A1` and `S1-A3` done, `S1-A2` left in lane A |
 
 ### Stage ladder
 
@@ -70,7 +70,7 @@ running from a Docker image with the models already inside it. Matches are still
 |---|---|---|---|---|
 | `S1-A1` | done | Scrape/transcribe the **full UNS PMF BSc Informatics** curriculum into `data/curricula/uns-pmf-informatics-bsc.json` (both modules, English titles, descriptions, outcomes, ECTS). Replaces the sample file. | `GET /api/v1/programmes` reports >= 45 courses and every course has a non-empty `description` | - |
 | `S1-A2` | todo | Same for **University of Twente, BSc Technical Computer Science** -> `utwente-tcs-bsc.json`, via `backend/scripts/scrape_utwente.py` | file validates against `docs/03-data-schema.md`, `source_url` and `scraped_at` filled in | - |
-| `S1-A3` | todo | `backend/scripts/validate_curricula.py` - schema check + duplicate-code check, runnable in CI | `python backend/scripts/validate_curricula.py` exits 0 on both files and non-zero on a broken one | - |
+| `S1-A3` | done | `backend/scripts/validate_curricula.py` - schema check + duplicate-code check, runnable in CI | `python backend/scripts/validate_curricula.py` exits 0 on both files and non-zero on a broken one | - |
 
 **Lane A gate:** [ ] two real curricula committed, validator green.
 
