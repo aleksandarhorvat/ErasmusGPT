@@ -7,120 +7,910 @@
   "level": "bachelor",
   "language": "en",
   "total_ects": 180,
-  "academic_year": "2025/2026",
+  "academic_year": "2026/2027",
   "source_url": "https://www.pmf.uns.ac.rs/en/studies/study-programs/informatics/",
-  "scraped_at": null,
-  "_note": "SAMPLE DATA - placeholder so the stub matcher returns something. Person A replaces this in S1-A1 with the full scraped curriculum.",
+  "scraped_at": "2026-09-19T16:51:56Z",
   "courses": [
     {
-      "code": "I101",
-      "title": "Introduction to Programming",
-      "ects": 8.0,
-      "year": 1, "semester": 1, "mandatory": true, "module": null, "language": "en",
-      "description": "Basic concepts of imperative programming. Data types, expressions, control flow, functions, arrays and pointers. Program decomposition, debugging and testing. Practical work in C.",
-      "learning_outcomes": ["Write, compile and debug small imperative programs", "Decompose a problem into functions"],
-      "topics": ["control flow", "functions", "arrays", "pointers"],
+      "code": "I011",
+      "title": "Introduction to programming",
+      "ects": 9.0,
+      "year": 1,
+      "semester": 1,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Enabling students to understand the concepts of (computer) programming, problem analysis and their implementation in a concrete procedural language. First programming language. Structure and parts of a programme. Simple data types, enumeration type, interval type. Assignment, expressions. Control and iteration statements. Structured data types, arrays, records, sets. Procedures, functions, global modules. Procedural data type. Input and output. Introduction to algorithms. Iterative and recursive approaches. Sums and products. Introduction to abstract data types. Example implementation of an abstract data type. Implementation using arrays. Practising the understanding of basic principles of the procedural programming style. Practising control and iteration statements, as well as simple, structured, and abstract data types. Practical implementation of algorithms using an appropriate editor and compiler.",
+      "learning_outcomes": [
+        "At the end of the course, successful students are expected to demonstrate understanding of the concepts of (computer) programming, ability to understand problems and the implementation of solutions in a concrete procedural language, with the use of available libraries.",
+        "At the end of the course, successful students are expected to demonstrate deep understanding of the concepts of (computer) programming, ability to understand and analyze problems and implement solutions using the procedural programming style."
+      ],
+      "topics": [],
       "prerequisites": [],
-      "url": null
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I011.pdf"
     },
     {
-      "code": "I102",
-      "title": "Data Structures and Algorithms",
+      "code": "I111",
+      "title": "Elements of mathematical logic",
+      "ects": 9.0,
+      "year": 1,
+      "semester": 1,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Systematization of the foundations of mathematics, establishing methods of logical deduction, and developing ability for the correct and creative solutions to mathematical problems. Introducing students to the basic concepts of mathematical logic and its place in mathematics. Various directions in founding mathematics, paradoxes. Propositional formulas, propositional algebra. Normal forms. Bases of propositional algebra. Switch circuits and logic circuits. Hypotheses and consequences. Predicate calculus. Valid formulas. Prenex form and Skolemization. FO resolution. Formal theories, propositional and predicate calculus as formal theories. Elements of set theory. Algebra of sets. Relations. Equivalence relations and partial orderings. Functions, inverse functions, operations. Cardinal numbers. Cantor diagonalization. follows theoretical instructions.",
+      "learning_outcomes": [
+        "Learning the rules of the language of mathematics and basic methods of proving. Recognition and ability to use tautologies and valid formulas as well as the corresponding formal theories. Managing constructions of sets. Understanding and constructing relations, especially equivalence relations and partial orderings. Understanding the notion of function and examining its properties.",
+        "Creatively using the rules of mathematical and logical deduction in solving complex problems and proving theorems. Understanding interpretations of first-order formulas and constructing models. Ability to employ the knowledge on relations and functions in other areas of mathematics."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I111.pdf"
+    },
+    {
+      "code": "I112",
+      "title": "Calculus 1",
+      "ects": 9.0,
+      "year": 1,
+      "semester": 1,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Acquiring basic knowledge and skills in mathematical analysis of real functions of one real variable. Axiomatic approach to the field of real numbers. Convergent sequences of real numbers. Limits of real valued functions. Continuous functions and their local properties and global properties on closed intervals. Differentiable functions (the relation to algebraic operations, composite function, inverse function). The criteria of monotonicity and extreme values. Higher derivatives and Taylor formula. Examination of real functions. Integral (changing the variable and partial integration). Integrals of rational functions. The Riemann integral and its applications on surface area, volumes and curve length. Numerical ser ies, criteria for absolute convergence (D\u2019Alambert and Cauchy). Series of functions (general and power) and their relation to convergence, derivation and integration. Improper integral. Proving some properties of real numbers based on the axiomatic. Basic properties of elementary functions. Calculation of the limits of sequences and functions. Derivatives of elementary functions. Application of criteria for finding the extreme values of functions. Application of Taylor formula for approximation of function values. Calculation of indefinite and definite integrals. Application of definite integral. Application of convergences criteria of numerical and functional series. Application of criteria for the convergence of improper integrals.",
+      "learning_outcomes": [
+        "Obtaining the basic knowledge on the notions from mathematical analysis and preparation for further courses in mathematical analysis."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I112.pdf"
+    },
+    {
+      "code": "I021",
+      "title": "Data structures and algorithms 1",
       "ects": 8.0,
-      "year": 1, "semester": 2, "mandatory": true, "module": null, "language": "en",
-      "description": "Abstract data types and their implementations: lists, stacks, queues, trees, hash tables and graphs. Algorithm design techniques and asymptotic complexity analysis. Sorting and searching algorithms.",
-      "learning_outcomes": ["Choose an appropriate data structure for a problem", "Analyse the asymptotic complexity of an algorithm"],
-      "topics": ["complexity", "trees", "hashing", "graphs", "sorting"],
-      "prerequisites": ["I101"],
-      "url": null
+      "year": 1,
+      "semester": 2,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Enabling students to understand and use dynamic data structures. Basic concepts of programming languages needed for efficient programming of data structures and algorithms. The definition of abstract data types. Various criteria for implementing data types. Algorithm efficiency and complexity score. Abstract data type LIST. Implementation of a list and basic operations with a list. Circular lists, use of headers and limiters. Multiply linked lists. Abstract data type stack and its implementation. Basic concepts of discrete simulation. Implementation of various data structures (list, stack, queue...), and various ways of their practical application.",
+      "learning_outcomes": [
+        "At the end of the course, successful student s should be able to realize a given data structure using pointers.",
+        "At the end of the course, successful students should be able to identify a suitable data structure for solving a problem and implement it using pointers where applicable."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I021.pdf"
     },
     {
-      "code": "I203",
-      "title": "Object-Oriented Programming",
-      "ects": 7.0,
-      "year": 2, "semester": 1, "mandatory": true, "module": null, "language": "en",
-      "description": "Classes, objects, encapsulation, inheritance and polymorphism. Interfaces and abstract classes, generics, exception handling, collections. Design principles and common design patterns. Practical work in Java.",
-      "learning_outcomes": ["Design a class hierarchy", "Apply standard design patterns"],
-      "topics": ["inheritance", "polymorphism", "generics", "design patterns"],
-      "prerequisites": ["I101"],
-      "url": null
+      "code": "I121",
+      "title": "Introduction to algebra",
+      "ects": 8.0,
+      "year": 1,
+      "semester": 2,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Introducing the basic algebraic structures and laws, as well as systematization of number structures and properties of polynomials in that direction. Introducing practical techniques for numbers, polynomials, systems of linear equations, determinants and matrices. Operations and algebraic structures. Groupoids and their properties, subgroupoids, factor-groupoids, homomorphisms, direct products. Semigroups, semigroups of words, quasigroups. Groups. Rings. Fields. Lattices and Boolean algebras. Natural numbers. The ring of integers. The Euclid\u2019s algorithm. Linear Diophantine equations. Rational, real and complex numbers. Systems of linear equations and Gaussian elimination. Vector spaces. Matrices and determinants. Cramer\u2019s rule. The inverse matrix. Polynomials, divisibility and roots of polynomials. Lagrange interpolation. Viet\u2019s formulas. follows theoretical instructions.",
+      "learning_outcomes": [
+        "Understanding the basic algebraic structures and related notions, as well as the ability to solve simple problems. Understanding constructions and properties of sets of numbers. Problem-solving using mathematical induction, solving systems of congruencies and Diophantine equations, finding roots of polynomials. Mastering methods of solving systems of linear equations, calculating determinants and finding the inverse matrix.",
+        "A successful student will be able to solve advanced problems about algebraic structures, numbers and polynomials, to recognize basic algebraic laws, structures and their properties in various areas of mathematics."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I121.pdf"
     },
     {
-      "code": "I204",
+      "code": "I122",
+      "title": "Calculus 2",
+      "ects": 8.0,
+      "year": 1,
+      "semester": 2,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Acquiring basic knowledge and skills in mathematical analysis of real functions of many real variables. Real functions of many real variables and their limits. Partial derivatives and the total differential. Derivative of the composite function. Taylor\u2019s formula. Local minimum and maximum of a function.Vector field. Existence and uniqueness of function of potential. Curve integral of first and second kind. Double and triple integral. Cylindrical and spherical coordinate systems. Gauss-Green theorem. Theorem on implicit functions . Surface integral. Ostrogradsky formula. Stokes formula. Geometrical representation of functions of two variables in three -dimensional space and fin ding their domains. Calculation of the limits of functions of two real variables. Finding the partial derivatives of functions. Application of criteria for finding extreme values of functions. Application of Taylor formula in approximation of functions. Ca lculation of curve integral. Calculation of double and triple integrals and their applications. Application of Green Gauss theorem, Ostrogradsky formula and Stokes formula.",
+      "learning_outcomes": [
+        "Acquiring the basic knowledge on the notions and methods of differential and integral calculus of real functions of many real variables."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I122.pdf"
+    },
+    {
+      "code": "I031",
       "title": "Databases 1",
       "ects": 7.0,
-      "year": 2, "semester": 1, "mandatory": true, "module": "Information Technologies", "language": "en",
-      "description": "The relational data model, relational algebra and SQL. Conceptual modelling with entity-relationship diagrams, functional dependencies and normalisation up to BCNF. Introduction to transactions and indexing.",
-      "learning_outcomes": ["Design a normalised relational schema", "Write non-trivial SQL queries"],
-      "topics": ["relational algebra", "SQL", "normalisation", "ER modelling"],
+      "year": 2,
+      "semester": 3,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Educating student for modelling, creating and using (SQL queries) relation data model, as well as mastering principles of operating DBMS. Basic terms and principles. Concept of databases. Basic data models. Entity -relation model and its connection with object data model. Relation data model. SQL - query language for manipulating data. Translation of ER model into relation data model. Separation of logical and physical data structure. Functions of database system management. Creating ER model for illustrative examples of systems using appropr iate CASE tool . Creating relation data model by translating ER model using appropriate CASE tool. Managing data using illustrative SQL queries.",
+      "learning_outcomes": [
+        "At the end of the course, student s will be able to create relation data model for an illustrated example of a real system using appropriate CASE tool; based on that model students should be able to create databas e and to demonstrate few examples of SQL query.",
+        "At the end of the course, successful student s should be able to understand basic principles of modelling and creating relation data model for an illustrative example of real system using appropriate CASE tool, execution of SQL queries and functions of DBMS."
+      ],
+      "topics": [],
       "prerequisites": [],
-      "url": null
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I031.pdf"
     },
     {
-      "code": "I205",
-      "title": "Operating Systems",
-      "ects": 6.0,
-      "year": 2, "semester": 2, "mandatory": true, "module": "Information Technologies", "language": "en",
-      "description": "Processes and threads, scheduling, synchronisation and deadlock. Virtual memory and paging. File systems, input/output subsystems and device drivers. Practical work with system calls on Unix-like systems.",
-      "learning_outcomes": ["Explain how an operating system schedules and isolates processes", "Write programs using system calls and threads"],
-      "topics": ["processes", "scheduling", "synchronisation", "virtual memory", "file systems"],
-      "prerequisites": ["I101"],
-      "url": null
-    },
-    {
-      "code": "I206",
-      "title": "Computer Networks",
-      "ects": 6.0,
-      "year": 2, "semester": 2, "mandatory": true, "module": "Information Technologies", "language": "en",
-      "description": "Layered network architectures, the TCP/IP stack, addressing and routing. Reliable transport, congestion control, application protocols such as HTTP and DNS. Basics of network security. Socket programming.",
-      "learning_outcomes": ["Explain the function of each layer of the TCP/IP stack", "Implement a simple client-server application over sockets"],
-      "topics": ["TCP/IP", "routing", "HTTP", "DNS", "sockets"],
+      "code": "I032",
+      "title": "Object-oriented programming 1",
+      "ects": 7.0,
+      "year": 2,
+      "semester": 3,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Introducing students to the basic principles and techniques of object -oriented programming, and enabling them to appl y the proven solutions and contemporary tools in the development of a wide spectrum of applications. Object-oriented methodology: design and programming. Basic elements of object-oriented programming: classes, inheritance, dynamic bounding. A review of some hybrid object-oriented languages. Object-oriented programming language. Structure and parts of the program. Simple data types, complex data types, classes and objects. Association, expressions. Control and loop commands. Referential data types. Packages. Exceptions. Structure of a program in a particular object-oriented language. Testing of finished solutions, tools, discussion on the possibilities of application and the like. Individual practical tasks: simple data types, branching commands, iterative statements, termination statements, working with strings, input and output streams, classes, objects, inheritance, abstract classes, interfaces, arrays, modifiers, initializers, nested classes, packages, exceptions.",
+      "learning_outcomes": [
+        "At the end of the course, successful students should be able to demonstrate the ability to understand and analyze problems, as well as the design and realization of the solution in a concrete object-oriented programming language. Optimal: At the end of the course, successful students should be able to understand, analyze and define problems based on logical foundations, as well as creative design and realization of solutions using the object-oriented style of programming."
+      ],
+      "topics": [],
       "prerequisites": [],
-      "url": null
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I032.pdf"
     },
     {
-      "code": "I307",
-      "title": "Formal Languages and Automata",
-      "ects": 6.0,
-      "year": 3, "semester": 1, "mandatory": false, "module": "Computer Science", "language": "en",
-      "description": "Regular languages, finite automata and regular expressions. Context-free grammars and pushdown automata. The Chomsky hierarchy, Turing machines, decidability and the limits of computation. Applications to lexical analysis and parsing.",
-      "learning_outcomes": ["Construct automata and grammars for given languages", "Argue about decidability of simple problems"],
-      "topics": ["finite automata", "grammars", "Turing machines", "decidability"],
+      "code": "I033",
+      "title": "Data structures and algorithms 2",
+      "ects": 8.0,
+      "year": 2,
+      "semester": 3,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Introducing students to data structures use d to represent sets and basic tree types. In addition, introducing a variety of algorithms that can be done over the structures. Abstract data type SET and its implementation. Set sea rching and abstract data type Dictionary (hashing). Set ordering: an elementary array sorting algorithms, complex array sorting algorithms, sorting lists. Complexity of sorting algorithms. The principle of divide and conquer programming and its application . Finding a subset (backtrack) and applications. Set searching with restrictions, dynamic programming and greedy algorithm. Constructive generation of subsets and the basic application on combinatorial objects. Abstract data type TREE and its implementation. Tree traversal. Binary search tree. Typical applications of the presented data structures and algorithms. Individual practical problems: hashing, sorting, backtrack, dynamic programming, tree traversal.",
+      "learning_outcomes": [
+        "At the end of the course, successful students should be able to implement the required sort or search algorithm.",
+        "At the end of the course, successful student s should be a ble to apply, implement and improve the appropriate sorting or searching algorithm."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I011"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I033.pdf"
+    },
+    {
+      "code": "I034",
+      "title": "Discrete mathematics 1",
+      "ects": 7.0,
+      "year": 2,
+      "semester": 3,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Acquiring basic knowledge and skills in combinatorics, graph theory, and basic algorithms that are characteristic for these two areas. Basic combinatorial principles. Words over a finite alphabet. Subsets of a finite set. Binomial numbers and Newton's binomial theorem. Monomials and multinomial theorem. Multisets. Inclusion-exclusion principle. Recurrence relations. Fibonacci numbers. Notion of a graph. Basic graph properties. Notion of a digraph. Basic digraph properties. Connectivity and metrics. Trees. Graph and digraph representation in computer science. Elementary counting techniques for words and finite sets. Application of Newton's binomial theorem. Counting words on multisets and submultisets of certain multisets. Application of the multinomial theorem. Algorithms for generating basic combinatorial configurations. Application of advanced combinatorial techniques. Graphs as system models. Distance in graph, BFS and applications. Graph tours, DFS and applications. Algorithm for testing graph connectivity, and for determining cut-vertices and cut-edges. Properties and representations of trees. Algorithm that determines whether a given graph is a tree.",
+      "learning_outcomes": [
+        "Successful students will be able to apply counting techniques to the problems that arise in practice, to analyse in detail the combinatorial configurations that describe connections between the elements of a system, and to understand and implement the basic algorithms of these two areas."
+      ],
+      "topics": [],
       "prerequisites": [],
-      "url": null
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I034.pdf"
     },
     {
-      "code": "I308",
-      "title": "Artificial Intelligence",
-      "ects": 6.0,
-      "year": 3, "semester": 1, "mandatory": false, "module": "Computer Science", "language": "en",
-      "description": "Problem solving by search, heuristic search and adversarial search. Knowledge representation and logical inference. Introduction to machine learning: supervised learning, evaluation, and neural networks. Practical work in Python.",
-      "learning_outcomes": ["Implement informed search algorithms", "Train and evaluate a simple classifier"],
-      "topics": ["search", "heuristics", "knowledge representation", "machine learning"],
-      "prerequisites": ["I102"],
-      "url": null
+      "code": "I141",
+      "title": "Programming languages",
+      "ects": 7.0,
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Introducing students to the histori cal and practical reasons which led to the emergence of many different programming languages, explaining their specifics, similarities and differencies among several programming paradigms, along with the detailed overview of the characteristics of their most influential and most accepted representatives. History of the development of programming languages. Procedural and nonprocedural programming languages. Characteristics of programming languages and the most common differences between them. A detailed comparative review of multiple programming styles (functional, logic...) and their typical representatives. Syntax and semantics. Basic concepts and mathematical basis. Data structures. Comparative review of different approaches to implementation of classic programming tasks, as well as an illustration of the philosophy behind each of the theoretical paradigms shown on typical examples. Testing of finished solutions, tools, discussion about the possibilities of applications, etc. Individual practical tasks: data types, statements, data structures.",
+      "learning_outcomes": [
+        "Students should be able to understand the concepts of programming languages, and comprehend the significance of different styles of programming. Optimal: Students should be able to understand the concepts of programming languages, the significance of different styles of programming, and to demonstrate the specific development skills in several programming paradigms."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I141.pdf"
     },
     {
-      "code": "I309",
-      "title": "Software Engineering",
-      "ects": 6.0,
-      "year": 3, "semester": 2, "mandatory": true, "module": null, "language": "en",
-      "description": "The software development lifecycle, requirements elicitation and specification, architectural and detailed design, version control, testing strategies, code review and agile process models. Team project work.",
-      "learning_outcomes": ["Elicit and document requirements", "Work effectively in a version-controlled team project"],
-      "topics": ["requirements", "architecture", "testing", "agile", "version control"],
-      "prerequisites": ["I203"],
-      "url": null
+      "code": "I142",
+      "title": "Formal languages and automata",
+      "ects": 8.0,
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Introducing the students to fundamental and abstract concepts of theoretical computer science. Algebra of languages. Semiautomata. Finite automata and regular languages. Minimization of automata. Automata with output. Generative grammars. Regular, context-free and context sensitive grammars. Recursive and recursively enumerable languages. Decidability problems. Manipulating the identities of the algebra of languages. Construction of semiautomata and monoid of a semiautomaton. Analysis and synthesis of finite automata. Pumping Lemma applications. Minimization of finite automata. Determining the language of a grammar and determining the grammar of a language.",
+      "learning_outcomes": [
+        "Students should be able to recognize the basic identities of the algebra of languages, find the language of a given finite automaton, construct the minimal automaton for a given regular language, find the language of a given grammar, construct a grammar which generates a given language, and differentiate between various types of languages.",
+        "Understanding of the basic ideas and principles of automata theory and theory of formal languages, as well as understanding the essence of decidability questions in theoretical computer science."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I142.pdf"
     },
     {
-      "code": "I310",
-      "title": "Web Programming",
+      "code": "I144",
+      "title": "Analytic geometry for students of informatics",
       "ects": 6.0,
-      "year": 3, "semester": 2, "mandatory": false, "module": "Information Technologies", "language": "en",
-      "description": "Client-side technologies: HTML, CSS and JavaScript, the DOM and asynchronous requests. Server-side programming, REST APIs, templating, sessions and authentication. Deployment of a complete web application.",
-      "learning_outcomes": ["Build a client-server web application", "Design and consume a REST API"],
-      "topics": ["HTML", "JavaScript", "REST", "authentication"],
-      "prerequisites": ["I203"],
-      "url": null
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Introducing students to basics of analytic geometry. Geometry of linear spaces. Dividing line segments. Centre of mass. Convex combination of vectors, convex hull. Scalar product, norm, orthogonality of vectors. Angle between two vectors. Orthogonal projection onto a subspace. Determinant as a signed measure. Plane analytic geometry. Point and line in plane (various forms of the equation of line). Two lines in plane. Conics. Lines and conics. Tangents and normals on a conic. Affine transformations of the plane and their matrix representations. Analytic geometry in 3D Euclidean space. Three kinds of products of vectors. Point, line and plane in space (various forms of the equation of line and plane). Sphere, planes and lines. Tangent plane and a normal onto a sphere. Affine transformations of 3D Euclidean space and their matrix representations. Vectors. Vector calculus. Solving various geometric problems using vectors. Solving geometric problems in plane. Solving geometric problems in 3D Euclidean space.",
+      "learning_outcomes": [
+        "Students should be able to solve basic problems of planimetry and stereometry using the techniques of analytic geometry, and to employ the knowledge gained in the course in modelling simpler real problems."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I144.pdf"
+    },
+    {
+      "code": "I051",
+      "title": "Operating systems 1",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "To introduce students to the basic concepts of operating systems, processes and process management, memory management, external memory management, and file systems. The role and development of operating systems. History and types of operating systems. Programming languages suitable for implementation of operating systems. Concurrent programming. Processes and process management. The concept of the process and process states. The process implementation. Interprocess communication and synchronization. Process communication. Process scheduling. Memory management. Managing available internal memory. Organization and management of virtual memory. File Management. The structure of files and directories. File systems. Concurrent programming and interprocess communication and synchronization. Simulation of typical algorithms for operating systems.",
+      "learning_outcomes": [
+        "At the end of the course, successful student s should be able to understand the concepts, algorithms, structure and principles of modern operating systems.",
+        "At the end of the course, successful student s should be able to understand and apply concepts, algorithms, structure and principles of modern operating systems."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I032"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I051.pdf"
+    },
+    {
+      "code": "I052",
+      "title": "Information systems 1",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": null,
+      "language": "en",
+      "description": "Modelling of information systems using unified modelling language \u2013 UML Overview of methodologies regarding information system modelling. Unified modelling language - UML. Basic concepts of object-oriented approach in system modelling. Modelling systems using use cases. Static, dynamic and physical models. Applying UML in system modelling. Examples of models of systems. Modelling of individual aspects of the system using appropriate UML diagrams. Drawing diagrams using the CASE (Computer-aided software engineering) tools that support UML 2.0.",
+      "learning_outcomes": [
+        "Minimum Knowledge of syntax and semantics of unified modelling language. Desirable System modelling using UML."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I031",
+        "I032"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I052.pdf"
+    },
+    {
+      "code": "I151",
+      "title": "Artificial intelligence 1",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Teaching students theoretical basics of artificial intelligence (AI) principles as well as a practical implementation of the software applications with the elements of knowledge representation, search and inference. The history of AI. Intelligent agents. Solving problems by searching: uninformed and informed (heuristic) search strategies. Adversarial search: Minimax. The example of Minimax implementation in two-player game. Knowledge representation and inference in first-order logic. Ontological engineering and semantic networks. Dealing with uncertainty in AI systems. Making decisions in AI systems. The basics of machine learning. The basic principles of natural language processing. Implementation of the problem-solving systems using standard AI search algorithms using object-oriented programming language. Implementation of the Minimax algorithm in two-player game. Implementation of knowledge representation and inference in declarative programming language.",
+      "learning_outcomes": [
+        "Students should understand the basic AI concepts and should be able to implement software application for solving problems by searching state space, implementation of the intelligent player in two-player games, as well as the implementation of the knowledge-based agent.",
+        "Students should be able to implementat the knowledge -based systems with deep understanding of logical inference and complex principles of AI."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I021",
+        "I111",
+        "I211"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I151.pdf"
+    },
+    {
+      "code": "I152",
+      "title": "Analysis of algorithms",
+      "ects": 8.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "The goal of the course is to present an introduction to basic concepts of computability theory i.e. to mathematical models of the intuitive notion of an algorithm and the fundamental techniques for estimating computational complexity of algorithmic problems. The intuitive notion of an algorithm and its formalisation, Church thesis. The basics of the theory of recursive functions. Recursive and recursively enumerable sets and languages. Turing machines and related computational models. Complexity of machines and complexity classes. An overview of some classical problems of polynomial time complexity. Non-deterministic Turing machines and their complexity. Reductions and completeness. NP-complete problems. Primitive recursive functions. Applications of theorems on sums and products. The minimisation operator. Applications of the majorisation theorem. Recursive sets. Computing functions on Turing machines in the {|,*}-system. Composition of machines. Routines for the iterated sum, product, function composition, the primitive recursion scheme, minimisation. Representations of graphs. Basic algorithms on graphs. Mutual reductions of various problems from mathematical logic, combinatorics, discrete optimisation.",
+      "learning_outcomes": [
+        "Understanding the necessity and the basic idea behind the mathematical form alisation of the notion of an algorithmic problem; designing simplest (non- branching) programs of Turing machines and developing the capability of analysing the time complexity of classical algorithms by solving the well-known computational problems.",
+        "Successful students should be able to design \u2013 by solving advanced problems concerning recursive functions and sets \u2013 more involved (branching) programs of Turing machines, and to apply theoretical knowledge in the area of computational complexity to analysis of problems and corresponding programs that are met in everyday programming practice."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I034"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I152.pdf"
+    },
+    {
+      "code": "I143",
+      "title": "Linear algebra",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 6,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Introducing the basic ideas and techniques of linear algebra to be used in mathematics and computer science. Vector spaces. Basis and dimension. Inner product. Orthogonality and Gramm-Schmidt process. Linear transformations. Matrices. Matrix of a linear transformation. Rank of a matrix. Regular matrices. Cayley-Hamilton theorem. Eigenvalues and eigenvectors. Similar matrices. Diagonalization of a matrix. Linear dependence and independence. Basis of a subspace. The sum and the intersection of subspaces. Orthogonality. Gramm-Schmidt process. Matrix algebra. Matrix of a linear transformation. Rank of a matrix. Inverse of a matrix. Applications of Cayley \u2013Hamilton theorem. Eigenvalues and eigenvectors. Diagonalization of a matrix.",
+      "learning_outcomes": [
+        "Students should be able to understand the basic principles and ideas of linear algebra and to apply the techniques of matrix algebra and vector algebra to practical problems. In particular, the students will be able to determine the matrix of a linear transformation, the rank of a matrix and linear transformation, the inverse of a matrix, to find the eigenvalues and the eigenvectors of a square matrix and a linear transformation, and to diagonalize a square matrix when it is possible."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I143.pdf"
+    },
+    {
+      "code": "I162",
+      "title": "Numerical analysis",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 6,
+      "mandatory": true,
+      "module": "Computer Science",
+      "language": "en",
+      "description": "Acquiring basic knowledge and skills in numerical mathematics. Development of the mathematical mind for precision, exactness and calculation, as well as work habits. Use of computers in numerical problem solving. Approximate numbers and errors. Machine numbers and computer arithmetic. Error terms in function evaluation. Interpolation, interpolating polynomials and error terms. Numerical differentiation, difference quotients and error terms. Numerical integration. Quadrature formulas. Newton-Cotes formulas. Trapeze and Simpson's rule. Numerical equation solving. Localization of zeros. General iterative method. Special iterative methods. Systems of equations. Differential equations. Exercises follow the lectures and are conducted with Mathematica.",
+      "learning_outcomes": [
+        "Students will be able to apply simple numerical methods; develop skills to set up problems, implement and execute numerical algorithms, solve problems and interpret the solutions; be able to link the mathematical knowledge with computer science and other subjects; be able to use mathematical software."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I162.pdf"
+    },
+    {
+      "code": "I211",
+      "title": "Theoretical foundations of informatics 1",
+      "ects": 8.0,
+      "year": 1,
+      "semester": 1,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Acquiring the basic mathematical knowledge and skills essential for understanding the formal models of advanced computer science concepts. Naive set theory, notation, operations on sets, basic properties of operations on sets. Relations. Binary relations. Special binary relations and their first properties. Operations on relations. Functions. Function composition. Surjective, injective, bijective functions. Invertibility and the inverse of a bijection. Kernel and image of a function. Cardinality of sets. Finite and countable sets. Propositional logic. Tautologies, modus ponens. Boolean functions and circuits. Normal forms (conjunctive, disjunctive) and completeness. Predicate logic, quantifiers. Models of predicate logic and validity. Syntax of the predicate logic. partially ordered sets, special elements. Representations of partially ordered sets. Infima, suprema and lattices. Complemented lattices and Boolean algebras (informal). Sets. Induction. Integers. The structure of mathematical proofs and standard proof techniques. Special binary relations. Functions. Modelling computer science phenomena in naive set theory using relations and functions. Describing the properties of formal models using predicate logic. Boolean functions and circuits. Lattices.",
+      "learning_outcomes": [
+        "Student should be able to understand and analyze formal models of simple computer science phenomena based on the naive set theory."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I211.pdf"
+    },
+    {
+      "code": "I212",
+      "title": "Calculus for students of informatics",
+      "ects": 8.0,
+      "year": 1,
+      "semester": 1,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Study of basic notions and theorems from th e Real Analysis, and their learning and teaching through examples. The field of real numbers and its topological structure. Real function of one real variable, its limit and continuity. Differential calculus and its application to the analysis of functions. Integrals. The Newton-Leibniz formula and its applications. Solving examples in the classes and/or at home, writing seminar papers.",
+      "learning_outcomes": [
+        "Students should learn the standard notions and theorems from the first Analysis course, and show their knowledge in solving easy and average examples from Analysis.",
+        "Besides the minimal knowledge, s tudents should show the ability in understanding and proving the main theorems and solve more difficult examples from Analysis."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I212.pdf"
+    },
+    {
+      "code": "I221",
+      "title": "Introduction to eBusiness",
+      "ects": 7.0,
+      "year": 1,
+      "semester": 2,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Introducing students to the basic principles of e-business, business models and strategies, as well as techniques for their implementation. Introduction to e-commerce. Business models and concepts of e-commerce. Technologies for implementation of e-business. B2B, B2C, C2C approaches. M-commerce. P2P networks. Infrastructure of e-commerce. Intelligent agents. Web site development. Systems for electronic payment and cash flow, security and control. View of e-business security. Search engine optimization. Small and medium-sized companies and e-business. Research and development in e-business. On-line services. Marketing and advertisement on the Internet. Analysis of the state of e-business in Serbia. Typical application of e-business. Analysis of various foreign and domestic B2B, B2C, C2C solutions. P2P techniques \u2013 software testing, discussion of application possibilities, ethical aspects, etc. Application of intelligent agents. Search engines \u2013 advanced search techniques, search engine optimization methods. Security protocols and applications. Use of electronic banking \u2013 comparative analysis of different domestic and foreign solutions. Development of marketing strategies. Data mining and e-business. Team problems (business model for e-business (commerce), etc.) \u2013 solution analysis, discussion, drawing conclusions.",
+      "learning_outcomes": [
+        "Students should be a ble to understand the concepts and importance of e -business in modern business environments.",
+        "Students should be able to understand and apply the concepts of e-business in modern business environments."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I221.pdf"
+    },
+    {
+      "code": "I222",
+      "title": "Algebra for students of informatics",
+      "ects": 8.0,
+      "year": 1,
+      "semester": 2,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Introducing students to the basic concepts of algebra and its place in mathematics. Introducing practical techniques for numbers, polynomials, systems of linear equations, determinants and matrices. Algebraic structures. Groupoids and their properties, subgroupoids, factor-groupoids, homomorphisms, direct products. Semigroups, semigroups of words. Groups. Rings. Fields. Lattices and Boolean algebras. Natural numbers, integers. The Euclid\u2019s algorithm. The fundamental theorem of arithmetic. Linear Diophantine equations. Rational, real and complex numbers. Systems of linear equations and Gaussian elimination. Matrices and determinants. Cramer\u2019s rule. The inverse matrix. Polynomials, the ring of polynomials, divisibility and roots of polynomials. The fundamental theorem of algebra. follows theoretical instructions.",
+      "learning_outcomes": [
+        "Understanding the basic algebraic structures and related notions, as well as the ability to solve simple problems. Understanding constructions and properties of sets of numbers. Problem-solving using mathematical induction, solving systems of congruencies and Diophantine equations, finding roots of polynomials. Mastering methods of solving systems of linear equations, calculating determinants and finding the inverse matrix.",
+        "A successful student will be able to solve advanced problems about algebraic structures, numbers and polynomials, to recognize basic algebraic laws, structures and their properties in various areas of mathematics."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I222.pdf"
+    },
+    {
+      "code": "I241",
+      "title": "Databases 2",
+      "ects": 8.0,
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "To teach student s about the principles of develop ing the client-server and multi -tier applications which use database s, to explain methodology of connecting applications which use database, as well as to teach principles on which functioning of classical and distributed DBMS is based. Client-server architecture. Multi -tier architecture. Principles of connecting application with database. ODBC and JDBC interfaces. Other technolo gy. Methodology of normalizing relation data model. Principles of physical organisation data into databases. Details dealing with managing transaction s in DBMS. Distributed DBMS. Connection of applications using databases. Data Warehouse systems. Web services. Normalization of relation data model is practised on concrete examples . Principles of creating and maintaining physical data structure in databases are also practised. Students practice principles of creating the JDBC application by doing exercises on a computer.",
+      "learning_outcomes": [
+        "Successful student s should be able to create application (based on JDBC interface) which establishes the basic communication with illustrative database.",
+        "Successful student s sh ould be able to d emonstrate understanding of the basic principles of ODBC and JDBC interface applied on the example of JDBC application which manages the illustrative database. In addition, student s should be able to demonstrate in-depth understanding of the principles on on which functioning of classical and distributed DBMS is based."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I011",
+        "I021"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I241.pdf"
+    },
+    {
+      "code": "I242",
+      "title": "Computer architecture",
+      "ects": 7.0,
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Acquiring the basic knowledge and skills in digital electronic components and computer hardware, as well as in low level programming languages. Computer. Computer organisation and functioning. System and application software. Numbers. Boolean algebra. Computer arithmetic . Hardware implementation of Boolean functions. Processor. Memory. Cache memory. Bus. Input-output subsystem. Peripherals. Modern processors and organisation. Machine language and assembler programming. Using assembler, linker and debugger. Combinatory and sequential circuits simulation.",
+      "learning_outcomes": [
+        "Successful students will be able to comprehend the basic principles of digital electronic components and computer organisation and architecture. Students should also be able to understand all aspects of computer archi tecture components , as well as to understand the advanced and multiprocessor architectures."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I242.pdf"
+    },
+    {
+      "code": "I243",
+      "title": "Computer networks",
+      "ects": 7.0,
+      "year": 2,
+      "semester": 4,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Objective of this course is to introduce the basic functions and design of computer networks to students. TCP/IP protocol stack is taught as the dominant protocol stack in modern computer networks as well as techniques for configuring parameters of the computer network. Theoretical instruction is divided into five sections. The first section covers the topologies and architectures of the computer networks, passive and active computer network equipment, structured cabling and standards in computer networks. The second section covers functions of computer network on the Data link layer (OSI 2), Data link layer protocols (Ethernet, PPP ...) and communication devices that operate on that layer (hub, switch). The third section covers functions and protocols of computer network on the Network layer of the computer network (OSI 3). IPv4, ICMPv4, routing principles, dynamic routing protocols, IP new generation are taught, as well as communication devices of the Network layer (router). The fourth section covers functions and protocols on the Transport layer of the computer network (UDP, TCP). The fifth section covers functions and protocols on the Application layer of the computer network. Various protocols and services of that layer are taught such as DNS, SMTP, POP, IMAP, HTTP, HTTPS and FTP. Practical instruction covers introduction to passive and active network equipment, creation of the structured cabling example of the building, monitoring, capturing and analysis of traffic on the network, configuration of available network devices in the classroom in order to make a simple computer network.",
+      "learning_outcomes": [
+        "Understanding the basic functions, technologies and architectures of modern computer networks.",
+        "Adopting skills required for administration and usage of simple local area networks and several Internet services."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I243.pdf"
+    },
+    {
+      "code": "I251",
+      "title": "Software engineering",
+      "ects": 9.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Overview of elementary and advanced phases and techniques of software development. Preparation of students for teamwork in characteristic phases of software development: requirements, analysis, design, implementation, elements of management and quality control. Basic notions and definitions. Software quality criteria. Models of software development process and basic concepts of the development description. Possible views on the software development process: functional, data oriented, rule oriented, state oriented, scenario based. Structure and object-oriented analysis and design. Formal specification. Principles and methods of implementation. Reverse engineering. Standardization of a software development process. Analysis and practical improvement of requirements specification. Training in methods of software cost estimation. Training in object-oriented analysis. Training in description of software product by methods of formal specification. Practical work on system and functional testing. Principles of software metrics and practicing of methods of software quality measurement.",
+      "learning_outcomes": [
+        "Students should be able to apply the obtained knowledge, and be able to work as a team member on the development and delivery of software products of high quality.",
+        "Students should have good knowledge, ability for critical analysis and application of knowledge in the field, ability to work both individually and as a team member on the development and delivery of high quality software products, as well as the ability to analyze their quality level."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I251.pdf"
+    },
+    {
+      "code": "I252",
+      "title": "Theoretical foundations of informatics 2",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 5,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Acquiring the basic knowledge and skills related to the Automata Theory and regular languages, and learning the basic theoretical algorithms characteristic for this area. Words and languages. Algebra of languages. Regular expressions and identities in the algebra of languages. Semiautomaton. Monoid and syntactical monoid of a semiautomaton. Deterministic and nondeterministic finite automaton. The language of an automaton. Equivalence of deterministic and nondeterministic automata. Kleene\u2019s theorem: analyzing and constructing automata. Pumping lemma. Myhill-Nerode\u2019s theorem. Minimal automaton. An algorithm for minimizing a given deterministic automaton. The value of regular expressions. Equivalence of regular expressions and fundamental identities in the algebra of languages. Ad hoc methods for analyzing and constructing finite automata. Constructing of a deterministic automaton that is equivalent to a given nondeterministic automaton. Some applications of Kleene\u2019s theorem, Pumping lemma and Myhill-Nerode\u2019s theorem. Constructing of a minimal automaton equivalent to a given finite deterministic automaton.",
+      "learning_outcomes": [
+        "Students should be able to apply fundamental algorithms in automata theory such as recognizing the language accepted by a given automaton and constructing an automaton that accepts a given language. Optimal: High level of understanding and applying the automata theory and ability to solve problems connected with acquired notions in a creative way."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I252.pdf"
+    },
+    {
+      "code": "I263",
+      "title": "Web programming",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 6,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Advanced concepts of web programming and the semantic web. Enabling students to apply the acquired knowledge practically, for developing non-trivial, dynamic web presentations and interactive web applications, first and foremost by using the fundamental web technologies (HTML, PHP, JavaScript, AJAX, jQuery), and then by using advanced, modern frameworks (HTM5, JavaServer Faces). Advanced concepts of content management systems (CMS). Concepts of Cloud computing and their practical applications. Properties of the Web. The client-server architecture. An overview of HTML. Basic concepts of a server-side programming language (PHP). Syntax and semantics. Working with forms. The concept of a session. Establishing database connectivity. Basic concepts of a client-side programming language (JavaScript). Syntax and semantics. Document Object Model (DOM). Event-driven programming. Working with windows, frames, and forms. Asynchronous JavaScript and XML (AJAX). An overview of the most important content and document management systems. Cloud computing and its benefits for developers, as well as the end-users. Exercises, Other forms of teaching, Student research Practice and understanding of the core principles using illustrative examples. Using the jQuery library for easier and faster applications of the presented concepts. Analysis and practical applications of the advanced concepts introduced in the new HTML5 specification. Development of modern, interactive web applications using a web GUI framework (Facelets, JavaServer Faces 2.x, Managed Beans). Practical implementations of web presentations and applications on a dedicated web server.",
+      "learning_outcomes": [
+        "Students should be able to design and implement a simple web presentation, in which the content is presented dynamically. The use of a back-end database system is mandatory.",
+        "Students should be able to design and implement a complex web application, with a high level of interactivity common in modern, professional web applications. Students are also expected to understand advanced concepts of the semantic web and content management systems."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I263.pdf"
+    },
+    {
+      "code": "I262",
+      "title": "Information systems 2",
+      "ects": 7.0,
+      "year": 3,
+      "semester": 6,
+      "mandatory": true,
+      "module": "Information Technologies",
+      "language": "en",
+      "description": "Training students for development of information systems in three-tier software architecture. Object-rational mapping: Hibernate. Object-oriented query language: Hibernate Query Language. Web application concepts: URL, HTTP, three-tier and n-tier software architecture. Java Servlets. Java Server Pages (JSP). JSP Standard Taglib Library and JSP expression language. The overview of current open-source Web development frameworks. Automated application compiling and building: Apache Ant. Reporting in information systems. Specification of the software requirements and creating database schema for one example of information system. Implementation of the business logic using ORM. Development of complex functionalities of the business tier using Java Servlet. Implementation of the user interface in JSP and HTML. Application building.",
+      "learning_outcomes": [
+        "Students should be able to implement certain functionalities of information system using up-to-date software tools.",
+        "Students should be able to implement the complete information system from the database schema, implementation of the business logic and simple user interface using up-to-date open-source software environments and tools."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I031",
+        "I032"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I262.pdf"
+    },
+    {
+      "code": "M-02",
+      "title": "English 1",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The objective is to familiarize students with the characteristics of both general academic and subject specific English register and to develop their command of specific academic skills needed for studying at university and during their professional career. -Basic characteristics of English for academic and specific purposes: Formal-informal style synonyms; use of linking words and phrases: additive conjunctions, adversative, causal and temporal conjunctions; word building: prefixes and suffixes common in scientific English; compound nouns; Foreign plurals; verb tenses most frequently used in academic register; numbers and reading of mathematical formulae; -Development of academic skills: reading authentic texts and using the following strategies: skimming and scanning, predicting, understanding the general idea and specific details; inferring meaning; using context for interpreting the meaning of unknown vocabulary; writing definitions and description of processes ; speaking: discussing subject -specific and more general academic issues.",
+      "learning_outcomes": [
+        "At the end of the course students will develop the following skills: -general linguistic skills: to distinguish formal academic style from informal use of language; to read critically and understand different genres of academic texts; to write short forms in accordance with academic conventions; to speak fluently on topics related to academic and non - academic issues; -specific skills related to subject study: to acquire subject- specific vocabulary and grammar elements typical for formal scientific discourse; to use general and subject -specific monolingual dictionaries."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M-02.pdf"
+    },
+    {
+      "code": "M3-21",
+      "title": "Mathematical foundations of Economics",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "To introduce students to the basic mathematical models in microeconomics and macroeconomics. Students need to acquire knowledge necessary for understanding of the basic economic concepts and processes, as well as the knowledge necessary to understand advanced courses in economic - financial module. Supply and demand (how markets work, markets welfare), economics of public sector, the behaviour of companies, labour economics, the real economy in the long term, money and prices in the long term, macroeconomics of the open economies, economics fluctuation in the short term.",
+      "learning_outcomes": [
+        "Knowledge of general and basic economic principles, understanding of mathematical models and the impact of model parameters, performance of relevant economics conclusions based on the model. Students will acquire basic knowledge of economic theory and mathematical models of the economy as well as understanding of the strong connection between modern economic theory and mathematics, and the role of mathematics in the development of economic thought."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M3-21.pdf"
+    },
+    {
+      "code": "I311",
+      "title": "Software Lab 1",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "To prepare the students for advanced use of certain s oftware tools for practical work in the relevant IT disciplines such as: office management, visual programming, internet tools, multimedia, desktop publishing, symbolic computation etc. Theoretical basis of the selected tool. Principles and purpose of its use in the relevant IT discipline. Learning to use all the advanced concepts of selected software tools on the examples. Practising advanced application of the selected software tool on real -world examples from different IT disciplines.",
+      "learning_outcomes": [
+        "Students should be a ble to show advanced knowledge of appropriate software tools through the illustrative example.",
+        "Students should be able to demonstrate understanding of the basic principles of adequate software tools , as well advanced knowledge of its use shown through illustrative example."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I311.pdf"
+    },
+    {
+      "code": "M-09",
+      "title": "English 2",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The course represents further development of the knowledge and skills acquired at a previous level. The objective is to familiarize students with more complex characteristics of both general academic and subject specific English register and to develop their command of specific academic skills needed for university studies and their professional career. -Basic characteristics of English for academic and specific purposes: Formal-informal style synonyms; use of articles; word building: prefixes and suffixes common in scientific English; common verb forms: the use of passive, modals and participles in academic register; -Development of academic skills: reading authentic texts and using the following strategies: skimming and scanning, predicting, und erstanding general idea and specific details; inferring meaning; using context for interpreting the meaning of unknown vocabulary; writing summaries; writing a CV; speaking: discussing subject -specific and more general academic issues, giving oral presentations on a subject-related topic.",
+      "learning_outcomes": [
+        "At the end of the course students will develop the following skills: -general linguistic skills: to distinguish formal academic style from informal use of language; to read critically and understand different genres of academic texts; to write short forms in accordance with academic conventions; to speak fluently on topics related to academic and non - academic issues; -specific skills related to subject study: to acquire subject- specific vocabulary and grammar elements typical for formal scientific dis course; to use efficiently general and subject -specific monolingual dictionaries."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "M-02"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M-09.pdf"
+    },
+    {
+      "code": "M-15",
+      "title": "Sociology",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Acquiring basic categories necessary for the description and explanation of society as a particular reality, its structure and dynamics, with specific emphasis on the study of modern society, the basic phenomena and processes of change that have been taking place (ecological crisis, economic cris is, growing poverty and impoverishment of the entire regions, wars, population stratification in practically all countries of the world). It also aims to introduce students to a global sociological method that reveals the social determination of the specific social phenomena (precision of each occurrence of a given social system and culture). (1) Subject, tasks and methods of sociology; (2) concept of constituent elements of the society; (3) Work, division of labor, economic life, modern organization; (4) Definition and basic forms of social groups; (5) stratification and class structure and (6) personality, personality socialization, conformity and deviant behaviour; (7) culture and civilization, the basic elements of culture;(8) Social change and development; (9) Globalization; (10) the mass society, mass media, mass culture, the Internet, social networks; (11) Education in modern society: the social function of education, the dynamic relationship between society and education, institutional development of education, ethical aspects of education, social interaction, education, new forms of education; (12) Environmental dimension of social development. Students' term papers and open discussions on given topics from materials with a focus on current events and processes in education in our country and abroad.",
+      "learning_outcomes": [
+        "Students should acquire the knowledge necessary for understanding the specifics of social determinism, how to link all the different social phenomenon in general, the principles of operation and the changes and development of wholeness, interconnectedness of different social phenomena, social interaction between individuals and groups in society, the role and importance of values and attitudes to the events in the modern world and their own society. Knowlegde of general sociological categories and global sociogical method that can be applied in learning, not only from the social sciences, but also in other subject, from example, in ecology."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M-15.pdf"
+    },
+    {
+      "code": "I321",
+      "title": "Introduction to digital electronics",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introduction to the basic digital circuits and digital systems work. Fundamentals. Signals and signal transmission. Passive electronic components. Semiconductor materials. Pure and impurity semiconductors. PN junction and characteristics. Real semiconductor diodes and semiconductor lasers. Bipolar transistor and FETs. Amplifiers. Integrated circuits. Operational amplifier and applications. Transistors as switching elements. Multivibrators. The basic logic circuits. A complex logic circuits. Adders. Addition of binary numbers. Flip-flops - RS, D, JK, JK-MS. Registers and shift registers. Converters. Counters. Decoders. Digital memory. Basics of connecting analogue and digital systems. A / D and D / A conversion. Experimental exercises: Operational amplifier. The basic logic. TTL and CMOS Decoder. RS and D flip-flop. Counters.",
+      "learning_outcomes": [
+        "Upon completion of the course students should have developed: General skills: Possession of good knowledge of most logic circuits on the functioning of digital systems; Subject-specific skills: Understanding of certain electronic devices and circuits. Understanding of the basic and complex logic circuits and memories."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I321.pdf"
+    },
+    {
+      "code": "M3-22",
+      "title": "Financial mathematics 1",
+      "ects": 9.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introducing students to those parts of mathematics that are practically applied in the economy. Mastering the basic terms and concepts of financial mathematics , as well as applications of mathematical apparatus in definitions of given concepts. Proportions. Percentage account. Simple interest. Promissory notes . Compound interest . Cash flow streams . Amortization of loan. Internal rate of return . Bonds. Functions in the economy. Options. Applications of simple interest. Promissory notes . Equations of value. Applications of compound interest. Cash flow streams. Decursive and anticipative periodic payments. Amortization of loan. Internal rate of return and investment evaluation. Bonds: purchase value, yield to maturity and duration. Portfolio i mmunization. Economic functions . Elasticity. Call and put options trading strategies.",
+      "learning_outcomes": [
+        "Acquiring the basic knowledge necessary for a p roper understanding of application of mathematical apparatus in finance. Students will gain competence in adopting the basic knowledge in a given field, in the use of mathematical literature at an appropriate level and in developing a critical way of thinking and problem analysis."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M3-22.pdf"
+    },
+    {
+      "code": "I322",
+      "title": "Software Lab 2",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "To prepare the students for advanced use of certain software tools for practical work in the relevant IT disciplines such as: office management, visual programming, internet tools, multimedia, desktop publishing, symbolic computation etc. Theoretical basis of the selected tool. Principles and purpose of its use in the relevant IT discipline. Learning to use all the advanced concepts of the selected software tools on the examples. Practising advanced application of the selected software tool on real-world examples from different IT disciplines.",
+      "learning_outcomes": [
+        "Students should be able to show advanced knowledge of appropriate software tools through the illustrative example.",
+        "Students should be able to demonstrate understanding of the basic principles of adequate software tools, as well to show advanced knowledge of its use through illustrative examples."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I322.pdf"
+    },
+    {
+      "code": "M-01",
+      "title": "Boolean algebras and optimization",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Systematization of the basics of mathematics, logical rules of reasoning; developing the ability to properly and creatively solve mathematical problems. Ordered set and lattices; diagrams. Modular, distributive and Boolean lattices and Boolean algebras. Representation of finite Boolean algebras. Boolean ring. Boolean terms and functions. Switching and logical circuits. Half-adder and adder. Minimization - concept and analysis. Different techniques of minimization. Examples. Examples and problems in ordered structures. Presentation of diagrams. Analyzing and solving problems and tasks that illustrate the minimization techniques of Boolean terms and functions. Analyzing practical examples.",
+      "learning_outcomes": [
+        "After completing the course, students should know and understand the finite ordered structures, in particular Boolean algebras, they should be familiar with the appropriate language. They should understand the role of terms or Boolean functions in digital technology, as well as the reasons and the meaning of minimization. They should know the appropriate algebraic techniques.",
+        "Detailed knowledge of ordered structures: ordered sets, distributive and Boolean lattices, representation theorems. Good understanding of Boolean terms and identities, and ability to solve complex minimization problems ."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M-01.pdf"
+    },
+    {
+      "code": "I331",
+      "title": "Seminar paper A",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Enabling students to master the principles of the selected modern information disciplines, which are not processed as a part of other subjects. Theoretical foundation of a chosen IT discipline. Technology and software tools which are used in that discipline. The principles and purposes of use of th e appropriate technologies and software tools in a chosen IT discipline. Mastering the use of appropriate technologies and software tools on illustrative examples in order to master the basic principles of a chosen IT discipline.",
+      "learning_outcomes": [
+        "Students should be able to present the basic principles of a chosen IT discipline through appropriate example.",
+        "Students should demonstrate in-depth understanding of the basic principles of a chosen IT discipline through their application in the appropriate real example."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I331.pdf"
+    },
+    {
+      "code": "M3-23",
+      "title": "Finance 1",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introducing the students to basic understanding of macroeconomics problems, the functioning of central banks, instruments of central banks, monetary aggregates, control function of central banks as well as of other financial institutions and instruments. Understanding the public financial system. History and development of money, financial system, central bank and its role, primary money, aggregate money, M1, M2 and M3. Public income and spending, budget and budgetary rules, procedure of budget making. Follows the theoretical instructions. Students are required to attend exercises and prepare two colloquia during the classes.",
+      "learning_outcomes": [
+        "Functional knowledge of the financial system, public finance and the role of central bank."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M3-23.pdf"
+    },
+    {
+      "code": "I341",
+      "title": "Object-oriented programming 2",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introducing the students to advanced methodologies and techniques of object-oriented programming, and enabling them to apply the proven solutions and modern tools in the development of a wide range of complex applications. An overview of recent improvements of the Java programming language. Strings in Java, advanced text processing, regular expressions. Enumerated data types. Input and output streams. Generics. Collections. Concurrent programming. Developing advanced graphical user interfaces. Network programming. Distributed programming. Developing complex enterprise applications u sing Java EE. Web services and web applications. Use of illustrative examples as the means of studying all of the presented theoretical concepts. Analysis of existing solutions and tools, and discussions about their usage in an efficient development of complex applications. Individual and group practical assignments and exercises focused on developing complex applications in the concrete object-oriented programming language.",
+      "learning_outcomes": [
+        "Students should demonstrate the a bility to understand and analyze complex problems, as well as to design and implement advanced solutions in a concrete object -oriented programming language.",
+        "Students should demonstrate the ability to understand, analyze and define complex problems on a logically-founded basis, as well as to creatively design and implement advanced solutions using the most recent techniques of the object-oriented programming paradigm."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I032"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I341.pdf"
+    },
+    {
+      "code": "I342",
+      "title": "Discrete mathematics 2",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Acquiring basic knowledge and skills related to the Graph Theory, and learning the basic graph-theoretical algorithms. Catalan numbers. Partitions, permutations and Stirling numbers of the 1st and 2nd kind. Systems of distinct representatives and Latin squares. Graphs. Eulerian graphs. Hamiltonian graphs. Planar graphs. Colouring vertices and edges of a graph. Digraphs. Weak and strong connectedness. Acyclic digraphs and topological sorting. Tournaments. Weighted graphs. Catalan and Stirling numbers. Systems of distinct representatives and Latin squares. Graphs as models of systems. Traversing graphs, DFS and applications. Testing algorithmically if a graph is Eulerian or Hamiltonian. Testing algorithmically if a digraph is weakly/strongly connected. Acyclic digraphs and topological sorting. Introductory algorithms on weighted graphs.",
+      "learning_outcomes": [
+        "Students should be able to analyze combinatorial configurations that describe relationships between entities of a system and apply basic algorithms to solving simple real-world problems."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I342.pdf"
+    },
+    {
+      "code": "I364",
+      "title": "Information theory and coding",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Understanding the principles of the theory of information, coding in the channel without the interference, the principles of the algebraic theory of coding and the importance of those theories in contemporary communication. Introduction to probability and analysis of the communicative system. Entropy and information. Information source and its entropy. Channel and capacity. Symmetric channels. Unique decoding. Optimality and corresponding codes. The algebraic principles of block-codes. The analysis of different kinds of errors and their detection and correction. Linear codes and other classes of block-codes. Examples of codes in the digital technology. Solving problems related to entropy and the communication system. Constructions of particular code classes and the source of information. Problems in which different errors are detected and corrected by using block-codes. Doing exercises of the application of linear codes. Solving problems from other classes of block-codes.",
+      "learning_outcomes": [
+        "Understanding the concept and importance of the amount of information, the system of communication, developing the capability in solving typical tasks from coding theory, understanding and implementing codes and source of information and solving optimisation problems. Understanding the principles of binary block-codes, solving problems on linear codes.",
+        "More detailed understanding of the notion and features of entropy, especially of the entropy of sources, the capacity of channels, symmetric channels. Algebraic methods in the applications of block-codes, some classes of linear codes and the capability of their usage."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I364.pdf"
+    },
+    {
+      "code": "M-05",
+      "title": "Accounting",
+      "ects": 7.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "To introduce the basic understanding of accounting principles as a business language in the globalized world. Introduction of the instruments of double accounting system as well as other structures of accounting with the aim of financial reporting. Accounting as a business language, double accounting and its instruments, chronological and systematic evidence, accounting documentation, errors in accounting and financial reporting. Follows the theoretical instructions.",
+      "learning_outcomes": [
+        "Knowledge of structure and companies\u2019 properties, influence of business events on the property and results and financial reporting."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/M-05.pdf"
+    },
+    {
+      "code": "I351",
+      "title": "Applied mathematical analysis",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introduction to theoretical foundations of applied analysis and basic properties of orthonormal bases and frames. Understanding the notion of analysis and synthesis of a signal. Application of the theory to digital signal processing. Hilbert spaces, orthonormal bases and frames. Fourier series and its convergence properties. Fourier transform and inverse Fourier transform with applications. Seminar papers of theoretical and/or practical content. The use of the Internet in research of topics in signal analysis and understanding its techniques.",
+      "learning_outcomes": [
+        "Students are expected to learn theoretical foundations and practical applications of certain parts of contemporary mathematical analysis. Students should acquire knowledge and become capable for a research in possible applications of mathematical analysis tools."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I351.pdf"
+    },
+    {
+      "code": "I352",
+      "title": "Selected chapters of applied algebra",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Acquiring knowledge of the various techniques of the applied algebra and training in solving practical problems by using these techniques. After the systematization of the classical algebra used in applications, basis of one or more of the following areas will be presented: theory and application of fuzzy sets, coding theory, cryptography and cryptanalysis, theory of clones, formal concept analysis, mathematical genetics, pattern recognition with applications in biology. Suitable problems will be solved by methods in applied algebra, preferably by using Matlab or a similar program.",
+      "learning_outcomes": [
+        "Knowledge of various techniques of the applied algebra and the ability to solve certain types of practical problems. Students should be able to independently choose the applied algebra techniques that are best suited to solve certain problems."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I352.pdf"
+    },
+    {
+      "code": "I361",
+      "title": "Seminar paper B",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Enabling students to master the principles of the selected modern information disciplines, which are not processed as a part of other subjects. Theoretical foundation of a chosen IT discipline. Technology and software tools which are used in that discipline. The principles and purposes of use of the appropriate technologies and software tools in a chosen IT discipline. Mastering the use of appropriate technologies and software tools on illustrative examples in order to master the basic principles of a chosen IT discipline.",
+      "learning_outcomes": [
+        "Students should be able to present the basic principles of the chosen IT discipline through the appropriate example.",
+        "Students should be able to demonstrate deeper understanding of the basic principles of a chosen IT discipline through their application in the appropriate real example."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I361.pdf"
+    },
+    {
+      "code": "I161",
+      "title": "Computer graphics 1",
+      "ects": 7.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introducing students to the basic principles of 2D computer graphics. Computer graphics and computer geometry as computer science subjects. Input/output devices. Graphics hardware. Raster graphics. Graphics in Java. Representing points, lines and rectangles. An incremental algorithm for scan-converting lines. Cohen-Sutherland line clipping algorithm. Incremental algorithms for scan-converting circles and ellipses. Ellipse arcs, clipping ellipses. Drawing primitives with attributes (line thickness, line styles etc). Polygons, area and orientation of polygons. Convex polygons. Checking convexity of polygons algorithmically. Orientation of a convex polygon. Drawing filled convex polygons. Convex hull and Graham's algorithm. Intersecting convex polygons and Sutherland-Hodgman algorithm. Basics of computer graphics support in Java. Iterative and recursive algorithms for drawing poly-lines. Fractals and L-systems. Using images in Java, colour models, and image filtering. Basic concepts of time-based animation. Double buffering algorithm. Morphing animation applied to images and geometric figures. Practical application of the aforementioned topics in the development of advanced user interfaces. Introduction to OpenGL.",
+      "learning_outcomes": [
+        "Students should be able to apply basic, as well as advanced techniques of 2D computer graphics (Java 2D) to real-world problems, to develop and adapt basic algorithms of 2D graphics, and to understand the basic concepts of 3D computer graphics (OpenGL)."
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I161.pdf"
+    },
+    {
+      "code": "I261",
+      "title": "Operating systems 2",
+      "ects": 7.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introduction to advanced concepts of operating systems. Pr esentation of the UNIX operating system. Analysis of a subset of the realization of an operating system, with an emphasis on the user interface. Deadlocks. Disk Management. Security system. Protection mechanisms. UNIX operating system. The structure of the operating system and system calls. Input and output. The input - output devices. Interrupts and device management software. Operating system securi ty. Graphical user interface. Elements of word processors and graphic editors. Analysis of a subset of the realization of an operating system. The system calls the UNIX operating system. The file system of UNIX operating system. Interprocess communication and synchronization with a special focus on the specifics of the UNIX operating system.",
+      "learning_outcomes": [
+        "Students should be able to use UNIX system calls and understand the basic principl es of graphical user interface.",
+        "Students should be able to use UNIX system calls in an advanced way and to understand and demonstrate the application of implementation of interactive graphics software system."
+      ],
+      "topics": [],
+      "prerequisites": [
+        "I033"
+      ],
+      "url": "https://www.pmf.uns.ac.rs/wp-content/uploads/2016/12/I261.pdf"
     }
   ]
 }

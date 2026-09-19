@@ -30,6 +30,20 @@ A partner programme is only usable for this project if it satisfies all four:
 
 Ingest **both** modules: ~50-60 courses total. That is the left-hand side of every match.
 
+As ingested (S1-A1, September 2026): 50 distinct courses. 19 per module, 8 of them shared
+by both, plus 20 electives that appear in no module table. Non-informatics electives
+(English, Sociology, Accounting, Finance) are kept, because a student can ask to have them
+recognised too. Notes for whoever re-scrapes:
+
+- The per-course syllabi are one-page English PDFs from the 2016 accreditation, not HTML
+  pages. `scrape_uns_pmf.py` extracts them with `pypdf`. Some words come out split
+  ("databas e"); they are left as extracted, since fixing them needs a dictionary.
+- The page types some codes with Cyrillic letters that look Latin (`M-02` with a
+  Cyrillic M). The scraper maps them to Latin so each `course_uid` has one spelling.
+- Electives have no semester in the source, so their `year` and `semester` are `null`.
+- `mandatory` is true for status C (whole programme) and CM (its module). `module` is set
+  only for courses that belong to exactly one module.
+
 ## Recommended partner shortlist (MVP = the first two, then add outward)
 
 | # | Institution | Programme | Why it is a good test case | Catalogue |

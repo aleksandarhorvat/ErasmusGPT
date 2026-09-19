@@ -14,6 +14,50 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-19 - [A] Real UNS PMF curriculum, 50 courses
+
+**Who:** Person A
+**Stage:** 1 - Real data, real surface. Lane A is not through its gate yet: `S1-A2` and
+`S1-A3` remain.
+**Commit:** `[A] scrape the full uns pmf informatics curriculum`
+**Tasks touched:** `S1-A1` (done)
+
+### Done
+- `backend/scripts/scrape_uns_pmf.py`: reads the three course tables on the PMF programme
+  page, downloads each course's syllabus PDF into `data/.cache/uns-pmf-pdf/` (one request
+  per second) and writes `data/curricula/uns-pmf-informatics-bsc.json`. `--offline`
+  re-parses the cache without touching the network.
+- `data/curricula/uns-pmf-informatics-bsc.json` replaced: 50 courses, every one with a
+  description (objectives plus syllabus text) and learning outcomes. The loader reports
+  `uns-pmf-informatics-bsc 50`, which meets the >= 45 criterion.
+- `data/gold/gold_pairs.csv` cut to its header. The 10 placeholder rows pointed at sample
+  codes (`I102`, `I307`, ...) that do not exist in the real curriculum.
+- Notes on the source and its quirks in `docs/01-universities.md`; `data/README.md`
+  updated.
+
+### Decisions
+- Kept all 50 courses, including English, Sociology and the finance electives. Dropping
+  them would leave 43, under the acceptance bar, and a student can ask to have them
+  recognised as well.
+- Course codes changed from the sample scheme to the real one (`I021` Data structures and
+  algorithms 1, `I142` Formal languages and automata). Anything that hardcoded a sample
+  code needs the real one.
+- `description` = learning objectives + syllabus, `learning_outcomes` = the minimum and
+  desirable outcomes, `topics` = `[]`. The PDFs have no topic list, and inventing one
+  would break the "store as published" rule.
+- Scraper dependencies (`requests`, `beautifulsoup4`, `pypdf`) live in
+  `backend/scripts/requirements-scrape.txt`, not in the image. They never ship, so no ADR.
+
+### Broken / known issues
+- `pypdf` splits a few words ("databas e", "appr iate"); 52 such fragments across 50
+  files. Left as extracted. The bi-encoder tolerates them; BM25 will miss those tokens.
+- Electives have `year` and `semester` null, because the source gives none.
+
+### Next
+- **A:** `S1-A2` Twente scraper, then `S1-A3` the validator. Those close lane A.
+
+---
+
 ## 2026-09-18 - [B] Offline run verified. Lane B gate for stage 1 passed
 
 **Who:** Person B
