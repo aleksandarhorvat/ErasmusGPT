@@ -29,9 +29,12 @@ Owner: **Person A**
 Practical notes:
 
 - BGE models want a **query prefix** for asymmetric retrieval
-  (`"Represent this sentence for searching relevant passages: "`). Our task is
-  *symmetric* (course <-> course), so **encode both sides with no prefix** and say so in
-  the report. If you change this, re-run the whole eval - it moves numbers.
+  (`"Represent this sentence for searching relevant passages: "`). This file used to say
+  to skip it, on the reasoning that course-to-course matching is symmetric. Measured on
+  2026-09-20, that reasoning was wrong: with the prefix on the home side only, Recall@5
+  goes from 0.78 to 0.87 against Twente Applied Mathematics and from 0.75 to 0.77 against
+  Twente TCS, with P@1 unchanged either way. It is in `embedder.QUERY_INSTRUCTION`, and
+  the home side now has its own cached matrix. Re-run the eval if you change it.
 - Normalise embeddings once, then cosine similarity is a dot product.
 - Cache: `data/.cache/<programme_id>.<model_tag>.npy`, invalidated by a hash of the
   course documents. Never inside `data/curricula/`, which is committed. Encoding must never happen inside a `/match` request.
@@ -46,9 +49,11 @@ Practical notes:
 
 Caveat to state in the report: `ms-marco-*` rerankers are trained on
 **web search relevance** (short query -> passage), not on **course equivalence**
-(long document <-> long document). Out of the box they still help, because "is this text
-about the same subject matter" transfers. S6-A3 (fine-tuning on the gold set) is the
-principled fix if there is time.
+(long document <-> long document). This file used to add "out of the box they still
+help". They do not. Measured on 2026-09-20 they lose to plain `hybrid` retrieval on both
+host programmes, and three alternative rerankers inside the size budget are worse still.
+See `eval/report/ablations.md`. S6-A3 (fine-tuning on the gold set) is the principled
+fix, and now it is the only one left.
 
 ### What we are NOT using, and why
 
