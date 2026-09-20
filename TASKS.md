@@ -20,7 +20,7 @@ lanes have passed their gate.
 | **Person A is on** | eval harness done; `S5-A0`/`S5-A1` blocked on the Twente data |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | `S1-A2` and the whole gold set: `scripts/check_style.py` rejects Twente's own course text |
-| **Last updated** | 2026-09-20 - eval harness runs; lane A blocked until B unblocks the data |
+| **Last updated** | 2026-09-20 - eval harness runs; baked models cut 724 MB -> 318 MB |
 
 ### Stage ladder
 

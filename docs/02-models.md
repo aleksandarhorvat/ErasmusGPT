@@ -83,8 +83,27 @@ The model list lives in one place, `backend/app/core/config.py`, and both the do
 and the runtime read it from there, so the two cannot drift apart.
 
 Expected image size: base python-slim + torch CPU wheels (~800 MB, the real cost) +
-~220 MB of models. Use `--index-url https://download.pytorch.org/whl/cpu` for torch so
+318 MB of models. Use `--index-url https://download.pytorch.org/whl/cpu` for torch so
 you do not pull 2.5 GB of CUDA libraries into a CPU-only image.
+
+### What the three baked models actually weigh
+
+Measured on 2026-09-20 from the repository metadata, with the filters
+`backend/scripts/download_models.py` applies:
+
+| Repository | Baked | Was |
+|---|---|---|
+| `BAAI/bge-small-en-v1.5` | 134 MB | 268 MB |
+| `sentence-transformers/all-MiniLM-L6-v2` | 92 MB | 273 MB |
+| `cross-encoder/ms-marco-MiniLM-L6-v2` | 92 MB | 183 MB |
+| **Total** | **318 MB** | **724 MB** |
+
+The "was" column is what the build pulled before S5-A2's clean-up. Hugging Face
+repositories publish the same weights several times over: `pytorch_model.bin` next to
+`model.safetensors`, and for MiniLM a Rust `rust_model.ot` as well. Each copy is the
+full model. The downloader now keeps safetensors where a repository has it and skips
+the other formats, and it fails the build if one model passes 200 MB or the set passes
+400 MB, so this cannot creep back unnoticed.
 
 ## Where the GPU is actually used
 

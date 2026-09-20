@@ -14,6 +14,48 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] The image was baking 724 MB of models, not 220 MB
+
+**Who:** Person A
+**Stage:** housekeeping while lane A is blocked
+**Commit:** `[A] stop baking duplicate model weights`
+**Tasks touched:** none directly. It breaks a rule in AGENTS.md, so it gets fixed now.
+
+### The problem
+`backend/scripts/download_models.py` pulled whole repositories minus a few formats.
+Hugging Face repositories publish the same weights several times: `pytorch_model.bin`
+next to `model.safetensors`, and MiniLM adds a Rust `rust_model.ot`. Each is the full
+model, and torch loads exactly one of them.
+
+| Repository | Was | Now |
+|---|---|---|
+| `BAAI/bge-small-en-v1.5` | 268 MB | 134 MB |
+| `sentence-transformers/all-MiniLM-L6-v2` | 273 MB | 92 MB |
+| `cross-encoder/ms-marco-MiniLM-L6-v2` | 183 MB | 92 MB |
+| **Total** | **724 MB** | **318 MB** |
+
+AGENTS.md allows ~200 MB per model and 400 MB in total. The build was over both, by a
+lot, and nothing checked.
+
+### Done
+- The downloader keeps safetensors when a repository has them and skips `.bin`, `.pt`,
+  `.pth`, `.ckpt` and `.ot`. Repositories without safetensors are unaffected, since the
+  patterns are chosen per repository from its file list.
+- It prints each model's size and **exits 1 if one model passes 200 MB or the set passes
+  400 MB**, so the build fails rather than the image quietly growing.
+- Measured figures are in `docs/02-models.md`, replacing the "~220 MB" estimate.
+- `eval/README.md` now covers `make_smoke.py` and says what each script needs.
+
+### Note for B
+The image should shrink by roughly 400 MB on the next `docker compose build`. Nothing in
+`backend/Dockerfile` changes: it still calls this script the same way.
+
+### Next
+- **A:** still blocked on the style checker before the Twente data and the gold set can
+  land.
+
+---
+
 ## 2026-09-20 - [A] Evaluation harness and metric tests
 
 **Who:** Person A
