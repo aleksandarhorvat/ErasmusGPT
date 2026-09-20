@@ -37,3 +37,16 @@ def test_sentence_splitter_drops_fragments() -> None:
     assert sentences("Hi. This is a sufficiently long sentence about automata theory.") == [
         "This is a sufficiently long sentence about automata theory."
     ]
+
+
+def test_outcomes_split_into_separate_sentences() -> None:
+    """Evidence quotes one outcome, not the whole block (reported by B, 2026-09-20)."""
+    text = (
+        "Learning outcomes: The student can design a database schema using ER modelling.; "
+        "The student can query and update a database using SQL."
+    )
+    parts = sentences(text)
+    assert len(parts) == 2
+    assert parts[0].startswith("The student can design")
+    assert not parts[0].lower().startswith("learning outcomes")
+    assert all(not p.endswith(";") for p in parts)

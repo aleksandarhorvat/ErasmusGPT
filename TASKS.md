@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | recognition estimate done; next `S6-A1`, more universities |
+| **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-20 - calibrated scores and the ECTS recognition estimate work |
+| **Last updated** | 2026-09-20 - B's review handled: coverage, denominator, bands, contract |
 
 ### Stage ladder
 
@@ -211,7 +211,7 @@ as the candidate generator that feeds the reranker.
 
 ## Stage 6 - Scale out, aggregate, polish
 
-**Added 2026-09-20 (A, after a call with Luka):** the system compares *courses*. What a
+**Added 2026-09-20 by A:** the system compares *courses*. What a
 student actually asks is "how much of my degree would be recognised". That is `S6-A4`,
 `S6-A5` and `S6-B4` below, and it is the difference between a demo and something a
 coordinator would use. It needs the gold set first: a cross-encoder score is not a

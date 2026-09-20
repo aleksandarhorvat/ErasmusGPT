@@ -73,6 +73,24 @@ Rules:
 - `score` is whatever the active strategy produces (cosine, RRF, or cross-encoder
   logit passed through a sigmoid). Never compare raw scores across strategies in the
   UI - that is what `score_pct` is for.
+- `score_pct` **means different things per strategy**, which the old wording
+  ("calibrated 0..100 for display") hid. Raised by B on 2026-09-20; see the CONTRACT
+  CHANGE note in `PROGRESS.md` for that date.
+
+  | Strategy | What `score_pct` is | Safe to read as a probability |
+  |---|---|---|
+  | `hybrid+ce` | calibrated probability that a coordinator recognises the pair, fitted on the gold set (`data/calibration/`) | yes |
+  | `dense` | cosine stretched from 0.55-0.95 onto 0-100 | no |
+  | `bm25`, `hybrid` | score relative to the best hit for the same home course, so rank 1 always reads 100 | no |
+
+  The field is still an integer 0..100 and still ordered within one strategy, so nothing
+  in the schema changes. Only `hybrid+ce` should be shown as a percentage of anything;
+  for the others the UI should show a rank or a band. A calibration file for the other
+  strategies would make this distinction go away.
+- `confidence` is derived from `score_pct` by one set of thresholds, in
+  `aggregate.py`: high at 0.70, medium at 0.40. `aggregate.py` calls the same bands
+  likely, borderline and unlikely when summarising a whole programme; the mapping is
+  `BUCKET_OF_CONFIDENCE`. One threshold, two vocabularies, no third set of cut-offs.
 - `evidence` may be `null` until S4-A3 lands.
 - Long requests: matching a full 54-course programme with `hybrid+ce` on CPU can take
   ~10-30 s. The UI must show progress; do not add a timeout below 120 s.

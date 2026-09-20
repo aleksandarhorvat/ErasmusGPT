@@ -14,6 +14,91 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] B's two reviews, worked through
+
+**Who:** Person A
+**Stage:** 5 and 6
+**Commit:** `[A] answer b's review: coverage, denominator, bands, contract`
+**Tasks touched:** `S5-A0` (extended), `S6-A1` (wip), `S6-A4`, `S6-A5`
+
+### CONTRACT CHANGE - `score_pct` means different things per strategy
+No schema field changes. `MatchCandidate.score_pct` is still an integer 0..100, ordered
+within a strategy. What changed is its meaning, which the contract described as
+"calibrated 0..100 for display" when it was nothing of the kind.
+
+- `hybrid+ce`: a calibrated probability, fitted on the gold set.
+- `dense`: a cosine stretched from 0.55-0.95 onto 0-100.
+- `bm25` and `hybrid`: relative to the best hit for that home course, so rank 1 is
+  always 100.
+
+`docs/04-api-contract.md` now carries the table. **B:** show a percentage only for
+`hybrid+ce`; for the others show a rank or a band. Fitting calibrations for the other
+three would remove the distinction, and it is cheap once the labels are checked.
+
+### Coverage: fixed, and not the way B proposed
+B's count was right: 13 of 40 home courses had an outright match, 12 had nothing at all.
+Pooling EPFL would not have fixed it. I checked before labelling: EPFL's MSc has no
+calculus, no linear algebra and no academic English, so those 12 would have collected
+another 150 zeros.
+
+The real gap was that Twente's mathematics is taught by **Applied Mathematics**, a
+different coordinating unit in the same catalogue. One argument to the existing scraper
+ingests it: `data/curricula/utwente-am-bsc.json`, 51 courses. Pooled and pre-labelled,
+580 more pairs.
+
+| | before | after |
+|---|---|---|
+| home courses with an outright match | 13 | 26 |
+| with any positive | 28 | 35 |
+| with nothing | 12 | 5 |
+
+The five left are both Software Labs, both English courses and Financial mathematics.
+No engineering faculty teaches those, and the report should say so rather than pretend.
+
+### The denominator was wrong (B's item 1)
+`summarise()` now takes `module` and `ects_budget`, so the answer is about a degree
+somebody could take: compulsory courses first, then the chosen module, then electives
+until the budget is full. Against Twente TCS the Information Technologies path scores
+36 % of 180 ECTS and Computer Science 26 %; against Applied Mathematics it is the other
+way round, 24 % and 29 %. Those numbers are still provisional, from pre-labels.
+
+### One set of bands (B's item 4)
+`aggregate.LIKELY` and `BORDERLINE` are now the only thresholds in the system;
+`pipeline.confidence_of()` maps them onto the contract's high/medium/low, and
+`BUCKET_OF_CONFIDENCE` maps back. A test asserts the two can never disagree. I kept the
+contract's vocabulary rather than retiring it, because changing the enum would break
+`frontend/src/lib/api.ts` for no gain: same thresholds, two names, one source.
+
+### B's item 5 was a good hypothesis and it is wrong
+B suggested the 512 to 256 token gain and the evidence bug shared a cause: the learning
+outcomes block at the tail of the document. Measured over 28 queries:
+
+| | P@1 | Recall@5 | MRR@10 |
+|---|---|---|---|
+| 512 tokens, full document | 0.57 | 0.53 | 0.68 |
+| 256 tokens, full document | 0.54 | 0.65 | 0.67 |
+| 512 tokens, outcomes dropped | 0.50 | 0.47 | 0.60 |
+
+Dropping the outcomes makes everything worse, so the tail carries signal. Shortening the
+window trades 0.03 of P@1 for 0.12 of Recall@5 at 2.5 times the speed. 256 stays, and
+the ablation goes in the report.
+
+### Also done
+- The evidence splitter (B's item 3): `document.sentences()` splits on `;` and drops the
+  field label, so the panel quotes one outcome instead of a seven-clause paragraph.
+- `--positive-label` is documented in `docs/05-evaluation.md`, with an instruction to
+  report both the optimistic and strict figures, since the gap is most of the headline.
+- The stage 6 note in `TASKS.md` no longer reads as though A were quoting himself.
+- Pulled both line-ending commits before touching anything.
+
+### Next
+- **Luka (S5-A1):** 1142 rows now await a human pass. Read the Twente TCS rows first,
+  then Applied Mathematics. Every number above becomes real, and the calibration refits
+  in one command, the moment rows are checked.
+- **A:** more universities, or the error analysis, whichever B prefers.
+
+---
+
 ## 2026-09-20 - [A] Calibrated scores and the ECTS recognition estimate
 
 **Who:** Person A

@@ -8,7 +8,7 @@ label).
     python eval/make_pool.py --host-programme utwente-tcs-bsc --max-home 40
 
 Writes two files:
-  data/.cache/pool.csv        - the pairs, with both course texts, for the labeller
+  data/.cache/pool.<host>.csv - the pairs, with both course texts, for the labeller
   data/gold/llm_prelabels.csv - the same pairs with an empty llm_label column
 
 Fill `llm_label` and `llm_reason` in the second file, commit it unedited, then copy it to
@@ -29,7 +29,7 @@ GOLD_DIR = REPO_ROOT / "data" / "gold"
 # The pool carries both courses' full text for the labeller. It is regenerable, and it
 # quotes university prose verbatim, so it lives in the git-ignored cache rather than in
 # data/gold next to the labels.
-POOL = REPO_ROOT / "data" / ".cache" / "pool.csv"
+POOL_DIR = REPO_ROOT / "data" / ".cache"
 PRELABELS = GOLD_DIR / "llm_prelabels.csv"
 
 POOL_DEPTH = 10
@@ -108,8 +108,9 @@ def main() -> int:
         return 1
 
     GOLD_DIR.mkdir(parents=True, exist_ok=True)
-    POOL.parent.mkdir(parents=True, exist_ok=True)
-    with POOL.open("w", encoding="utf-8", newline="") as handle:
+    POOL_DIR.mkdir(parents=True, exist_ok=True)
+    pool_path = POOL_DIR / f"pool.{args.host_programme}.csv"
+    with pool_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)

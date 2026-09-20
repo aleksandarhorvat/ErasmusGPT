@@ -28,8 +28,12 @@ from dataclasses import dataclass, field
 from app.schemas.match import MatchCandidate
 from app.schemas.programme import CourseSummary
 
+# The only thresholds in the system. pipeline.confidence_of() maps them onto the
+# contract's high/medium/low, so a row cannot be "likely" here and "medium" there.
 LIKELY = 0.70
 BORDERLINE = 0.40
+# Contract value -> the word this module uses, for whoever renders the summary.
+BUCKET_OF_CONFIDENCE = {"high": "likely", "medium": "borderline", "low": "unlikely"}
 
 
 @dataclass
@@ -70,10 +74,56 @@ def bucket_of(probability: float) -> str:
     return "unlikely"
 
 
+def study_path(
+    rows: list[tuple[CourseSummary, list[MatchCandidate]]],
+    module: str | None = None,
+    ects_budget: float | None = None,
+) -> list[tuple[CourseSummary, list[MatchCandidate]]]:
+    """The subset of rows a real student would actually take.
+
+    A curriculum file lists more than any one student studies: PMF Informatics is 353
+    ECTS of courses for a 180 ECTS degree, because the two modules and the elective pool
+    are alternatives, not a sequence. Summarising all of it would answer a question
+    nobody asked (reported by B, 2026-09-20).
+
+    Keep the compulsory courses, then the chosen module's courses, then electives in
+    catalogue order until the budget is full.
+    """
+    if module is None and ects_budget is None:
+        return rows
+    def priority(row: tuple[CourseSummary, list[MatchCandidate]]) -> int:
+        course = row[0]
+        if course.mandatory and course.module in (None, module):
+            return 0  # compulsory for the programme or for the chosen module
+        if course.module == module and module is not None:
+            return 1  # the chosen module's electives
+        if course.module is None:
+            return 2  # the free elective pool
+        return 3  # the other module, which this student does not take
+
+    chosen: list[tuple[CourseSummary, list[MatchCandidate]]] = []
+    total = 0.0
+    for rank in (0, 1, 2):
+        for row in rows:
+            if priority(row) != rank:
+                continue
+            if ects_budget is not None and total + row[0].ects > ects_budget:
+                continue
+            chosen.append(row)
+            total += row[0].ects
+    return chosen
+
+
 def summarise(
-    rows: list[tuple[CourseSummary, list[MatchCandidate]]], calibrated: bool = False
+    rows: list[tuple[CourseSummary, list[MatchCandidate]]], calibrated: bool = False,
+    module: str | None = None, ects_budget: float | None = None,
 ) -> RecognitionSummary:
-    """Aggregate one match_programme result. Rows with no candidate count as unlikely."""
+    """Aggregate one match_programme result. Rows with no candidate count as unlikely.
+
+    Pass `module` and `ects_budget` to summarise a study path rather than the whole
+    catalogue; the denominator is then a degree a student could actually take.
+    """
+    rows = study_path(rows, module, ects_budget)
     summary = RecognitionSummary(calibrated=calibrated)
     for course, candidates in rows:
         best = candidates[0] if candidates else None

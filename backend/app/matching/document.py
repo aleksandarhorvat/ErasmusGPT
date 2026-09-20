@@ -15,7 +15,12 @@ _BOILERPLATE = (
     re.compile(r"^this course is part of.*?\.", re.I | re.S),
     re.compile(r"^students who have (passed|completed).*?\.", re.I | re.S),
 )
-_SENT = re.compile(r"(?<=[.!?])\s+")
+# Semicolons split too: build_document joins learning outcomes with "; ", so without it
+# a whole outcomes block is one "sentence" and the evidence panel shows a paragraph
+# instead of the one line that explains the match.
+_SENT = re.compile(r"(?<=[.!?;])\s+")
+# A fragment may start with the field label that build_document inserted.
+_FIELD_LABEL = re.compile(r"^(learning outcomes|topics)\s*:\s*", re.I)
 
 
 def clean(text: str) -> str:
@@ -26,7 +31,13 @@ def clean(text: str) -> str:
 
 
 def sentences(text: str) -> list[str]:
-    return [s.strip() for s in _SENT.split(clean(text)) if len(s.strip()) > 20]
+    """Sentence-ish fragments, long enough to be worth quoting as evidence."""
+    out = []
+    for fragment in _SENT.split(clean(text)):
+        fragment = _FIELD_LABEL.sub("", fragment).strip().rstrip(";")
+        if len(fragment) > 20:
+            out.append(fragment)
+    return out
 
 
 def build_document(

@@ -27,11 +27,11 @@ import requests
 from bs4 import BeautifulSoup
 
 REPO = Path(__file__).resolve().parents[2]
-OUT = REPO / "data" / "curricula" / "utwente-tcs-bsc.json"
+CURRICULA = REPO / "data" / "curricula"
 CACHE = REPO / "data" / ".cache" / "utwente"
 API = "https://utwente.osiris-student.nl/student/osiris"
 SOURCE_URL = "https://utwente.osiris-student.nl/onderwijscatalogus/extern/cursus"
-PROGRAMME = "Bachelor Technical Computer Science"
+DEFAULT_PROGRAMME = "Bachelor Technical Computer Science"
 # The last fully published year. Osiris publishes a year quartile by quartile, and in
 # September 2026 the 2026-2027 catalogue still lacked most of year 1.
 ACADEMIC_YEAR = "2025-2026"
@@ -46,10 +46,10 @@ COURSE_CODE = re.compile(r"\b\d{9}\b")
 RESIT_ONLY = re.compile(r"only for (repeat|resit)|retake last year", re.IGNORECASE)
 
 
-def fetch_list(session: requests.Session) -> list[dict]:
+def fetch_list(session: requests.Session, programme: str = DEFAULT_PROGRAMME) -> list[dict]:
     must = [
         {"terms": {"collegejaar": [ACADEMIC_YEAR]}},
-        {"terms": {"coordinerend_onderdeel_oms": [PROGRAMME]}},
+        {"terms": {"coordinerend_onderdeel_oms": [programme]}},
     ]
     body = {
         "from": 0,
@@ -163,15 +163,21 @@ def build_course(unit: dict, detail: dict, codes: set[str]) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--offline", action="store_true", help="use cached files only")
+    parser.add_argument("--programme", default=DEFAULT_PROGRAMME,
+                        help="value of coordinerend_onderdeel_oms in Osiris")
+    parser.add_argument("--programme-id", default="utwente-tcs-bsc")
+    parser.add_argument("--programme-name", default="BSc Technical Computer Science")
     args = parser.parse_args()
 
     CACHE.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
     session.headers.update(HEADERS)
 
-    listing_path = CACHE / "list.json"
+    listing_path = CACHE / f"list.{args.programme_id}.json"
     if not args.offline:
-        listing_path.write_text(json.dumps(fetch_list(session), indent=1), encoding="utf-8")
+        listing_path.write_text(
+            json.dumps(fetch_list(session, args.programme), indent=1), encoding="utf-8"
+        )
     units = select_units(json.loads(listing_path.read_text(encoding="utf-8")))
 
     details = {}
@@ -193,11 +199,11 @@ def main() -> int:
     codes = {unit["cursus"] for unit in units}
     courses = [build_course(unit, details[unit["cursus"]], codes) for unit in units]
     programme = {
-        "programme_id": "utwente-tcs-bsc",
+        "programme_id": args.programme_id,
         "institution_id": "utwente",
         "institution_name": "University of Twente",
         "country": "NL",
-        "programme_name": "BSc Technical Computer Science",
+        "programme_name": args.programme_name,
         "level": "bachelor",
         "language": "en",
         "total_ects": 180,
@@ -206,10 +212,11 @@ def main() -> int:
         "scraped_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "courses": courses,
     }
-    OUT.write_text(json.dumps(programme, indent=2) + "\n", encoding="utf-8")
+    out = CURRICULA / f"{args.programme_id}.json"
+    out.write_text(json.dumps(programme, indent=2) + "\n", encoding="utf-8")
 
     empty = [c["code"] for c in courses if not c["description"]]
-    print(f"wrote {len(courses)} courses to {OUT.relative_to(REPO)}")
+    print(f"wrote {len(courses)} courses to {out.relative_to(REPO)}")
     if empty:
         print(f"empty description: {', '.join(empty)}", file=sys.stderr)
     return 0

@@ -113,3 +113,44 @@ def test_as_dict_is_json_serialisable() -> None:
     payload = as_dict(summarise(rows, calibrated=True))
     assert json.loads(json.dumps(payload))["expected_recognised_ects"] == pytest.approx(4.8)
     assert payload["courses"][0]["best_match_title"] == "Host x"
+
+
+# --- the study path denominator (raised by B, 2026-09-20) -------------------
+
+def module_course(uid: str, ects: float, module: str | None) -> CourseSummary:
+    return CourseSummary(course_uid=uid, code=uid, title=f"Course {uid}", ects=ects,
+                         description="", module=module)
+
+
+def test_a_module_and_budget_give_a_real_denominator() -> None:
+    """A 353 ECTS catalogue is not a 180 ECTS degree."""
+    rows = [
+        (module_course("core", 100.0, None), [candidate("x", 100)]),
+        (module_course("cs", 60.0, "Computer Science"), [candidate("y", 100)]),
+        (module_course("it", 60.0, "Information Technologies"), [candidate("z", 100)]),
+        (module_course("elective", 20.0, None), [candidate("w", 100)]),
+    ]
+    summary = summarise(rows, module="Computer Science", ects_budget=180.0)
+    assert summary.total_ects == 180.0
+    taken = {course.course_uid for course in summary.courses}
+    assert "it" not in taken  # the other module is not part of this path
+    assert {"core", "cs"} <= taken
+
+
+def test_without_a_module_every_row_counts() -> None:
+    rows = [(module_course("a", 6.0, None), [candidate("x", 50)])]
+    assert summarise(rows).total_ects == 6.0
+
+
+def test_the_budget_is_never_exceeded() -> None:
+    rows = [(module_course(str(i), 30.0, None), [candidate("x", 50)]) for i in range(10)]
+    assert summarise(rows, ects_budget=100.0).total_ects <= 100.0
+
+
+def test_bands_agree_with_the_contract_confidence() -> None:
+    """One threshold set: a likely row must never be reported as medium confidence."""
+    from app.matching.aggregate import BUCKET_OF_CONFIDENCE
+    from app.matching.pipeline import confidence_of
+
+    for pct in range(0, 101, 5):
+        assert BUCKET_OF_CONFIDENCE[confidence_of(pct)] == bucket_of(pct / 100)

@@ -561,3 +561,583 @@ uns-pmf:I331,utwente:202500362,0,user experience design
 uns-pmf:I331,utwente:202500332,0,databases and machine learning
 uns-pmf:I331,utwente:202200022,0,knowledge representation and data quality
 uns-pmf:I331,utwente:202500346,0,computer networks
+uns-pmf:I011,utwente:202001363,0,an implementation project on one graph algorithm
+uns-pmf:I011,utwente:202001234,0,discrete mathematics
+uns-pmf:I011,utwente:202200142,1,"teaches programming alongside mathematical modelling, so only part of it is the programming introduction"
+uns-pmf:I011,utwente:202001193,0,introductory mathematics
+uns-pmf:I011,utwente:202200243,0,"modelling project, programming assumed"
+uns-pmf:I011,utwente:202500369,0,abstract algebra
+uns-pmf:I011,utwente:201600167,0,mathematical analysis
+uns-pmf:I011,utwente:202500368,0,grammars and automata
+uns-pmf:I011,utwente:202200141,0,linear systems
+uns-pmf:I011,utwente:202500367,0,"data structures, which the home course only introduces at the end"
+uns-pmf:I011,utwente:202200339,0,stochastic modelling project
+uns-pmf:I011,utwente:202200239,0,"modelling project, programming assumed"
+uns-pmf:I011,utwente:202400634,0,learning theory
+uns-pmf:I011,utwente:202001379,0,graduation project
+uns-pmf:I011,utwente:202500460,0,real analysis
+uns-pmf:I111,utwente:202001234,1,discrete mathematics covers part of the logic and set material
+uns-pmf:I111,utwente:202001193,1,"introductory mathematics touches sets and proof, far short of predicate calculus"
+uns-pmf:I111,utwente:201600167,1,"develops the formal mathematical language, overlapping with the logic foundations"
+uns-pmf:I111,utwente:202500460,0,real analysis
+uns-pmf:I111,utwente:202300018,0,reflection on statistics and vector calculus
+uns-pmf:I111,utwente:202500369,0,abstract algebra
+uns-pmf:I111,utwente:202200141,0,linear systems
+uns-pmf:I111,utwente:202400348,0,philosophy of applied mathematics
+uns-pmf:I111,utwente:202200236,0,linear structures
+uns-pmf:I111,utwente:202001215,0,differential equations
+uns-pmf:I111,utwente:202300026,0,mathematical statistics
+uns-pmf:I111,utwente:202300028,0,optimisation
+uns-pmf:I111,utwente:202200243,0,modelling project
+uns-pmf:I112,utwente:202400660,1,continues real analysis beyond the first course
+uns-pmf:I112,utwente:202001201,1,"integration theory for one variable, half of the home syllabus"
+uns-pmf:I112,utwente:202500460,2,"real analysis of functions of one variable: limits, continuity, differentiation, integration"
+uns-pmf:I112,utwente:202200179,1,"sequences and series, the other half"
+uns-pmf:I112,utwente:202001193,1,introductory mathematics with a first calculus part
+uns-pmf:I112,utwente:202300055,1,"a basic calculus course, below the level of the home course"
+uns-pmf:I112,utwente:202001234,0,discrete mathematics
+uns-pmf:I112,utwente:202300017,0,"multidimensional analysis, which is the second calculus course"
+uns-pmf:I112,utwente:202001215,1,"calculus for other programmes, starting from differential equations"
+uns-pmf:I112,utwente:201500405,0,complex function theory
+uns-pmf:I112,utwente:202300018,0,reflection course
+uns-pmf:I112,utwente:201600167,1,"foundations of analysis, narrower than the full first calculus course"
+uns-pmf:I021,utwente:202500367,2,"elementary data structures and the algorithms over them, the same subject"
+uns-pmf:I021,utwente:202001363,1,"implements one algorithm in depth, practice without the breadth"
+uns-pmf:I021,utwente:202500369,0,abstract algebra
+uns-pmf:I021,utwente:202200141,0,linear systems
+uns-pmf:I021,utwente:202200236,0,linear structures
+uns-pmf:I021,utwente:202001234,0,discrete mathematics
+uns-pmf:I021,utwente:202500368,0,grammars and automata
+uns-pmf:I021,utwente:202001237,0,linear algebra
+uns-pmf:I021,utwente:202001193,0,introductory mathematics
+uns-pmf:I021,utwente:202200243,0,modelling project
+uns-pmf:I021,utwente:202200239,0,modelling project
+uns-pmf:I021,utwente:202200142,0,modelling and programming
+uns-pmf:I021,utwente:202500366,1,classic discrete algorithms rather than the data structures themselves
+uns-pmf:I021,utwente:202400634,0,learning theory
+uns-pmf:I021,utwente:202300018,0,reflection course
+uns-pmf:I121,utwente:202500369,2,"an introduction to abstract algebra: groups, rings and fields, as in the home course"
+uns-pmf:I121,utwente:202200141,1,systems of linear equations and their structure
+uns-pmf:I121,utwente:202001237,1,"linear systems and matrices, one part of the home syllabus"
+uns-pmf:I121,utwente:202200236,1,"continues linear structures, still only the linear part"
+uns-pmf:I121,utwente:202001193,1,introductory mathematics covering number structures
+uns-pmf:I121,utwente:202001234,0,discrete mathematics
+uns-pmf:I121,utwente:202500460,0,real analysis
+uns-pmf:I121,utwente:201600167,0,mathematical analysis
+uns-pmf:I121,utwente:202400631,0,graph theory
+uns-pmf:I121,utwente:202500367,0,data structures
+uns-pmf:I121,utwente:202200238,0,systems theory
+uns-pmf:I121,utwente:202001201,0,calculus
+uns-pmf:I121,utwente:202500366,0,discrete algorithms
+uns-pmf:I121,utwente:202400632,0,partial differential equations
+uns-pmf:I121,utwente:202300055,0,basic calculus
+uns-pmf:I122,utwente:202400660,1,continues analysis into several variables in part
+uns-pmf:I122,utwente:202001201,0,one-variable integration
+uns-pmf:I122,utwente:202200179,1,sequences and series rather than functions of several variables
+uns-pmf:I122,utwente:202200148,1,"vector fields, divergence and gradient, the vector calculus half only"
+uns-pmf:I122,utwente:202300017,2,"multidimensional analysis: topology, partial derivatives and multiple integrals"
+uns-pmf:I122,utwente:202300055,0,basic calculus
+uns-pmf:I122,utwente:201500405,0,complex function theory
+uns-pmf:I122,utwente:202300028,0,optimisation
+uns-pmf:I122,utwente:202500460,0,"one-variable analysis, which is the first calculus course"
+uns-pmf:I122,utwente:202200242,0,differential equations
+uns-pmf:I122,utwente:201600167,0,foundations of analysis
+uns-pmf:I122,utwente:202001215,0,differential equations
+uns-pmf:I122,utwente:202001193,0,introductory mathematics
+uns-pmf:I122,utwente:202001344,0,probability theory
+uns-pmf:I031,utwente:202200142,0,"mathematical modelling, no data modelling or sql"
+uns-pmf:I031,utwente:202200243,0,modelling project
+uns-pmf:I031,utwente:202300157,0,modelling project
+uns-pmf:I031,utwente:202200339,0,stochastic modelling project
+uns-pmf:I031,utwente:202001234,0,discrete mathematics
+uns-pmf:I031,utwente:202400634,0,learning theory
+uns-pmf:I031,utwente:202200141,0,linear systems
+uns-pmf:I031,utwente:202500368,0,grammars and automata
+uns-pmf:I031,utwente:202300026,0,mathematical statistics
+uns-pmf:I031,utwente:202200239,0,modelling project
+uns-pmf:I031,utwente:202300156,0,modelling project
+uns-pmf:I031,utwente:202200337,0,stochastic models
+uns-pmf:I031,utwente:202001363,0,graph algorithm project
+uns-pmf:I031,utwente:202500367,0,"data structures, not databases"
+uns-pmf:I032,utwente:202001363,0,one algorithm implementation project
+uns-pmf:I032,utwente:202200141,0,linear systems
+uns-pmf:I032,utwente:202200243,0,modelling project
+uns-pmf:I032,utwente:202200239,0,modelling project
+uns-pmf:I032,utwente:202500367,0,data structures
+uns-pmf:I032,utwente:202200142,1,"programming is taught, but in service of mathematical modelling rather than object orientation"
+uns-pmf:I032,utwente:202500369,0,abstract algebra
+uns-pmf:I032,utwente:202200236,0,linear structures
+uns-pmf:I032,utwente:202500368,0,grammars and automata
+uns-pmf:I032,utwente:202001234,0,discrete mathematics
+uns-pmf:I032,utwente:202001193,0,introductory mathematics
+uns-pmf:I032,utwente:201600167,0,mathematical analysis
+uns-pmf:I032,utwente:202400634,0,learning theory
+uns-pmf:I032,utwente:202300028,0,optimisation
+uns-pmf:I032,utwente:202200337,0,stochastic models
+uns-pmf:I033,utwente:202500367,2,"elementary data structures and the algorithms over them, including trees and sorting"
+uns-pmf:I033,utwente:202500369,0,abstract algebra
+uns-pmf:I033,utwente:202001363,1,"implements one graph algorithm, practice without the breadth"
+uns-pmf:I033,utwente:202200141,0,linear systems
+uns-pmf:I033,utwente:202400631,0,"graph theory as mathematics, not as data structures"
+uns-pmf:I033,utwente:202500366,1,"classic discrete algorithms, overlapping with the greedy and dynamic programming part"
+uns-pmf:I033,utwente:202001193,0,introductory mathematics
+uns-pmf:I033,utwente:202200236,0,linear structures
+uns-pmf:I033,utwente:202001234,0,discrete mathematics
+uns-pmf:I033,utwente:202001237,0,linear algebra
+uns-pmf:I033,utwente:202200337,0,stochastic models
+uns-pmf:I033,utwente:202400634,0,learning theory
+uns-pmf:I033,utwente:202300026,0,mathematical statistics
+uns-pmf:I033,utwente:202200239,0,modelling project
+uns-pmf:I034,utwente:202400631,1,"graph theory in depth, which is one half of the home course"
+uns-pmf:I034,utwente:202500366,1,the algorithmic half: classic algorithms over discrete structures
+uns-pmf:I034,utwente:202001234,2,discrete mathematics covering the counting and graph material of the home course
+uns-pmf:I034,utwente:202001193,0,introductory mathematics
+uns-pmf:I034,utwente:202500367,0,data structures
+uns-pmf:I034,utwente:202500369,0,abstract algebra
+uns-pmf:I034,utwente:202001363,0,one algorithm implementation project
+uns-pmf:I034,utwente:202001237,0,linear algebra
+uns-pmf:I034,utwente:202200141,0,linear systems
+uns-pmf:I034,utwente:201600167,0,mathematical analysis
+uns-pmf:I034,utwente:202400634,0,learning theory
+uns-pmf:I034,utwente:202500460,0,real analysis
+uns-pmf:I034,utwente:202300027,0,linear optimisation
+uns-pmf:I141,utwente:202500368,1,"grammars and automata give the syntax half, with no comparison of paradigms"
+uns-pmf:I141,utwente:202200142,0,programming for mathematical modelling in one language
+uns-pmf:I141,utwente:202300018,0,reflection course
+uns-pmf:I141,utwente:202200141,0,linear systems
+uns-pmf:I141,utwente:202001234,0,discrete mathematics
+uns-pmf:I141,utwente:202001363,0,algorithm project
+uns-pmf:I141,utwente:202500367,0,data structures
+uns-pmf:I141,utwente:202200243,0,modelling project
+uns-pmf:I141,utwente:201600167,0,mathematical analysis
+uns-pmf:I141,utwente:202400635,0,sequential decision-making
+uns-pmf:I141,utwente:202500369,0,abstract algebra
+uns-pmf:I141,utwente:202200239,0,modelling project
+uns-pmf:I141,utwente:202001193,0,introductory mathematics
+uns-pmf:I141,utwente:202400634,0,learning theory
+uns-pmf:I141,utwente:202001237,0,linear algebra
+uns-pmf:I142,utwente:202500368,2,"grammars and automata models, the subject of the home course"
+uns-pmf:I142,utwente:202001234,0,discrete mathematics
+uns-pmf:I142,utwente:202500369,0,abstract algebra
+uns-pmf:I142,utwente:201600167,0,mathematical analysis
+uns-pmf:I142,utwente:202001193,0,introductory mathematics
+uns-pmf:I142,utwente:202200236,0,linear structures
+uns-pmf:I142,utwente:202200141,0,linear systems
+uns-pmf:I142,utwente:202200238,0,systems theory in the control sense
+uns-pmf:I142,utwente:202500460,0,real analysis
+uns-pmf:I142,utwente:202500367,0,data structures
+uns-pmf:I142,utwente:202400632,0,partial differential equations
+uns-pmf:I142,utwente:202400631,0,graph theory
+uns-pmf:I142,utwente:202500366,0,discrete algorithms
+uns-pmf:I144,utwente:202300017,0,multidimensional analysis
+uns-pmf:I144,utwente:202200141,1,"vector spaces, inner products and matrices, without the geometry of conics and transformations"
+uns-pmf:I144,utwente:202200236,1,"continues linear structures, still the algebraic half only"
+uns-pmf:I144,utwente:202200148,0,vector fields rather than analytic geometry
+uns-pmf:I144,utwente:202400660,0,real analysis
+uns-pmf:I144,utwente:202001237,1,"linear systems and matrices, the computational half"
+uns-pmf:I144,utwente:202300018,0,reflection course
+uns-pmf:I144,utwente:202200179,0,sequences and series
+uns-pmf:I144,utwente:202500460,0,real analysis
+uns-pmf:I144,utwente:202001215,0,differential equations
+uns-pmf:I144,utwente:202500369,0,abstract algebra
+uns-pmf:I144,utwente:202001193,0,introductory mathematics
+uns-pmf:I144,utwente:202300055,0,basic calculus
+uns-pmf:I144,utwente:202300027,0,linear optimisation
+uns-pmf:I144,utwente:202200238,0,systems theory
+uns-pmf:I051,utwente:202200338,0,"stochastic simulation, not process scheduling"
+uns-pmf:I051,utwente:202200141,0,linear systems
+uns-pmf:I051,utwente:202001234,0,discrete mathematics
+uns-pmf:I051,utwente:202500367,0,data structures
+uns-pmf:I051,utwente:202500368,0,grammars and automata
+uns-pmf:I051,utwente:202400635,0,sequential decision-making
+uns-pmf:I051,utwente:202001237,0,linear algebra
+uns-pmf:I051,utwente:202200243,0,modelling project
+uns-pmf:I051,utwente:202200142,0,modelling and programming
+uns-pmf:I051,utwente:202500460,0,real analysis
+uns-pmf:I051,utwente:202001193,0,introductory mathematics
+uns-pmf:I051,utwente:202300018,0,reflection course
+uns-pmf:I051,utwente:202001363,0,algorithm project
+uns-pmf:I051,utwente:202200236,0,linear structures
+uns-pmf:I051,utwente:202200238,0,systems theory
+uns-pmf:I051,utwente:202200239,0,modelling project
+uns-pmf:I051,utwente:202500369,0,abstract algebra
+uns-pmf:I052,utwente:202200243,0,"mathematical modelling, not uml system modelling"
+uns-pmf:I052,utwente:202300157,0,mathematical modelling
+uns-pmf:I052,utwente:202500368,0,grammars and automata
+uns-pmf:I052,utwente:202200142,0,mathematical modelling
+uns-pmf:I052,utwente:202200339,0,stochastic modelling project
+uns-pmf:I052,utwente:202200336,0,markov chains
+uns-pmf:I052,utwente:202001234,0,discrete mathematics
+uns-pmf:I052,utwente:202200338,0,stochastic simulation
+uns-pmf:I052,utwente:202300018,0,reflection course
+uns-pmf:I052,utwente:202400348,0,philosophy of mathematics
+uns-pmf:I052,utwente:202300196,0,modelling project
+uns-pmf:I052,utwente:202300156,0,modelling project
+uns-pmf:I052,utwente:202400634,0,learning theory
+uns-pmf:I052,utwente:202001237,0,linear algebra
+uns-pmf:I052,utwente:202200239,0,modelling project
+uns-pmf:I151,utwente:202300028,1,"optimisation and learning, the machine learning side only"
+uns-pmf:I151,utwente:202400635,1,"decision-making under uncertainty, one component of the home course"
+uns-pmf:I151,utwente:202001363,0,algorithm project
+uns-pmf:I151,utwente:202001234,0,discrete mathematics
+uns-pmf:I151,utwente:202200142,0,modelling and programming
+uns-pmf:I151,utwente:202400634,1,"the mathematics of learning, one component of the home course"
+uns-pmf:I151,utwente:202001193,0,introductory mathematics
+uns-pmf:I151,utwente:201600167,0,mathematical analysis
+uns-pmf:I151,utwente:202200239,0,modelling project
+uns-pmf:I151,utwente:202200141,0,linear systems
+uns-pmf:I151,utwente:202200339,0,stochastic modelling project
+uns-pmf:I151,utwente:202500367,0,data structures
+uns-pmf:I151,utwente:202200337,0,stochastic models
+uns-pmf:I151,utwente:202300018,0,reflection course
+uns-pmf:I151,utwente:202001379,0,graduation project
+uns-pmf:I151,utwente:202300027,0,linear optimisation
+uns-pmf:I152,utwente:202500367,1,"algorithmic complexity in practice, not the theory of np-completeness"
+uns-pmf:I152,utwente:202500366,1,classic algorithms and their analysis
+uns-pmf:I152,utwente:202001234,0,discrete mathematics
+uns-pmf:I152,utwente:202300028,0,optimisation
+uns-pmf:I152,utwente:202400631,0,graph theory
+uns-pmf:I152,utwente:202500368,1,grammars and automata give the computability side without the complexity classes
+uns-pmf:I152,utwente:202001193,0,introductory mathematics
+uns-pmf:I152,utwente:202200241,0,numerical mathematics
+uns-pmf:I152,utwente:202500460,0,real analysis
+uns-pmf:I152,utwente:201600167,0,mathematical analysis
+uns-pmf:I152,utwente:202300026,0,mathematical statistics
+uns-pmf:I152,utwente:202400660,0,real analysis
+uns-pmf:I152,utwente:202300027,0,linear optimisation
+uns-pmf:I152,utwente:202200238,0,systems theory
+uns-pmf:I152,utwente:202300017,0,multidimensional analysis
+uns-pmf:I143,utwente:202001237,2,"linear algebra: systems, matrices and the structure behind them"
+uns-pmf:I143,utwente:202200141,1,"the first half of the same material, systems and vector spaces"
+uns-pmf:I143,utwente:202200236,1,"the continuation, eigenvalues and further structure"
+uns-pmf:I143,utwente:202500369,1,"abstract algebra, which covers the structures but not the matrix techniques"
+uns-pmf:I143,utwente:202200238,0,systems theory
+uns-pmf:I143,utwente:202300027,0,linear optimisation
+uns-pmf:I143,utwente:202400631,0,graph theory
+uns-pmf:I143,utwente:202300028,0,optimisation
+uns-pmf:I143,utwente:202200241,0,numerical mathematics
+uns-pmf:I143,utwente:202500460,0,real analysis
+uns-pmf:I143,utwente:202300055,0,basic calculus
+uns-pmf:I143,utwente:202001201,0,calculus
+uns-pmf:I143,utwente:202500366,0,discrete algorithms
+uns-pmf:I143,utwente:202400634,0,learning theory
+uns-pmf:I143,utwente:202001234,0,discrete mathematics
+uns-pmf:I162,utwente:202200241,2,"numerical mathematics: interpolation, quadrature and iterative solving"
+uns-pmf:I162,utwente:202200243,0,modelling project
+uns-pmf:I162,utwente:202300157,0,modelling project
+uns-pmf:I162,utwente:202500460,0,real analysis
+uns-pmf:I162,utwente:202200142,0,modelling and programming
+uns-pmf:I162,utwente:202001215,0,differential equations
+uns-pmf:I162,utwente:202001201,0,calculus
+uns-pmf:I162,utwente:202400660,0,real analysis
+uns-pmf:I162,utwente:202001193,0,introductory mathematics
+uns-pmf:I162,utwente:202300055,0,basic calculus
+uns-pmf:I162,utwente:201600167,0,mathematical analysis
+uns-pmf:I162,utwente:202300018,0,reflection course
+uns-pmf:I162,utwente:202400634,0,learning theory
+uns-pmf:I162,utwente:202200338,0,stochastic simulation
+uns-pmf:I211,utwente:202001234,2,"sets, relations, counting and logic, the same foundational material"
+uns-pmf:I211,utwente:202001193,1,introductory mathematics covering part of the same foundations
+uns-pmf:I211,utwente:202500368,0,grammars and automata
+uns-pmf:I211,utwente:201600167,1,"develops the formal language of mathematics, overlapping in part"
+uns-pmf:I211,utwente:202500460,0,real analysis
+uns-pmf:I211,utwente:202500369,0,abstract algebra
+uns-pmf:I211,utwente:202200141,0,linear systems
+uns-pmf:I211,utwente:202500367,0,data structures
+uns-pmf:I211,utwente:202400631,0,graph theory
+uns-pmf:I211,utwente:202400634,0,learning theory
+uns-pmf:I211,utwente:202300157,0,modelling project
+uns-pmf:I211,utwente:202200243,0,modelling project
+uns-pmf:I211,utwente:202200142,0,modelling and programming
+uns-pmf:I211,utwente:202001344,0,probability theory
+uns-pmf:I211,utwente:202300018,0,reflection course
+uns-pmf:I212,utwente:202400660,1,the continuation of the analysis line
+uns-pmf:I212,utwente:202001215,1,"calculus for other programmes, starting from differential equations"
+uns-pmf:I212,utwente:202500460,2,"real analysis of one variable, the same first course"
+uns-pmf:I212,utwente:202001201,1,integration theory for one variable
+uns-pmf:I212,utwente:202300055,1,a basic calculus course below this level
+uns-pmf:I212,utwente:202001234,0,discrete mathematics
+uns-pmf:I212,utwente:201600167,1,foundations of analysis
+uns-pmf:I212,utwente:202200179,1,sequences and series
+uns-pmf:I212,utwente:202300018,0,reflection course
+uns-pmf:I212,utwente:202001193,1,introductory mathematics with a calculus part
+uns-pmf:I212,utwente:202300017,0,multidimensional analysis
+uns-pmf:I212,utwente:201500405,0,complex function theory
+uns-pmf:I221,utwente:202200338,0,stochastic simulation
+uns-pmf:I221,utwente:202400635,0,sequential decision-making
+uns-pmf:I221,utwente:202200339,0,stochastic modelling project
+uns-pmf:I221,utwente:202200142,0,modelling and programming
+uns-pmf:I221,utwente:202400633,0,reflection course
+uns-pmf:I221,utwente:202001363,0,algorithm project
+uns-pmf:I221,utwente:202300026,0,mathematical statistics
+uns-pmf:I221,utwente:202300157,0,modelling project
+uns-pmf:I221,utwente:202200243,0,modelling project
+uns-pmf:I221,utwente:202001237,0,linear algebra
+uns-pmf:I221,utwente:201600167,0,mathematical analysis
+uns-pmf:I221,utwente:202001379,0,graduation project
+uns-pmf:I221,utwente:202400631,0,graph theory
+uns-pmf:I221,utwente:202300018,0,reflection course
+uns-pmf:I221,utwente:202300028,0,optimisation
+uns-pmf:I221,utwente:202400634,0,learning theory
+uns-pmf:I221,utwente:202300027,0,linear optimisation
+uns-pmf:I221,utwente:202200238,0,systems theory
+uns-pmf:I222,utwente:202500369,2,"an introduction to abstract algebra: groups, rings and fields"
+uns-pmf:I222,utwente:202200141,1,systems of linear equations and their structure
+uns-pmf:I222,utwente:202001237,1,"linear systems and matrices, one part of the home syllabus"
+uns-pmf:I222,utwente:202500460,0,real analysis
+uns-pmf:I222,utwente:202001234,0,discrete mathematics
+uns-pmf:I222,utwente:202001193,1,introductory mathematics covering number structures
+uns-pmf:I222,utwente:202200236,1,the continuation of linear structures
+uns-pmf:I222,utwente:201600167,0,mathematical analysis
+uns-pmf:I222,utwente:202500367,0,data structures
+uns-pmf:I222,utwente:202400631,0,graph theory
+uns-pmf:I222,utwente:202500366,0,discrete algorithms
+uns-pmf:I222,utwente:202200238,0,systems theory
+uns-pmf:I222,utwente:202300018,0,reflection course
+uns-pmf:I222,utwente:202300055,0,basic calculus
+uns-pmf:I222,utwente:202300027,0,linear optimisation
+uns-pmf:I241,utwente:202200236,0,linear structures
+uns-pmf:I241,utwente:202200243,0,modelling project
+uns-pmf:I241,utwente:202500367,0,data structures
+uns-pmf:I241,utwente:202300157,0,modelling project
+uns-pmf:I241,utwente:202300196,0,modelling project
+uns-pmf:I241,utwente:202001363,0,algorithm project
+uns-pmf:I241,utwente:202300026,0,mathematical statistics
+uns-pmf:I241,utwente:202200141,0,linear systems
+uns-pmf:I241,utwente:202200239,0,modelling project
+uns-pmf:I241,utwente:202200339,0,stochastic modelling project
+uns-pmf:I241,utwente:202400633,0,reflection course
+uns-pmf:I241,utwente:202400634,0,learning theory
+uns-pmf:I241,utwente:202300156,0,modelling project
+uns-pmf:I241,utwente:202300028,0,optimisation
+uns-pmf:I241,utwente:201600167,0,mathematical analysis
+uns-pmf:I242,utwente:202001234,0,"discrete mathematics, no hardware"
+uns-pmf:I242,utwente:202500367,0,data structures
+uns-pmf:I242,utwente:202200236,0,linear structures
+uns-pmf:I242,utwente:201600167,0,mathematical analysis
+uns-pmf:I242,utwente:202200141,0,linear systems
+uns-pmf:I242,utwente:202500368,0,grammars and automata
+uns-pmf:I242,utwente:202200142,0,modelling and programming
+uns-pmf:I242,utwente:202200338,0,stochastic simulation
+uns-pmf:I242,utwente:202200339,0,stochastic modelling project
+uns-pmf:I242,utwente:202001363,0,algorithm project
+uns-pmf:I242,utwente:202400634,0,learning theory
+uns-pmf:I242,utwente:202001385,0,graduation project
+uns-pmf:I242,utwente:202300028,0,optimisation
+uns-pmf:I242,utwente:202200336,0,markov chains
+uns-pmf:I242,utwente:202300018,0,reflection course
+uns-pmf:I243,utwente:202400631,0,"graph theory in the mathematical sense, not protocol layers"
+uns-pmf:I243,utwente:202001363,0,algorithm project
+uns-pmf:I243,utwente:202500367,0,data structures
+uns-pmf:I243,utwente:202200338,0,stochastic simulation
+uns-pmf:I243,utwente:202001385,0,graduation project
+uns-pmf:I243,utwente:202001234,0,discrete mathematics
+uns-pmf:I243,utwente:202200336,0,"markov chains, used for traffic models but not networking"
+uns-pmf:I243,utwente:202500369,0,abstract algebra
+uns-pmf:I243,utwente:202001237,0,linear algebra
+uns-pmf:I243,utwente:202300028,0,optimisation
+uns-pmf:I243,utwente:202300055,0,basic calculus
+uns-pmf:I243,utwente:202200239,0,modelling project
+uns-pmf:I243,utwente:202001193,0,introductory mathematics
+uns-pmf:I243,utwente:202500366,0,discrete algorithms
+uns-pmf:I243,utwente:202300027,0,linear optimisation
+uns-pmf:I243,utwente:201600167,0,mathematical analysis
+uns-pmf:I251,utwente:202200339,0,stochastic modelling project
+uns-pmf:I251,utwente:202200239,0,modelling project
+uns-pmf:I251,utwente:202200142,0,modelling and programming
+uns-pmf:I251,utwente:202001363,0,algorithm project
+uns-pmf:I251,utwente:202300156,0,modelling project
+uns-pmf:I251,utwente:202200338,0,stochastic simulation
+uns-pmf:I251,utwente:202300196,0,modelling project
+uns-pmf:I251,utwente:202200336,0,markov chains
+uns-pmf:I251,utwente:202200243,0,modelling project
+uns-pmf:I251,utwente:202000148,0,statistics
+uns-pmf:I251,utwente:202500367,0,data structures
+uns-pmf:I251,utwente:202300028,0,optimisation
+uns-pmf:I251,utwente:202001379,0,graduation project
+uns-pmf:I251,utwente:202300018,0,reflection course
+uns-pmf:I251,utwente:202400634,0,learning theory
+uns-pmf:I251,utwente:202300055,0,basic calculus
+uns-pmf:I252,utwente:202500368,2,"automata, grammars and regular languages, the subject of the home course"
+uns-pmf:I252,utwente:202001234,0,discrete mathematics
+uns-pmf:I252,utwente:201600167,0,mathematical analysis
+uns-pmf:I252,utwente:202500369,0,abstract algebra
+uns-pmf:I252,utwente:202500367,0,data structures
+uns-pmf:I252,utwente:202001193,0,introductory mathematics
+uns-pmf:I252,utwente:202500366,0,discrete algorithms
+uns-pmf:I252,utwente:202500460,0,real analysis
+uns-pmf:I252,utwente:202200141,0,linear systems
+uns-pmf:I252,utwente:202200236,0,linear structures
+uns-pmf:I252,utwente:202400634,0,learning theory
+uns-pmf:I252,utwente:202400660,0,real analysis
+uns-pmf:I252,utwente:202300026,0,mathematical statistics
+uns-pmf:I252,utwente:202400631,0,graph theory
+uns-pmf:I263,utwente:202001363,0,algorithm project
+uns-pmf:I263,utwente:202200141,0,linear systems
+uns-pmf:I263,utwente:202200243,0,modelling project
+uns-pmf:I263,utwente:202500368,0,grammars and automata
+uns-pmf:I263,utwente:202400635,0,sequential decision-making
+uns-pmf:I263,utwente:202200338,0,stochastic simulation
+uns-pmf:I263,utwente:202200239,0,modelling project
+uns-pmf:I263,utwente:202200236,0,linear structures
+uns-pmf:I263,utwente:202200339,0,stochastic modelling project
+uns-pmf:I263,utwente:202300018,0,reflection course
+uns-pmf:I263,utwente:202200142,0,modelling and programming
+uns-pmf:I263,utwente:202300028,0,optimisation
+uns-pmf:I263,utwente:201600167,0,mathematical analysis
+uns-pmf:I263,utwente:202500367,0,data structures
+uns-pmf:I262,utwente:202001363,0,algorithm project
+uns-pmf:I262,utwente:202200236,0,linear structures
+uns-pmf:I262,utwente:202500369,0,abstract algebra
+uns-pmf:I262,utwente:202200239,0,modelling project
+uns-pmf:I262,utwente:202200243,0,modelling project
+uns-pmf:I262,utwente:202200142,0,modelling and programming
+uns-pmf:I262,utwente:202500367,0,data structures
+uns-pmf:I262,utwente:202400633,0,reflection course
+uns-pmf:I262,utwente:202200339,0,stochastic modelling project
+uns-pmf:I262,utwente:202001385,0,graduation project
+uns-pmf:I262,utwente:202300018,0,reflection course
+uns-pmf:I262,utwente:201600167,0,mathematical analysis
+uns-pmf:I262,utwente:202001379,0,graduation project
+uns-pmf:I262,utwente:202001380,0,reflection course
+uns-pmf:M-02,utwente:202400633,0,reflection course in mathematics
+uns-pmf:M-02,utwente:201600167,0,mathematical analysis
+uns-pmf:M-02,utwente:202001385,0,graduation project
+uns-pmf:M-02,utwente:202300018,0,reflection course
+uns-pmf:M-02,utwente:202200142,0,modelling and programming
+uns-pmf:M-02,utwente:202001379,0,graduation project
+uns-pmf:M-02,utwente:202300156,0,modelling project
+uns-pmf:M-02,utwente:202001380,0,reflection course
+uns-pmf:M-02,utwente:202400348,0,philosophy of mathematics
+uns-pmf:M-02,utwente:202001234,0,discrete mathematics
+uns-pmf:M-02,utwente:202200239,0,modelling project
+uns-pmf:M-02,utwente:202300196,0,modelling project
+uns-pmf:M3-21,utwente:201600167,0,"mathematical analysis, no economics"
+uns-pmf:M3-21,utwente:202200142,0,modelling and programming
+uns-pmf:M3-21,utwente:202001344,0,probability theory
+uns-pmf:M3-21,utwente:202500380,0,mathematical statistics
+uns-pmf:M3-21,utwente:202300018,0,reflection course
+uns-pmf:M3-21,utwente:202001193,0,introductory mathematics
+uns-pmf:M3-21,utwente:202300157,0,modelling project
+uns-pmf:M3-21,utwente:202200243,0,modelling project
+uns-pmf:M3-21,utwente:202300026,0,mathematical statistics
+uns-pmf:M3-21,utwente:202400633,0,reflection course
+uns-pmf:M3-21,utwente:202001215,0,differential equations
+uns-pmf:M3-21,utwente:202001379,0,graduation project
+uns-pmf:I311,utwente:202200339,0,stochastic modelling project
+uns-pmf:I311,utwente:202200142,0,"programming for mathematical modelling, not it tooling"
+uns-pmf:I311,utwente:202001363,0,algorithm project
+uns-pmf:I311,utwente:202200338,0,stochastic simulation
+uns-pmf:I311,utwente:202200239,0,modelling project
+uns-pmf:I311,utwente:202200141,0,linear systems
+uns-pmf:I311,utwente:202200243,0,modelling project
+uns-pmf:I311,utwente:202300018,0,reflection course
+uns-pmf:I311,utwente:202300157,0,modelling project
+uns-pmf:I311,utwente:202300156,0,modelling project
+uns-pmf:I311,utwente:202001385,0,graduation project
+uns-pmf:I311,utwente:202300028,0,optimisation
+uns-pmf:I311,utwente:202400634,0,learning theory
+uns-pmf:I311,utwente:202001379,0,graduation project
+uns-pmf:I311,utwente:202300055,0,basic calculus
+uns-pmf:M-09,utwente:202400633,0,reflection course in mathematics
+uns-pmf:M-09,utwente:201600167,0,mathematical analysis
+uns-pmf:M-09,utwente:202001385,0,graduation project
+uns-pmf:M-09,utwente:202300156,0,modelling project
+uns-pmf:M-09,utwente:202200142,0,modelling and programming
+uns-pmf:M-09,utwente:202200239,0,modelling project
+uns-pmf:M-09,utwente:202400348,0,philosophy of mathematics
+uns-pmf:M-09,utwente:202300018,0,reflection course
+uns-pmf:M-09,utwente:202001380,0,reflection course
+uns-pmf:M-09,utwente:202001379,0,graduation project
+uns-pmf:M-09,utwente:202400660,0,real analysis
+uns-pmf:M-09,utwente:202500460,0,real analysis
+uns-pmf:M-09,utwente:202300196,0,modelling project
+uns-pmf:M-15,utwente:202300018,0,"reflection on statistics and calculus, not society"
+uns-pmf:M-15,utwente:202500369,0,abstract algebra
+uns-pmf:M-15,utwente:202400633,0,reflection course
+uns-pmf:M-15,utwente:202001380,0,reflection course
+uns-pmf:M-15,utwente:202200141,0,linear systems
+uns-pmf:M-15,utwente:202300157,0,modelling project
+uns-pmf:M-15,utwente:202300026,0,mathematical statistics
+uns-pmf:M-15,utwente:202400631,0,graph theory
+uns-pmf:M-15,utwente:202200243,0,modelling project
+uns-pmf:M-15,utwente:202200142,0,modelling and programming
+uns-pmf:M-15,utwente:202400348,0,philosophy of mathematics
+uns-pmf:M-15,utwente:202300028,0,optimisation
+uns-pmf:M-15,utwente:202001237,0,linear algebra
+uns-pmf:M-15,utwente:202200242,0,differential equations
+uns-pmf:M-15,utwente:202200236,0,linear structures
+uns-pmf:I321,utwente:202001234,0,"discrete mathematics, no electronics"
+uns-pmf:I321,utwente:202001193,0,introductory mathematics
+uns-pmf:I321,utwente:201600167,0,mathematical analysis
+uns-pmf:I321,utwente:202001237,0,linear algebra
+uns-pmf:I321,utwente:202001215,0,differential equations
+uns-pmf:I321,utwente:202200236,0,linear structures
+uns-pmf:I321,utwente:202400631,0,graph theory
+uns-pmf:I321,utwente:202200338,0,stochastic simulation
+uns-pmf:I321,utwente:202200141,0,linear systems
+uns-pmf:I321,utwente:202200241,0,numerical mathematics
+uns-pmf:I321,utwente:202200238,0,systems theory in the control sense
+uns-pmf:I321,utwente:202500369,0,abstract algebra
+uns-pmf:I321,utwente:202001201,0,calculus
+uns-pmf:I321,utwente:202500460,0,real analysis
+uns-pmf:M3-22,utwente:202500460,0,"real analysis, not financial mathematics"
+uns-pmf:M3-22,utwente:202500380,0,mathematical statistics
+uns-pmf:M3-22,utwente:202300018,0,reflection course
+uns-pmf:M3-22,utwente:202001193,0,introductory mathematics
+uns-pmf:M3-22,utwente:202200141,0,linear systems
+uns-pmf:M3-22,utwente:202001234,0,discrete mathematics
+uns-pmf:M3-22,utwente:202300055,0,basic calculus
+uns-pmf:M3-22,utwente:202500369,0,abstract algebra
+uns-pmf:M3-22,utwente:202001201,0,calculus
+uns-pmf:M3-22,utwente:201600167,0,mathematical analysis
+uns-pmf:M3-22,utwente:202300026,0,mathematical statistics
+uns-pmf:M3-22,utwente:202200142,0,modelling and programming
+uns-pmf:M3-22,utwente:202300157,0,modelling project
+uns-pmf:M3-22,utwente:202200243,0,modelling project
+uns-pmf:I322,utwente:202200339,0,stochastic modelling project
+uns-pmf:I322,utwente:202200239,0,modelling project
+uns-pmf:I322,utwente:202200142,0,"programming for mathematical modelling, not it tooling"
+uns-pmf:I322,utwente:202300196,0,modelling project
+uns-pmf:I322,utwente:202300156,0,modelling project
+uns-pmf:I322,utwente:202001363,0,algorithm project
+uns-pmf:I322,utwente:202200243,0,modelling project
+uns-pmf:I322,utwente:202200338,0,stochastic simulation
+uns-pmf:I322,utwente:202300157,0,modelling project
+uns-pmf:I322,utwente:202400633,0,reflection course
+uns-pmf:I322,utwente:202001385,0,graduation project
+uns-pmf:I322,utwente:202400660,0,real analysis
+uns-pmf:I322,utwente:202300028,0,optimisation
+uns-pmf:I322,utwente:202300018,0,reflection course
+uns-pmf:I322,utwente:202001379,0,graduation project
+uns-pmf:I322,utwente:202200236,0,linear structures
+uns-pmf:M-01,utwente:202001234,1,discrete mathematics touches boolean functions and ordered structures
+uns-pmf:M-01,utwente:202500367,0,data structures
+uns-pmf:M-01,utwente:202001193,0,introductory mathematics
+uns-pmf:M-01,utwente:202500369,1,"abstract algebra covers lattices and boolean algebras, without the minimisation techniques"
+uns-pmf:M-01,utwente:202200141,0,linear systems
+uns-pmf:M-01,utwente:202001237,0,linear algebra
+uns-pmf:M-01,utwente:202500460,0,real analysis
+uns-pmf:M-01,utwente:202300028,0,"nonlinear optimisation, a different notion of optimisation"
+uns-pmf:M-01,utwente:201600167,0,mathematical analysis
+uns-pmf:M-01,utwente:202200236,0,linear structures
+uns-pmf:M-01,utwente:202300027,0,"linear optimisation, a different notion of optimisation"
+uns-pmf:M-01,utwente:202200241,0,numerical mathematics
+uns-pmf:M-01,utwente:202500366,0,discrete algorithms
+uns-pmf:M-01,utwente:202200142,0,modelling and programming
+uns-pmf:I331,utwente:202200339,0,stochastic modelling project
+uns-pmf:I331,utwente:202300018,0,reflection course
+uns-pmf:I331,utwente:202200338,0,stochastic simulation
+uns-pmf:I331,utwente:202200142,0,modelling and programming
+uns-pmf:I331,utwente:202400633,0,reflection course
+uns-pmf:I331,utwente:202400635,0,sequential decision-making
+uns-pmf:I331,utwente:202200239,0,modelling project
+uns-pmf:I331,utwente:202001363,0,algorithm project
+uns-pmf:I331,utwente:202001385,1,"an independent assignment ending in a report, but a mathematics graduation project"
+uns-pmf:I331,utwente:202400348,0,philosophy of mathematics
+uns-pmf:I331,utwente:202300028,0,optimisation
+uns-pmf:I331,utwente:202400634,0,learning theory
+uns-pmf:I331,utwente:201600167,0,mathematical analysis
+uns-pmf:I331,utwente:202300026,0,mathematical statistics
+uns-pmf:I331,utwente:202500367,0,data structures
+uns-pmf:I331,utwente:202001380,0,reflection course

@@ -108,9 +108,18 @@ def _display_pct(strategy: Strategy, score: float, best: float,
 
 
 def confidence_of(score_pct: int) -> Confidence:
-    if score_pct >= 75:
+    """One set of thresholds for the whole system (raised by B, 2026-09-20).
+
+    The contract's high/medium/low and aggregate.py's likely/borderline/unlikely were
+    two vocabularies with two sets of cut-offs over the same number. The cut-offs now
+    live in aggregate.py, tied to a calibrated probability: high means the model expects
+    about seven such pairs in ten to be recognised.
+    """
+    from app.matching.aggregate import BORDERLINE, LIKELY
+
+    if score_pct >= LIKELY * 100:
         return "high"
-    if score_pct >= 50:
+    if score_pct >= BORDERLINE * 100:
         return "medium"
     return "low"
 

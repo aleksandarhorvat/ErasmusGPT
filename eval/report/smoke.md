@@ -10,10 +10,10 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I011 Introduction to programming
 
-- `bm25` (6 ms): Software Diamond (100 %) | Introduction to Programming (98 %) | Concurrency and Compiler Construction (84 %)
+- `bm25` (7 ms): Software Diamond (100 %) | Introduction to Programming (99 %) | Concurrency and Compiler Construction (84 %)
 - `dense` (0 ms): Introduction to Programming (71 %) | Concurrency and Compiler Construction (65 %) | Advanced Programming (62 %)
-- `hybrid` (4 ms): Introduction to Programming (100 %) | Concurrency and Compiler Construction (98 %) | Software Diamond (96 %)
-- `hybrid+ce` (2891 ms): Introduction to Programming (91 %) | Software Diamond (81 %) | Data & Information Project (69 %)
+- `hybrid` (7 ms): Introduction to Programming (100 %) | Concurrency and Compiler Construction (98 %) | Software Diamond (97 %)
+- `hybrid+ce` (1464 ms): Introduction to Programming (54 %) | Advanced Programming (47 %) | Functional and Logic Programming (36 %)
 
   Evidence for rank 1 (similarity 0.8101):
   - home: Introduction to programming Enabling students to understand the concepts of (computer) programming, problem analysis and their implementation in a concrete procedural language.
@@ -21,102 +21,102 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I021 Data structures and algorithms 1
 
-- `bm25` (4 ms): Software Diamond (100 %) | Functional and Logic Programming (95 %) | Concurrency and Compiler Construction (88 %)
+- `bm25` (4 ms): Software Diamond (100 %) | Functional and Logic Programming (98 %) | Concurrency and Compiler Construction (89 %)
 - `dense` (0 ms): Concurrency and Compiler Construction (58 %) | Databases (55 %) | Introduction to Programming (54 %)
-- `hybrid` (3 ms): Concurrency and Compiler Construction (100 %) | Databases (98 %) | Software Diamond (98 %)
-- `hybrid+ce` (2907 ms): Software Diamond (94 %) | Introduction to Programming (86 %) | Databases (85 %)
+- `hybrid` (5 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Databases (98 %)
+- `hybrid+ce` (1332 ms): Introduction to Programming (56 %) | Concurrency and Compiler Construction (52 %) | Advanced Programming (36 %)
 
-  Evidence for rank 1 (similarity 0.8266):
-  - home: Basic concepts of programming languages needed for efficient programming of data structures and algorithms.
-  - host: Learning outcomes: The student can explain the principle of and differences between linear and binary search methods, as well as between bubble sort and merge sort.; The student understands the complexity arguments behind the aforementioned algorithms and can analyse which is the best solution in what context.; The student can apply simple imperative programming concepts: if/then, while, integer variables and arrays.; The student can use basic concepts and syntax of the chosen functional language, such as numbers, lists, and recursion.; The student can implement specifications and execute systematic tests using quickcheck.; The student can use induction to prove basic properties of small functions.; The student can implement simple algorithms in the chosen functional language.
+  Evidence for rank 1 (similarity 0.7804):
+  - home: Data structures and algorithms 1 Enabling students to understand and use dynamic data structures.
+  - host: Introduction to Programming In this study unit, the students build upon the knowledge on algorithms and recursion acquired in Module 1.
 
 ## I031 Databases 1
 
-- `bm25` (6 ms): Information Diamond (100 %) | Databases (60 %) | DS&AI Project (44 %)
-- `dense` (0 ms): Information Diamond (62 %) | Databases (60 %) | Data & Information Project (51 %)
-- `hybrid` (6 ms): Information Diamond (100 %) | Databases (98 %) | Software Design and Modelling (92 %)
-- `hybrid+ce` (2857 ms): Information Diamond (82 %) | Data & Information Project (69 %) | Databases (53 %)
+- `bm25` (6 ms): Information Diamond (100 %) | Databases (54 %) | DS&AI Project (40 %)
+- `dense` (0 ms): Information Diamond (64 %) | Databases (60 %) | Data & Information Project (47 %)
+- `hybrid` (7 ms): Information Diamond (100 %) | Databases (98 %) | Knowledge Representation and Reasoning & Data Quality (92 %)
+- `hybrid+ce` (1321 ms): Software Design and Modelling (29 %) | Information Diamond (24 %) | Databases (21 %)
 
-  Evidence for rank 1 (similarity 0.8504):
-  - home: Learning outcomes: At the end of the course, student s will be able to create relation data model for an illustrated example of a real system using appropriate CASE tool; based on that model students should be able to create databas e and to demonstrate few examples of SQL query.; At the end of the course, successful student s should be able to understand basic principles of modelling and creating relation data model for an illustrative example of real system using appropriate CASE tool, execution of SQL queries and functions of DBMS.
-  - host: Learning outcomes: The student knows the basic concepts of databases and can design a database schema for a simple case using ER modelling.; The student can implement a database design in a relational DBMS and can query and update it using SQL.; The student knows the basic concepts of artificial intelligence and intelligent interaction.; The student can discuss the use of intelligent systems and their ethical implications.; The student understands the basic principles of machine learning, can design a simple classifier or regressor, and can evaluate and compare the performance of such models.; The student understands the concepts of fraud and plagiarism and knows how to behave responsibly as a professional concerning these aspects.
+  Evidence for rank 1 (similarity 0.8232):
+  - home: Entity -relation model and its connection with object data model.
+  - host: Analyzing relations among entities within a model, among different models and between each model and software code.
 
 ## I142 Formal languages and automata
 
-- `bm25` (4 ms): Embedded Architectures and Tools (100 %) | Concurrency and Compiler Construction (49 %) | Data & Information Project (48 %)
+- `bm25` (5 ms): Embedded Architectures and Tools (100 %) | Concurrency and Compiler Construction (49 %) | Data & Information Project (44 %)
 - `dense` (0 ms): Software Diamond (52 %) | Introduction to Artificial Intelligence and Machine Learning (52 %) | Concurrency and Compiler Construction (45 %)
-- `hybrid` (4 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Hardware Diamond (96 %)
-- `hybrid+ce` (3020 ms): Introduction to Artificial Intelligence and Machine Learning (47 %) | Software Diamond (33 %) | Information Diamond (28 %)
+- `hybrid` (5 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Hardware Diamond (95 %)
+- `hybrid+ce` (1448 ms): Introduction to Artificial Intelligence and Machine Learning (18 %) | Introduction to Programming (13 %) | Functional and Logic Programming (12 %)
 
-  Evidence for rank 1 (similarity 0.8055):
-  - home: Learning outcomes: Students should be able to recognize the basic identities of the algebra of languages, find the language of a given finite automaton, construct the minimal automaton for a given regular language, find the language of a given grammar, construct a grammar which generates a given language, and differentiate between various types of languages.; Understanding of the basic ideas and principles of automata theory and theory of formal languages, as well as understanding the essence of decidability questions in theoretical computer science.
-  - host: Learning outcomes: The student can explain and apply the main AI techniques concerning logical reasoning, search, Bayesian networks and machine learning.; The student can compare different types of AI techniques and discuss their advantages and disadvantages.; The student can recall the historical development of the AI field.
+  Evidence for rank 1 (similarity 0.7437):
+  - home: Formal languages and automata Introducing the students to fundamental and abstract concepts of theoretical computer science.
+  - host: Introduction to Artificial Intelligence and Machine Learning Introduction to Artificial Intelligence and Machine Learning gives an introduction to the field and its basic formalisms and methods and their applications.
 
 ## I051 Operating systems 1
 
 - `bm25` (5 ms): Operating Systems (100 %) | Hardware Diamond (61 %) | Computer Systems Project (54 %)
 - `dense` (0 ms): Operating Systems (64 %) | Computer Architecture and Organisation (59 %) | Concurrency and Compiler Construction (57 %)
-- `hybrid` (5 ms): Operating Systems (100 %) | Computer Architecture and Organisation (97 %) | Hardware Diamond (95 %)
-- `hybrid+ce` (3174 ms): Operating Systems (94 %) | Hardware Diamond (79 %) | Information Diamond (74 %)
+- `hybrid` (4 ms): Operating Systems (100 %) | Computer Architecture and Organisation (97 %) | Hardware Diamond (95 %)
+- `hybrid+ce` (1402 ms): Introduction to Programming (37 %) | Computer Systems Project (29 %) | Concurrency and Compiler Construction (27 %)
 
-  Evidence for rank 1 (similarity 0.8154):
-  - home: Learning outcomes: At the end of the course, successful student s should be able to understand the concepts, algorithms, structure and principles of modern operating systems.; At the end of the course, successful student s should be able to understand and apply concepts, algorithms, structure and principles of modern operating systems.
-  - host: Learning outcomes: Understand the major mechanisms of current general-purpose operating systems exemplified by Linux.; Appreciate the design space and trade-offs involved in implementing an operating system.; Be capable of basic system-oriented programming and providing simple extensions to an operating system.; Understand the exploitation of vulnerabilities and privilege escalation; Integrate the knowledge and skills that are taught in the CAO and OS parts.
+  Evidence for rank 1 (similarity 0.7397):
+  - home: Concurrent programming.
+  - host: Collaborating with other students according to the pair programming method.
 
 ## I151 Artificial intelligence 1
 
-- `bm25` (7 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (97 %) | Intelligent Embedded Systems Project (82 %)
-- `dense` (0 ms): Introduction to Artificial Intelligence and Machine Learning (75 %) | Knowledge Representation and Reasoning & Data Quality (55 %) | Information Diamond (50 %)
-- `hybrid` (6 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (98 %) | Information Diamond (96 %)
-- `hybrid+ce` (3305 ms): Introduction to Artificial Intelligence and Machine Learning (82 %) | Information Diamond (80 %) | Intelligent Embedded Systems Project (16 %)
+- `bm25` (6 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (96 %) | Intelligent Embedded Systems Project (81 %)
+- `dense` (0 ms): Introduction to Artificial Intelligence and Machine Learning (75 %) | Knowledge Representation and Reasoning & Data Quality (56 %) | Information Diamond (52 %)
+- `hybrid` (5 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (98 %) | Information Diamond (95 %)
+- `hybrid+ce` (1399 ms): Introduction to Artificial Intelligence and Machine Learning (54 %) | Data & Information Project (9 %) | Explainable AI & Ethics (9 %)
 
-  Evidence for rank 1 (similarity 0.8801):
-  - home: Learning outcomes: Students should understand the basic AI concepts and should be able to implement software application for solving problems by searching state space, implementation of the intelligent player in two-player games, as well as the implementation of the knowledge-based agent.; Students should be able to implementat the knowledge -based systems with deep understanding of logical inference and complex principles of AI.
-  - host: Learning outcomes: The student can explain and apply the main AI techniques concerning logical reasoning, search, Bayesian networks and machine learning.; The student can compare different types of AI techniques and discuss their advantages and disadvantages.; The student can recall the historical development of the AI field.
+  Evidence for rank 1 (similarity 0.8431):
+  - home: Students should be able to implementat the knowledge -based systems with deep understanding of logical inference and complex principles of AI.
+  - host: The student can explain and apply the main AI techniques concerning logical reasoning, search, Bayesian networks and machine learning.
 
 ## I152 Analysis of algorithms
 
-- `bm25` (8 ms): Software Diamond (100 %) | Functional and Logic Programming (79 %) | Concurrency and Compiler Construction (63 %)
+- `bm25` (8 ms): Software Diamond (100 %) | Functional and Logic Programming (82 %) | Concurrency and Compiler Construction (64 %)
 - `dense` (0 ms): Software Diamond (65 %) | Introduction to Artificial Intelligence and Machine Learning (54 %) | Concurrency and Compiler Construction (47 %)
 - `hybrid` (8 ms): Software Diamond (100 %) | Functional and Logic Programming (97 %) | Concurrency and Compiler Construction (97 %)
-- `hybrid+ce` (3238 ms): Introduction to Artificial Intelligence and Machine Learning (16 %) | Software Diamond (8 %) | Social Network Structure and Dynamics (5 %)
+- `hybrid+ce` (1439 ms): Statistical Methods for Data Analysis (23 %) | Introduction to Artificial Intelligence and Machine Learning (21 %) | Information Diamond (15 %)
 
-  Evidence for rank 1 (similarity 0.8154):
-  - home: Learning outcomes: Understanding the necessity and the basic idea behind the mathematical form alisation of the notion of an algorithmic problem; designing simplest (non- branching) programs of Turing machines and developing the capability of analysing the time complexity of classical algorithms by solving the well-known computational problems.; Successful students should be able to design – by solving advanced problems concerning recursive functions and sets – more involved (branching) programs of Turing machines, and to apply theoretical knowledge in the area of computational complexity to analysis of problems and corresponding programs that are met in everyday programming practice.
-  - host: Learning outcomes: The student can explain and apply the main AI techniques concerning logical reasoning, search, Bayesian networks and machine learning.; The student can compare different types of AI techniques and discuss their advantages and disadvantages.; The student can recall the historical development of the AI field.
+  Evidence for rank 1 (similarity 0.711):
+  - home: Analysis of algorithms The goal of the course is to present an introduction to basic concepts of computability theory i.e.
+  - host: Statistical Methods for Data Analysis Based on the knowledge of “Probability Theory” in M4, the Statistics course aims to introduce the basic topics in statistics: Descriptive statistics, Estimation (theory), Confidence intervals and Testing of hypotheses.
 
 ## I243 Computer networks
 
-- `bm25` (7 ms): Network Systems Part 2 (100 %) | Network Systems Part 1 (100 %) | Network Systems Part 3 (99 %)
+- `bm25` (10 ms): Network Systems Part 2 (100 %) | Network Systems Part 1 (100 %) | Network Systems Part 3 (99 %)
 - `dense` (0 ms): Network Systems Part 1 (75 %) | Network Systems Part 3 (74 %) | Network Systems Part 2 (74 %)
-- `hybrid` (7 ms): Network Systems Part 1 (100 %) | Network Systems Part 2 (99 %) | Network Systems Part 3 (98 %)
-- `hybrid+ce` (3199 ms): Network Systems Part 1 (92 %) | Network Systems Part 3 (88 %) | Network Systems Part 2 (87 %)
+- `hybrid` (10 ms): Network Systems Part 1 (100 %) | Network Systems Part 2 (99 %) | Network Systems Part 3 (98 %)
+- `hybrid+ce` (1484 ms): Network Systems Project (54 %) | Computer Systems Project (53 %) | Network Systems Part 2 (50 %)
 
-  Evidence for rank 1 (similarity 0.9098):
-  - home: Learning outcomes: Understanding the basic functions, technologies and architectures of modern computer networks.; Adopting skills required for administration and usage of simple local area networks and several Internet services.
-  - host: Learning outcomes: understand basic principles in communication systems, networks, and networked applications; describe and understand key protocols underlying the operation of the Internet; make simple quantitative models of network systems, and use them to evaluate these systems; analyze the behavior of common networking systems using network monitoring tools; design and implement basic networking protocols and applications
+  Evidence for rank 1 (similarity 0.8516):
+  - home: Understanding the basic functions, technologies and architectures of modern computer networks.
+  - host: design and implement basic networking protocols and applications
 
 ## I251 Software engineering
 
-- `bm25` (5 ms): Software Design and Modelling (100 %) | Data & Information Project (77 %) | Agile Project Process Development (72 %)
+- `bm25` (7 ms): Software Design and Modelling (100 %) | Data & Information Project (84 %) | Agile Project Process Development (69 %)
 - `dense` (0 ms): Software Design and Modelling (68 %) | Introduction to Programming (63 %) | Software Systems Implementation Project (60 %)
-- `hybrid` (7 ms): Software Design and Modelling (100 %) | Data & Information Project (95 %) | Agile Project Process Development (95 %)
-- `hybrid+ce` (3205 ms): Software Design and Modelling (76 %) | Data & Information Project (53 %) | Computer Systems Project (45 %)
+- `hybrid` (5 ms): Software Design and Modelling (100 %) | Data & Information Project (96 %) | Agile Project Process Development (95 %)
+- `hybrid+ce` (1525 ms): Software Design and Modelling (48 %) | Advanced Programming (41 %) | Software Engineering for Embedded Systems (29 %)
 
-  Evidence for rank 1 (similarity 0.8114):
-  - home: Models of software development process and basic concepts of the development description.
-  - host: Learning outcomes: Specifying an existing software system or a software system under design by using UML models, with the help of software tools that are suitable for this purpose.; Analyzing relations among entities within a model, among different models and between each model and software code.; Explaining the commonly recognized phases of a structured software development process.; Measuring and interpreting basic software metrics to assess the quality characteristics of a code base.; Designing programs so as to increase cohesion and reduce coupling.; Applying software design patterns to avoid tight coupling between different components of software, such as use of interfaces, the strategy pattern and the observer pattern.
+  Evidence for rank 1 (similarity 0.9076):
+  - home: Principles of software metrics and practicing of methods of software quality measurement.
+  - host: Measuring and interpreting basic software metrics to assess the quality characteristics of a code base.
 
 ## I263 Web programming
 
-- `bm25` (9 ms): Secure Web Development (100 %) | Data & Information Project (74 %) | Agile Project Technical Development (66 %)
-- `dense` (0 ms): Secure Web Development (58 %) | Advanced Programming (55 %) | Databases (49 %)
-- `hybrid` (9 ms): Secure Web Development (100 %) | Data & Information Project (97 %) | Databases (95 %)
-- `hybrid+ce` (3204 ms): Introduction to Programming (66 %) | Data & Information Project (51 %) | Functional and Logic Programming (43 %)
+- `bm25` (9 ms): Secure Web Development (100 %) | Data & Information Project (72 %) | Agile Project Technical Development (66 %)
+- `dense` (0 ms): Secure Web Development (56 %) | Advanced Programming (53 %) | Databases (49 %)
+- `hybrid` (8 ms): Secure Web Development (100 %) | Advanced Programming (95 %) | Data & Information Project (95 %)
+- `hybrid+ce` (1482 ms): Advanced Programming (58 %) | Introduction to Programming (51 %) | Functional and Logic Programming (46 %)
 
-  Evidence for rank 1 (similarity 0.7153):
-  - home: Web programming Advanced concepts of web programming and the semantic web.
-  - host: Eck Introduction to Programming Using Java is available online at https://math.hws.edu/javanotes For questions concerning the module, please email: module2-tcs@utwente.nl Learning outcomes: Applying the core concepts of imperative programming, such as variables, data types, structured programming statements, recursion, arrays, methods, parameters.; Applying the core concepts of object-oriented programming, such as encapsulation, abstraction, inheritance and polymorphism.; Documenting software using Javadoc.; Collaborating with other students according to the pair programming method.; Designing and implementing unit tests; Designing programs so as to increase cohesion and reduce coupling.
+  Evidence for rank 1 (similarity 0.7651):
+  - home: Event-driven programming.
+  - host: Specifying software by defining preconditions and postconditions.
 
 ## How to read the percentages
 
@@ -130,7 +130,7 @@ because it was trained on search relevance, not on course equivalence.
 
 | Strategy | ms |
 |---|---|
-| `bm25` | 6 |
+| `bm25` | 7 |
 | `dense` | 0 |
-| `hybrid` | 6 |
-| `hybrid+ce` | 3100 |
+| `hybrid` | 7 |
+| `hybrid+ce` | 1430 |

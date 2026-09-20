@@ -79,6 +79,12 @@ with these rules, each of them a judgement worth defending or attacking at the d
 
 - **Only the best candidate per home course counts.** One course is replaced by one
   course, so summing the top five would count the same credits repeatedly.
+- **Partial matches count as matches, and that choice moves the number.** The fit uses
+  `--positive-label 1`, so a label of 1 ("overlapping but not sufficient on its own")
+  counts as recognised, exactly like a 2. That is the optimistic reading, it inflates
+  the recognition estimate, and the UI has to say so wherever the number appears.
+  **Report both**: run `eval/fit_calibration.py --positive-label 2` as well and quote
+  the pair, because the gap between them is most of the headline figure.
 - **`p` is a calibrated probability, not a similarity.** `eval/fit_calibration.py` fits
   `p = sigmoid(a * score + b)` on the gold labels, treating labels 1 and 2 as matches,
   and writes `data/calibration/<strategy>.json`, which the pipeline loads at startup.
