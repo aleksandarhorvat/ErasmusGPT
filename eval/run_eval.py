@@ -16,13 +16,32 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
+import random
+import sys
+import time
 from collections import defaultdict
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT / "backend"))
+
 GOLD = REPO_ROOT / "data" / "gold" / "gold_pairs.csv"
 
 CONFIGS = ["bm25", "dense-minilm", "dense-bge", "hybrid", "hybrid+ce"]
+
+# config -> (bi-encoder tag, strategy). One place, so the report cannot describe a
+# configuration other than the one that ran.
+CONFIG_SETUP: dict[str, tuple[str, str]] = {
+    "bm25": ("bge-small", "bm25"),
+    "dense-minilm": ("minilm", "dense"),
+    "dense-bge": ("bge-small", "dense"),
+    "hybrid": ("bge-small", "hybrid"),
+    "hybrid+ce": ("bge-small", "hybrid+ce"),
+}
+BASELINE = "dense-minilm"
+SEED = 20260920
 
 
 def load_gold(path: Path = GOLD) -> dict[str, dict[str, int]]:
@@ -88,25 +107,216 @@ def reciprocal_rank(ranked: list[str], relevant: set[str], k: int = 10) -> float
 
 
 def ndcg_at_k(ranked: list[str], labels: dict[str, int], k: int = 10) -> float:
-    import math
-
     dcg = sum(labels.get(uid, 0) / math.log2(i + 1) for i, uid in enumerate(ranked[:k], start=1))
     ideal = sorted(labels.values(), reverse=True)[:k]
     idcg = sum(rel / math.log2(i + 1) for i, rel in enumerate(ideal, start=1))
     return dcg / idcg if idcg else 0.0
 
 
+def precision_at_1(ranked: list[str], relevant: set[str]) -> float:
+    return 1.0 if ranked and ranked[0] in relevant else 0.0
+
+
+METRICS = {
+    "Recall@5": lambda ranked, labels, relevant: recall_at_k(ranked, relevant, 5),
+    "Recall@10": lambda ranked, labels, relevant: recall_at_k(ranked, relevant, 10),
+    "MRR@10": lambda ranked, labels, relevant: reciprocal_rank(ranked, relevant, 10),
+    "nDCG@10": lambda ranked, labels, relevant: ndcg_at_k(ranked, labels, 10),
+    "P@1": lambda ranked, labels, relevant: precision_at_1(ranked, relevant),
+}
+
+
+# --- statistics (S5-A3) -----------------------------------------------------
+def bootstrap_ci(
+    values: list[float], resamples: int = 1000, seed: int = SEED
+) -> tuple[float, float]:
+    """95 % percentile bootstrap interval over queries. Seeded, so the report repeats."""
+    if not values:
+        return (0.0, 0.0)
+    rng = random.Random(seed)
+    n = len(values)
+    means = sorted(
+        sum(values[rng.randrange(n)] for _ in range(n)) / n for _ in range(resamples)
+    )
+    return (means[int(0.025 * resamples)], means[int(0.975 * resamples) - 1])
+
+
+def paired_bootstrap_p(
+    treatment: list[float], baseline: list[float],
+    resamples: int = 1000, seed: int = SEED,
+) -> float:
+    """Two-sided p for "the per-query difference has mean zero".
+
+    Paired because both configurations answer the same queries. An unpaired test throws
+    the pairing away and overstates the uncertainty.
+    """
+    differences = [t - b for t, b in zip(treatment, baseline, strict=True)]
+    observed = sum(differences) / len(differences) if differences else 0.0
+    if observed == 0:
+        return 1.0
+    rng = random.Random(seed)
+    n = len(differences)
+    centred = [d - observed for d in differences]
+    extreme = sum(
+        abs(sum(centred[rng.randrange(n)] for _ in range(n)) / n) >= abs(observed)
+        for _ in range(resamples)
+    )
+    return (extreme + 1) / (resamples + 1)
+
+
+# --- running the configurations ---------------------------------------------
+def evaluate(
+    config: str, gold: dict[str, dict[str, int]], home_programme: str,
+    host_programme: str, depth: int = 10,
+) -> tuple[dict[str, list[float]], float, list[str]]:
+    """Per-query metric values for one configuration, mean ms per query, and the queries.
+
+    Imports the same app.matching code the API serves, as the module docstring demands.
+    """
+    from app.core.config import Settings
+    from app.ingest.loader import CurriculumStore
+    from app.matching.pipeline import PipelineMatcher
+
+    bi_encoder, strategy = CONFIG_SETUP[config]
+    settings = Settings(bi_encoder=bi_encoder)
+    matcher = PipelineMatcher(CurriculumStore(settings.curricula_dir), settings)
+
+    known = {c.course_uid for c in matcher.get_courses(home_programme)}
+    queries = sorted(uid for uid in gold if uid in known)
+    per_query: dict[str, list[float]] = {name: [] for name in METRICS}
+    total_ms = 0.0
+    for home_uid in queries:
+        labels = gold[home_uid]
+        relevant = {uid for uid, label in labels.items() if label >= 1}
+        started = time.perf_counter()
+        candidates = matcher.match_course(home_uid, host_programme, strategy, depth)
+        total_ms += (time.perf_counter() - started) * 1000
+        ranked = [c.host_course.course_uid for c in candidates]
+        for name, metric in METRICS.items():
+            per_query[name].append(metric(ranked, labels, relevant))
+    return per_query, total_ms / max(len(queries), 1), queries
+
+
+def write_report(
+    results: dict[str, dict[str, list[float]]], latency: dict[str, float],
+    queries: list[str], out_dir: Path, host_programme: str,
+) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    corrections, compared = correction_rate()
+
+    rows = []
+    for config, per_query in results.items():
+        row: dict[str, object] = {
+            "config": config,
+            "queries": len(queries),
+            "ms_per_query": round(latency[config], 1),
+        }
+        for name, values in per_query.items():
+            low, high = bootstrap_ci(values)
+            row[name] = round(sum(values) / len(values) if values else 0.0, 4)
+            row[f"{name}_ci_low"] = round(low, 4)
+            row[f"{name}_ci_high"] = round(high, 4)
+        rows.append(row)
+
+    with (out_dir / "results.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    lines = [
+        "# Evaluation results",
+        "",
+        f"Generated by `eval/run_eval.py` on {datetime.now(UTC):%Y-%m-%d}. Host programme "
+        f"`{host_programme}`, {len(queries)} queries with checked labels.",
+        "Protocol: `docs/05-evaluation.md`. Intervals are 95 % percentile bootstrap over",
+        f"queries, 1000 resamples, seed {SEED}.",
+        "",
+        "| Config | " + " | ".join(METRICS) + " | ms/query |",
+        "|---" * (len(METRICS) + 2) + "|",
+    ]
+    for row in rows:
+        cells = [
+            f"{row[name]:.3f} [{row[f'{name}_ci_low']:.3f}, {row[f'{name}_ci_high']:.3f}]"
+            for name in METRICS
+        ]
+        lines.append(
+            f"| `{row['config']}` | " + " | ".join(cells) + f" | {row['ms_per_query']:.0f} |"
+        )
+
+    lines += ["", "## Is the gain real?", ""]
+    if BASELINE in results and "hybrid+ce" in results:
+        for name in METRICS:
+            treatment = results["hybrid+ce"][name]
+            baseline = results[BASELINE][name]
+            gain = (sum(treatment) - sum(baseline)) / max(len(treatment), 1)
+            p = paired_bootstrap_p(treatment, baseline)
+            verdict = "significant at 0.05" if p < 0.05 else "not significant at 0.05"
+            lines.append(
+                f"- **{name}**: `hybrid+ce` minus `{BASELINE}` = {gain:+.3f}, "
+                f"paired bootstrap p = {p:.3f}, {verdict}."
+            )
+    else:
+        lines.append(f"- Not computed: both `hybrid+ce` and `{BASELINE}` have to run.")
+
+    lines += [
+        "",
+        "## How the labels were made",
+        "",
+        "Pairs were pooled from the top 10 of `dense` and `hybrid+ce`, pre-labelled by a",
+        "model, then read and corrected by hand (`docs/05-evaluation.md`).",
+    ]
+    if compared:
+        lines.append(
+            f"The human pass changed {corrections} of {compared} pre-labels "
+            f"({corrections / compared:.1%})."
+        )
+    else:
+        lines.append("There is no pre-label file to diff, so no correction rate is reported.")
+    lines += [
+        "Rows no human has read are excluded from every number above.",
+        "",
+        "Unlabelled pairs count as 0. That slightly favours the strategies that fed the",
+        "pool, which is a known property of pooled collections rather than a fault here.",
+        "",
+    ]
+    (out_dir / "results.md").write_text("\n".join(lines), encoding="utf-8")
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--home-programme", default="uns-pmf-informatics-bsc")
     parser.add_argument("--host-programme", required=True)
     parser.add_argument("--out", default="eval/report")
-    parser.parse_args()
+    parser.add_argument("--configs", nargs="*", default=CONFIGS)
+    args = parser.parse_args()
 
-    raise NotImplementedError(
-        "S5-A2: wire this to app.matching, run every config in CONFIGS, "
-        "write results.md + results.csv with bootstrap CIs."
-    )
+    gold = load_gold()
+    if not gold:
+        print(
+            "no checked rows in data/gold/gold_pairs.csv, so there is nothing to measure. "
+            "Build the gold set first: S5-A0 pools the pairs, S5-A1 labels them.",
+            file=sys.stderr,
+        )
+        return 1
+
+    results: dict[str, dict[str, list[float]]] = {}
+    latency: dict[str, float] = {}
+    queries: list[str] = []
+    for config in args.configs:
+        print(f"--> {config}", flush=True)
+        per_query, ms, queries = evaluate(
+            config, gold, args.home_programme, args.host_programme
+        )
+        results[config] = per_query
+        latency[config] = ms
+
+    if not queries:
+        print("no gold query is a course of the home programme", file=sys.stderr)
+        return 1
+
+    write_report(results, latency, queries, REPO_ROOT / args.out, args.host_programme)
+    print(f"wrote {args.out}/results.md and results.csv for {len(queries)} queries")
+    return 0
 
 
 if __name__ == "__main__":

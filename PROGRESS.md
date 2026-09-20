@@ -14,6 +14,50 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Evaluation harness and metric tests
+
+**Who:** Person A
+**Stage:** 5 - Gold set and evaluation, taken early. The harness runs; it has nothing to
+measure until the gold set exists.
+**Commit:** `[A] finish the evaluation harness`
+**Tasks touched:** `S5-A2`, `S5-A4` (done, early), `S5-A3` (wip)
+
+### Done
+- `eval/run_eval.py` is implemented. It imports `app.matching` rather than
+  reimplementing scoring, runs every configuration in `CONFIGS`, and writes
+  `eval/report/results.md` and `results.csv` with Recall@5, Recall@10, MRR@10, nDCG@10,
+  P@1 and ms/query.
+- Statistics (`S5-A3`): 95 % percentile bootstrap intervals over queries and a paired
+  bootstrap test of `hybrid+ce` against `dense-minilm`, both seeded so the report
+  reproduces. The report states in words whether each gain is significant, and discloses
+  the pre-labelling and the correction rate.
+- `backend/tests/test_matching_metrics.py`, 18 tests with values computed by hand,
+  including an nDCG worked through for a swapped pair. 79 tests in total, all offline.
+
+### Verified
+Run end to end on a throwaway gold file of 12 queries with random labels, writing to a
+temporary directory: the table, the intervals, the paired test and the CSV all come out.
+The numbers were nonsense by construction, which is the point of the exercise.
+
+### Decisions
+- `CONFIG_SETUP` maps a configuration name to (bi-encoder, strategy) in one place, so
+  `dense-minilm` cannot silently report numbers produced by bge.
+- An empty gold set exits 1 with the task IDs to run, rather than writing an empty report
+  that looks like a result.
+- The paired test resamples query pairs, not queries independently: both configurations
+  answer the same queries, and discarding that pairing would overstate the uncertainty.
+
+### Broken / known issues
+- `S5-A3` stays `wip`: the code is written but no real report can be produced until the
+  gold set exists, and that needs the real Twente data.
+
+### Next
+- **A:** blocked on B for the style checker. `S5-A0` (pooling) and `S5-A1` (labelling)
+  both need the real Twente file to be worth doing, and stage 6 starts with ingesting
+  Masaryk, which would hit the same checker problem. Waiting.
+
+---
+
 ## 2026-09-20 - [A] Cross-encoder reranking, evidence, smoke sheet
 
 **Who:** Person A

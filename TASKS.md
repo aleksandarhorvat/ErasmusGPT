@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | lane A done through stage 4, early. Next `S5-A0` pooling. `S1-A2` still blocked |
+| **Person A is on** | eval harness done; `S5-A0`/`S5-A1` blocked on the Twente data |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
-| **Blocked on** | `S1-A2`: `scripts/check_style.py` rejects Twente's own course text |
-| **Last updated** | 2026-09-20 - all four strategies work, cross-encoder included |
+| **Blocked on** | `S1-A2` and the whole gold set: `scripts/check_style.py` rejects Twente's own course text |
+| **Last updated** | 2026-09-20 - eval harness runs; lane A blocked until B unblocks the data |
 
 ### Stage ladder
 
@@ -186,11 +186,11 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S5-A0` | todo | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
-| `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
-| `S5-A2` | todo | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
-| `S5-A3` | todo | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
-| `S5-A4` | todo | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
+| `S5-A0` | blocked | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
+| `S5-A1` | blocked | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
+| `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
+| `S5-A3` | wip | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
+| `S5-A4` | done (early) | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
 
 **Lane A gate:** [ ] `eval/report/results.md` is committed with real numbers and CIs.
 
