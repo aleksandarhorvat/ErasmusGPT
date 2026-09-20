@@ -14,6 +14,52 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Three real curricula land. Stage 1 closed
+
+**Who:** Person A
+**Stage:** 1 closed, both lanes. Current stage moves to 2, where lane A is already done.
+**Commit:** `[A] land the real twente and epfl curricula`
+**Tasks touched:** `S1-A2` (done), `S6-A1` (wip)
+
+### I edited a file in B's zone, with A's explicit approval
+`scripts/check_style.py` applied the banned-word and sentence-pattern rules to
+`data/curricula/*.json`. Those files quote universities word for word, and
+`docs/03-data-schema.md` says the text is stored as published. Twente's prose broke six
+rules, EPFL's broke eleven, all of it ordinary prospectus English. Editing a university's
+wording to satisfy our style guide would make the data wrong.
+
+The change is four lines: files under `data/curricula/` skip the word and pattern checks.
+**The ASCII check still applies to them**, because `course_uid`s and the eval harness
+depend on ASCII. Every other file is unaffected.
+
+**B: this is your file. Say so if you want it reverted or written differently.** The rule
+itself came from the initial scaffold rather than from anyone's decision, and it had
+never met real scraped data.
+
+### Done
+- `data/curricula/utwente-tcs-bsc.json`: 40 real courses, 2025-2026, replacing the
+  9-course sample. `data/curricula/epfl-cs-msc.json`: 78 courses.
+- The API now serves three programmes: PMF 50, Twente 40, EPFL 78.
+- `eval/report/smoke.md` regenerated against the real Twente catalogue.
+- `data/README.md` updated: no placeholders left.
+
+### What the real data shows, good and bad
+- **Right:** Computer networks -> Network Systems Part 1, 2, 3 at 92, 88, 87 %.
+  Software engineering -> Software Design and Modelling. Against EPFL, Formal languages
+  and automata -> Computational complexity, with Goedel and recursivity third.
+- **Wrong, and worth writing up in S6-A2:** Databases 1 ranks Information Diamond first
+  at 82 % and the actual Databases course third at 53 %. Computer networks against EPFL
+  returns Network machine learning at 96 %, a topical trap rather than an equivalent.
+- **Structural:** the real Twente catalogue has no automata course, so Formal languages
+  and automata gets an answer anyway (Introduction to Artificial Intelligence, 47 %).
+  There is no concept of "no acceptable match" in the contract. Worth raising at the
+  defence, and worth a threshold discussion with B for the UI.
+
+### Next
+- **A:** `S5-A0` pooling, then pre-labelling, which unblocks the whole of stage 5.
+
+---
+
 ## 2026-09-20 - [A] EPFL scraper, and what language costs us
 
 **Who:** Person A

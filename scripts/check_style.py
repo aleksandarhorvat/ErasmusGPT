@@ -23,6 +23,9 @@ EXTRA_FILES = {"Dockerfile", ".env.example", ".gitignore", ".dockerignore", "ngi
 # Allowed non-ASCII, with the reason. Keep this list almost empty.
 ALLOWED_NON_ASCII: set[str] = set()
 
+# Files under this path hold text quoted from universities, not text we wrote.
+QUOTED_SOURCES = "data/curricula"
+
 BANNED_WORDS = [
     "delve", "leverages", "leveraging", "seamless", "seamlessly", "holistic",
     "cutting-edge", "state-of-the-art", "game-changing", "elevate", "empower",
@@ -69,6 +72,11 @@ def check(path: Path) -> list[str]:
         return [f"{path}: not valid UTF-8"]
 
     is_style_doc = path.name in {"check_style.py", "CONTEXT.md"}
+    # Quoted third-party text: scraped course descriptions, stored as published
+    # (docs/03-data-schema.md). The word rules are about prose we write, and editing a
+    # university's own wording to satisfy them would make the data wrong. ASCII still
+    # applies, because course_uids and the eval harness depend on it.
+    is_quoted_source = QUOTED_SOURCES in path.as_posix()
 
     for number, line in enumerate(lines, start=1):
         for char in line:
@@ -78,7 +86,7 @@ def check(path: Path) -> list[str]:
                     f"see CONTEXT.md section 11"
                 )
                 break
-        if is_style_doc:
+        if is_style_doc or is_quoted_source:
             continue
         lowered = line.lower()
         for word in BANNED_WORDS:

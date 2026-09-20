@@ -1,0 +1,1770 @@
+{
+  "programme_id": "epfl-cs-msc",
+  "institution_id": "epfl",
+  "institution_name": "Ecole Polytechnique Federale de Lausanne",
+  "country": "CH",
+  "programme_name": "MSc Computer Science",
+  "level": "master",
+  "language": "en",
+  "total_ects": 120,
+  "academic_year": "2026/2027",
+  "source_url": "https://edu.epfl.ch/studyplan/en/master/computer-science/",
+  "scraped_at": "2026-09-20T10:11:09Z",
+  "courses": [
+    {
+      "code": "COM-401",
+      "title": "Cryptography and security",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course introduces the basics of cryptography. We review several types of cryptographic primitives, when it is safe to use them and how to select the appropriate security parameters. We detail how they work and sketch how they can be implemented. Ancient cryptography : Vigen\u00e8re, Enigma, Kerckhoffs principle, Vernam cipher, Shannon theory Diffie-Hellman cryptography : algebra, Diffie-Hellman, ElGamal, DSA RSA cryptography : number theory, primality, RSA, factoring Elliptic curve cryptography : elliptic curves over a finite field, ECDH, ECIES, ECDSA, pairing Symmetric encryption : block ciphers, stream ciphers, exhaustive search Integrity and authentication : hashing, MAC, AES-CCM, AES-GCM, birthday paradox Public-key cryptography : key lengths, Fujisaki-Okamoto, hybrid encryption, post-quantum cryptography Trust establishment : password-based cryptography, secure communication, trust setups Case studies : TLS, WiFI, bitcoin, EMV, Signal, mobile telephony, Bluetooth, biometric passport",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "cryptography",
+        "encryption",
+        "secure communication"
+      ],
+      "prerequisites": [
+        "CS-250",
+        "MATH-232",
+        "MATH-310"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/cryptography-and-security-COM-401"
+    },
+    {
+      "code": "COM-404",
+      "title": "Information theory and coding",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The mathematical principles of communication that govern the compression and transmission of data and the design of efficient methods of doing so. 1. Mathematical definition of information and the study of its properties. 2. Source coding: efficient representation of message sources. 3. Communication channels and their capacity. 4. Coding for reliable communication over noisy channels. 5. Multi-user communications: multi access and broadcast channels. 6. Lossy source coding : approximate representation of message sources. 7. Information Theory and statistics",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/information-theory-and-coding-COM-404"
+    },
+    {
+      "code": "COM-405",
+      "title": "Mobile networks",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course provides a detailed description of the organization and operating principles of mobile and wireless communication networks, as well as the use of wireless signals for sensing and imaging. The course includes weekly lectures on the below topics, weekly exercise sessions used to help students with the homework problems, weekly lab sessions used to help students on the programming assignments, and hands on tutorials done in class during lecture time. A. There will be homeworks. B. There will be lab assignments on OFDM, MIMO, Wireless Localization, and Wireless Imaging. C. The three hands on tutorials will allow students to program hardware and will cover: How to build your own 5G base station and private 5G Network How to use wirelss signals for sensing and imaging in non-line-of-sight. WIFI & Cellular Security (Tentative.) E. There will be a final exam similar to the homework questions. (Sample exams will be provided) F. Covered Topics (Tentative): Introduction to wireless networks Wireless PHY Layer Techniques MAC (Medium Access Control) Layer Protocols Wi-Fi & Bluetooth Cellular networks (3G, 4G, 5G). Internet of Things (IoT) Networks and Technologies. Multi-Hop Networks, Mesh Networks, and Sensor Networks Routing in Wireless Networks Network Coding Cross Layer Networking Multipath TCP Satellite Networks Wireless Localization Wireless Sensing Wireless Imaging Wireless Security & Privacy",
+      "learning_outcomes": [
+        "Synthesize the way a mobile network operates",
+        "Interpret the behavior of such networks",
+        "Propose evolutions to existing protocols",
+        "Identify weaknesses, bottlenecks and vulnerabilities",
+        "Identify weaknesses and bottlenecks"
+      ],
+      "topics": [
+        "Communication networks",
+        "protocols",
+        "wireless",
+        "IoT",
+        "security"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/mobile-networks-COM-405"
+    },
+    {
+      "code": "COM-406",
+      "title": "Foundations of Data Science",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "We discuss a set of topics that are important for the understanding of modern data science but that are typically not taught in an introduction ML course. In particular we discuss fundamentals ideas and techniques that come from probability, information theory as well as signal processing. This class presents basic concepts of Information Theory and Signal Processing and their relevance to emerging problems in Data Science and Machine Learning. A tentative list of topics covered is : 1. Information Measures 2. Signal Representations 3. Detection and Estimation 4. Multi-arm Bandits 5. Distribution Estimation, Property Testing, and Property Estimation 6. Exponential Families 7. Compression and Dimensionality Reduction 8. Information Measures and Geeralization Error",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Information Theory",
+        "Signal Processing",
+        "Statistical Signal Processing",
+        "Machine Learning",
+        "Data Science"
+      ],
+      "prerequisites": [
+        "COM-300"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/foundations-of-data-science-COM-406"
+    },
+    {
+      "code": "COM-407",
+      "title": "Advanced networks",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This advanced course in computer networks offers an in-depth exploration of how the Internet is designed and operates. Students dive into the architecture of the Internet and gain hands-on understanding of the key protocols that power it. In the lectures, students will learn and understand the main ideas underlying Internet architecture, as well as the various ways computer networks are built and operated today. In the labs, they will gain hands-on experience using Mininet and Zebra (to exercise practical configurations and study IP, OSPF, TCP congestion control, and BGP behavior), along with other tools like Wireshark (to monitor and analyze network traffic). Additionally, students will apply socket programming for both unicast and multicast communications using Python. In particular, the topics covered are: Layer 2: CDMA in the context of Wi-Fi, Switched (full-duplex) Ethernet and STP, VLANs. Layer 2.5: ARP, NDP. Layer 3: Differences between: IPv4 and IPv6 configuration mechanisms (focusing on DHCP and SLAAC), Unicast and multicast (with emphasis on BIER), Routing principles (such as Longest-prefix match, Source and segment routing, SDN flow-based routing, Policy routing (with a focus on OSPF and BGP)); Tunneling: VPN, MPLS, VLANs over IP (similar to Cisco TRILL); NAT: Traditional operation, full-cone and symmetric NATs. Layer 4: The self-clocking nature of TCP, Theory of congestion control, Fairness, Congestion control algorithms (Reno, Cubic, DCTCP, BBR), QUIC (if time allows for it). Application Layer: DNS, Application-layer gateways and proxies (e.g., HTTP, ARP). Important Note: The above-mentioned topics are tentative and will be explored at different depths. In class participation is strongly recommended---there is a strong correlation between students who participate in class and those who get a good grade.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "TCP-IP Computer Networks"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-networks-COM-407"
+    },
+    {
+      "code": "COM-417",
+      "title": "Advanced probability and applications",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In this course, various aspects of probability theory are considered. The first part covers the main theorems in the field (law of large numbers, central limit theorem), while the second part focuses on the theory of martingales and concentration inequalities. - sigma-fields, random variables - probability measures, distributions - probability couplings - independence, convolution - expectation, characteristic function - random vectors and Gaussian random vectors - inequalities, convergences of sequences of random variables - laws of large numbers, applications and extensions - convergence in distribution, central limit theorem and applications - moments and Carleman's theorem - concentration inequalities - conditional expectation - martingales, stopping times - martingale convergence theorems",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "probability theory",
+        "measure theory",
+        "martingales",
+        "convergence theorems"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-probability-and-applications-COM-417"
+    },
+    {
+      "code": "COM-418",
+      "title": "Computers and music",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In this class we will explore some of the fundamental ways in which the pervasiveness of digital devices has completely revolutionized the world of music in the last 40 years, both from the point of view of production and recording, and from the point of view of listening and distribution. review of digital signal processing: discrete-time signals, spectral analysis, digital filters audio measurement standards; A/D and D/A converters; oversampling; sigma-delta audio compression; the MP3 standard digital synthesizers: oscillators, FM synthesis, samplers fundamentals of time-frequency analysis; pitch shifting; time stretching; vocoder music production; equalization, compression, reverb notions of balancing and mastering; the MIDI and VST standards nonlinear system modeling deep learning in audio processing",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "DSP",
+        "computer music",
+        "digital audio"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/computers-and-music-COM-418"
+    },
+    {
+      "code": "COM-440",
+      "title": "Introduction to quantum cryptography",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In this course we discover some cryptographic tasks for which quantum information provides a decisive advantage. In each case we model the task and define security precisely, and then develop the mathematical techniques required to show security. It has been known since the 1980s that the use of quantum information could enable certain cryptographic tasks, such as quantum money or quantum key distribution, that are impossible classically without making computational assumptions. Quantum money: Wiesner's scheme and attacks on it The quantum one-time pad Entanglement and non-local games Quantum key distribution: the BB'84 protocol Ekert's protocol and device independence Two-party cryptography: bit commitment, oblivious transfer, coin-flipping The noisy storage model Quantum encryption Delegated computation",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "COM-309",
+        "CS-308",
+        "PHYS-541",
+        "PHYS-550"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/introduction-to-quantum-cryptography-COM-440"
+    },
+    {
+      "code": "COM-480",
+      "title": "Data visualization",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Understanding why and how to present complex data interactively in an effective manner has become a crucial skill for any data scientist. In this course, you will learn how to design, judge, build and present your own interactive data visualizations. Tentative course schedule Week 1: Introduction to Data visualization Web development Week 2: Javascript Week 3: More Javascript Week 4: Data Data driven documents (D3.js) Week 5: Interaction, filtering, aggregation (UI /UX). Advanced D3 / javascript libs Week 6: Perception, cognition, color Marks and channels Week 7: Designing visualizations (UI/UX) Project introduction Dos and don\u2019ts for data-viz Week 8: Maps (theory) Maps (practice) Week 9: Text visualization Week 10: Graphs Week 11: Tabular data viz Music viz Week 12: Introduction to scientific visualisation Week 13: Storytelling with data / data journalism Creative coding Week 14: Wrap-Up",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Data viz",
+        "visualization",
+        "data science"
+      ],
+      "prerequisites": [
+        "CS-250",
+        "CS-401"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/data-visualization-COM-480"
+    },
+    {
+      "code": "COM-490",
+      "title": "Large-scale data science for real-world data",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This hands-on course covers tools and methods used by data scientists, from researching solutions to scaling prototypes on Spark clusters. Students engage with the full data engineering and data science pipeline, from data acquisition to extracting insights, applied to real-world problems. 1. Crash Course in Python for Data Science Use essential Python libraries for data manipulation, visualization, and introductory machine learning; get hands-on with development environments, collaborate via version control tools, work with interactive notebooks, and build workflows using real-world datasets. 2. Distributed Data Wrangling at Scale Understand distributed data processing platforms spanning multiple servers and storage systems; build and optimize data lakes using efficient storage formats; perform large-scale Extract-Transform-Load (ETL) workflows; and explore and transform massive datasets for batch processing. 3. Distributed Processing with Spark Apply advanced data engineering techniques using Spark; process and transform large datasets; train machine learning models in distributed pipelines; and optimize performance through efficient execution strategies. 4. Real-Time Big Data Processing Learn real-time and event-driven processing concepts; design scalable streaming pipelines integrated with batch systems; and perform live inference on streaming data under dynamic conditions. 5. Final Project (Assignment) - Integration and Application Design a comprehensive data science solution combining batch and streaming workflows; integrate methods from previous modules; apply best practices for scalable processing and deployment; and demonstrate full-cycle implementation on a real-world-inspired problem.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Data Engineering",
+        "Data Lakes",
+        "Machine Learning Operations (MLOps)",
+        "Distributed Computing",
+        "Real-Time Data Stream Processing",
+        "Scalable Data Processing",
+        "Large-Scale Data Analysis",
+        "Predictive Modeling",
+        "Apache Spark",
+        "Hadoop",
+        "Kafka."
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/large-scale-data-science-for-real-world-data-COM-490"
+    },
+    {
+      "code": "COM-501",
+      "title": "Advanced cryptography",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course reviews some failure cases in public-key cryptography. It introduces some cryptanalysis techniques. It also presents fundamentals in cryptography such as interactive proofs. Finally, it presents some techniques to validate the security of cryptographic primitives. The cryptograhic zoo : definitions, cryptographic primitives, math, algorithms, complexity Cryptographic security models: security notions for encryption and authentication, game reduction techniques, RSA and Diffie-Hellman security notions Public-key cryptanalysis: side channels, low RSA exponents, discrete logarithm, ElGamal signature Interactive proofs: interactive systems, zero-knowledge, Sigma-protocols, Schnorr and Fiat-Shamir protocols Symmetric-key cryptanalysis: differential and linear cryptanalysis, hypothesis testing, decorrelation Proof techniques: random oracles, leftover-hash lemma, Fujisaki-Okamoto transform, generic group model",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "cryptography",
+        "cryptanalysis",
+        "interactive proof",
+        "security proof"
+      ],
+      "prerequisites": [
+        "COM-401"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-cryptography-COM-501"
+    },
+    {
+      "code": "COM-502",
+      "title": "Dynamical system theory for engineers",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Linear and nonlinear dynamical systems are found in all fields of science and engineering. After a short review of linear system theory, the class will explain and develop the main tools for the qualitative analysis of nonlinear systems, both in discrete-time and continuous-time. Introduction: Dynamics of linear and non linear systems. Definitions; Unicity of a solution; Limit Sets, Attractors. Linear Systems: Solutions; Stability of autonomous systems, Geometrical analysis, connection with frequency domain analysis. Nonlinear Systems: Solutions; Examples. Large-scale notions of stability : Lyapunov functions. Hamiltonian systems, gradient systems. Small-scale notions of stability : Linearization; stability and basin of attraction of an equilibrium point, stability of periodic solutions, Floquet Multipliers. Graphical methods for the analysis of low-dimensional systems. Structural stability, Bifurcation theory. Introduction to chaotic systems : Lyapunov exponents, computation using ergodic theory, period doubling route to chaos, topological conjugacy. Time permitting: chosen advanced topic (e.g, a topic in stochastic approximation, mean-field approach, optimization, network dynamics, ...). The class is methodology-driven. It may present some limited examples of applications, but it is not application-driven.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Dynamical Systems",
+        "Attractors",
+        "Equilibrium point",
+        "Limit Cycles",
+        "Stability",
+        "Lyapunov Functions",
+        "Bifurcations",
+        "Lyapunov exponents",
+        "Measure Theory."
+      ],
+      "prerequisites": [
+        "MATH-231",
+        "MATH-232",
+        "MATH-234"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/dynamical-system-theory-for-engineers-COM-502"
+    },
+    {
+      "code": "COM-506",
+      "title": "Seminar on applied cryptography",
+      "ects": 3.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This seminar introduces the participants to the current trends, problems, and methods in the area of communication security. We will look at today's mot popular security protocols and new kinds of protocols, techniques, and problems that will play an emerging role in the future. Also, the seminar will cover methods to model and analyze such security protocols. This course will be held as a seminar, in which the students actively participate. The talks will be assigned in the first meeting to teams of students, and each team will have to give a 30 minutes talk, react to other students' questions, and write a 3-4 pages summary of their talk.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Network Security",
+        "Security Protocols",
+        "Cryptography"
+      ],
+      "prerequisites": [
+        "COM-301",
+        "COM-401"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/seminar-on-applied-cryptography-COM-506"
+    },
+    {
+      "code": "COM-512",
+      "title": "Networks out of control",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The goal of this class is to acquire mathematical tools and engineering insight about networks whose structure is random, as well as learning and control techniques applicable to such network data. Random graph models: Erd\u00f6s-Renyi graphs, random regular graphs, random geometric graphs, small worlds, stochastic block model, power-laws and scale-free graphs. Learning graphs from data: centrality metrics, embeddings, network alignment, network motifs. Processes on graphs: bond/site percolation, bootstrap percolation, epidemics, navigation.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Random graphs",
+        "network data",
+        "machine learning",
+        "graph processes."
+      ],
+      "prerequisites": [
+        "COM-300"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/networks-out-of-control-COM-512"
+    },
+    {
+      "code": "COM-516",
+      "title": "Markov chains and algorithmic applications",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The study of random walks finds many applications in computer science and communications. The goal of the course is to get familiar with the theory of random walks, and to get an overview of some applications of this theory to problems of interest in communications, computer and network science. Part 1: Markov chains (~6 weeks): - basic properties: irreducibility, periodicity, recurrence/transience, stationary and limiting distributions, - ergodic theorem: coupling method - detailed balance - convergence rate to the equilibrium, spectral gap, mixing times - cutoff phenomenon Part 2: Sampling (~6 weeks) - classical methods, importance and rejection sampling - Markov Chain Monte Carlo methods, Metropolis-Hastings algorithm, Glauber dynamics, Gibbs sampling - applications: function minimization, coloring problem, satisfiability problems, Ising models - coupling from the past and exact simulation",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "random walks",
+        "stationarity",
+        "ergodic",
+        "convergence",
+        "spectral gap",
+        "mixing time",
+        "sampling",
+        "Markov chain Monte Carlo",
+        "coupling from the past"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/markov-chains-and-algorithmic-applications-COM-516"
+    },
+    {
+      "code": "CS-401",
+      "title": "Applied data analysis",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course teaches the basic techniques, methodologies, and practical skills required to draw meaningful insights from a variety of data, with the help of common software tools from the data science world (pandas, scikit-learn, etc.) Thanks to modern software tools that allow to easily process and analyze data at scale, we are now able to extract invaluable insights from the vast amount of data generated daily. As a result, both the business and scientific world are undergoing a revolution which is fueled by one of the most sought after job profiles: the data scientist. This course covers the fundamental steps of the data science pipeline: Data wrangling Data acqusition (scraping, crawling, parsing, etc.) Data manipulation, array programming, dataframes The many sources of data problems (and how to fix them): missing data, incorrect data, inconsistent representations Data quality testing with crowdsourcing Data interpretation Statistics in practice (distribution fitting, statistical significance, etc.) Working with \"found data\" (design of observational studies, regression analysis) Machine learning in practice (supervised and unsupervised, feature engineering, evaluation, etc.) Text mining: preprocessing steps, vector space model, topic models Social network analysis (properties of real networks, working graph data, etc.) Data visualization Introduction to different plot types (1, 2, and 3 variables), layout best practices, network and geographical data Visualization to diagnose data problems, scaling visualization to large datasets, visualizing uncertain data Reporting Results reporting, infographics How to publish reproducible results The students will embark on a semester-long project, split in teams of 3-4 students. In the project, students propose and execute analyses of a real-world dataset, which will require creativity and the application of the tools encountered in the course. The outcome of this team effort will be a project portfolio that will be made public (and available as open source). At the end of the semester, students will take a 3-hour final exam in a classroom with their own computer, where they will be asked to complete a data analysis pipeline (both with code and extensive comments) on a dataset they have never worked with before.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "data science",
+        "data analysis",
+        "data mining",
+        "machine learning"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/applied-data-analysis-CS-401"
+    },
+    {
+      "code": "CS-411",
+      "title": "Digital education",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course addresses the relationship between specific technological features and the learners' cognitive processes. It also covers the methods and results of empirical studies: do student actually learn due to technologies? This iteration will also have a focus on AI for teaching and learning. Learning theories and learning processes Types of learning technlogies Instructional design: methods, patterns and principles Effectiveness of learning technologies Methods for empirical research AI/Generative AI in education",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "learning",
+        "pedagogy",
+        "teaching",
+        "AI"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/digital-education-CS-411"
+    },
+    {
+      "code": "CS-412",
+      "title": "Software security",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course focuses on software security fundamentals, secure coding guidelines and principles, and advanced software security concepts. Students learn to assess and understand threats, learn how to design and implement secure software systems, and get hands-on experience with security pitfalls. Software running on current systems is exploited by attackers despite many deployed defence mechanisms and best practices for developing new software. In this course students will learn about current security threats, attack vectors, and defence mechanisms on current systems. The students will work with real world problems and technical challenges of security mechanisms (both in the design and implementation of programming languages, compilers, and runtime systems). Secure software lifecycle: design, implementation, testing, and deployment Basic software security principles Reverse engineering : understanding code Security policies: Memory and Type safety Software bugs and undefined behavior Attack vectors: from flaw to compromise Runtime defense: mitigations Software testing: fuzzing and sanitization Focus topic: Web security Focus topic: Mobile security Focus topic: AI security Note that topics are tentative and will be explored at different depths. Material discussed in previous years is an indication of what may be covered but not a guarantee as software security is a fast moving target. In class participation is strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Software security",
+        "mitigation",
+        "software testing",
+        "sanitization",
+        "fuzzing"
+      ],
+      "prerequisites": [
+        "COM-301"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/software-security-CS-412"
+    },
+    {
+      "code": "CS-420",
+      "title": "Advanced compiler construction",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Students learn several implementation techniques for modern functional and object-oriented programming languages. They put some of them into practice by developing key parts of a compiler and run time system for a simple functional programming language. Part 1: implementation of high-level concepts functional languages: closures, continuations, tail call elimination, object-oriented languages: object layout, method dispatch, membership test. Part 2: optimizations compiler intermediate representations (RTL, SSA, CPS), inlining and simple optimizations, register allocation. Part 3: run time support interpreters and virtual machines, memory management (including garbage collection).",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Compilation",
+        "programming languages",
+        "functional programming languages",
+        "object-oriented programming languages",
+        "code optimization",
+        "register allocation",
+        "garbage collection",
+        "virtual machines",
+        "interpreters",
+        "Scala."
+      ],
+      "prerequisites": [
+        "CS-320"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-compiler-construction-CS-420"
+    },
+    {
+      "code": "CS-421",
+      "title": "Machine learning for behavioral data",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Computer environments such as educational games, interactive simulations, and web services provide large amounts of data, which can be analyzed and serve as a basis for adaptation. This course will cover the core methods of user modeling and personalization, with a focus on educational data. The users of computer environments such as intelligent tutoring systems, interactive games, and web services are often very heterogeneous and therefore it is important to adapt to their specific needs and preferences. This course will cover the core methods of adaptation and personalization, with a focus on educational data. Specifically we will discuss approaches to the task of accurately modeling and predicting human behavior within a computer environment. Furthermore, we we will also discuss data mining techniques with the goal to gain insights into human behavior. We will cover the theories and methodologies underlying the current approaches and then also look into the most recent developments in the field. Cycle of adaptation : representation, prediction, intervention (e.g. recommendation) Data Processing and Interpretation (missing data, feature transformations, distribution fitting) Performance evaluation (cross-validation, error measures, statistical significance, overfitting) Representation & Prediction (probabilistic graphical models, recurrent neural networks, logistic models, clustering-classification approaches) Recommendation (collaborative filtering, content-based recommendations, multi-armed bandits) Ethics in ML/AI (fairness, explainability)",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/machine-learning-for-behavioral-data-CS-421"
+    },
+    {
+      "code": "CS-428",
+      "title": "Interactive theorem proving",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "A hands-on introduction to interactive theorem proving, computer-checked mathematics, compiler verification, proofs as programs, dependent types, and proof automation. Come learn how to write computer-checked proofs and certified bug-free code! Sample topics: Intro to interactive theorem proving (Rocq, logic, higher-order functions, tactics) Functional programming (inductive types and fixpoints) Structural induction (data structures and verified algorithms) Interpreter-based program semantics (intro to compiler verification) Inductive relations (predicates, rule induction) Automation and tactics I (bottom-up reasoning and logic programming) Operational program semantics (small-and big-step semantics) Program logics (hoare triples) Automation and tactics II (top-down reasoning) Type systems (Simply-typed lambda calculus) Dependent types and equality proofs Automation and tactics III (proofs by reflection) Real-world theorem proving (various topics)",
+      "learning_outcomes": [
+        "Implement purely-functional algorithms in an ITP language",
+        "Translate informal requirements about software into precise mathematical properties",
+        "Plan and carry out mechanized proofs in a theorem prover (e.g. maths, algorithms, compilers, type systems)",
+        "Automate repetitive proof tasks by crafting simple custom decision procedures"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/interactive-theorem-proving-CS-428"
+    },
+    {
+      "code": "CS-433",
+      "title": "Machine learning",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Machine learning methods are becoming increasingly central in many sciences and applications. In this course, fundamental principles and methods of machine learning and AI will be introduced, analyzed and practically implemented. Basic regression and classification concepts and methods: Linear models, overfitting, linear regression, Ridge regression, logistic regression, k-NN, SVMs and kernel methods Fundamental concepts: cost-functions and optimization, cross-validation and bias-variance trade-off, curse of dimensionality. Neural Networks: Representation power, backpropagation, activation functions, CNN, transformer models, regularization, data augmentation, dropout Unsupervised learning: k-means clustering, gaussian mixture models and the EM algorithm. Basics of self-supervised learning Dimensionality reduction: PCA and matrix factorization, word embeddings Advanced methods: Adversarial learning, Generative adversarial networks, LLMs",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Machine learning",
+        "AI",
+        "pattern recognition",
+        "deep learning",
+        "neural networks",
+        "data mining",
+        "knowledge discovery",
+        "algorithms"
+      ],
+      "prerequisites": [
+        "CS-250",
+        "MATH-232"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/machine-learning-CS-433"
+    },
+    {
+      "code": "CS-438",
+      "title": "Decentralized systems engineering",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "A decentralized system is one that works when no single party is in charge or fully trusted. This course teaches decentralized systems principles while guiding students through the engineering of their own decentralized system featuring messaging, file sharing, encryption, and blockchain concepts. Addressing, Forwarding, Routing. Peer-to-peer communication. Information gossip. UseNet: technical, security, and social lessons. Randomized rumor-mongering and anti-entropy algorithms. Trust and Reputation. Authorities, trust networks. Sybil attacks and defenses. Naming and search. Request flooding. Hierarchical directories, landmark routing. Self-certifying identities. Distributed hash tables. Distributed consensus, distributed ledgers (blockchains), and cryptocurrencies. Anonymous Communication. Onion routing, mix networks. Dining cryptographers. Voting, verifiable shuffles, homomorphic encryption. Anonymous disruption. Fireproofing Alexandria: Decentralized Storage. Replication. Parity, erasure coding. Renewal. Digital preservation. Content Distribution. Opportunistic caching (FreeNet). Content integrity: hash trees, hash file systems. Convergent encryption. Swarming downloads: BitTorrent. Free-riding, incentives. Gaining perspective. Spam, malicious content. Review/moderation and reputation systems. Leveraging social networks (Peerspective). Balancing local and global viewpoints. Decentralized Collaboration. Network file systems, version management. Consistency. Consistency Models. Disconnected operation, eventual consistency, conflict resolution. Distributed Consensus. Paxos. Accountability (PeerReview). Byzantine fault tolerance. Mobile Code. Smart contract systems. Privacy: trusted computing, fully homomorphic encryption. Decentralized virtual organizations. Securing Decentralized Systems: threat modelling, use of threshold cryptosystems. Going into production: Quality assurance, chaos engineering and operations.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "distributed systems",
+        "decentralized systems",
+        "security",
+        "privacy",
+        "anonymity",
+        "cryptography",
+        "gossip",
+        "consensus",
+        "swarming",
+        "blockchain",
+        "cryptocurrency"
+      ],
+      "prerequisites": [
+        "COM-301",
+        "CS-202"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/decentralized-systems-engineering-CS-438"
+    },
+    {
+      "code": "CS-439",
+      "title": "Optimization for machine learning",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course teaches an overview of modern optimization methods, for applications in machine learning and data science. In particular, scalability of algorithms to large datasets will be discussed in theory and in implementation. This course teaches an overview of modern optimization methods, for applications in machine learning and data science. In particular, scalability of algorithms to large datasets will be discussed in theory and in implementation. Fundamental Contents: Convexity, Gradient Methods, Proximal algorithms, Stochastic and Online Variants of mentioned methods, Coordinate Descent Methods, Subgradient Methods, Non-Convex Optimization, Frank-Wolfe, Accelerated Methods, Primal-Dual context and certificates, Lagrange and Fenchel Duality, Second-Order Methods, Quasi-Newton Methods, Gradient-Free and Zero-Order Optimization. Advanced Contents: Non-Convex Optimization: Convergence to Critical Points, Saddle-Point methods, Alternating minimization for matrix and tensor factorizations Parallel and Distributed Optimization Algorithms, Synchronous and Asynchronous Communication Lower Bounds On the practical side, a graded group project allows to explore and investigate the real-world performance aspects of the algorithms and variants discussed in the course.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Optimization",
+        "Machine learning"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/optimization-for-machine-learning-CS-439"
+    },
+    {
+      "code": "CS-440",
+      "title": "Advanced computer graphics",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course covers advanced 3D graphics techniques for realistic image synthesis. Students will learn how light interacts with objects in our world, and how to recreate these phenomena in a computer simulation to create synthetic images that are indistinguishable from photographs. This is a project-based course: students will initially receive a basic software package that lacks most rendering-related functionality. Over the course of the semester, we will discuss a variety of concepts and tools including the basic physical quantities, how light interacts with surfaces, and how to solve the resulting mathematical problem numerically to create realistic images. Advanced topics include participating media, material models for sub-surface light transport, and Markov Chain Monte Carlo Methods. Each major topic is accompanied by an assignment so that students can implement solution algorithms and obtain practical experience with these techniques within their own software framework. Towards the end of the course, students will realize a self-directed final project that extends their rendering software with additional features of their own choosing. The objective of the final project is to create a single image of both technical and artistic merit that is entered into a rendering competition and judged by an independent panel of computer graphics experts.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-computer-graphics-CS-440"
+    },
+    {
+      "code": "CS-442",
+      "title": "Computer vision",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Computer Vision aims at modeling the world from digital images acquired using video or infrared cameras, and other imaging sensors. We will focus on images acquired using digital cameras. We will introduce basic processing techniques and discuss their field of applicability. I ntroduction History of Computer Vision Human vs Machine Vision Image formation Extracting 2D Features Contours Texture Regions 3D Shape Recovery From one single image From multiple images",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/computer-vision-CS-442"
+    },
+    {
+      "code": "CS-448",
+      "title": "Sublinear algorithms",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In this course we will define rigorous mathematical models for computing on large datasets, cover main algorithmic techniques that have been developed for sublinear (e.g. faster than linear time) data processing. We will also discuss limitations inherent to computing with constrained resources. The tentative list of topics is: Streaming: given a large dataset as a stream, how can we approximate its basic properties using a very small memory footprint? Examples that we will cover include statistical problems such as estimating the number of distinct elements in a stream of data items, finding heavy hitters, frequency moments, as well as graphs problems such as approximating shortest path distances, maximum matchings etc.; Sketching: what can we learn about the input from a few carefully designed measurements (i.e. a `sketch') of the input, or just a few samples of the input? We will cover several results in sparse recovery and property testing that answer this question for a range of fundamental problems; Sublinear runtime: which problems admit solutions that run faster than it takes to read the entire input? We will cover sublinear time algorithms for graph processing problems, nearest neighbor search and sparse recovery (including Sparse FFT); Communication: how can we design algorithms for modern distributed computation models (e.g. MapReduce) that have low communication requirements? We will discuss graph sketching, a recently developed approach for designing low communication algorithms for processing dynamically changing graphs, as well as other techniques.",
+      "learning_outcomes": [],
+      "topics": [
+        "streaming",
+        "sketching",
+        "sparse recovery",
+        "sublinear algorithms"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/sublinear-algorithms-CS-448"
+    },
+    {
+      "code": "CS-450",
+      "title": "Algorithms II",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "A first graduate course in algorithms, this course assumes minimal background, but moves rapidly. The objective is to learn the main techniques of algorithm analysis and design, while building a repertory of basic algorithmic solutions to problems in many domains. Algorithm analysis techniques: worst-case and amortized, average-case, randomized, competitive, approximation. Basic algorithm design techniques: greedy, iterative, incremental, divide-and-conquer, dynamic programming, randomization, linear programming. Examples from graph theory, linear algebra, geometry, operations research, and finance.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/algorithms-ii-CS-450"
+    },
+    {
+      "code": "CS-451",
+      "title": "Distributed algorithms",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Computing is nowadays distributed over several machines, in a local IP-like network, a cloud or a P2P network. Failures are common and computations need to proceed despite partial failures of machines or communication links. This course will study the foundations of reliable distributed computing. Reliable broadcast Causal Broadcast Total Order Broadcast Consensus Non-Blocking Atomic Commit Group Membership, View Synchrony Terminating Reliable Broadcast Shared Memory in Message Passing Systems Byzantine Fault Tolerance Self Stabilization Population protocols (models of mobile networks) Bitcoin, Blockchain Distributed Machine Learning Gossip",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Distributed algorithms",
+        "checkpointing",
+        "replication",
+        "consensus",
+        "atomic broadcast",
+        "ditributed transactions",
+        "atomic commitment",
+        "2PC",
+        "Machine Learning"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/distributed-algorithms-CS-451"
+    },
+    {
+      "code": "CS-453",
+      "title": "Concurrent computing",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "With the advent of modern architectures, it becomes crucial to master the underlying algorithmics of concurrency. The objective of this course is to study the foundations of concurrent algorithms and in particular the techniques that enable the construction of robust such algorithms. Model of a parallel system Multicore and multiprocessors architecture Processes and objects Safety and liveness Parallel programming Automatic parallelism Mutual exclusion and locks Non-blocking data structures Register Implementations Safe, regular and atomic registers Counters General and limited operations Atomic counters and snapshots Hierarchy of objects The FLP impossibility The consensus number Universal constructions Transactional memories Transactional algorithms Opacity and obstruction-freedom Anonymous computing Fault-tolerant shared-memory computing",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Concurrency",
+        "parallelism",
+        "algorithms",
+        "data structures"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/concurrent-computing-CS-453"
+    },
+    {
+      "code": "CS-455",
+      "title": "Topics in theoretical computer science",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The students gain an in-depth knowledge of several current and emerging areas of theoretical computer science. The course familiarizes them with advanced techniques, and develops an understanding of fundamental questions that underlie some of the key problems of modern computer science. This course develops a broad toolbox of techniques for designing and analysing algorithms for difficult combinatorial optimization problems. Rather than treating each technique in isolation, the course studies them through a common running example, set cover, making it possible to compare different algorithmic ideas, analyses, and guarantees within a clean and unified framework. Students will learn not only how these methods work, but also how to recognize when they are useful and how to transfer them to more complex problems. Topics may include greedy algorithms and charging arguments; local search and non-oblivious potential functions; linear-programming relaxations and integrality gaps; deterministic and randomized rounding, including threshold rounding and exponential-clock techniques; structural integrality results, such as total unimodularity and methods based on VC dimension; linear-programming duality; dual fitting, primal-dual algorithms, and complementary slackness; multiplicative-weights methods; and online algorithms in adversarial and random-order models. The course will also cover approximation-preserving reductions and hardness of approximation. In particular, we will introduce the PCP theorem and explain how PCP-based reductions are used to prove limits on the approximation guarantees achievable by polynomial-time algorithms. The emphasis is on the main ideas underlying each technique, on rigorous approximation and competitive guarantees, and on understanding the relationships between apparently different algorithmic approaches. Set cover serves as the principal running example, but the techniques are intended as reusable tools for a much wider range of optimization problems. The planned material follows the organization of the developing course monograph, including combinatorial algorithms, LP rounding, duality, online algorithms, and hardness of approximation.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Approximation Algorithms",
+        "Combinatorial Optimization",
+        "Greedy Algorithms",
+        "Local Search",
+        "Linear Programming",
+        "Randomized Rounding",
+        "LP Duality",
+        "Primal-Dual Algorithms",
+        "Multiplicative Weights",
+        "Online Algorithms",
+        "PCP Theorem",
+        "Hardness of Approximation",
+        "Set Cover"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/topics-in-theoretical-computer-science-CS-455"
+    },
+    {
+      "code": "CS-457",
+      "title": "Geometric computing",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course will cover mathematical concepts and efficient numerical methods for geometric computing. We will explore the beauty of geometry and develop algorithms to simulate and optimize 2D and 3D geometric models with an emphasis towards computational design for digital fabrication. - Discrete geometric models for curves and surfaces - Notions of differential geometry - Forward and inverse design optimization methods - Shape Optimization - Overview of modern digital fabrication technology",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "geometry",
+        "shape modeling",
+        "optimization",
+        "digital fabrication"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/geometric-computing-CS-457"
+    },
+    {
+      "code": "CS-459",
+      "title": "Foundations of probabilistic proofs",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Probabilistic proof systems (eg PCPs and IPs) have had a tremendous impact on theoretical computer science, as well as on real-world secure systems. They underlie delegation of computation protocols and hardness of approximation. This course covers the foundations of probabilistic proof systems. Proofs are at the foundations of mathematics, and verifying the correctness of a mathematical proof is a fundamental computational task. (The P versus NP problem, which deals precisely with the complexity of proof verification, is one of the most important open problems in all of mathematics.) The complexity-theoretic study of proof verification has led to new notions of mathematical proofs, such as Interactive Proofs, Probabilistically Checkable Proofs, and others. Probabilistic proofs are a powerful tool for proving hardness of approximation results, and are an essential building block to achieve delegation of computation (protocols that enable super fast verification of long computations, such as SNARKs). Via these applications, probabilistic proofs have had a tremendous impact on theoretical computer science and, more recently, are playing an exciting role in applied cryptography, computer security, and blockchain technology (e.g., they help secure billions of dollars in transactionds per day). This course provides an introduction to probabilistic proofs and the beautiful mathematics underlying them. Covered topics include arithmetization, the sumcheck protocol, zero knowledge, doubly-efficient interactive proofs, linearity testing, low-degree testing, proof composition, succinct verification, and more. This courses assumes basic familiarity with algorithms (asymptotic notation and analysis of algorithms), complexity theory (computation models and simple complexity classes), and some algebra (finite fields and their properties).",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/foundations-of-probabilistic-proofs-CS-459"
+    },
+    {
+      "code": "CS-460",
+      "title": "Systems for data management and data science",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This is a course for students who want to understand modern large-scale data analysis systems and database systems. The course covers fundamental principles for understanding and building systems for managing and analyzing large amounts of data. It covers a wide range of topics and technologies. Topics include large-scale data systems design and implementation, and specifically : Distributed data management systems Data management : locality, accesses, partitioning, replication Modern storage hierarchies Query optimization, database tuning Transaction management Data structures : File systems, Key-value stores, DBMS Consistency models Large-scale data analytics infrastructures Parallel Processing Data stream and graph processing Note that the topics listed are tentative and may be covered at different levels of depth. Material discussed in previous editions of the course provides an indication of what may be covered, but does not constitute a guarantee, as systems for systems for data management and data science, technologies, and practices continue to evolve rapidly. Active participation in class and completion of the course projects/labs are strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "CS-107",
+        "CS-202",
+        "CS-214",
+        "CS-300"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/systems-for-data-management-and-data-science-CS-460"
+    },
+    {
+      "code": "CS-461",
+      "title": "Foundation models and generative AI",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course covers the principles, architectures, and applications of foundation models and generative AI, including generative methods, tokenization, multi-modal learning, adaptation, prompting, and their use in reasoning, decision-making, and scientific domains. This course introduces the principles, methods, and applications of foundation models and generative AI, i.e., two areas that increasingly shape the frontiers of machine learning. Foundation models are large-scale models pretrained on broad and diverse data, capable of adapting to a wide range of downstream tasks across modalities. While not all foundation models are generative, many leverage generative modeling techniques, such as autoregressive prediction, variational inference, diffusion processes, and flow-based transformations, to learn expressive representations and enable open-ended generation. The course begins with the core generative model families, covering their objectives, mathematical foundations, and applications in language, vision, and scientific domains. It then transitions to the design and scaling of foundation models, focusing on tokenization across modalities, architectural choices, and training strategies. Students will explore multi-modal learning, prompting, adaptation (e.g. fine-tuning, test-time training), and the role of reinforcement learning in aligning model behavior with desired outcomes. Throughout, the course highlights how foundation models and generative AI increasingly intersect, particularly in the development of world models, where learned generative representations support simulation, planning, and decision-making. Through lectures, assignments, and hands-on exercises, students will gain both theoretical and practical understanding of the foundations, capabilities, and frontiers of generative and foundation models, and their growing impact across scientific and engineering domains.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "foundation models",
+        "generative AI",
+        "multi-modal learning"
+      ],
+      "prerequisites": [
+        "CS-233",
+        "CS-433"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/foundation-models-and-generative-ai-CS-461"
+    },
+    {
+      "code": "CS-462",
+      "title": "Programming language foundations",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course provides an introduction to the theory of programming languages, with an emphasis on language design and formal semantics. Students will learn how to formalize common programming constructs using operational, denotational, and axiomatic models; to prove properties about programs using language-based reasoning tools; and to apply these ideas in the design of a new domain-specific language. Note that the list of topics is tentative and different topics will be explored at different levels of detail. In class participation is strongly recommended. Introduction and Mathematical Preliminaries Coures overview and motivation; sets, relations, functions, induction, etc. Operational Semantics Large and small-step semantics; evaluation rules; proofs by induction. Denotational Semantics Relational models; fixpoints; relationship to operational semantics Axiomatic Semantics Partial and total correctness; Hoare logic; soundness and relative completeness Imperative Features Pointers and heaps; separation logic Lambda Calculus Syntax and semantics; substitution; encodings; fixed-point combinators Type Systems Typing rules; type soundness; normalization Polymorphism System F; type inference; relational parametricity Continuations Continuation-passing style; exceptions and control operators; compilation Effects Monads, effect handlers Relational Reasoning Program equivalence; algebraic methods; relational logics Concurrency Interleaving semantics; message-passing; bisimulation Domain-Specific Languages Case studes from selected domains (e.g., databases, graphics, networking, etc.) Victory Lap Project presentations; research in programming languages",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/programming-language-foundations-CS-462"
+    },
+    {
+      "code": "CS-463",
+      "title": "Hardware-software co-design",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course offers a deep dive into the architecture and programming of modern computing systems, moving beyond general-purpose CPUs to explore how hardware and software are co-designed for maximum efficiency. Note : This is a hands-on, implementation-focused class where students will transition from theoretical performance modeling to programming specilized hardware. Serveral of the course block will be based on the textbook \"Efficient Processing of Deep Neural Networks (Synthesis Lectures on Computer Architecture)\" by Vivienne Sze & al. Tentative syllabus (up to reordering; a subset of bullet points within each block might be selected from year to year) Block 0 : Principles of Hardware-Software codesign : Speed of light, Roofline analysis, Arithmetic intensity Little's law Taxonomy of parallelisms Custom datatypes (dynamic range, precision, quantitative benefits of quantization) Block 1 : GPU Architecture (multi-level parallelism and integrated accelerators) GPU pseudo-ISAS (PTX) Compilation challenges Divergence Explicit management of memory hierarchy Practical GPU programming Kernel fusion (FlashAttention) Static dataflow graphs on a GPU Block 2 : Systolic Architectures Systolically computable functions (theory), space-time mapping GEMM : Input, Weight, Output stationary dataflows Architecture (0-D + 1-D + 2-D systolic units + data orchestrators) Kernel fusion on systolic architectures Low-level programming for a TPU-like machine Block 3 : Spatial architectures BSP paradigm Programming around the NoC Hypergraph partitioning Block 4 : Sparsity Sparse matrix multipliction, graph analytics, recommendation systems Metadata representation Memory amplification and sort reduce Historical dataflow machines and modern reincarnation Block 5 : Compilation challenges and techniques Domain space exploration : space of loop nest reordering \"Algorithm vs Mapping\" MILP for DSL compilers Simple DSL \"JIT\"s Egraphs Decoupled languages (Halide) Tiling languages (Triton, tilelang, cuTILE MLIR Note that topics are tentative and will be explored at different depths. In class participation is strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "CS-173",
+        "CS-200",
+        "CS-214",
+        "CS-320"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/hardware-software-co-design-CS-463"
+    },
+    {
+      "code": "CS-464",
+      "title": "Human-centered security and privacy",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Safeguarding security, privacy, and online safety are critical sociotechnical challenges that require integrating computing and social science. This course introduces fundamentals of human-centered computer security and privacy while drawing on novel research about emerging threats to online safety. This course will investigate computer security and privacy from a human-centered perspective. Students will learn about core security and privacy technologies, societal and ethical challenges in online safety, and how to effectively study people's attitudes, opinions, and behaviors. Weeks 1-2: defintions of security, privacy, usability Weeks 3-5: usable authentification, privacy and online advertising; running and evaluating user studes Weeks 6-8: equity and inclusion in S&P; societal and ethical challenges in research Weeks 9-11: safety on social media, online threats; tools, interventions, and eduction Weeks 12-14: Emerging technologies, including smart devices, VR/MR, AI Note that topics are tentative and will be explored at different depths. In class participation is strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/human-centered-security-and-privacy-CS-464"
+    },
+    {
+      "code": "CS-470",
+      "title": "Advanced computer architecture",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course explores techniques for exploiting instruction-level parallelism both statically and dynamically. It also addresses the generation of hardware accelerators from programming languages and investigates security issues related to microarchitectural features, including side-channel attacks. Pushing processor performance to its limits: Principles of Instruction Level Parallelism (ILP) Register renaming techniques Prediction and speculation Simultaneous multithreading VLIW and compiler techniques for ILP Dynamic binary translation Domain specific architectures and accelerators: Specificities of embedded vs. general computing processors High-Level Synthesis and accelerators Hardware security: Information leakage through the microarchitecture Trusted Execution Environments Physical side-channel attacks",
+      "learning_outcomes": [
+        "Design strategies to exploit instruction level parallelism in processors.",
+        "Contrast static and dynamic techniques for instruction level parallelism.",
+        "Design effective processor (micro-)architectures for which efficient compilers can be written.",
+        "Develop hardware accelerators competitive to best commercial processors",
+        "Defend against security threats based on microarchitectural processor features"
+      ],
+      "topics": [
+        "Processors",
+        "Instruction Level Parallelism",
+        "Systems-on-Chip",
+        "Embedded Systems",
+        "High-Level Synthesis",
+        "Hardware Security."
+      ],
+      "prerequisites": [
+        "CS-200"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-computer-architecture-CS-470"
+    },
+    {
+      "code": "CS-471",
+      "title": "Advanced multiprocessor architecture",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Multiprocessors are basic building blocks for all computer systems. This course covers the architecture and organization of modern multiprocessors, prevalent accelerators (e.g., GPU, TPU), and datacenters. It includes a research project on multiprocessors and post-Moore era datacenters. Methodology, Metrics, and Evaluation Parallel Software Construction Cache Coherence Memory Ordering Manycore Caches GPUs and Multithreading Interconnects DRAM Caches Cloud Applications and Workloads Cloud-Native Servers Cloud-Native CPUs Cloud-Native Accelerators AI Accelerators Near-memory Computing Cloud-Native Memory Cloud-Native Network Sustainable Datacenter Architectures",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-multiprocessor-architecture-CS-471"
+    },
+    {
+      "code": "CS-472",
+      "title": "Design technologies for integrated systems",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Hardware compilation is the process of transforming specialized hardware description languages into circuit descriptions, which are iteratively refined, detailed and optimized. The course presents algorithms, tools and methods for hardware compilation and logic synthesis. The course will present the most outstanding features of hardware compilation, as well as the techniques for optimizing logic representations and networks. The course gives a novel, uptodate view of digital circuit design. Practical sessions and the projecct will teach students the use of current design tools. The course will give first an overview of synthesis flows for digital circuits and then delve into synthesis and optimization algorithms. Topics will include:1) Modeling languages and specification formalisms;2) High-level synthesis and optimization methods (scheduling, binding, data-path and control synthesis);3) Representation and optimization of combinational logic functions (encoding problems, binary decision diagrams);4) Representation and optimization of multiple-level networks (algebraic and Boolean methods, \"don't care\" set computation, timing verification and optimization);5) Modeling and optimization of sequential functions and networks (retiming);6) Semicustom libraries and library binding.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Hardware",
+        "VLSI",
+        "Synthesis",
+        "Optimization",
+        "Algorithms"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/design-technologies-for-integrated-systems-CS-472"
+    },
+    {
+      "code": "CS-473",
+      "title": "System programming for Systems-on-chip",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "To efficiently program embedded systems an understanding of their architectures is required. After following this course students will be able to take an existing SoC, understand its architecture, and efficiently program it. Hardware elements found in embedded systems: Flash, tightly couples memories, SDRAM, DDR. IO-interfaces and protocols (RS232, I2C, I2S, SPI). Bus architectures. Architecture imposed restrictions: Memory map and memory holes. Cached and non-cached regions. Interrupt latencies, bus latencies, task-switch latencies. Software techniques: BIOS/firmware DMA and computation/data-transfer overlaps Hot-spot detection and hardware/software profiling",
+      "learning_outcomes": [
+        "Analyze and understand the architecture of embedded systems (SoC's)",
+        "Write a firmeware that initializes an embedded system and efficiently implement the required functionality",
+        "Explain the different latencies present in an embedded system and how these latencies influence the execution time on the firmware",
+        "Profile an embedded system and pin-point the hardware related and software induced hot-spots",
+        "understand the different types of memories present in an embedded systems and how to use them",
+        "Program the different types of I/O devices present in an embedded system and know how their protocol works"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/system-programming-for-systems-on-chip-CS-473"
+    },
+    {
+      "code": "CS-476",
+      "title": "Embedded system design",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Hardware-software co-design is a well known concept in embedded system design.It is also a concept required in designing FPGA-accelerators in data-centers.This course teaches how to transform algorithms in smart hardware-software solutions. High-level architectures: FIFO's, LIFO's, ring-buffers, and ping-pong buffers. FSM-D (finite state machine data-path) structures. Stream processing. Acceleration methods: Custom instruction set extensions. Hardware accelerators Compiler optimizations. Implementation methods: Hardware-software co-design. Timing closure. Virtual prototyping. Bare metal versus usage of an RTOS.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/embedded-system-design-CS-476"
+    },
+    {
+      "code": "CS-477",
+      "title": "Advanced operating systems",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course teaches the design and implementation of modern operating systems through the lens of the Linux kernel. Using an extensive hands-on approach, students study how classical OS principles are realized in a production kernel and explore new design ideas proposed over the past two decades. OS architecture: kernel design space, isolation, and the system call interface Kernel data structures and debugging Concurrency and synchronization: locking, lock-free data structures, and multicore scalability Process management and scheduling Interrupts and kernel execution contexts Memory management: address spaces, virtual memory, and memory allocation Storage: VFS, page cache, file systems, and the block layer Virtualization OS security: data security, integrity, and authentication Note that topics are tentative and will be explored at different depths. Material discussed in previous years is an indication of what may be covered, but not a guarantee, as operating systems remain a fast-moving target. In-class participation is strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Operating systems",
+        "Linux kernel",
+        "concurrency",
+        "scalability",
+        "memory management",
+        "file systems",
+        "virtualization",
+        "OS security"
+      ],
+      "prerequisites": [
+        "COM-208",
+        "CS-200",
+        "CS-202",
+        "CS-210",
+        "CS-214",
+        "CS-300",
+        "CS-322",
+        "CS-323"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-operating-systems-CS-477"
+    },
+    {
+      "code": "CS-479",
+      "title": "Brain-style learning in neural networks",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Full title : Brain-style learning in Neural Networks: Learning algorithms of the brain. Biological brains show powerful learning without BackProp, how? By a smart combination of Reinforcement Learning and Self-supervised learning with local learning rules at the connections (synapses). - Why BackProp is biologically not plausible. Two-factor and three-factor rules in biology and neuromorphic hardware (Synaptic Plasticity/Biology) - Three-factor rules for reward-based learning (Reinforcement Learning 1) - Policy gradient (Reinforcement Learning 3) - Actor-critic networks (Reinforcement Learning 4) - Reinforcement learning in the brain (Reinforcement Learning 5) - Hebbian two-factor rules and Independent Component Analysis (Self-supervised Learning 1) - Two-factor rules for clustering and competitive learning (Self-supervised Learning 2) - Learning of representations in multi-layer networks (Self-supervised Learning 3) - Learning to find a goal: a bio-plausible model with place cells and rewards (Applications 1) - Learning by suprise and novelty: exploration and changing environments (Application 2) - Surprise and novelty in changing environments (Application 3) - Neuromorphic hardware and in-memory computing (Application 4)",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "- Reinforcement Learning (RL) - Eligibility traces - Surprise and novelty - Two-factor rules and trhee factor rules - Synaptic plasticity - Self-supervised learning - Representation learning - Neuromodulators (dopamine) - Neuromorphic hardware"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/brain-style-learning-in-neural-networks-CS-479"
+    },
+    {
+      "code": "CS-486",
+      "title": "Interaction design",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course focuses on goal-directed design and interaction design, two subjects treated in depth in the Cooper book (see reference below). To practice these two methods, we propose a design challenge, which is further divided into mini-projects evenly spaced throughout the semester. Design methods for HCI What is HCI: its aims and goals Design thinking Goal-directed Design Mental model and different types of users Qualitative research and user interviews User modeling: persona and empathy diagram Scenarios, requirements and framework design Visual design Information Visualization design Basic prototyping methods for HCI Storyboarding Context scenario Interactive prototype Video prototype Human computer interaction evaluation methods Cognitive walkthrough Heuristic evaluation Evaluation with users",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Interaction design",
+        "design thinking",
+        "user interviews",
+        "ideation",
+        "storyboard",
+        "context scenarios",
+        "digital mockup",
+        "user evaluation",
+        "video prototyping."
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/interaction-design-CS-486"
+    },
+    {
+      "code": "CS-489",
+      "title": "Experience design",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "As we move towards an AI economy, the success of new products, systems and services depend increasingly on the excellence of personal experience. This course introduces students to the notion and practice of experience design following a hands-on, studio-based approach. Experience design in practice encompasses the collection, analysis and design of users experiences based on a deep understanding of the context concerned. We will examine these processes using a series of mini-workshops, to rapidly iterate on multiple design experience options. The goal is to create a meaningful, interactive, data-driven (and possibly AI-assisted) digital interface and physical prototypes for new experiences. We explore questions at the intersection of physical and digital architecture through an experience design approach, involving: (1) a mapping of the social dynamics surrounding an experience; (2) a critical analysis of the geographical and temporal flows (experience journeys); and (3) a detailed evaluation of the experience touch points. Based on this experience diagnosis, we propose alternative designs of experience blueprints that combine physical and digital touch points which in turn will constitute the elements of future typologies. Our particular focus will be on information intensive typologies in the contemporary city, such as museums, libraries, airports, banks, boutiques, governments, universities, hospitals and homes. Each year, we will investigate a different typology. Digital interfaces and augmented artifacts will be considered as possible alternatives to reconfigure the senses of perception, redistribute time, and reorchestrate the configuration of social, emotional and spatial experiences. The seminar will combine students from both IC and ENAC to work together in a real interdisciplinary process.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "User Experience (UX) Design",
+        "Design Thinking",
+        "Journey Mapping",
+        "Optioneering",
+        "Critical Prototyping",
+        "Value Proposition"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/experience-design-CS-489"
+    },
+    {
+      "code": "CS-498",
+      "title": "Research project in Computer Science II",
+      "ects": 12.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Individual research during the semester under the guidance of a professor or an assistant. Subject to be chosen among the themes proposed on the web site : Projects by laboratory",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/research-project-in-computer-science-ii-CS-498"
+    },
+    {
+      "code": "CS-500",
+      "title": "AI product management",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The course focuses on the development of real-word AI products. It is intended for students who have acquired a theoretical background in AI/ML and are interested in applying that toward developing AI products. AI is set to transform several industry sectors, and there is high demand for AI product managers. AI Product Management (AIPM) is a complex role that requires an understanding of both AI and product management. This course will enable students to identify opportunities for developing new AI products, understand when they should use AI in an existing product, manage the development of AI products, and launch and deliver AI products successfully. The lectures will introduce general product management to the students, and the guest lectures, by leading figures in AI industries, explain how the general product management skills are applied to the development and delivery of AI products. Module 1: Introduction to AI Product Management (AIPM) The rise of AIPM: what is it and why are AI product managers becoming essential? Core challenges: What makes AIPM uniquely complex? Success in AIPM: What defines a successful AI product/project? Module 2: AI Product Discovery Identify the problem clearly: Understand customer needs, user profiles, value proposition, and competitor landscape. Address critical risks early: Analyze and test risks related to value, usability, feasibility, and viability. Build and test the right MVP: Identify the problem, prioritize assumptions, set success criteria, choose MVP type, deliver, and iterate. Refining AI Product Strategy: Use insights from discovery to re-shape the vision, startegy, define the roadmap, and document the product journey (PRD). Module 3: AI Product Development Master agile and iterative development Align design, testing, and development of AI systems Manage data readiness and feasibility Foster team dynamics and ethical development practices Communicate effectively with stakeholders Module 4: AI Product Delivery Planning and executing a successful AI product launch Market AI capabilities effectively Ensure monitoring, user adoption, and continuous improvement Address governance, trust, and responsible AI",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Innovation",
+        "Artificial Intelligence (AI)",
+        "AI product managers"
+      ],
+      "prerequisites": [
+        "CS-233",
+        "CS-433"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/ai-product-management-CS-500"
+    },
+    {
+      "code": "CS-502",
+      "title": "Deep learning in biomedicine",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Deep learning offers potential to transform biomedical research. In this course, we will cover recent deep learning methods and learn how to apply these methods to problems in biomedical domain. The goal of this course is to cover recent deep learning methods and demonstrate how they can be applied to biomedical data. The course will cover ongoing advances in deep learning research for different input data types (e.g., convolutional neural networks for images, graph convolutional neural networks for graph-structured data, transformers for sequence data). We will start with a standard supervised learning setting and then cover ongoing developments in unsupervised learning, transfer learning and building foundation models. Here, we will discuss specific challenges in adapting these paradigms to different varieties of biomedical data (e.g., genomics, transcriptomics, proteomics, medical image processing). Additionally, we will cover LLM-based agentic systems that can interact with data to automate biomedical research. We will cover and discuss recent papers from the literature that apply these methods to problems in biomedicine. Note that topics are tentative and will be explored at different depths. Material discussed in previous years is an indication of what may be covered but not a guarantee as the AI field is moving fast. In class participation is strongly recommended.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "CS-433"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/deep-learning-in-biomedicine-CS-502"
+    },
+    {
+      "code": "CS-503",
+      "title": "Visual intelligence",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course covers both classic concepts and recent advances in computer vision and machine learning \u00e2\u0080\u0094 with a primary focus on embodied intelligence and multimodal learning. Perception is the capability of inferring the properties of the external world merely from a sensed signal, for example, the light reflected off objects. This is done beautifully well by simple (e.g., mosquitoes) or complex (e.g., humans) biological organisms. They can see and understand the complex environment around them and act accordingly -- all done in an efficient and astonishingly robust way. Despite remarkable progress in replicating this capability in machines, a large gap between current systems and sophisticated perceptual capabilities, such as those exhibited by animals, remains. The goal of this course is to discuss what is possible today in this context in computer vision and artificial intelligence and what is not . We will overview the basic concepts and recent advances in computer vision, multimodal learning, active perception, and machine learning more generally. For inspiration regarding the missing capabilities and how to approach them, we will turn to visual perception in biological organisms. The course includes lectures, homework, and projects. There will be a heavy emphasis on the projects and hands-on experience . The homework tasks will focus on key tools and concepts in ML, for example, Transformers, LLMs, and multimodal foundation models. The course project will be centered around designing, implementing, and testing a solution to a (preferably open) problem pertinent to visual perception. The students are encouraged to work in groups, propose a project that interests them, and pursue ambitious yet feasible goals. The course staff will provide support throughout the semester on the projects. In the lectures, the students will learn about the principles of computer vision and multimodal learning, their current limits, and visual perception in humans and animals, which will help with formulating their course projects. In particular, the lectures will discuss the following: An overview of basic computer vision concepts: classification, detection, grouping, image transformations, optical flow, 3D from X, etc., and recent neural network architectures, such as Transformers. Psychology/physiology of the visual system. Multimodal leanring and multimodal foundation models. Perception-action loop: active perception and embodied vision. The course interests master's/PhD students interested in research in computer vision, machine learning, and perceptual robotics, as well as senior undergraduate students interested in understanding state of the art in these topics.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Computer vision",
+        "Machine learning",
+        "Multimodal learning",
+        "Embodied intelligence",
+        "Robotics",
+        "AI."
+      ],
+      "prerequisites": [
+        "CS-233",
+        "CS-433",
+        "CS-456",
+        "EE-559"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/visual-intelligence-CS-503"
+    },
+    {
+      "code": "CS-510",
+      "title": "Topics in software security",
+      "ects": 3.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Memory corruption and type safety flaws dominate the threat landscape. We will approach current research from three dimensions: sanitization (finding flaws through runtime monitors); fuzzing (testing software automatically); and mitigation (protecting software at runtime). Unsafe languages like C/C++ are widely used for their great promise of performance. Unfortunately, these languages are prone to a large set of different types of memory and type errors that allow the exploitation of several attack vectors such as code reuse, privilege escalation, or information leaks. On a high level memory and type safety (and type safety) would solve all these problems. Safe languages can (somewhat) cheaply enforce these properties. Unfortunately, these guarantees come at a high cost if retrofitted onto existing languages. When working with unsafe languages, three fundamental approaches exist to protect against software flaws: formal verification (proving the absence of bugs), software testing (finding bugs), and mitigation (protecting against the exploitation of bugs). In this seminar, we will primarily focus on the latter two approaches. Formal verification, while giving strong guarantees, struggles to scale to large software. This seminar explores three areas: the understanding of attack vectors,approaches to software testing, and mitigation strategies. First you need to understand what kind of software flaws exist in low level software and how those flaws can be exploited.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "COM-301",
+        "CS-323"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/topics-in-software-security-CS-510"
+    },
+    {
+      "code": "CS-522",
+      "title": "Principles of computer systems",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This advanced graduate course teaches the key design principles underlying successful computer and communication systems, and shows how to solve real problems with ideas, techniques, and algorithms from operating systems, networks, databases, programming languages, and computer architecture. A modern computer system spans many layers: applications, libraries, operating systems, networks, and hardware devices. Building a good system entails making the right trade-offs (e.g., between performance, durability, and correctness) and understanding emergent behaviors. Great system designers make these trade-offs in a principled fashion, whereas average ones make them by trial-and-error. In this course, we develop a principled framework for computer system design, covering the following topics: Modularity and abstraction Names Layers Indirection and virtualization Redundancy and fault tolerance Replication and consistency Laziness and speculation Locality and caching Hardware/software co-design Client/server architectures Transactional building blocks",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [
+        "CS-202",
+        "CS-300",
+        "CS-302"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/principles-of-computer-systems-CS-522"
+    },
+    {
+      "code": "CS-523",
+      "title": "Advanced topics on privacy enhancing technologies",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This advanced course will provide students with the knowledge to tackle the design of privacy-preserving ICT systems. Students will learn about existing technologies to prect privacy, and how to evaluate the protection they provide. The course will cover the following topics : - Privacy definitions and concepts - Privacy-preserving cryptographics solutions : anonymous credentials, zero-knowledge proofs, secure multi-party computation, homomorphic encryption, Private information retrieval (PIR), Oblivious RAM (ORAM) - Anonymization and data hiding : generalization, differential privacy, etc - Machine learning and privacy - Protection of metadata : anonymous communications systems, location privacy, censorpship resistance - Online tracking and countermeasures - Privacy engineering : design and evaluation (evaluation metrics and notions) - Legal aspects of privacy",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Privacy",
+        "anonymity",
+        "homomorphic encryption",
+        "secure multi-paty computation",
+        "anonymous credentials",
+        "ethics"
+      ],
+      "prerequisites": [
+        "COM-301",
+        "COM-402"
+      ],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/advanced-topics-on-privacy-enhancing-technologies-CS-523"
+    },
+    {
+      "code": "CS-524",
+      "title": "Computational complexity",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In computational complexity we study the computational resources needed to solve problems and understand the relation between different types of computation. This course advances the students knowledge of computational complexity, and develop an understanding of fundamental open questions. Complexity classes (time, space, nondeterminism) Space complexity (Logspace, L vs NL) Boolean circuits and nonuniform computation Power of randomness Lower bounds for concrete models of computation: Decision trees, communication protocols, propositional proofs.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "theoretical computer science computational complexity"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/computational-complexity-CS-524"
+    },
+    {
+      "code": "CS-526",
+      "title": "Learning theory",
+      "ects": 6.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Machine learning and data analysis are becoming increasingly central in many sciences and applications. This course concentrates on the theoretical underpinnings of machine learning. Basics : statistical learning framework, Probably Approximately Correct (PAC) learning, learning with a finite number of classes, Vapnik-Chervonenkis (VC). Bias-variance tradeoff and modern double descent phenomena. Stochastic gradient descent, modern aspects: mean field approach, neural tangent kernel. Diffusion methods. Tensor decompositions and factorization, Jenrich's tehorem, Alternating least squares, Tucker decompositions. Applications: e.g. Learning mixture models, topic modeling.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/learning-theory-CS-526"
+    },
+    {
+      "code": "CS-550",
+      "title": "Formal verification",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "We introduce formal verification as an approach for developing highly reliable systems. Formal verification finds proofs that computer systems work under all relevant scenarios. We will learn how to use formal verification tools and explain the theory and the practice behind them. Tools used may include some of these: Stainless ( https://github.com/epfl-lara/stainless ), Lisa ( https://github.com/epfl-lara/lisa ) and Lean ( https://lean-lang.org/ ). Examinations may take place throughout the weeks during the entire semester, which may require substantial presence to pass the course. Topics may include (among others) some of the following: Methodology of Formal Verification Review of Sets, Relations, Propositional and First-Order Logic Completeness and Semi-Decidability for First-Order Logic Proof Systems State Machines. Transition Formulas. Traces. Strongest Postconditions and Weakest Preconditions. Hoare Logic. Inductive Invariants. Well-Founded Relations and Termination Measures Interactive Theorem Provers (Proof Assistants) such as Lisa and Lean SAT Solvers and Bounded Model Checking Loop Invariants. Hoare Logic. Statically Checked Function Contracts. Relational Semantics and Fixed-Point Semantics Symbolic Execution. Satisfiability Modulo Theories Abstract Interpretation",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/formal-verification-CS-550"
+    },
+    {
+      "code": "CS-552",
+      "title": "Modern natural language processing",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Natural language processing is ubiquitous in modern intelligent technologies, serving as a foundation for language translators, virtual assistants, search engines, and many more. In this course, students will learn algorithmic tools for tackling problems in modern NLP. This course includes lectures, exercises, a midterm exam, and a project. In lectures, we will cover the foundations of modern methods for natural language processing, such as word embeddings, recurrent neural networks, transformers, pretraining. We will also cover issues with these state-of-the-art approaches (such as robustness, interpretability, sensitivity), identify their failure modes in different applications, and discuss analysis and mitigation techniques for these issues. In the midterm, students will be evaluated on their ability to apply methods learned in class on closed-form problems developed by the course staff. In their project, students will be expected to apply techniques learned in lecture to a problem of the course staff's choosing. They will formulate the problem, propose a suitable evaluation to measure their progress, train a model to solve the task, and provide analysis of the strengths and weaknesses of their method. This course is of interest to MS / PhD student interested in modern methods and issues in natural language processing, both from a research and applied perspective.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/modern-natural-language-processing-CS-552"
+    },
+    {
+      "code": "CS-596",
+      "title": "Optional research project in computer science II",
+      "ects": 8.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Individual research during the semester under the guidance of a professor or an assistant. Supervisor and subject to be chosen among the themes proposed on the web site : Projects by laboratory",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/optional-research-project-in-computer-science-ii-CS-596"
+    },
+    {
+      "code": "CS-599",
+      "title": "Master project in Computer Science",
+      "ects": 30.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The student carries out an academic or industrial master's project. The student will use the required skills and knowledge to accomplish an independent Master in Computer Science. The Master's project gives the student's the opportunity to carry out theoretical and practical work out of academic or industrial scope registered in a broad field of knowledge of the engineer in Computer Science acquired during his years of study. Each project is carried out under the supervisor of a professor from the Computer and Communication School.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/master-project-in-computer-science-CS-599"
+    },
+    {
+      "code": "DH-415",
+      "title": "Ethics and law of AI",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This master course enables students to sharpen their proficiency in tackling ethical and legal challenges linked to Artificial Intelligence (AI). Students acquire the competence to define AI and identify ethical and legal questions linked to its conception and increased use in society. AI is used as shortcut-concept to identify a number of computational systems producing intelligent behavior, i.e., complex behavior conducive to reaching goals. AI systems are increasingly used across society. They raise conceptual issues (how to define AI?), technological-ethical issues (how should AI systems be conceived?), legal issues (how to define the responsibility when using an AI system? how to regulate AI?) and social-political issues (which justice questions does the deployment of AI raise?) The following issues will be dealt with: - What is ethics? - What is an AI system? - Who is responsible for the actions of an AI system? - What are the most pressing ethical questions in the phase of conception of AI systems? - How should we design AI system in order to overcome ethical-legal challenges? - Should we regulate AI? - How should we address the consequences of the wide deployment of AI systems?",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "artificial intelligence",
+        "ethics",
+        "law",
+        "data",
+        "regulation",
+        "responsibility"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/ethics-and-law-of-ai-DH-415"
+    },
+    {
+      "code": "EE-452",
+      "title": "Network machine learning",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Fundamentals, methods, algorithms and applications of network machine learning and graph neural networks Context In the last decade, our information society has mutated into a data society, where the volume of worldwide data grows increasingly fast. An increasing amount of this data is structured on networks of different forms. How to make sense of such tremendous volume of data? Developing effective techniques to extract meaningful information from large-scale and high-dimensional network datasets has become essential for the success of business, government and science. Objective The goal of this course is to provide a broad introduction to effective methods algorithms in data science, network analysis and network machine learning. A major effort will be given to show that existing data analysis techniques can be defined and enhanced on graphs. Graphs can encode complex structures like cerebral connection, stock exchange, and social network. Strong mathematical tools have been developed based on statistics, or linear and non-linear graph spectral harmonic analysis to advance the standard data analysis algorithms. At the same time, modern machine learning tools such as neural networks have been adapted to process data defined on network structures. The objective of the class is to develop fundamentals and review algorithms that permit to develop modern network data analysis methods. The main topics of the course are networks, network data analysis, unsupervised and supervised learning on graphs and networks, graph generative models, sparse representation, multi-resolution analysis, graph neural networks. Structure The course is organized into two parts: lectures (2 hours) and lab assignements and projects (1 hour). The essential objective of the exercises and lab assignements is to apply the theory on real-world cases. The objective of the projects is to study practical network machine learning cases, and develop effective solutions based on tools studied in the class. Evaluation Evaluation will be conducted on a continuous basis: homeworks and coding assignments.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "graph representation learning",
+        "machine learning",
+        "network science"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/network-machine-learning-EE-452"
+    },
+    {
+      "code": "EE-512",
+      "title": "Applied biomedical signal processing",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course covers state-of-the-art concepts and approaches for biomedical signal processing, applied to diverse sensing modalities, and framed in real applications within the health, wellness, and sports domains. Introduction of the basics in anatomy and physiology of the autonomous nervous system, electrical cardiac system, vascular system, brain function and respiratory activity. Digital signal processing fundamentals including sampling, Fourier transform, filtering, stochastic signal correlation and power spectral density. Time-frequency analysis including short-term Fourier and wavelet transforms. Linear modeling and estimation techniques including autoregressive models, linear prediction, parametric spectral estimation, and criteria for model selection. Adaptive filtering including adaptive prediction and estimations of transfer functions as well as adaptive interference cancellation. Multivariate signal processing techniques such as singular value decomposition and principal component analysis, blind source separation. Machine learning techniques including classification and regression with approaches such as support vector machines, neural network architectures such as CNN and RNN. Biomedical applications and exercises related to e.g. cardiac arrythmia detection and classification, central blood pressure estimation, sleep phase classification, heart rate tracking in the presence of motion interferences, epileptic event detection, fall detection, apnoea detection, SpO2 estimation, and respiration tracking and volume estimation. These exercises will be based on biomedical signals such as electrocardiogram, electroencephalogram, movement (accelerometer, gyroscope, and barometer), photoplethysmography, bio-impedance, vocal/audio.",
+      "learning_outcomes": [],
+      "topics": [
+        "biomedical engineering",
+        "signal processing",
+        "signal modeling",
+        "spectral analysis",
+        "adaptive filtering",
+        "machine learning",
+        "algorithm design",
+        "cardiovascular",
+        "respiratory",
+        "neurological"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/applied-biomedical-signal-processing-EE-512"
+    },
+    {
+      "code": "EE-554",
+      "title": "Automatic speech processing",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The goal of this course is to provide the students with the main formalisms, models and algorithms required for the implementation of advanced speech processing applications (involving, among others, speech coding, speech analysis/synthesis, and speech recognition, speaker recognition). 1. Introduction: Speech processing tasks, Speech science, language engineering applications. 2. Basic Tools: Analysis and spectral properties of the speech signal, linear prediction algorithms, statistical pattern recognition, dynamic programming, speech representation learning 3. Speech Coding: Human hearing properties, quantization theory, speech coding in the temporal and frequency domains. 4. Speech Synthesis: speech synthesis models, concatenative synthesis, hidden Markov models (HMMs) based speech synthesis, Neural speech synthesis. 5. Automatic Speech Recognition: Temporal pattern matching and Dynamic Time Warping (DTW) algorithms, speech recognition systems based on HMMs, Neural networks-based speech recognition. 6. Speaker recognition and speaker verification: Formalism, hypothesis testing, Text-dependent and Text-independent speaker verification, Gaussian mixture models-/HMM-based speaker verification, speaker embeddings based speaker verification, presentation attack detection (antispoofing). 7. Paralinguistic speech processing: fundamentals and applications (e.g., emotion recognition, pathological speech detection, depression detection), hand-crafted feature based approaches, neural approaches.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "speech processing",
+        "speech coding",
+        "speech analysis/synthesis",
+        "automatic speech recognition",
+        "speaker identification",
+        "text-to-speech"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/automatic-speech-processing-EE-554"
+    },
+    {
+      "code": "EE-559",
+      "title": "Deep learning",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course explores how to design reliable discriminative and generative neural networks, the ethics of data acquisition and model deployment, as well as modern multi-modal models. This course equips students with a comprehensive foundation of modern deep learning, enabling students to design and train discriminative and generative neural networks for a wide range of tasks. Topics include: Deep learning applications (natural language processing, computer vision, audio processing, biology, robotics, science), principles and regulations Loss functions, data and labels, data provenance Training models: gradients and initialization Generalization and performance Transformers Graph neural networks Generative adversarial networks Variational autoencoders Diffusion models Multi-modal models Interpretability, explanations, bias and fairness",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "machine learning",
+        "neural networks",
+        "deep learning",
+        "python"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/deep-learning-EE-559"
+    },
+    {
+      "code": "ENG-466",
+      "title": "Distributed intelligent systems",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The goal of this course is to provide methods and tools for modeling distributed intelligent systems as well as designing and optimizing coordination strategies. The course is a well-balanced mixture of theory and practical activities. - Introduction to key concepts (e.g., self-organization, stigmergy) and tools used in the course - Examples of natural, artificial and hybrid distributed intelligent systems - Modeling methods: sub-microscopic, microscopic, macroscopic, multi-level; spatial and non-- spatial; mean field, approximated and exact approaches - Data-driven methods: in-line learning and metaheuristic optimization; expensive optimization problems and noise resistance; performance evaluation - Coordination strategies and distributed control algorithms - Application examples in distributed sensing and action",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Swarm intelligence",
+        "artificial intelligence",
+        "machine-learning",
+        "distributed robotics",
+        "swarm robotics",
+        "multi-robot systems",
+        "sensor networks",
+        "modeling",
+        "control",
+        "metaheuristic optimization"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/distributed-intelligent-systems-ENG-466"
+    },
+    {
+      "code": "MATH-352",
+      "title": "Causal thinking",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course will give a unified presentation of modern methods for causal inference. We focus on concepts, and we will present examples and ideas from various scientific disciplines, including medicine, computer science, engineering, economics and epidemiology. Association vs. causation Definitions of causal effects - Causal models - Counterfactuals and potential outcomes - Individual level causal effects vs. average causal effects - Population causal effects Study design - Randomisation and experiments - Observational studies Causal graphs - Causal Directed Acyclic Graphs - Single World Intervention Graphs Identification of causal effects - Identifiability assumptions - SWIGs Causal mechanisms - Mediation and path specific effects - Instrumental variables Applications - Medical interventions, including pharmaceuticals - Experiments in technology industry and engineering - Experiments in life sciences - Causal effects and mechanisms in the social sciences. Estimation of causal effects - Estimation using classical statistical models - Estimation using machine learning",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Causality; Causal inference; Randomisation; Design of experiments; Observational studies; Causal Graphs"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/causal-thinking-MATH-352"
+    },
+    {
+      "code": "MATH-483",
+      "title": "G\u00f6del and recursivity",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "G\u00f6del incompleteness theorems and mathematical foundations of computer science Recursivity : Turing Machines and variants. The Church-Turing Thesis. Universal Turing Machine. Undecidable problems (the halting and the Post-Correspondance problems). Reducibility. The arithmetical hierarchy. Relations to Turing machines. Turing degrees. G\u00f6del's theorems : Peano and Robinson Arithmetics. Representable functions. Incompleteness, and undecidability theorems in arithmetics. If time permits, the completeness of the first order theory of the field of real numbers.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "G\u00f6del",
+        "incompleteness theorems",
+        "Peano arithmetic",
+        "Robinson arithmetic",
+        "decidability",
+        "recursively enumarable",
+        "arithmetical hierarchy",
+        "Turing machine",
+        "Turing degrees",
+        "jump operator",
+        "primitive recursive functions",
+        "recursive functions",
+        "automata",
+        "pushdown automata",
+        "regular languages",
+        "context-free languages",
+        "recursive languages",
+        "halting problem",
+        "universal Turing machine",
+        "Church thesis."
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/godel-and-recursivity-MATH-483"
+    },
+    {
+      "code": "MATH-489",
+      "title": "Number theory II.d - Cryptography",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": ".",
+      "learning_outcomes": [],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/number-theory-ii-d-cryptography-MATH-489"
+    },
+    {
+      "code": "MATH-493",
+      "title": "Applied biostatistics",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course covers topics in applied biostatistics, with an emphasis on practical aspects of data analysis using R statistical software. Topics include types of studies and their design and analysis, high dimensional data analysis (genetic/genomic) and other topics as time and interest permit. Types of studies Design and analysis of studies R statistical software Reproducible research techniques and tools Report writing Exploratory data analysis Liniear modeling (regression, anova) Generalized linear modeling (logistic, Poission) Survival analysis Discrete data analysis Meta-analysis High dimensional data analysis (genetics/genomics applications) Additional topics as time and interest permit",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Data analysis",
+        "reproducible research",
+        "statistical methods",
+        "R",
+        "biostatistical data analysis",
+        "statistical data analysis"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/applied-biostatistics-MATH-493"
+    },
+    {
+      "code": "MGT-416",
+      "title": "Causal inference",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Students will learn the core concepts and techniques of network analysis with emphasis on causal inference. Theory and application will be balanced, with students working directly with network data throughout the course. - Introduction: What is causal inference? - Review of Useful Probability concepts - Random variable, predictors, divergences - Introduction to Applications - Computational neuroscience - Financial markets - Social networks - Pearl Causality - Causal Bayesian Networks (CBNs) - Learning CBNS: Faithfulness and identifiably - Algorithms - Potential Outcome Model - Counterfactuals and identification problems - Graphical causal models - Randomized Experiments - Identification of causes in randomized experiments - Effect modification - Causality in Times Series - Granger causality - More general linear predictors - Beyond linear models and Granger causality - Directed information graphs - Efficient algorithms - Concrete Applications - Computational neuroscience - Financial markets - Social networks",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "Causality",
+        "structure learning",
+        "network inference"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/causal-inference-MGT-416"
+    },
+    {
+      "code": "MGT-427",
+      "title": "Project management and risk analysis",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "",
+      "learning_outcomes": [],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/project-management-and-risk-analysis-MGT-427"
+    },
+    {
+      "code": "MGT-435",
+      "title": "Algorithmic game theory",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "We will study mathematical models of the interplay between algorithms and strategic behavior. We cover fundamental concepts from game theory and mechanism design, including Nash equilibria, the price of anarchy, auctions and market design, incentive compatibility, and online learning and dynamics. - Basic concepts: agents, utility, equilibrium concepts, zero-sum games. - Efficiency, price of anarchy, congestion games. - Learning in games: coarse-correlated equilibrium and no-regret dynamics. - Mechanism Design, prior-free (VCG) and Bayesian (Myerson's) - Near-optimal mechanism design. - Selected topics in social choice and matching markets.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "game theory",
+        "algorithms",
+        "mechanism design",
+        "auctions",
+        "nash equilibrium"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/algorithmic-game-theory-MGT-435"
+    },
+    {
+      "code": "MICRO-452",
+      "title": "Basics of mobile robotics",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "This course gives an overview of the field of mobile robotics, introducing to the main techniques and allowing to test them in exercises and a team-based project. Sensors Perception, feature extraction Modeling Markov localization: Bayesian filter, Monte Carlo localization, extended Kalman filter Navigation: path planning, obstacle avoidance Control architectures and robotic frameworks Locomotion principles and control Sustainability",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/basics-of-mobile-robotics-MICRO-452"
+    },
+    {
+      "code": "MICRO-511",
+      "title": "Image processing I",
+      "ects": 3.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Introduction to the basic techniques of image processing. Introduction to the development of image-processing software and to prototyping using Jupyter notebooks. Application to real-world examples in industrial vision and biomedical imaging. Introduction . Image processing versus image analysis. Applications. System components. Characterization of continuous images . Image classes. 2D Fourier transform. Shift-invariant systems. Image acquisition . Sampling theory. Acquisition systems. Histogram and simple statistics. Max-Lloyd quantization (K-means). Characterization of discrete images and linear filtering . z-transform. Convolution. Separability. FIR and IIR filters. Morphological operators . Binary morphology (opening, closing, etc.). Gray-level morphology. Image-processing tasks . Preprocessing. Matching and detection. Feature extraction. Segmentation. Convolutional neural networks . Basic components. Operator-based formalism. CNN in practice: denoising and segmentation.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/image-processing-i-MICRO-511"
+    },
+    {
+      "code": "MICRO-512",
+      "title": "Image processing II",
+      "ects": 3.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "Study of advanced image processing; mathematical imaging. Development of image-processing software and prototyping in Jupyter Notebooks; application to real-world examples in industrial vision and biomedical imaging. Directional image analysis. Mathematical foundations. Structure tensor. Steerable filters. Continuous representation of discrete data. Splines. Interpolation. Geometric transformations. Multi-scale decomposition (pyramids and wavelets). Image transforms. Karhunen-Lo\u00e8ve transform (KLT). Discrete cosine transform (DCT). JPEG coding. Image pyramids. Wavelet decomposition. Reconstruction in the continuum. Wiener filter. Radon transform. Fourier slice theorem. Filtered backprojection. Computational imaging. Imaging as an inverse problem. Iterative reconstruction methods. Elements of convex analysis. Regularization & sparsity constraints.",
+      "learning_outcomes": [
+        "Construct interpolation models and continuous-discrete representations",
+        "Analyze image transforms",
+        "Design image-reconstruction algorithms",
+        "Formalize multiresolution representations using wavelets",
+        "Design deconvolution algorithms",
+        "Perform image analysis and feature extraction",
+        "Design image-processing software (plugins)",
+        "Synthesize steerable filters",
+        "Construct interpolation models and continuous-discrete representations",
+        "Analyze image transforms",
+        "Design image-reconstruction algorithms",
+        "Formalize multiresolution representations using wavelets",
+        "Perform image analysis and feature extraction",
+        "Design image-processing software",
+        "Design image reconstruction algorithms"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/image-processing-ii-MICRO-512"
+    },
+    {
+      "code": "NX-465",
+      "title": "Computational neurosciences: neuronal dynamics",
+      "ects": 5.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "In this course we study mathematical models of neurons and neuronal networks in the context of biology and establish links to models of cognition. The focus is on brain dynamics approximated by deterministic or stochastic differential equations. I. Models of single neurons 1. Introduction: brain, computers, and a first simple neuron model 2. Models on the level of ion current (Hodgkin-Huxley model) 3./4. Two-dimensional models and phase space analysis II. Neuronal Dynamics of Cognition 5. Associative Memory and Attractor Dynamics (Hopfield Model) 6. Neuronal Populations and mean-field methods 7. Continuum models and perception 8. Competition and models of Decision making III. Noise and the neural code 9. Noise and variability of spike trains (point processes, renewal process, interval distribution) 10: Variance of membrane potentials and Spike Response Models 11. Population dynamics: Fokker-Planck equation 12. Fitting Neural Models to Data 13. Neural Manifolds and low-dimensional dynamics 14. Summary",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [
+        "neural networks",
+        "neuronal dynamics",
+        "computational neuroscience",
+        "mathematical modeling in biology",
+        "applied mathematics",
+        "brain",
+        "cognition",
+        "neurons",
+        "memory",
+        "decision making"
+      ],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/computational-neurosciences-neuronal-dynamics-NX-465"
+    },
+    {
+      "code": "PHYS-512",
+      "title": "Statistical physics of computation",
+      "ects": 4.0,
+      "year": null,
+      "semester": null,
+      "mandatory": false,
+      "module": null,
+      "language": "en",
+      "description": "The students understand tools from the statistical physics of disordered systems, and apply them to study computational and statistical problems in graph theory, discrete optimisation, inference and machine learning. Interest in the methods and concepts of statistical physics is rapidly growing in fields as diverse as theoretical computer science, probability theory, machine learning, discrete mathematics, optimization, signal processing and others. Large part of the related work has relied on the use of message-passing algorithms and their connection to the statistical physics of glasses and spin glasses. This course covers this active interdisciplinary research landscape. Specifically, we will review the statistical physics approach to problems ranging from graph theory (e.g. community detection) to discrete optimization and constraint satisfaction (e.g. satisfiability or coloring) and to inference and machine learning problems (learning in neural networks, clustering of data and of networks, compressed sensing or sparse linear regression, low-rank matrix factorization). We will expose theoretical methods of analysis (replica, cavity, ...) algorithms (message passing, spectral methods, etc), discuss concrete applications, highlight rigorous justifications as well as present the connection to the physics of glassy and disordered systems. This is an advanced theoretical course that is designed for students with background in mathematics, electrical engineering, computer science or physics. This course exposes advanced theoretical concepts and methods, with exercises in the analytical methods and usage of the related algorithms.",
+      "learning_outcomes": [
+        "By the end of the course, the student must be able to:"
+      ],
+      "topics": [],
+      "prerequisites": [],
+      "url": "https://edu.epfl.ch/studyplan/en/master/computer-science/coursebook/statistical-physics-of-computation-PHYS-512"
+    }
+  ]
+}

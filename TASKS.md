@@ -14,20 +14,20 @@ lanes have passed their gate.
 
 | | |
 |---|---|
-| **Current stage** | **Stage 1 - Real data, real surface** |
+| **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S6-A1` more universities; their data is held back by the same checker |
+| **Person A is on** | `S5-A0` pooling, now unblocked. Lane A is done through stage 4 |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
-| **Blocked on** | every curriculum file: `scripts/check_style.py` rejects the universities' own course text |
-| **Last updated** | 2026-09-20 - eval harness runs; baked models cut 724 MB -> 318 MB |
+| **Blocked on** | nothing |
+| **Last updated** | 2026-09-20 - three real curricula committed, stage 1 closed |
 
 ### Stage ladder
 
 | Stage | Lane A | Lane B | Gate |
 |---|---|---|---|
 | 0 - Scaffold | done | done | closed |
-| 1 - Real data, real surface | todo | done | todo |
+| 1 - Real data, real surface | done | done | closed |
 | 2 - Dense retrieval | done (early) | todo | todo |
 | 3 - Lexical + hybrid | done (early) | todo | todo |
 | 4 - Cross-encoder rerank | done (early) | todo | todo |
@@ -69,10 +69,10 @@ running from a Docker image with the models already inside it. Matches are still
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S1-A1` | done | Scrape/transcribe the **full UNS PMF BSc Informatics** curriculum into `data/curricula/uns-pmf-informatics-bsc.json` (both modules, English titles, descriptions, outcomes, ECTS). Replaces the sample file. | `GET /api/v1/programmes` reports >= 45 courses and every course has a non-empty `description` | - |
-| `S1-A2` | blocked | Same for **University of Twente, BSc Technical Computer Science** -> `utwente-tcs-bsc.json`, via `backend/scripts/scrape_utwente.py` | file validates against `docs/03-data-schema.md`, `source_url` and `scraped_at` filled in | - |
+| `S1-A2` | done | Same for **University of Twente, BSc Technical Computer Science** -> `utwente-tcs-bsc.json`, via `backend/scripts/scrape_utwente.py` | file validates against `docs/03-data-schema.md`, `source_url` and `scraped_at` filled in | - |
 | `S1-A3` | done | `backend/scripts/validate_curricula.py` - schema check + duplicate-code check, runnable in CI | `python backend/scripts/validate_curricula.py` exits 0 on both files and non-zero on a broken one | - |
 
-**Lane A gate:** [ ] two real curricula committed, validator green.
+**Lane A gate:** [x] two real curricula committed, validator green (three, with EPFL).
 
 ### Lane B
 
@@ -84,7 +84,7 @@ running from a Docker image with the models already inside it. Matches are still
 
 **Lane B gate:** [x] one command starts the whole thing offline and shows a table.
 
-**Stage gate:** [ ] A   [x] B - a stranger can clone, run one command, and see real PMF course
+**Stage gate:** [x] A   [x] B - a stranger can clone, run one command, and see real PMF course
 titles next to real Twente course titles.
 
 ---
@@ -186,8 +186,8 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S5-A0` | blocked | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
-| `S5-A1` | blocked | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
+| `S5-A0` | todo | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
+| `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
 | `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
 | `S5-A3` | wip | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
 | `S5-A4` | done (early) | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
