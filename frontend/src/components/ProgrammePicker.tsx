@@ -6,10 +6,13 @@ interface Props {
   host: string
   strategy: Strategy
   strategies: StrategyInfo[]
+  modules: string[]
+  module: string
   busy: boolean
   onHome: (id: string) => void
   onHost: (id: string) => void
   onStrategy: (s: Strategy) => void
+  onModule: (m: string) => void
   onSwap: () => void
   onMatch: () => void
 }
@@ -19,7 +22,7 @@ function label(p: ProgrammeSummary): string {
 }
 
 export default function ProgrammePicker(props: Props) {
-  const { programmes, home, host, strategy, strategies, busy } = props
+  const { programmes, home, host, strategy, strategies, modules, module, busy } = props
   const sameProgramme = home !== '' && home === host
   const active = strategies.find((s) => s.id === strategy)
 
@@ -61,6 +64,18 @@ export default function ProgrammePicker(props: Props) {
             ))}
           </select>
         </label>
+
+        {modules.length > 0 && (
+          <label htmlFor="module">
+            My study path
+            <select id="module" value={module} onChange={(e) => props.onModule(e.target.value)} disabled={busy}>
+              <option value="">every course offered</option>
+              {modules.map((m) => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
+          </label>
+        )}
 
         <button type="button" className="primary" onClick={props.onMatch} disabled={busy || sameProgramme}>
           {busy ? 'Matching...' : 'Match courses'}

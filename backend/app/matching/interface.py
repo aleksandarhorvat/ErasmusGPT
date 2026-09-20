@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
 
+from app.matching.aggregate import RecognitionSummary, summarise
 from app.schemas.match import MatchCandidate, Strategy
 from app.schemas.programme import CourseSummary, ProgrammeSummary
 
@@ -62,3 +63,6 @@ class Matcher(Protocol):
 
     @property
     def models_loaded(self) -> bool: ...
+
+
+__all__ = ["STRATEGIES", "Matcher", "RecognitionSummary", "summarise"]

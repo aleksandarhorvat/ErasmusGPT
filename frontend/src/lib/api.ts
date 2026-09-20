@@ -76,6 +76,39 @@ export interface StrategyInfo {
   id: Strategy
   label: string
   description: string
+  calibrated: boolean
+  provisional: boolean
+}
+
+export type Bucket = 'likely' | 'borderline' | 'unlikely'
+
+export interface CourseOutcome {
+  course_uid: string
+  title: string
+  ects: number
+  probability: number
+  bucket: Bucket
+  best_match_uid: string | null
+  best_match_title: string | null
+  ects_shortfall: number
+}
+
+export interface RecognitionResponse {
+  home_programme_id: string
+  host_programme_id: string
+  strategy: Strategy
+  module: string | null
+  calibrated: boolean
+  provisional: boolean
+  took_ms: number
+  total_ects: number
+  expected_recognised_ects: number
+  expected_share: number
+  likely_ects: number
+  borderline_ects: number
+  unlikely_ects: number
+  ects_shortfall: number
+  courses: CourseOutcome[]
 }
 
 export interface MatchBody {
@@ -123,4 +156,27 @@ export const api = {
   strategies: () => request<StrategyInfo[]>('/strategies'),
   match: (body: MatchBody) =>
     request<MatchResponse>('/match', { method: 'POST', body: JSON.stringify(body) }, MATCH_TIMEOUT_MS),
+  matchCourse: (body: {
+    home_course_uid: string
+    host_programme_id: string
+    strategy: Strategy
+    top_k: number
+  }) =>
+    request<MatchCandidate[]>(
+      '/match/course',
+      { method: 'POST', body: JSON.stringify(body) },
+      MATCH_TIMEOUT_MS,
+    ),
+  recognition: (body: {
+    home_programme_id: string
+    host_programme_id: string
+    strategy: Strategy
+    module: string | null
+    ects_budget: number | null
+  }) =>
+    request<RecognitionResponse>(
+      '/recognition',
+      { method: 'POST', body: JSON.stringify(body) },
+      MATCH_TIMEOUT_MS,
+    ),
 }

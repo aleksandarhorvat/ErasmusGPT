@@ -68,3 +68,63 @@ class StrategyInfo(BaseModel):
     id: Strategy
     label: str
     description: str
+    calibrated: bool = Field(
+        default=False,
+        description="score_pct is a fitted probability of recognition, not a display number",
+    )
+    provisional: bool = Field(
+        default=False,
+        description="the calibration was fitted on machine labels, no human pass yet",
+    )
+
+
+# --- recognition estimate (S6-A5 / S6-B4) -----------------------------------
+
+Bucket = Literal["likely", "borderline", "unlikely"]
+
+
+class RecognitionRequest(BaseModel):
+    """A whole-programme estimate, over one study path rather than every course.
+
+    A curriculum file lists every course a programme offers. Nobody takes all of them:
+    UNS PMF Informatics offers 353 ECTS and the degree is 180. `module` and
+    `mandatory_only` narrow the home side to a path a student could actually follow, so
+    the denominator means something.
+    """
+
+    home_programme_id: str
+    host_programme_id: str
+    strategy: Strategy = "hybrid+ce"
+    module: str | None = Field(default=None, description="null means every course offered")
+    ects_budget: float | None = Field(
+        default=None, ge=1, description="degree size, usually the programme's total_ects"
+    )
+
+
+class CourseOutcome(BaseModel):
+    course_uid: str
+    title: str
+    ects: float
+    probability: float = Field(ge=0.0, le=1.0)
+    bucket: Bucket
+    best_match_uid: str | None = None
+    best_match_title: str | None = None
+    ects_shortfall: float = 0.0
+
+
+class RecognitionResponse(BaseModel):
+    home_programme_id: str
+    host_programme_id: str
+    strategy: Strategy
+    module: str | None
+    calibrated: bool
+    provisional: bool
+    took_ms: int
+    total_ects: float
+    expected_recognised_ects: float
+    expected_share: float
+    likely_ects: float
+    borderline_ects: float
+    unlikely_ects: float
+    ects_shortfall: float
+    courses: list[CourseOutcome]

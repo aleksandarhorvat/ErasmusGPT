@@ -14,6 +14,80 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [B] Lane B catches up: stages 2 to 4, plus the recognition panel
+
+**Who:** Person B
+**Stage:** 2, 3 and 4 lane B closed. `S6-B4` pulled forward, marked done.
+**Commit:** `[B] score display, export, compare mode and the recognition panel`
+**Tasks touched:** `S2-B1` `S2-B2` `S3-B1` `S3-B2` `S3-B3` `S4-B1` `S4-B2` `S4-B3` `S6-B4` (done)
+
+### CONTRACT CHANGE
+Three additions to `app/schemas/match.py`, all additive. Nothing existing changed shape.
+
+- `StrategyInfo` gains `calibrated` and `provisional`, both defaulting to false.
+- New `RecognitionRequest`, `CourseOutcome`, `RecognitionResponse` for `POST /api/v1/recognition`.
+- `app/matching/interface.py` re-exports `summarise` and `RecognitionSummary` from
+  `aggregate.py`, so `app/api/**` keeps its rule of importing only the interface and the
+  factory from the matching package.
+
+**A: nothing of yours has to change.** The endpoint calls `match_programme` and your
+`summarise`. `docs/04-api-contract.md` needs the new endpoint written up, which is mine.
+
+### S3-B1, the part that was actually wrong
+`score_pct` means three different things: a fitted probability for `hybrid+ce`, a
+stretched cosine for `dense`, a per-query relative for `bm25` and `hybrid` where the top
+row is always 100. The UI was printing all three on the same badge.
+
+`frontend/src/lib/score.ts` is now the only place allowed to format a score. Calibrated
+strategies get the recognition bands and a tooltip reading "estimated 91 % chance a
+coordinator would recognise this pair"; the others get neutral grey badges and a tooltip
+saying the number is relative and not a probability. `GET /api/v1/strategies` carries
+`calibrated` and `provisional` so the frontend does not have to guess, and
+`app/core/calibration.py` reads the same `data/calibration/` directory the pipeline
+reads rather than asking the matcher, so nothing in lane A had to change.
+
+### The ECTS denominator, resolved against A's version
+I first filtered the home courses in the endpoint, which got UNS PMF from 353 ECTS down
+to 270 but still counted courses offered on a path rather than taken on one. A's
+`aggregate.study_path()`, which landed in `fb5f457`, does it properly: compulsory
+courses, then the chosen module, then electives until the budget is full.
+
+`POST /api/v1/recognition` now delegates. It matches every home course and passes
+`module` and `ects_budget` to `summarise`, because filtering first would hide the
+electives `study_path` needs to choose between. `module="Computer Science"` with
+`ects_budget=180` returns exactly 180.0 ECTS over 26 courses. The frontend sends the
+programme's own `total_ects` as the budget, so the panel reads "of 180 ECTS".
+
+### Also
+- CSV export (`S3-B2`): one row per suggested pair, with a `score_meaning` column so a
+  coordinator reading it knows whether the number is a probability.
+- Compare mode (`S3-B3` and `S4-B2` together): any row expands to re-run that one course
+  under another strategy via `/match/course`, shown underneath. This only became
+  testable once the real pipeline differentiated strategies.
+- The panel refuses to pretend: an uncalibrated strategy gets a warning instead of a
+  share, and a provisional calibration says so in the panel, not just in a JSON field.
+
+### Verified
+- `ruff`, `check_style`, 81 backend tests (8 new in `test_api_recognition.py`), `tsc`,
+  `npm run build`, all clean.
+- Drove the built bundle headless against mocked responses: module selector, recognition
+  panel and its provisional warning, calibrated vs relative badges with the right
+  tooltips, compare mode fetching and rendering, and the CSV download firing with the
+  right filename. No console errors.
+
+### Broken / known issues
+- `S2-B3`, SQLite persistence, is still todo. Nothing depends on it yet.
+- The band vocabularies are no longer a problem: A tied `confidence_of` to
+  `aggregate.py`'s cut-offs in `fb5f457`, so high/medium/low and
+  likely/borderline/unlikely now share one set of thresholds. `score.ts` already used
+  those numbers, so nothing here changed.
+
+### Next
+- **B:** `S5-B1`, the cold 30-pair slice for Cohen's kappa, before I ever see A's
+  corrected labels. Then `S2-B3`.
+
+---
+
 ## 2026-09-20 - [A] The cross-encoder does not earn its place
 
 **Who:** Person A

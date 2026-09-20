@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
-| **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
+| **Person B is on** | stages 2-4 lane B done, plus `S6-B4`. `S2-B3` and `S5-B1` next |
 | **Blocked on** | a decision: `hybrid+ce` is the documented product and it measures worse than `hybrid` |
-| **Last updated** | 2026-09-20 - ablations done; the cross-encoder loses to hybrid |
+| **Last updated** | 2026-09-20 - lane B through stage 4; ablations say the cross-encoder loses to hybrid |
 
 ### Stage ladder
 
@@ -28,9 +28,9 @@ lanes have passed their gate.
 |---|---|---|---|
 | 0 - Scaffold | done | done | closed |
 | 1 - Real data, real surface | done | done | closed |
-| 2 - Dense retrieval | done (early) | todo | todo |
-| 3 - Lexical + hybrid | done (early) | todo | todo |
-| 4 - Cross-encoder rerank | done (early) | todo | todo |
+| 2 - Dense retrieval | done (early) | done | todo |
+| 3 - Lexical + hybrid | done (early) | done | todo |
+| 4 - Cross-encoder rerank | done (early) | done | todo |
 | 5 - Gold set + evaluation | todo | todo | todo |
 | 6 - Scale out + polish | todo | todo | todo |
 | 7 - Defence | todo | todo | todo |
@@ -110,8 +110,8 @@ finds *Theory of Computation* in the top 5 (rank 1, cosine 0.878, verified 2026-
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S2-B1` | todo | Strategy selector in the UI driven by `GET /api/v1/strategies`, with the description shown under it; disable strategies the backend reports as unavailable | switching strategy re-runs the match and the table updates | - |
-| `S2-B2` | todo | Real loading UX: a progress indicator that survives a 60 s request, and a clear timeout message. Raise the nginx/axios timeouts to 180 s | a 60 s match does not look like a hang | - |
+| `S2-B1` | done | Strategy selector in the UI driven by `GET /api/v1/strategies`, with the description shown under it; disable strategies the backend reports as unavailable | switching strategy re-runs the match and the table updates | - |
+| `S2-B2` | done | Real loading UX: a progress indicator that survives a 60 s request, and a clear timeout message. Raise the nginx/axios timeouts to 180 s | a 60 s match does not look like a hang | - |
 | `S2-B3` | todo | SQLite persistence of ingested programmes (`app/db/models.py`), `content_hash` bookkeeping so A's cache invalidation has a home | restarting the container does not re-ingest unchanged files | - |
 
 **Lane B gate:** [ ] the UI can drive every strategy and survives a slow request.
@@ -139,9 +139,9 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S3-B1` | todo | Score calibration: map each strategy's raw score to `score_pct` 0-100 and a `confidence` band, in **one** place, plus the ECTS delta column | scores are comparable across strategies in the UI; bands are green/amber/red | - |
-| `S3-B2` | todo | "Export to CSV" button - the artefact a student actually emails to their coordinator (home course, ECTS, top-5 host courses, scores, links) | the downloaded file opens cleanly in Excel | `S1-B1` |
-| `S3-B3` | todo | Per-row "re-match this course" using `POST /api/v1/match/course`, so a single row can be retried with another strategy without re-running the whole programme | one row updates in place | - |
+| `S3-B1` | done | Score calibration: map each strategy's raw score to `score_pct` 0-100 and a `confidence` band, in **one** place, plus the ECTS delta column | scores are comparable across strategies in the UI; bands are green/amber/red | - |
+| `S3-B2` | done | "Export to CSV" button - the artefact a student actually emails to their coordinator (home course, ECTS, top-5 host courses, scores, links) | the downloaded file opens cleanly in Excel | `S1-B1` |
+| `S3-B3` | done | Per-row "re-match this course" using `POST /api/v1/match/course`, so a single row can be retried with another strategy without re-running the whole programme | one row updates in place | - |
 
 **Lane B gate:** [ ] results are interpretable and exportable.
 
@@ -168,9 +168,9 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S4-B1` | todo | Render `evidence` as an expandable "why" under each match - the two sentences, quoted | clicking "why" shows the sentence pair | `S4-A3` (use the contract's shape before it lands; it is frozen) |
-| `S4-B2` | todo | Side-by-side compare mode: same home course, two strategies, two columns. This is the screenshot for the README and the slides | toggling compare shows `dense` vs `hybrid+ce` next to each other | `S3-B3` |
-| `S4-B3` | todo | Show `took_ms` and the active model names in the footer (`/health` already carries them) | the demo can answer "what is it actually running?" without opening a terminal | - |
+| `S4-B1` | done | Render `evidence` as an expandable "why" under each match - the two sentences, quoted | clicking "why" shows the sentence pair | `S4-A3` (use the contract's shape before it lands; it is frozen) |
+| `S4-B2` | done | Side-by-side compare mode: same home course, two strategies, two columns. This is the screenshot for the README and the slides | toggling compare shows `dense` vs `hybrid+ce` next to each other | `S3-B3` |
+| `S4-B3` | done | Show `took_ms` and the active model names in the footer (`/health` already carries them) | the demo can answer "what is it actually running?" without opening a terminal | - |
 
 **Lane B gate:** [ ] the improvement is visible on screen, not only in the eval table.
 
@@ -238,7 +238,7 @@ estimate calibrated.
 | `S6-B1` | todo | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
 | `S6-B2` | todo | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
 | `S6-B3` | todo | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
-| `S6-B4` | todo | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
+| `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
 
 **Lane B gate:** [ ] verified clean-machine run + README + recognition summary.
 

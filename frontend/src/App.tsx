@@ -4,12 +4,15 @@ import {
   type HealthResponse,
   type MatchResponse,
   type ProgrammeSummary,
+  type RecognitionResponse,
   type Strategy,
   type StrategyInfo,
 } from './lib/api'
+import { download, matchesToCsv } from './lib/csv'
 import ProgrammePicker from './components/ProgrammePicker'
 import ResultsTable from './components/ResultsTable'
 import CourseBrowser from './components/CourseBrowser'
+import RecognitionPanel from './components/RecognitionPanel'
 
 // Appearance is explicitly not graded (CONTEXT.md section 9). Keep this file readable
 // and put the real work in the backend.
@@ -23,7 +26,10 @@ export default function App() {
   const [home, setHome] = useState('')
   const [host, setHost] = useState('')
   const [strategy, setStrategy] = useState<Strategy>('hybrid+ce')
+  const [modules, setModules] = useState<string[]>([])
+  const [module, setModule] = useState<string>('')
   const [result, setResult] = useState<MatchResponse | null>(null)
+  const [recognition, setRecognition] = useState<RecognitionResponse | null>(null)
   const [phase, setPhase] = useState<Phase>('booting')
   const [error, setError] = useState<string | null>(null)
   const [browsing, setBrowsing] = useState<string | null>(null)
@@ -50,6 +56,24 @@ export default function App() {
       })
   }, [])
 
+  // Study paths for the recognition denominator (S6-B4).
+  useEffect(() => {
+    if (!home) return
+    let live = true
+    api
+      .courses(home)
+      .then((cs) => {
+        if (!live) return
+        const found = Array.from(new Set(cs.map((c) => c.module).filter((m): m is string => !!m)))
+        setModules(found)
+        setModule('')
+      })
+      .catch(() => live && setModules([]))
+    return () => {
+      live = false
+    }
+  }, [home])
+
   useEffect(() => {
     if (phase !== 'matching') {
       if (timer.current !== null) window.clearInterval(timer.current)
@@ -66,11 +90,29 @@ export default function App() {
     setPhase('matching')
     setError(null)
     setResult(null)
+    setRecognition(null)
     setBrowsing(null)
     try {
-      setResult(
-        await api.match({ home_programme_id: home, host_programme_id: host, strategy, top_k: 5 }),
-      )
+      const matched = await api.match({
+        home_programme_id: home,
+        host_programme_id: host,
+        strategy,
+        top_k: 5,
+      })
+      setResult(matched)
+      try {
+        setRecognition(
+          await api.recognition({
+            home_programme_id: home,
+            host_programme_id: host,
+            strategy,
+            module: module || null,
+            ects_budget: programmes.find((p) => p.programme_id === home)?.total_ects ?? null,
+          }),
+        )
+      } catch {
+        setRecognition(null) // the table is the deliverable; the summary is a bonus
+      }
       setPhase('ready')
     } catch (e) {
       setError((e as Error).message)
@@ -82,9 +124,21 @@ export default function App() {
     setHome(host)
     setHost(home)
     setResult(null)
+    setRecognition(null)
+  }
+
+  function exportCsv() {
+    if (!result) return
+    const info = strategies.find((s) => s.id === result.strategy)
+    download(`erasmusgpt-${result.home_programme_id}-${result.host_programme_id}.csv`,
+             matchesToCsv(result, info))
   }
 
   const browsed = programmes.find((p) => p.programme_id === browsing) ?? null
+  const clear = () => {
+    setResult(null)
+    setRecognition(null)
+  }
 
   return (
     <main>
@@ -98,7 +152,7 @@ export default function App() {
 
       {phase === 'failed' && (
         <p className="error">
-          {error} Start the backend with <code>docker compose up --build</code>, then reload.
+          {error} Start the backend with <code>docker compose up</code>, then reload.
         </p>
       )}
 
@@ -117,19 +171,13 @@ export default function App() {
           host={host}
           strategy={strategy}
           strategies={strategies}
+          modules={modules}
+          module={module}
           busy={phase === 'matching'}
-          onHome={(id) => {
-            setHome(id)
-            setResult(null)
-          }}
-          onHost={(id) => {
-            setHost(id)
-            setResult(null)
-          }}
-          onStrategy={(s) => {
-            setStrategy(s)
-            setResult(null)
-          }}
+          onHome={(id) => { setHome(id); clear() }}
+          onHost={(id) => { setHost(id); clear() }}
+          onStrategy={(s) => { setStrategy(s); clear() }}
+          onModule={(m) => { setModule(m); clear() }}
           onSwap={swap}
           onMatch={runMatch}
         />
@@ -137,8 +185,8 @@ export default function App() {
 
       {phase === 'matching' && (
         <p className="hint">
-          Matching, {elapsed}s elapsed. Cross-encoder reranking on CPU can take up to a minute for a
-          whole programme.
+          Matching, {elapsed}s elapsed. Cross-encoder reranking on CPU takes about a second per
+          course, so a whole programme is around a minute.
         </p>
       )}
 
@@ -152,7 +200,19 @@ export default function App() {
         </p>
       )}
 
-      {result && <ResultsTable data={result} />}
+      {recognition && <RecognitionPanel data={recognition} />}
+
+      {result && (
+        <>
+          <p className="actions">
+            <button type="button" onClick={exportCsv}>Export CSV</button>
+            <span className="hint">
+              One row per suggested pair, for the learning agreement.
+            </span>
+          </p>
+          <ResultsTable data={result} strategies={strategies} hostProgrammeId={host} />
+        </>
+      )}
 
       {!result && phase === 'ready' && programmes.length > 0 && (
         <section className="empty">

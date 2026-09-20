@@ -60,3 +60,36 @@ button.linkish { border: 0; background: none; padding: 0; text-align: left; colo
   .badge.medium { background: #33290f; color: #e3c069; }
   .badge.low { background: #3a1d1f; color: #ef9b95; }
 }
+
+/* --- recognition summary (S6-B4) --- */
+.recog { margin: 1.4rem 0 1rem; padding: 1rem 1.1rem; background: #fff; border: 1px solid #e6e6ec; border-radius: 6px; }
+.recog h2 { margin: 0 0 .7rem; font-size: 1.12rem; font-weight: 600; }
+.stack { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: #eceef3; }
+.seg { display: block; height: 100%; }
+.seg.likely, .dot.likely { background: #2f7d4f; }
+.seg.borderline, .dot.borderline { background: #c79300; }
+.seg.unlikely, .dot.unlikely { background: #cfd3dc; }
+.dot.short { background: #b3261e; }
+.keys { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; padding: 0; margin: .6rem 0 .5rem; font-size: .85rem; color: #55555f; }
+.keys li { display: flex; align-items: center; gap: .35rem; }
+.dot { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
+/* --- relative (uncalibrated) badges read as neutral, not as probabilities --- */
+.badge.rel-high { background: #e7ebf3; color: #35415c; }
+.badge.rel-medium { background: #eef0f4; color: #55607a; }
+.badge.rel-low { background: #f2f3f6; color: #7a8090; }
+
+.actions { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin: 1rem 0 0; }
+.compare { margin-top: .6rem; padding: .6rem .7rem; border-left: 3px solid #c9c9d1; background: #fafbfd; border-radius: 0 4px 4px 0; }
+.compare-head { display: flex; align-items: flex-end; gap: .6rem; flex-wrap: wrap; margin-bottom: .4rem; }
+
+@media (prefers-color-scheme: dark) {
+  .recog { background: #161922; border-color: #262b36; }
+  .stack { background: #222733; }
+  .seg.unlikely, .dot.unlikely { background: #39404e; }
+  .keys { color: #98a2b3; }
+  .badge.rel-high { background: #222a3a; color: #b9c6e0; }
+  .badge.rel-medium { background: #1e2430; color: #9aa6bb; }
+  .badge.rel-low { background: #1b2029; color: #7b8496; }
+  .compare { background: #141821; border-left-color: #2c313c; }
+}
