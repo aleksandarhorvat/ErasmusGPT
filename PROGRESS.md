@@ -14,6 +14,47 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] KTH ingested. Four host programmes
+
+**Who:** Person A
+**Stage:** 6
+**Commit:** `[A] add the kth scraper and curriculum`
+**Tasks touched:** `S6-A1` (the >= 4 host programmes half of the gate is met)
+
+### Done
+- `backend/scripts/scrape_kth.py` plus `data/curricula/kth-cs-msc.json`: 79 courses of
+  the MSc Computer Science, in English, with contents and intended learning outcomes.
+- The API now serves five programmes: PMF 50, Twente TCS 40, Twente Applied Mathematics
+  51, EPFL 78, KTH 79. Startup encodes all of them in 55 s cold, instantly from cache.
+
+### Sample of what KTH gives us
+Artificial intelligence 1 -> Artificial Intelligence and Applied Methods (65 %). Formal
+languages and automata -> Automata and Languages (56 %). Computer networks -> Protocols
+and Principles of the Internet (60 %). Databases 1 finds nothing above 19 %, because
+this year-1 master's list has no database course, and the system says so rather than
+inventing one.
+
+### Decision worth knowing about
+The KTH programme syllabus page is a JavaScript app and the KOPPS API returned 502 all
+day, so the course codes live in `data/curricula/kth-cs-msc.codes.txt`, with a comment
+saying where they came from and when. The course pages themselves are plain server-
+rendered HTML, so everything else is scraped normally. Refreshing the list is a yearly
+job, not a per-run one.
+
+### Catalogues that were tried and rejected, so nobody repeats the work
+- **Delft**: the study guide is a single-page app, the programme list is paginated in
+  JavaScript, and no plain API answered. Expensive, revisit only if we want a Dutch BSc.
+- **DTU**: every plain request is bounced through a JavaScript login loop.
+- **Masaryk**: `is.muni.cz` returned an empty body to a plain request.
+- **ETH**: course ids in the VVZ are session-bound.
+- **EPFL, KTH**: server-rendered and easy. Both done.
+
+### Next
+- **A:** the query-side instruction that bge-small expects for retrieval is not being
+  used; worth an ablation like the token-length one. Then the error analysis.
+
+---
+
 ## 2026-09-20 - [A] B's two reviews, worked through
 
 **Who:** Person A

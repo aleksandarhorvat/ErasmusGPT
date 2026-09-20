@@ -20,7 +20,7 @@ lanes have passed their gate.
 | **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-20 - B's review handled: coverage, denominator, bands, contract |
+| **Last updated** | 2026-09-20 - four host programmes: Twente TCS and AM, EPFL, KTH |
 
 ### Stage ladder
 
@@ -228,8 +228,8 @@ probability until it has been calibrated against real labels.
 | `S6-A4` | done | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |
 | `S6-A5` | done | **Recognition estimate, part 2: aggregate over a programme.** `GET`/`POST` returns, per home course, the best match and its calibrated probability; the expected recognised ECTS of a whole programme is the sum of `ects x p`. Decide and document the rule for partial matches (label 1) and for ECTS shortfall (6 ECTS home vs 4 ECTS host) | a programme-level number exists with its arithmetic written down in `docs/05-evaluation.md` | `S6-A4` |
 
-**Lane A gate:** [ ] >= 4 host programmes, error analysis committed, recognition estimate
-calibrated.
+**Lane A gate:** [x] >= 4 host programmes; [ ] error analysis committed; [x] recognition
+estimate calibrated.
 
 ### Lane B
 

@@ -85,6 +85,8 @@ and accept that for several of them this means the master's rather than the bach
 | University | English programme to ingest | Level | Catalogue |
 |---|---|---|---|
 | Twente | BSc Technical Computer Science | BSc | Osiris JSON API, done |
+| Twente | BSc Applied Mathematics | BSc | same scraper, `--programme`, done. It teaches the mathematics that TCS students take, which is why the maths half of PMF had nothing to match against |
+| KTH Stockholm | MSc Computer Science | MSc | `kth.se/student/kurser/kurs/<CODE>?l=en`, server-rendered, done. The syllabus page that lists the codes is a JavaScript app, so the code list is committed as `kth-cs-msc.codes.txt` |
 | EPFL | MSc Computer Science | MSc | `edu.epfl.ch`, server-rendered, done |
 | Delft | BSc Computer Science and Engineering | BSc | `studiegids.tudelft.nl`, JavaScript app |
 | JKU Linz | BSc Artificial Intelligence | BSc | JKU online catalogue |
