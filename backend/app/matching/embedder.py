@@ -21,6 +21,14 @@ from app.matching.document import build_document
 
 log = logging.getLogger(__name__)
 
+# bge models are trained with an instruction on the query side of a retrieval pair and
+# none on the document side. Measured over the pooled labels, adding it lifts Recall@5
+# from 0.75 to 0.77 against Twente TCS and from 0.78 to 0.87 against Applied
+# Mathematics, with P@1 unchanged. Models without a published instruction get none.
+QUERY_INSTRUCTION = {
+    "bge-small": "Represent this sentence for searching relevant passages: ",
+}
+
 
 def programme_documents(store: CurriculumStore, programme_id: str) -> list[str]:
     """The text that represents each course, in get_courses order.
@@ -92,18 +100,26 @@ class Embedder:
         )
         return np.asarray(vectors, dtype=np.float32)
 
-    def cache_path(self, programme_id: str) -> Path:
-        return self.settings.cache_dir / f"{programme_id}.{self.model_tag}.npy"
+    @property
+    def instruction(self) -> str:
+        return QUERY_INSTRUCTION.get(self.model_tag, "")
 
-    def encode_programme(self, programme_id: str) -> np.ndarray:
+    def cache_path(self, programme_id: str, as_query: bool = False) -> Path:
+        suffix = ".query" if as_query and self.instruction else ""
+        return self.settings.cache_dir / f"{programme_id}.{self.model_tag}{suffix}.npy"
+
+    def encode_programme(self, programme_id: str, as_query: bool = False) -> np.ndarray:
         """Embeddings for one programme, from cache when the documents are unchanged.
 
-        Row i belongs to store.get_courses(programme_id)[i]. Raises KeyError if the
-        programme is unknown.
+        Row i belongs to store.get_courses(programme_id)[i]. With as_query, the model's
+        query instruction is prepended, which is how bge expects a query to be encoded.
+        Raises KeyError if the programme is unknown.
         """
         documents = programme_documents(self.store, programme_id)
+        if as_query and self.instruction:
+            documents = [self.instruction + document for document in documents]
         digest = content_hash(documents)
-        path = self.cache_path(programme_id)
+        path = self.cache_path(programme_id, as_query)
         meta_path = path.with_suffix(".json")
 
         if path.exists() and meta_path.exists():

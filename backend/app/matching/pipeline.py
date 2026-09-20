@@ -22,7 +22,7 @@ import numpy as np
 from app.core.config import Settings, get_settings
 from app.ingest.loader import CurriculumStore
 from app.matching.dense import DenseIndex
-from app.matching.document import sentences
+from app.matching.document import rerank_query, sentences
 from app.matching.embedder import Embedder, programme_documents
 from app.matching.fusion import reciprocal_rank_fusion
 from app.matching.lexical import BM25Index
@@ -144,6 +144,7 @@ class PipelineMatcher:
         self.reranker = reranker or Reranker(self.settings)
         self.calibration = load_calibration(self.settings)
         self.indexes: dict[str, DenseIndex] = {}
+        self.queries: dict[str, DenseIndex] = {}
         self.lexical: dict[str, BM25Index] = {}
         self.documents: dict[str, dict[str, str]] = {}
         # course_uid -> (sentences, one L2-normalised row each), for evidence (S4-A3).
@@ -158,6 +159,10 @@ class PipelineMatcher:
             uids = [c.course_uid for c in self.store.get_courses(programme_id)]
             self.indexes[programme_id] = DenseIndex(
                 uids, self.embedder.encode_programme(programme_id)
+            )
+            # The query side is encoded separately when the model expects an instruction.
+            self.queries[programme_id] = DenseIndex(
+                uids, self.embedder.encode_programme(programme_id, as_query=True)
             )
             documents = programme_documents(self.store, programme_id)
             self.lexical[programme_id] = BM25Index(uids, documents)
@@ -216,7 +221,8 @@ class PipelineMatcher:
         return self.store.get_courses(programme_id)
 
     def _vector(self, course_uid: str):  # noqa: ANN202 - np.ndarray, one row
-        for index in self.indexes.values():
+        """The query-side embedding of a course, instruction included where one applies."""
+        for index in self.queries.values():
             if course_uid in index.uids:
                 return index.matrix[index.uids.index(course_uid)]
         raise KeyError(course_uid)
@@ -253,15 +259,15 @@ class PipelineMatcher:
 
         # hybrid+ce: rerank the fused candidates as (home, host) pairs.
         pairs = [(uid, self.documents[host_programme_id][uid]) for uid, _ in fused]
+        query = rerank_query(self.store.get_course(home_uid).title, self._document(home_uid))
         if self._pair_budget < len(pairs):
             # Over budget: keep the fused order for the rest rather than risk a timeout.
-            kept = self.reranker.rerank(self._document(home_uid),
-                                        pairs[:self._pair_budget], n)
+            kept = self.reranker.rerank(query, pairs[:self._pair_budget], n)
             rest = [(uid, 0.0) for uid, _ in fused[self._pair_budget:]]
             self._pair_budget = 0
             return (kept + rest)[:n]
         self._pair_budget -= len(pairs)
-        return self.reranker.rerank(self._document(home_uid), pairs, n)
+        return self.reranker.rerank(query, pairs, n)
 
     def _candidate(
         self, home: CourseSummary, host_uid: str, score: float, rank: int, pct: int

@@ -14,6 +14,67 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] The cross-encoder does not earn its place
+
+**Who:** Person A
+**Stage:** 6, with a finding that reaches back into stage 4 and into `CONTEXT.md`.
+**Commit:** `[A] measure the reranker properly and write up the ablations`
+**Tasks touched:** `S6-A2` (started), `S4-A2` (called into question)
+
+### The finding
+Over the pooled labels, against Twente TCS, 28 queries:
+
+| Strategy | P@1 | Recall@5 | MRR@10 | ms/query |
+|---|---|---|---|---|
+| `bm25` | 0.86 | 0.75 | 0.91 | 2 |
+| `dense` | 0.75 | 0.77 | 0.81 | <1 |
+| **`hybrid`** | **0.86** | **0.80** | **0.90** | 2 |
+| `hybrid+ce` | 0.68 | 0.72 | 0.77 | 979 |
+
+Against Applied Mathematics the reranker draws on P@1 and MRR and loses on recall. So
+the configuration `CONTEXT.md` calls "the product" is the worst of the four, and the
+slowest by three orders of magnitude.
+
+The reason looks like task mismatch, not a bug: `ms-marco` cross-encoders are trained on
+short web queries against passages, and both sides here are 1400-character course
+descriptions.
+
+### What was tried to rescue it
+- **A shorter query side.** Giving the reranker the title plus one sentence instead of
+  the whole document lifts P@1 from 0.54 to 0.68. Adopted (`document.rerank_query`).
+- **Three other rerankers in the budget.** `ms-marco-L12` 0.57, `stsb-TinyBERT-L-4`
+  0.29, `stsb-distilroberta-base` 0.18. The sentence-similarity models are much worse,
+  which is informative in itself: a course description is neither short nor a sentence.
+- Neither closes the gap to `hybrid`.
+
+### Two improvements that stand on their own
+- `embedder.QUERY_INSTRUCTION`: bge expects an instruction on the query side and we were
+  not using one. Recall@5 0.78 -> 0.87 against Applied Mathematics, P@1 unchanged. The
+  query side now has its own cached matrix per programme.
+- The 256-token window is confirmed as better, and B's explanation for why is refuted by
+  a direct test: removing the learning outcomes makes every metric worse.
+
+### Everything is written up
+`eval/report/ablations.md` carries all five ablations with the caveat at the top: these
+labels were written by a model and no human has checked them, so they can choose between
+settings but cannot go in the report as results.
+
+### Decision needed, for A and B together
+1. Make `hybrid` the default and present the reranker as a measured negative result.
+2. Keep `hybrid+ce` and defend shipping the slower, worse option.
+3. Fine-tune the reranker on the gold set (`S6-A3`), which is the version where the
+   original claim could survive. Needs the human pass first.
+
+My recommendation is 1 now and 3 if there is time, with the ablation table as a centre
+piece of the report rather than an appendix. Changing the default strategy touches
+`CONTEXT.md`, `docs/04-api-contract.md` and the UI default, so it is not mine to make
+alone.
+
+### Next
+- **Luka:** `S5-A1`. Everything above is provisional until those rows are checked.
+
+---
+
 ## 2026-09-20 - [A] KTH ingested. Four host programmes
 
 **Who:** Person A

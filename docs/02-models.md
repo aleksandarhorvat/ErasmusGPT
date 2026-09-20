@@ -105,6 +105,21 @@ full model. The downloader now keeps safetensors where a repository has it and s
 the other formats, and it fails the build if one model passes 200 MB or the set passes
 400 MB, so this cannot creep back unnoticed.
 
+## What the measurements say about these choices (2026-09-20)
+
+`eval/report/ablations.md` has the tables. The short version, on provisional labels:
+
+- The **cross-encoder loses to plain hybrid retrieval** on both host programmes, by
+  0.18 of P@1 against Twente TCS, for about 500 times the latency. Two rescues were
+  tried: a shorter query side (recovers a third of the gap, adopted) and three other
+  rerankers inside the budget (all worse, including both sentence-similarity models).
+- The **bge query instruction** was missing and is worth up to 0.09 of Recall@5.
+- The cross-encoder runs at **256 tokens**, not 512: same P@1, better Recall@5, 2.5
+  times faster. Cutting the learning outcomes instead makes everything worse, so the
+  outcomes stay in the document.
+
+None of this is settled until the gold set is human-checked (`S5-A1`).
+
 ## Where the GPU is actually used
 
 `notebooks/` on Colab free (T4), for:

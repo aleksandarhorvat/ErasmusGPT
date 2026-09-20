@@ -19,8 +19,8 @@ lanes have passed their gate.
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
-| **Blocked on** | nothing |
-| **Last updated** | 2026-09-20 - four host programmes: Twente TCS and AM, EPFL, KTH |
+| **Blocked on** | a decision: `hybrid+ce` is the documented product and it measures worse than `hybrid` |
+| **Last updated** | 2026-09-20 - ablations done; the cross-encoder loses to hybrid |
 
 ### Stage ladder
 

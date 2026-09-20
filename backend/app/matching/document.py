@@ -40,6 +40,19 @@ def sentences(text: str) -> list[str]:
     return out
 
 
+def rerank_query(title: str, document: str) -> str:
+    """The short text a cross-encoder gets as the query side of a pair.
+
+    ms-marco cross-encoders are trained on a short query against a longer passage. Given
+    a whole 1400-character course document instead, the reranker degrades badly: over the
+    pooled labels, P@1 0.54 with the full document against 0.68 with the title and one
+    sentence, and Recall@5 0.65 against 0.71. The document stays the document; only the
+    query side is shortened.
+    """
+    first = sentences(document)
+    return f"{clean(title)}. {first[0]}" if first else clean(title)
+
+
 def build_document(
     course: CourseSummary,
     learning_outcomes: list[str] | None = None,

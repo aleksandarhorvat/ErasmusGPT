@@ -10,10 +10,10 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I011 Introduction to programming
 
-- `bm25` (7 ms): Software Diamond (100 %) | Introduction to Programming (99 %) | Concurrency and Compiler Construction (84 %)
-- `dense` (0 ms): Introduction to Programming (71 %) | Concurrency and Compiler Construction (65 %) | Advanced Programming (62 %)
-- `hybrid` (7 ms): Introduction to Programming (100 %) | Concurrency and Compiler Construction (98 %) | Software Diamond (97 %)
-- `hybrid+ce` (1464 ms): Introduction to Programming (54 %) | Advanced Programming (47 %) | Functional and Logic Programming (36 %)
+- `bm25` (6 ms): Software Diamond (100 %) | Introduction to Programming (99 %) | Concurrency and Compiler Construction (84 %)
+- `dense` (0 ms): Introduction to Programming (64 %) | Concurrency and Compiler Construction (57 %) | Databases (53 %)
+- `hybrid` (2 ms): Introduction to Programming (100 %) | Concurrency and Compiler Construction (98 %) | Software Diamond (98 %)
+- `hybrid+ce` (901 ms): Introduction to Programming (70 %) | Advanced Programming (69 %) | Software Diamond (52 %)
 
   Evidence for rank 1 (similarity 0.8101):
   - home: Introduction to programming Enabling students to understand the concepts of (computer) programming, problem analysis and their implementation in a concrete procedural language.
@@ -21,32 +21,32 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I021 Data structures and algorithms 1
 
-- `bm25` (4 ms): Software Diamond (100 %) | Functional and Logic Programming (98 %) | Concurrency and Compiler Construction (89 %)
-- `dense` (0 ms): Concurrency and Compiler Construction (58 %) | Databases (55 %) | Introduction to Programming (54 %)
-- `hybrid` (5 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Databases (98 %)
-- `hybrid+ce` (1332 ms): Introduction to Programming (56 %) | Concurrency and Compiler Construction (52 %) | Advanced Programming (36 %)
+- `bm25` (3 ms): Software Diamond (100 %) | Functional and Logic Programming (98 %) | Concurrency and Compiler Construction (89 %)
+- `dense` (0 ms): Concurrency and Compiler Construction (51 %) | Databases (49 %) | Introduction to Programming (47 %)
+- `hybrid` (3 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Databases (98 %)
+- `hybrid+ce` (962 ms): Social Network Structure and Dynamics (23 %) | Concurrency and Compiler Construction (18 %) | Introduction to Programming (15 %)
 
-  Evidence for rank 1 (similarity 0.7804):
+  Evidence for rank 1 (similarity 0.7193):
   - home: Data structures and algorithms 1 Enabling students to understand and use dynamic data structures.
-  - host: Introduction to Programming In this study unit, the students build upon the knowledge on algorithms and recursion acquired in Module 1.
+  - host: Students will be able to understand and model network data as graphs, and develop algorithms for analyzing basic graph properties of large volumes of network data (big data).
 
 ## I031 Databases 1
 
-- `bm25` (6 ms): Information Diamond (100 %) | Databases (54 %) | DS&AI Project (40 %)
-- `dense` (0 ms): Information Diamond (64 %) | Databases (60 %) | Data & Information Project (47 %)
-- `hybrid` (7 ms): Information Diamond (100 %) | Databases (98 %) | Knowledge Representation and Reasoning & Data Quality (92 %)
-- `hybrid+ce` (1321 ms): Software Design and Modelling (29 %) | Information Diamond (24 %) | Databases (21 %)
+- `bm25` (3 ms): Information Diamond (100 %) | Databases (54 %) | DS&AI Project (40 %)
+- `dense` (0 ms): Information Diamond (60 %) | Databases (53 %) | Data & Information Project (42 %)
+- `hybrid` (3 ms): Information Diamond (100 %) | Databases (98 %) | Knowledge Representation and Reasoning & Data Quality (93 %)
+- `hybrid+ce` (933 ms): Information Diamond (63 %) | Databases (50 %) | Data & Information Project (24 %)
 
-  Evidence for rank 1 (similarity 0.8232):
-  - home: Entity -relation model and its connection with object data model.
-  - host: Analyzing relations among entities within a model, among different models and between each model and software code.
+  Evidence for rank 1 (similarity 0.8236):
+  - home: At the end of the course, successful student s should be able to understand basic principles of modelling and creating relation data model for an illustrative example of real system using appropriate CASE tool, execution of SQL queries and functions of DBMS.
+  - host: The student knows the basic concepts of databases and can design a database schema for a simple case using ER modelling.
 
 ## I142 Formal languages and automata
 
-- `bm25` (5 ms): Embedded Architectures and Tools (100 %) | Concurrency and Compiler Construction (49 %) | Data & Information Project (44 %)
-- `dense` (0 ms): Software Diamond (52 %) | Introduction to Artificial Intelligence and Machine Learning (52 %) | Concurrency and Compiler Construction (45 %)
-- `hybrid` (5 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (98 %) | Hardware Diamond (95 %)
-- `hybrid+ce` (1448 ms): Introduction to Artificial Intelligence and Machine Learning (18 %) | Introduction to Programming (13 %) | Functional and Logic Programming (12 %)
+- `bm25` (3 ms): Embedded Architectures and Tools (100 %) | Concurrency and Compiler Construction (49 %) | Data & Information Project (44 %)
+- `dense` (0 ms): Software Diamond (47 %) | Introduction to Artificial Intelligence and Machine Learning (45 %) | Knowledge Representation and Reasoning & Data Quality (38 %)
+- `hybrid` (3 ms): Concurrency and Compiler Construction (100 %) | Software Diamond (99 %) | Hardware Diamond (96 %)
+- `hybrid+ce` (949 ms): Introduction to Artificial Intelligence and Machine Learning (9 %) | Introduction to Programming (8 %) | Hardware Diamond (8 %)
 
   Evidence for rank 1 (similarity 0.7437):
   - home: Formal languages and automata Introducing the students to fundamental and abstract concepts of theoretical computer science.
@@ -54,21 +54,21 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I051 Operating systems 1
 
-- `bm25` (5 ms): Operating Systems (100 %) | Hardware Diamond (61 %) | Computer Systems Project (54 %)
-- `dense` (0 ms): Operating Systems (64 %) | Computer Architecture and Organisation (59 %) | Concurrency and Compiler Construction (57 %)
-- `hybrid` (4 ms): Operating Systems (100 %) | Computer Architecture and Organisation (97 %) | Hardware Diamond (95 %)
-- `hybrid+ce` (1402 ms): Introduction to Programming (37 %) | Computer Systems Project (29 %) | Concurrency and Compiler Construction (27 %)
+- `bm25` (3 ms): Operating Systems (100 %) | Hardware Diamond (61 %) | Computer Systems Project (54 %)
+- `dense` (0 ms): Operating Systems (61 %) | Computer Architecture and Organisation (54 %) | Concurrency and Compiler Construction (52 %)
+- `hybrid` (3 ms): Operating Systems (100 %) | Computer Architecture and Organisation (97 %) | Computer Systems Project (96 %)
+- `hybrid+ce` (927 ms): Computer Systems Project (53 %) | Operating Systems (52 %) | Hardware Diamond (17 %)
 
-  Evidence for rank 1 (similarity 0.7397):
-  - home: Concurrent programming.
-  - host: Collaborating with other students according to the pair programming method.
+  Evidence for rank 1 (similarity 0.8255):
+  - home: The role and development of operating systems.
+  - host: Gain hands-on experience in system-level programming and OS interaction.
 
 ## I151 Artificial intelligence 1
 
-- `bm25` (6 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (96 %) | Intelligent Embedded Systems Project (81 %)
-- `dense` (0 ms): Introduction to Artificial Intelligence and Machine Learning (75 %) | Knowledge Representation and Reasoning & Data Quality (56 %) | Information Diamond (52 %)
-- `hybrid` (5 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (98 %) | Information Diamond (95 %)
-- `hybrid+ce` (1399 ms): Introduction to Artificial Intelligence and Machine Learning (54 %) | Data & Information Project (9 %) | Explainable AI & Ethics (9 %)
+- `bm25` (3 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (96 %) | Intelligent Embedded Systems Project (81 %)
+- `dense` (0 ms): Introduction to Artificial Intelligence and Machine Learning (69 %) | Knowledge Representation and Reasoning & Data Quality (57 %) | DS&AI Project (45 %)
+- `hybrid` (3 ms): Introduction to Artificial Intelligence and Machine Learning (100 %) | Knowledge Representation and Reasoning & Data Quality (98 %) | Information Diamond (95 %)
+- `hybrid+ce` (942 ms): Introduction to Artificial Intelligence and Machine Learning (70 %) | Intelligent Embedded Systems Project (36 %) | Software Systems Implementation Project (10 %)
 
   Evidence for rank 1 (similarity 0.8431):
   - home: Students should be able to implementat the knowledge -based systems with deep understanding of logical inference and complex principles of AI.
@@ -76,21 +76,21 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I152 Analysis of algorithms
 
-- `bm25` (8 ms): Software Diamond (100 %) | Functional and Logic Programming (82 %) | Concurrency and Compiler Construction (64 %)
-- `dense` (0 ms): Software Diamond (65 %) | Introduction to Artificial Intelligence and Machine Learning (54 %) | Concurrency and Compiler Construction (47 %)
-- `hybrid` (8 ms): Software Diamond (100 %) | Functional and Logic Programming (97 %) | Concurrency and Compiler Construction (97 %)
-- `hybrid+ce` (1439 ms): Statistical Methods for Data Analysis (23 %) | Introduction to Artificial Intelligence and Machine Learning (21 %) | Information Diamond (15 %)
+- `bm25` (5 ms): Software Diamond (100 %) | Functional and Logic Programming (82 %) | Concurrency and Compiler Construction (64 %)
+- `dense` (0 ms): Software Diamond (63 %) | Introduction to Artificial Intelligence and Machine Learning (53 %) | Functional and Logic Programming (45 %)
+- `hybrid` (4 ms): Software Diamond (100 %) | Functional and Logic Programming (98 %) | Concurrency and Compiler Construction (96 %)
+- `hybrid+ce` (934 ms): Software Diamond (16 %) | Statistical Methods for Data Analysis (15 %) | Introduction to Programming (11 %)
 
-  Evidence for rank 1 (similarity 0.711):
-  - home: Analysis of algorithms The goal of the course is to present an introduction to basic concepts of computability theory i.e.
-  - host: Statistical Methods for Data Analysis Based on the knowledge of “Probability Theory” in M4, the Statistics course aims to introduce the basic topics in statistics: Descriptive statistics, Estimation (theory), Confidence intervals and Testing of hypotheses.
+  Evidence for rank 1 (similarity 0.7979):
+  - home: designing simplest (non- branching) programs of Turing machines and developing the capability of analysing the time complexity of classical algorithms by solving the well-known computational problems.
+  - host: The student can implement simple algorithms in the chosen functional language.
 
 ## I243 Computer networks
 
-- `bm25` (10 ms): Network Systems Part 2 (100 %) | Network Systems Part 1 (100 %) | Network Systems Part 3 (99 %)
-- `dense` (0 ms): Network Systems Part 1 (75 %) | Network Systems Part 3 (74 %) | Network Systems Part 2 (74 %)
-- `hybrid` (10 ms): Network Systems Part 1 (100 %) | Network Systems Part 2 (99 %) | Network Systems Part 3 (98 %)
-- `hybrid+ce` (1484 ms): Network Systems Project (54 %) | Computer Systems Project (53 %) | Network Systems Part 2 (50 %)
+- `bm25` (5 ms): Network Systems Part 2 (100 %) | Network Systems Part 1 (100 %) | Network Systems Part 3 (99 %)
+- `dense` (0 ms): Network Systems Part 3 (70 %) | Network Systems Part 2 (70 %) | Network Systems Part 1 (69 %)
+- `hybrid` (4 ms): Network Systems Part 2 (100 %) | Network Systems Part 3 (99 %) | Network Systems Part 1 (98 %)
+- `hybrid+ce` (952 ms): Network Systems Project (70 %) | Hardware Diamond (70 %) | Network Systems Part 1 (67 %)
 
   Evidence for rank 1 (similarity 0.8516):
   - home: Understanding the basic functions, technologies and architectures of modern computer networks.
@@ -98,10 +98,10 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I251 Software engineering
 
-- `bm25` (7 ms): Software Design and Modelling (100 %) | Data & Information Project (84 %) | Agile Project Process Development (69 %)
-- `dense` (0 ms): Software Design and Modelling (68 %) | Introduction to Programming (63 %) | Software Systems Implementation Project (60 %)
-- `hybrid` (5 ms): Software Design and Modelling (100 %) | Data & Information Project (96 %) | Agile Project Process Development (95 %)
-- `hybrid+ce` (1525 ms): Software Design and Modelling (48 %) | Advanced Programming (41 %) | Software Engineering for Embedded Systems (29 %)
+- `bm25` (4 ms): Software Design and Modelling (100 %) | Data & Information Project (84 %) | Agile Project Process Development (69 %)
+- `dense` (0 ms): Software Design and Modelling (60 %) | Introduction to Programming (57 %) | Software Systems Implementation Project (54 %)
+- `hybrid` (4 ms): Software Design and Modelling (100 %) | Data & Information Project (97 %) | Agile Project Process Development (95 %)
+- `hybrid+ce` (968 ms): Software Design and Modelling (68 %) | Software Engineering for Embedded Systems (47 %) | Advanced Programming (11 %)
 
   Evidence for rank 1 (similarity 0.9076):
   - home: Principles of software metrics and practicing of methods of software quality measurement.
@@ -109,10 +109,10 @@ Read it as: does rank 1 look right, and do the four strategies differ?
 
 ## I263 Web programming
 
-- `bm25` (9 ms): Secure Web Development (100 %) | Data & Information Project (72 %) | Agile Project Technical Development (66 %)
-- `dense` (0 ms): Secure Web Development (56 %) | Advanced Programming (53 %) | Databases (49 %)
-- `hybrid` (8 ms): Secure Web Development (100 %) | Advanced Programming (95 %) | Data & Information Project (95 %)
-- `hybrid+ce` (1482 ms): Advanced Programming (58 %) | Introduction to Programming (51 %) | Functional and Logic Programming (46 %)
+- `bm25` (5 ms): Secure Web Development (100 %) | Data & Information Project (72 %) | Agile Project Technical Development (66 %)
+- `dense` (0 ms): Secure Web Development (54 %) | Advanced Programming (53 %) | Databases (47 %)
+- `hybrid` (5 ms): Secure Web Development (100 %) | Advanced Programming (95 %) | Data & Information Project (95 %)
+- `hybrid+ce` (1039 ms): Advanced Programming (37 %) | Introduction to Programming (8 %) | Data & Information Project (8 %)
 
   Evidence for rank 1 (similarity 0.7651):
   - home: Event-driven programming.
@@ -130,7 +130,7 @@ because it was trained on search relevance, not on course equivalence.
 
 | Strategy | ms |
 |---|---|
-| `bm25` | 7 |
+| `bm25` | 4 |
 | `dense` | 0 |
-| `hybrid` | 7 |
-| `hybrid+ce` | 1430 |
+| `hybrid` | 3 |
+| `hybrid+ce` | 951 |
