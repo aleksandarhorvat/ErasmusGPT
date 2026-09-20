@@ -14,6 +14,51 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Gold set pooled and pre-labelled, 562 pairs
+
+**Who:** Person A
+**Stage:** 5. `S5-A0` done. `S5-A1`, the human pass, is next and only a human can do it.
+**Commit:** `[A] pool and pre-label the gold set`
+**Tasks touched:** `S5-A0` (done)
+
+### Done
+- Pooled the union of the top 10 from `dense` and `hybrid+ce` over 40 PMF courses against
+  the real Twente catalogue: **562 pairs, 14.1 per home course**. 238 were found by both
+  strategies, 324 by one only.
+- Pre-labelled all 562 by reading both course texts against the rubric in
+  `docs/05-evaluation.md`, the question being whether a coordinator would sign the host
+  course off in place of the home one. Result: **17 twos, 66 ones, 479 zeros.**
+- `data/gold/llm_prelabels.csv` is written and frozen. `data/gold/gold_pairs.csv` is the
+  working copy, same labels, every row `checked=no`.
+- `pool.csv` now goes to `data/.cache/`, not `data/gold/`. It quotes course text verbatim
+  and is regenerable, so it does not belong in the repository.
+
+### What the labels say about the data
+- **12 of the 40 home courses have no acceptable match at all**: both Calculus courses,
+  Linear algebra, Analytic geometry, Numerical analysis, Algebra, both English courses,
+  Financial mathematics, and both Software Labs. Twente's mathematics line is run by
+  Applied Mathematics and is not in our slice of the catalogue, and nobody teaches
+  academic English or a software tools lab there. A third of the programme therefore has
+  no correct answer available, and the system still returns five candidates for each.
+- Only 17 pairs are outright matches. The clean ones are the obvious ones: Computer
+  networks against all three Network Systems parts, Operating systems 1, Computer
+  architecture, Databases 1, Information systems 1 against Software Design and Modelling.
+
+### Honesty note for the report
+The pre-labels come from the same model family that the pipeline uses for matching. I
+labelled from the course texts alone and did not look at which strategy proposed a pair
+or at its rank, but the correlation cannot be ruled out, and `S5-A1` exists precisely to
+break it. The correction rate from diffing the two files is the number that shows whether
+the human pass was real, and it belongs in `results.md`.
+
+### Next
+- **Luka (S5-A1):** open `tools/annotate.html`, load `data/gold/gold_pairs.csv`, read each
+  row and press Enter to accept or change the label. Only `checked=yes` rows reach the
+  metrics, so today `eval/run_eval.py` still has nothing to measure.
+- **A:** once rows are checked, run the evaluation and write `eval/report/results.md`.
+
+---
+
 ## 2026-09-20 - [A] Three real curricula land. Stage 1 closed
 
 **Who:** Person A

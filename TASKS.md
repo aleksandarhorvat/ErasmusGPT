@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S5-A0` pooling, now unblocked. Lane A is done through stage 4 |
+| **Person A is on** | waiting on `S5-A1`, which is Luka's own reading pass in the annotator |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-20 - three real curricula committed, stage 1 closed |
+| **Last updated** | 2026-09-20 - 562 pairs pooled and pre-labelled, ready for the human pass |
 
 ### Stage ladder
 
@@ -186,7 +186,7 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S5-A0` | todo | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
+| `S5-A0` | done | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
 | `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
 | `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
 | `S5-A3` | wip | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
@@ -209,7 +209,13 @@ as the candidate generator that feeds the reranker.
 
 ---
 
-## Stage 6 - Scale out and polish
+## Stage 6 - Scale out, aggregate, polish
+
+**Added 2026-09-20 (A, after a call with Luka):** the system compares *courses*. What a
+student actually asks is "how much of my degree would be recognised". That is `S6-A4`,
+`S6-A5` and `S6-B4` below, and it is the difference between a demo and something a
+coordinator would use. It needs the gold set first: a cross-encoder score is not a
+probability until it has been calibrated against real labels.
 
 ### Lane A
 
@@ -219,7 +225,11 @@ as the candidate generator that feeds the reranker.
 | `S6-A2` | todo | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 
-**Lane A gate:** [ ] >= 4 host programmes, error analysis committed.
+| `S6-A4` | todo | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |
+| `S6-A5` | todo | **Recognition estimate, part 2: aggregate over a programme.** `GET`/`POST` returns, per home course, the best match and its calibrated probability; the expected recognised ECTS of a whole programme is the sum of `ects x p`. Decide and document the rule for partial matches (label 1) and for ECTS shortfall (6 ECTS home vs 4 ECTS host) | a programme-level number exists with its arithmetic written down in `docs/05-evaluation.md` | `S6-A4` |
+
+**Lane A gate:** [ ] >= 4 host programmes, error analysis committed, recognition estimate
+calibrated.
 
 ### Lane B
 
@@ -228,8 +238,9 @@ as the candidate generator that feeds the reranker.
 | `S6-B1` | todo | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
 | `S6-B2` | todo | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
 | `S6-B3` | todo | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
+| `S6-B4` | todo | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
 
-**Lane B gate:** [ ] verified clean-machine run + README.
+**Lane B gate:** [ ] verified clean-machine run + README + recognition summary.
 
 **Stage gate:** [ ] A   [ ] B.
 

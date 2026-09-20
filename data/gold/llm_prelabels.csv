@@ -1,0 +1,563 @@
+home_uid,host_uid,llm_label,llm_reason
+uns-pmf:I011,utwente:202500342,2,both teach the core of imperative programming; the host unit adds object orientation
+uns-pmf:I011,utwente:202300357,0,concurrency and compilers assume programming rather than teach it
+uns-pmf:I011,utwente:202500343,1,"continues the same programming line with exceptions, io and collections, not the introduction itself"
+uns-pmf:I011,utwente:202500352,0,"databases, no programming fundamentals"
+uns-pmf:I011,utwente:202400444,0,"project work on multi-tier systems, not an introduction to programming"
+uns-pmf:I011,utwente:202500568,0,"functional and logic paradigms, a different programming model from the procedural one taught here"
+uns-pmf:I011,utwente:202500331,1,"half of it is algorithmics and functional programming, overlapping only partly with procedural basics"
+uns-pmf:I011,utwente:202500361,0,artificial intelligence and machine learning
+uns-pmf:I011,utwente:202500332,0,databases and intelligent interaction
+uns-pmf:I011,utwente:202500354,0,agile project work
+uns-pmf:I011,utwente:202500333,0,computer architecture and networks
+uns-pmf:I011,utwente:202500358,0,integration project across module subjects
+uns-pmf:I111,utwente:202500568,1,"the logic programming half touches resolution, the rest is programming"
+uns-pmf:I111,utwente:202500361,1,"covers logic and probabilistic reasoning, a part of the home syllabus, inside an ai course"
+uns-pmf:I111,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I111,utwente:202500332,0,databases and machine learning workflows
+uns-pmf:I111,utwente:202200022,1,knowledge representation and reasoning overlaps with predicate calculus and inference
+uns-pmf:I111,utwente:202500333,1,"boolean logic and switching circuits appear in both, but as one half of a hardware course"
+uns-pmf:I111,utwente:202300357,0,concurrency and compiler construction
+uns-pmf:I111,utwente:202001047,0,group project on network topics
+uns-pmf:I111,utwente:202500342,0,imperative programming
+uns-pmf:I111,utwente:202200024,0,data science project
+uns-pmf:I111,utwente:202500356,0,processor architecture; boolean algebra only as background
+uns-pmf:I111,utwente:202500352,0,relational databases and sql
+uns-pmf:I112,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I112,utwente:202500334,0,cryptography and law
+uns-pmf:I112,utwente:202001033,0,"statistics, not analysis of real functions"
+uns-pmf:I112,utwente:202500568,0,programming paradigms
+uns-pmf:I112,utwente:202500361,0,artificial intelligence
+uns-pmf:I112,utwente:202500333,0,computer architecture
+uns-pmf:I112,utwente:202001047,0,web science project
+uns-pmf:I112,utwente:202500352,0,databases
+uns-pmf:I112,utwente:202500332,0,databases and intelligent interaction
+uns-pmf:I112,utwente:202500343,0,programming
+uns-pmf:I112,utwente:202200024,0,data science project
+uns-pmf:I112,utwente:202500362,0,user experience design
+uns-pmf:I112,utwente:202400362,0,networking project
+uns-pmf:I112,utwente:202200023,0,explainable ai and ethics
+uns-pmf:I021,utwente:202300357,0,"concurrency and compilers, assumes data structures already known"
+uns-pmf:I021,utwente:202500352,0,databases
+uns-pmf:I021,utwente:202500342,1,"builds on algorithms and recursion while teaching imperative programming, overlapping in part"
+uns-pmf:I021,utwente:202400444,0,project on multi-tier systems
+uns-pmf:I021,utwente:202200021,0,neural network architectures per data type
+uns-pmf:I021,utwente:202500331,1,"the algorithmics half covers search, sorting and complexity but not the pointer-based data structures"
+uns-pmf:I021,utwente:202500333,0,computer architecture and networks
+uns-pmf:I021,utwente:202500356,0,processor architecture
+uns-pmf:I021,utwente:202500343,1,manipulating collections touches the same material from the programming side
+uns-pmf:I021,utwente:202500332,0,databases and intelligent interaction
+uns-pmf:I021,utwente:202500568,0,functional and logic paradigms
+uns-pmf:I021,utwente:202500344,0,team implementation project
+uns-pmf:I021,utwente:202001045,0,"social network analysis, graph theory in a different context"
+uns-pmf:I121,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I121,utwente:202500361,0,artificial intelligence
+uns-pmf:I121,utwente:202500333,0,"digital circuits, not algebraic structures"
+uns-pmf:I121,utwente:202500342,0,programming
+uns-pmf:I121,utwente:202001047,0,web science project
+uns-pmf:I121,utwente:202500356,0,processor architecture
+uns-pmf:I121,utwente:202500334,1,"the cryptography half uses modular arithmetic and number theory, which the home course founds"
+uns-pmf:I121,utwente:202500332,0,databases and machine learning
+uns-pmf:I121,utwente:202001045,0,"graph theory applied to social networks, not abstract algebra"
+uns-pmf:I121,utwente:202500343,0,programming
+uns-pmf:I121,utwente:202001033,0,statistics
+uns-pmf:I121,utwente:202400362,0,networking project
+uns-pmf:I121,utwente:202500362,0,user experience design
+uns-pmf:I122,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I122,utwente:202500334,0,cryptography and law
+uns-pmf:I122,utwente:202500361,0,artificial intelligence
+uns-pmf:I122,utwente:202001047,0,web science project
+uns-pmf:I122,utwente:202001033,0,"statistics, not multivariable analysis"
+uns-pmf:I122,utwente:202500333,0,computer architecture
+uns-pmf:I122,utwente:202500332,0,databases and machine learning
+uns-pmf:I122,utwente:202500568,0,programming paradigms
+uns-pmf:I122,utwente:202200024,0,data science project
+uns-pmf:I122,utwente:202500343,0,programming
+uns-pmf:I122,utwente:202500352,0,databases
+uns-pmf:I122,utwente:202500354,0,agile project work
+uns-pmf:I122,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I122,utwente:202400362,0,networking project
+uns-pmf:I122,utwente:202500362,0,user experience design
+uns-pmf:I031,utwente:202500332,2,"the databases half covers er modelling, a relational dbms and sql, which is the home substance"
+uns-pmf:I031,utwente:202500352,2,"the host course is a databases course: relational design, sql and dbms use"
+uns-pmf:I031,utwente:202400444,1,applies database management systems inside a project rather than teaching the model
+uns-pmf:I031,utwente:202500361,0,artificial intelligence
+uns-pmf:I031,utwente:202500341,1,modelling with uml overlaps with er modelling but not with sql or dbms internals
+uns-pmf:I031,utwente:202200021,0,machine learning per data type
+uns-pmf:I031,utwente:202200022,0,"data quality and reasoning, not data modelling"
+uns-pmf:I031,utwente:202500342,0,programming
+uns-pmf:I031,utwente:202300357,0,concurrency and compilers
+uns-pmf:I031,utwente:202001047,0,web science project
+uns-pmf:I031,utwente:202500354,1,"same module, data-centric development, but project work rather than database theory"
+uns-pmf:I031,utwente:202500333,0,computer architecture and networks
+uns-pmf:I031,utwente:202500353,0,agile process side of the project
+uns-pmf:I031,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I031,utwente:202500357,0,operating systems
+uns-pmf:I032,utwente:202500342,2,"teaches the principles and constructs of object-oriented programming, the substance of the home course"
+uns-pmf:I032,utwente:202300357,0,"concurrency and compilers, assumes object orientation"
+uns-pmf:I032,utwente:202400444,0,multi-tier project work
+uns-pmf:I032,utwente:202500568,0,functional and logic paradigms
+uns-pmf:I032,utwente:202500352,0,databases
+uns-pmf:I032,utwente:202500343,1,"exceptions, io and collections continue the same object-oriented line without the introduction"
+uns-pmf:I032,utwente:202500341,1,"class diagrams and design models overlap with the design half, not with the language"
+uns-pmf:I032,utwente:202500354,0,agile project work
+uns-pmf:I032,utwente:202500344,1,a team project applying object-oriented programming rather than teaching it
+uns-pmf:I032,utwente:202500356,0,processor architecture
+uns-pmf:I032,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I032,utwente:202500332,0,databases and machine learning
+uns-pmf:I032,utwente:202500361,0,artificial intelligence
+uns-pmf:I032,utwente:202500333,0,computer architecture and networks
+uns-pmf:I032,utwente:202500351,0,web development and security
+uns-pmf:I033,utwente:202500331,1,"the algorithmics half covers search, sorting and complexity but not trees, dynamic programming or greedy methods"
+uns-pmf:I033,utwente:202500352,0,databases
+uns-pmf:I033,utwente:202300357,0,concurrency and compilers
+uns-pmf:I033,utwente:202500332,0,databases and machine learning
+uns-pmf:I033,utwente:202500333,0,computer architecture and networks
+uns-pmf:I033,utwente:202500342,0,introductory programming
+uns-pmf:I033,utwente:202400444,0,project work
+uns-pmf:I033,utwente:202500361,1,informed and uninformed search overlaps with the search and backtracking part
+uns-pmf:I033,utwente:202001047,0,web science project
+uns-pmf:I033,utwente:202200021,0,neural networks per data type
+uns-pmf:I033,utwente:202001045,0,"graph theory for social networks, a different structure family"
+uns-pmf:I033,utwente:202500343,1,collections are the implementation side of the same structures
+uns-pmf:I033,utwente:202500354,0,agile project work
+uns-pmf:I034,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I034,utwente:202001045,1,"covers graph theory concepts, one of the two halves of the home course, applied to social networks"
+uns-pmf:I034,utwente:202001047,0,web science project
+uns-pmf:I034,utwente:202500361,0,treats discrete mathematics as a prerequisite rather than teaching it
+uns-pmf:I034,utwente:202500333,0,computer architecture and networks
+uns-pmf:I034,utwente:202500332,0,databases and machine learning
+uns-pmf:I034,utwente:202500334,0,cryptography and law
+uns-pmf:I034,utwente:202001046,0,"game theory, auctions and voting"
+uns-pmf:I034,utwente:202001033,0,statistics
+uns-pmf:I034,utwente:202300357,0,concurrency and compilers
+uns-pmf:I034,utwente:202200024,0,data science project
+uns-pmf:I034,utwente:202500568,0,programming paradigms
+uns-pmf:I034,utwente:202500356,0,processor architecture
+uns-pmf:I034,utwente:202500352,0,databases
+uns-pmf:I141,utwente:202500568,2,"a comparative treatment of non-imperative paradigms with syntax, parsing and compilation, which is the home substance"
+uns-pmf:I141,utwente:202500342,0,"one language, no comparison of paradigms"
+uns-pmf:I141,utwente:202300357,1,"the compiler construction half covers syntax and semantics, the concurrency half does not"
+uns-pmf:I141,utwente:202500343,0,programming practice in one language
+uns-pmf:I141,utwente:202400444,0,project work
+uns-pmf:I141,utwente:202500352,0,databases
+uns-pmf:I141,utwente:202500344,0,implementation project
+uns-pmf:I141,utwente:202500331,1,the functional programming half shows one alternative paradigm
+uns-pmf:I141,utwente:202500341,0,design models
+uns-pmf:I141,utwente:202500361,0,artificial intelligence
+uns-pmf:I141,utwente:202500333,0,computer architecture and networks
+uns-pmf:I141,utwente:202500332,0,databases and machine learning
+uns-pmf:I141,utwente:202200021,0,neural networks per data type
+uns-pmf:I142,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I142,utwente:202500361,0,artificial intelligence
+uns-pmf:I142,utwente:202300357,1,"parsing and compilation use grammars, but automata theory and decidability are absent"
+uns-pmf:I142,utwente:202500568,1,language technology and parsing overlap; the formal language theory itself is not taught
+uns-pmf:I142,utwente:202500343,0,programming practice
+uns-pmf:I142,utwente:202500333,0,computer architecture and networks
+uns-pmf:I142,utwente:202200022,0,"knowledge representation, a different kind of formalism"
+uns-pmf:I142,utwente:202001047,0,web science project
+uns-pmf:I142,utwente:202500332,0,databases and machine learning
+uns-pmf:I142,utwente:202500342,0,programming
+uns-pmf:I142,utwente:202400444,0,project work
+uns-pmf:I142,utwente:202300106,0,a research project with no fixed subject matter
+uns-pmf:I142,utwente:202400608,0,internship
+uns-pmf:I142,utwente:202500334,0,cryptography and law
+uns-pmf:I144,utwente:202500332,0,databases and machine learning
+uns-pmf:I144,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I144,utwente:202001047,0,web science project
+uns-pmf:I144,utwente:202200024,0,data science project
+uns-pmf:I144,utwente:202500334,0,cryptography and law
+uns-pmf:I144,utwente:202500568,0,programming paradigms
+uns-pmf:I144,utwente:202500361,0,artificial intelligence
+uns-pmf:I144,utwente:202500333,0,computer architecture and networks
+uns-pmf:I144,utwente:202001045,0,"graph theory for social networks, not analytic geometry"
+uns-pmf:I144,utwente:202500352,0,databases
+uns-pmf:I144,utwente:202001041,0,smart environments
+uns-pmf:I144,utwente:202001033,0,statistics
+uns-pmf:I144,utwente:202001046,0,game theory
+uns-pmf:I051,utwente:202500357,2,"an operating systems course covering the same processes, memory and file system material"
+uns-pmf:I051,utwente:202500356,0,processor architecture rather than the operating system above it
+uns-pmf:I051,utwente:202300357,1,concurrent programming and synchronisation overlap; memory and file systems do not
+uns-pmf:I051,utwente:202500342,0,programming
+uns-pmf:I051,utwente:202500358,1,the module project applies operating systems material rather than teaching it
+uns-pmf:I051,utwente:202500333,1,the second half covers operating systems briefly alongside networks
+uns-pmf:I051,utwente:202500343,0,programming practice
+uns-pmf:I051,utwente:202500568,0,programming paradigms
+uns-pmf:I051,utwente:202500346,0,computer networks
+uns-pmf:I051,utwente:202500344,0,implementation project
+uns-pmf:I051,utwente:202500332,0,databases and machine learning
+uns-pmf:I051,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I051,utwente:202500354,0,agile project work
+uns-pmf:I051,utwente:202400444,0,project work
+uns-pmf:I052,utwente:202500341,2,"the same subject: uml class, activity and state diagrams with case tool support"
+uns-pmf:I052,utwente:202400783,0,embedded architectures
+uns-pmf:I052,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I052,utwente:202500356,0,processor architecture
+uns-pmf:I052,utwente:202400444,1,"designs and implements a multi-tier system, applying modelling rather than teaching it"
+uns-pmf:I052,utwente:202500342,0,programming
+uns-pmf:I052,utwente:202500362,1,"user-centred design and information architecture overlap with requirements modelling, not with uml"
+uns-pmf:I052,utwente:202500352,0,databases
+uns-pmf:I052,utwente:202500351,0,web development and security
+uns-pmf:I052,utwente:202500361,0,artificial intelligence
+uns-pmf:I052,utwente:202500332,0,databases and machine learning
+uns-pmf:I052,utwente:202200021,0,neural networks per data type
+uns-pmf:I052,utwente:202500354,0,agile project work
+uns-pmf:I151,utwente:202500361,2,"the same introduction: logic, search, probabilistic reasoning and machine learning"
+uns-pmf:I151,utwente:202200022,1,knowledge representation and reasoning is one part of the home syllabus
+uns-pmf:I151,utwente:202500332,1,the intelligent interaction half introduces ai concepts and machine learning workflows
+uns-pmf:I151,utwente:202200024,0,project work on data science
+uns-pmf:I151,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I151,utwente:202500568,0,programming paradigms
+uns-pmf:I151,utwente:202500342,0,programming
+uns-pmf:I151,utwente:202500356,0,processor architecture
+uns-pmf:I151,utwente:202500333,0,computer architecture and networks
+uns-pmf:I151,utwente:202001046,0,"game theory equilibria, not adversarial search in ai"
+uns-pmf:I151,utwente:202200203,0,embedded systems project
+uns-pmf:I151,utwente:202001041,0,smart environments
+uns-pmf:I151,utwente:202200201,0,software engineering for embedded systems
+uns-pmf:I151,utwente:202500351,0,web development and security
+uns-pmf:I151,utwente:202500354,0,agile project work
+uns-pmf:I152,utwente:202500331,1,"complexity of search and sorting algorithms, but no computability theory or np-completeness"
+uns-pmf:I152,utwente:202500361,0,artificial intelligence
+uns-pmf:I152,utwente:202300357,0,concurrency and compilers
+uns-pmf:I152,utwente:202500568,0,programming paradigms
+uns-pmf:I152,utwente:202500333,0,computer architecture and networks
+uns-pmf:I152,utwente:202500342,0,programming
+uns-pmf:I152,utwente:202500356,0,processor architecture
+uns-pmf:I152,utwente:202500343,0,programming practice
+uns-pmf:I152,utwente:202500332,0,databases and machine learning
+uns-pmf:I152,utwente:202001047,0,web science project
+uns-pmf:I152,utwente:202001045,0,social network analysis
+uns-pmf:I152,utwente:202200024,0,data science project
+uns-pmf:I152,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I152,utwente:202001033,0,statistics
+uns-pmf:I152,utwente:202200201,0,software engineering for embedded systems
+uns-pmf:I152,utwente:202200023,0,explainable ai and ethics
+uns-pmf:I143,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I143,utwente:202500361,0,"artificial intelligence; linear algebra is assumed, not taught"
+uns-pmf:I143,utwente:202001047,0,web science project
+uns-pmf:I143,utwente:202001045,0,graph theory for social networks
+uns-pmf:I143,utwente:202500332,0,databases and machine learning
+uns-pmf:I143,utwente:202001033,0,statistics
+uns-pmf:I143,utwente:202200024,0,data science project
+uns-pmf:I143,utwente:202500333,0,computer architecture and networks
+uns-pmf:I143,utwente:202001046,0,game theory
+uns-pmf:I143,utwente:202500342,0,programming
+uns-pmf:I143,utwente:202001041,0,smart environments
+uns-pmf:I143,utwente:202500362,0,user experience design
+uns-pmf:I143,utwente:202500352,0,databases
+uns-pmf:I143,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I143,utwente:202500356,0,processor architecture
+uns-pmf:I162,utwente:202500361,0,artificial intelligence
+uns-pmf:I162,utwente:202001047,0,web science project
+uns-pmf:I162,utwente:202500332,0,databases and machine learning
+uns-pmf:I162,utwente:202001033,0,"statistics, not numerical methods"
+uns-pmf:I162,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I162,utwente:202500341,0,design models
+uns-pmf:I162,utwente:202500333,0,computer architecture and networks
+uns-pmf:I162,utwente:202500343,0,programming practice
+uns-pmf:I162,utwente:202500568,0,programming paradigms
+uns-pmf:I162,utwente:202500354,0,agile project work
+uns-pmf:I162,utwente:202500353,0,agile project work
+uns-pmf:I162,utwente:202500362,0,user experience design
+uns-pmf:I162,utwente:202400444,0,project work
+uns-pmf:I162,utwente:202200024,0,data science project
+uns-pmf:I162,utwente:202300357,0,concurrency and compilers
+uns-pmf:I162,utwente:202500352,0,databases
+uns-pmf:I211,utwente:202500361,1,"the logic component overlaps; set theory, relations and cardinality do not appear"
+uns-pmf:I211,utwente:202500331,1,proof by induction in the functional half touches the same formal habits
+uns-pmf:I211,utwente:202200022,1,"reasoning methods overlap with predicate logic, without the set-theoretic foundations"
+uns-pmf:I211,utwente:202500568,0,programming paradigms
+uns-pmf:I211,utwente:202500333,1,boolean functions and circuits appear in the architecture half
+uns-pmf:I211,utwente:202500332,0,databases and machine learning
+uns-pmf:I211,utwente:202500356,0,processor architecture
+uns-pmf:I211,utwente:202300357,0,concurrency and compilers
+uns-pmf:I211,utwente:202500343,0,programming practice
+uns-pmf:I211,utwente:202500352,0,databases
+uns-pmf:I211,utwente:202200024,0,data science project
+uns-pmf:I211,utwente:202400608,0,internship
+uns-pmf:I211,utwente:202400444,0,project work
+uns-pmf:I211,utwente:202001045,0,social network analysis
+uns-pmf:I211,utwente:202200021,0,neural networks per data type
+uns-pmf:I212,utwente:202001047,0,web science project
+uns-pmf:I212,utwente:202500361,0,artificial intelligence
+uns-pmf:I212,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I212,utwente:202500343,0,programming practice
+uns-pmf:I212,utwente:202500334,0,cryptography and law
+uns-pmf:I212,utwente:202500332,0,databases and machine learning
+uns-pmf:I212,utwente:202500352,0,databases
+uns-pmf:I212,utwente:202500341,0,design models
+uns-pmf:I212,utwente:202500568,0,programming paradigms
+uns-pmf:I212,utwente:202300357,0,concurrency and compilers
+uns-pmf:I212,utwente:202500333,0,computer architecture and networks
+uns-pmf:I212,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I212,utwente:202001033,0,"statistics, not real analysis"
+uns-pmf:I212,utwente:202200024,0,data science project
+uns-pmf:I212,utwente:202300106,0,research project
+uns-pmf:I221,utwente:202001046,1,auctions and matching markets overlap with the market mechanisms of e-commerce
+uns-pmf:I221,utwente:202500361,0,artificial intelligence
+uns-pmf:I221,utwente:202500332,0,databases and machine learning
+uns-pmf:I221,utwente:202500351,1,building and securing web applications is the implementation half of the home course
+uns-pmf:I221,utwente:202500344,0,implementation project
+uns-pmf:I221,utwente:202500352,0,databases
+uns-pmf:I221,utwente:202001047,0,web science project
+uns-pmf:I221,utwente:202500343,0,programming practice
+uns-pmf:I221,utwente:202500342,0,programming
+uns-pmf:I221,utwente:202400444,0,project work
+uns-pmf:I221,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I221,utwente:202001041,0,"smart environments, retail scenarios only in passing"
+uns-pmf:I221,utwente:202400362,0,networking project
+uns-pmf:I221,utwente:202500354,0,agile project work
+uns-pmf:I221,utwente:202500341,0,design models
+uns-pmf:I222,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I222,utwente:202500342,0,programming
+uns-pmf:I222,utwente:202001047,0,web science project
+uns-pmf:I222,utwente:202500361,0,artificial intelligence
+uns-pmf:I222,utwente:202500332,0,databases and machine learning
+uns-pmf:I222,utwente:202500352,0,databases
+uns-pmf:I222,utwente:202500333,0,"digital circuits, not algebraic structures"
+uns-pmf:I222,utwente:202500343,0,programming practice
+uns-pmf:I222,utwente:202500356,0,processor architecture
+uns-pmf:I222,utwente:202500568,0,programming paradigms
+uns-pmf:I222,utwente:202001033,0,statistics
+uns-pmf:I222,utwente:202200024,0,data science project
+uns-pmf:I222,utwente:202400362,0,networking project
+uns-pmf:I222,utwente:202500358,0,systems project
+uns-pmf:I241,utwente:202500352,2,"multi-tier systems over a dbms with rest services, which is the client-server half of the home course"
+uns-pmf:I241,utwente:202400444,1,builds a multi-tier system but teaches no transaction or distribution theory
+uns-pmf:I241,utwente:202500332,1,"relational design and sql, one level below the home course"
+uns-pmf:I241,utwente:202500354,0,agile project work
+uns-pmf:I241,utwente:202500351,1,"the web tier over a database, without normalisation or transactions"
+uns-pmf:I241,utwente:202500353,0,agile process work
+uns-pmf:I241,utwente:202500342,0,programming
+uns-pmf:I241,utwente:202500344,0,implementation project
+uns-pmf:I241,utwente:202500356,0,processor architecture
+uns-pmf:I241,utwente:202500341,0,design models
+uns-pmf:I241,utwente:202500333,0,computer architecture and networks
+uns-pmf:I241,utwente:202500347,0,computer networks
+uns-pmf:I241,utwente:202200023,0,explainable ai and ethics
+uns-pmf:I241,utwente:202400362,0,networking project
+uns-pmf:I242,utwente:202500356,2,"computer organisation, processor structure and digital design, the same material"
+uns-pmf:I242,utwente:202500333,2,"the architecture half covers binary representation, boolean logic, registers, the alu and machine language"
+uns-pmf:I242,utwente:202400783,1,"microcontroller and fpga architecture, narrower and applied to embedded devices"
+uns-pmf:I242,utwente:202300357,0,concurrency and compilers
+uns-pmf:I242,utwente:202500358,1,the project applies the architecture material rather than teaching it
+uns-pmf:I242,utwente:202500361,0,artificial intelligence
+uns-pmf:I242,utwente:202500568,0,programming paradigms
+uns-pmf:I242,utwente:202500357,1,"same module, but the operating system side rather than the hardware"
+uns-pmf:I242,utwente:202500332,0,databases and machine learning
+uns-pmf:I242,utwente:202500346,0,computer networks
+uns-pmf:I242,utwente:202400444,0,project work
+uns-pmf:I242,utwente:202500352,0,databases
+uns-pmf:I242,utwente:202500347,0,computer networks
+uns-pmf:I242,utwente:202500348,0,computer networks
+uns-pmf:I243,utwente:202500346,2,"the layered protocol architecture from the physical layer upwards, the same subject"
+uns-pmf:I243,utwente:202500348,2,"the third part of the same networking course, covering the upper layers"
+uns-pmf:I243,utwente:202500347,2,"the continuation of the same networking course, covering the middle layers"
+uns-pmf:I243,utwente:202500333,1,the second half covers computer networks briefly alongside operating systems
+uns-pmf:I243,utwente:202500356,0,processor architecture
+uns-pmf:I243,utwente:202400362,1,the networking project applies protocols rather than teaching the stack
+uns-pmf:I243,utwente:202500358,0,systems project
+uns-pmf:I243,utwente:202001047,0,web science project
+uns-pmf:I243,utwente:202300357,0,concurrency and compilers
+uns-pmf:I243,utwente:202500357,0,operating systems
+uns-pmf:I243,utwente:202500332,0,databases and machine learning
+uns-pmf:I243,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I243,utwente:202001045,0,"social network analysis, networks in the graph sense"
+uns-pmf:I251,utwente:202500341,2,"software engineering models, uml and development processes, the design core of the home course"
+uns-pmf:I251,utwente:202500342,0,programming
+uns-pmf:I251,utwente:202500344,1,"team project with professional skills, practice rather than method"
+uns-pmf:I251,utwente:202500354,1,"the technical half of the same project, implementation and testing"
+uns-pmf:I251,utwente:202500353,1,"agile process, requirements and teamwork, one process model out of several"
+uns-pmf:I251,utwente:202400444,1,"design, implementation and testing of a system in a team"
+uns-pmf:I251,utwente:202500343,0,programming practice
+uns-pmf:I251,utwente:202300357,0,concurrency and compilers
+uns-pmf:I251,utwente:202500351,0,web development and security
+uns-pmf:I251,utwente:202500568,0,programming paradigms
+uns-pmf:I251,utwente:202500358,0,systems project
+uns-pmf:I251,utwente:202500352,0,databases
+uns-pmf:I251,utwente:202500361,0,artificial intelligence
+uns-pmf:I251,utwente:202500356,0,processor architecture
+uns-pmf:I252,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I252,utwente:202500361,0,artificial intelligence
+uns-pmf:I252,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I252,utwente:202500568,1,language technology touches the same machinery from the implementation side
+uns-pmf:I252,utwente:202300357,1,parsing and compilation apply regular and context-free machinery without the automata theory
+uns-pmf:I252,utwente:202500332,0,databases and machine learning
+uns-pmf:I252,utwente:202500333,0,computer architecture and networks
+uns-pmf:I252,utwente:202500334,0,cryptography and law
+uns-pmf:I252,utwente:202500343,0,programming practice
+uns-pmf:I252,utwente:202001047,0,web science project
+uns-pmf:I252,utwente:202400444,0,project work
+uns-pmf:I252,utwente:202400608,0,internship
+uns-pmf:I252,utwente:202500352,0,databases
+uns-pmf:I252,utwente:202200024,0,data science project
+uns-pmf:I263,utwente:202500351,2,"server and client side web development over a database, with security, the core of the home course"
+uns-pmf:I263,utwente:202500343,0,programming practice
+uns-pmf:I263,utwente:202500352,1,the database tier that the home course connects to
+uns-pmf:I263,utwente:202400444,1,builds a multi-tier web system as a project rather than teaching the technologies
+uns-pmf:I263,utwente:202500342,0,programming
+uns-pmf:I263,utwente:202500354,1,the technical half of the same web project
+uns-pmf:I263,utwente:202500344,0,networked game project
+uns-pmf:I263,utwente:202001047,0,"web science in the analytical sense, not web development"
+uns-pmf:I263,utwente:202300357,0,concurrency and compilers
+uns-pmf:I263,utwente:202500568,0,programming paradigms
+uns-pmf:I263,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I263,utwente:202500332,0,databases and machine learning
+uns-pmf:I263,utwente:202500341,0,design models
+uns-pmf:I262,utwente:202400444,2,"designing and implementing a multi-tier information system over a database, the same practice"
+uns-pmf:I262,utwente:202500351,1,"the web tier with security, part of the three-tier architecture taught here"
+uns-pmf:I262,utwente:202500352,1,the data tier and object mapping context
+uns-pmf:I262,utwente:202500332,0,databases and machine learning
+uns-pmf:I262,utwente:202500344,0,networked game project
+uns-pmf:I262,utwente:202500342,0,programming
+uns-pmf:I262,utwente:202500341,0,design models
+uns-pmf:I262,utwente:202500343,0,programming practice
+uns-pmf:I262,utwente:202500354,1,the technical half of the same project
+uns-pmf:I262,utwente:202300357,0,concurrency and compilers
+uns-pmf:I262,utwente:202500357,0,operating systems
+uns-pmf:I262,utwente:202500358,0,systems project
+uns-pmf:I262,utwente:202500333,0,computer architecture and networks
+uns-pmf:I262,utwente:202400783,0,embedded architectures
+uns-pmf:M-02,utwente:202001033,0,statistics
+uns-pmf:M-02,utwente:202500332,0,databases and machine learning
+uns-pmf:M-02,utwente:202500568,0,programming paradigms
+uns-pmf:M-02,utwente:202001047,0,web science project
+uns-pmf:M-02,utwente:202500361,0,artificial intelligence
+uns-pmf:M-02,utwente:202500344,0,"the professional skills part is presenting, not academic english"
+uns-pmf:M-02,utwente:202200024,0,data science project
+uns-pmf:M-02,utwente:202500342,0,programming
+uns-pmf:M-02,utwente:202200021,0,"machine learning on text, not language study"
+uns-pmf:M-02,utwente:202500333,0,computer architecture and networks
+uns-pmf:M-02,utwente:202400362,0,networking project with a writing component only
+uns-pmf:M-02,utwente:202300106,0,research project with academic writing as a by-product
+uns-pmf:M-02,utwente:202500343,0,programming practice
+uns-pmf:M-02,utwente:202400444,0,project work
+uns-pmf:M-02,utwente:202500352,0,databases
+uns-pmf:M3-21,utwente:202001046,1,"markets, auctions and strategic behaviour overlap with microeconomics, without the macro half"
+uns-pmf:M3-21,utwente:202001047,0,web science project
+uns-pmf:M3-21,utwente:202500361,0,artificial intelligence
+uns-pmf:M3-21,utwente:202001033,0,statistics
+uns-pmf:M3-21,utwente:202001045,0,social network analysis
+uns-pmf:M3-21,utwente:202500332,0,databases and machine learning
+uns-pmf:M3-21,utwente:202200024,0,data science project
+uns-pmf:M3-21,utwente:202500568,0,programming paradigms
+uns-pmf:M3-21,utwente:202500342,0,programming
+uns-pmf:M3-21,utwente:202500356,0,processor architecture
+uns-pmf:M3-21,utwente:202500331,0,algorithms and functional programming
+uns-pmf:M3-21,utwente:202500333,0,computer architecture and networks
+uns-pmf:M3-21,utwente:202400444,0,project work
+uns-pmf:M3-21,utwente:202500354,0,agile project work
+uns-pmf:M3-21,utwente:202001041,0,smart environments
+uns-pmf:M3-21,utwente:202200021,0,machine learning per data type
+uns-pmf:I311,utwente:202500341,0,"modelling with uml, one tool rather than a survey of it tooling"
+uns-pmf:I311,utwente:202500343,0,programming practice
+uns-pmf:I311,utwente:202500344,0,implementation project
+uns-pmf:I311,utwente:202500342,0,programming
+uns-pmf:I311,utwente:202500354,0,agile project work
+uns-pmf:I311,utwente:202500353,0,agile process work
+uns-pmf:I311,utwente:202500352,0,databases
+uns-pmf:I311,utwente:202400444,0,project work
+uns-pmf:I311,utwente:202500351,0,web development and security
+uns-pmf:I311,utwente:202500358,0,systems project
+uns-pmf:I311,utwente:202001041,0,smart environments
+uns-pmf:M-09,utwente:202500332,0,databases and machine learning
+uns-pmf:M-09,utwente:202500568,0,programming paradigms
+uns-pmf:M-09,utwente:202001033,0,statistics
+uns-pmf:M-09,utwente:202500344,0,project work with a presentation component only
+uns-pmf:M-09,utwente:202200024,0,data science project
+uns-pmf:M-09,utwente:202001047,0,web science project
+uns-pmf:M-09,utwente:202500333,0,computer architecture and networks
+uns-pmf:M-09,utwente:202400362,0,networking project
+uns-pmf:M-09,utwente:202500361,0,artificial intelligence
+uns-pmf:M-09,utwente:202500342,0,programming
+uns-pmf:M-09,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:M-09,utwente:202400444,0,project work
+uns-pmf:M-09,utwente:202400608,0,internship
+uns-pmf:M-09,utwente:202500354,0,agile project work
+uns-pmf:M-09,utwente:202500352,0,databases
+uns-pmf:M-15,utwente:202001045,1,"studies social structure, but as network analysis rather than as sociological theory"
+uns-pmf:M-15,utwente:202001047,0,web science project
+uns-pmf:M-15,utwente:202001033,0,statistics
+uns-pmf:M-15,utwente:202001046,0,game theory
+uns-pmf:M-15,utwente:202200024,0,data science project
+uns-pmf:M-15,utwente:202500332,0,databases and machine learning
+uns-pmf:M-15,utwente:202400362,0,networking project
+uns-pmf:M-15,utwente:202500361,0,artificial intelligence
+uns-pmf:M-15,utwente:202500342,0,programming
+uns-pmf:M-15,utwente:202500344,0,implementation project
+uns-pmf:M-15,utwente:202200023,0,"ethics of ai systems, a narrower ethical question"
+uns-pmf:M-15,utwente:202500356,0,processor architecture
+uns-pmf:M-15,utwente:202500352,0,databases
+uns-pmf:I321,utwente:202500333,1,"boolean logic, adders and machine-level structure, but no semiconductor electronics"
+uns-pmf:I321,utwente:202500356,1,digital system design at the organisation level rather than the component level
+uns-pmf:I321,utwente:202500361,0,artificial intelligence
+uns-pmf:I321,utwente:202400783,1,"microcontrollers and fpgas, applied digital hardware without the device physics"
+uns-pmf:I321,utwente:202400591,0,cyber-physical systems
+uns-pmf:I321,utwente:202500346,0,computer networks
+uns-pmf:I321,utwente:202500347,0,computer networks
+uns-pmf:I321,utwente:202500332,0,databases and machine learning
+uns-pmf:I321,utwente:202500348,0,computer networks
+uns-pmf:I321,utwente:202300357,0,concurrency and compilers
+uns-pmf:I321,utwente:202500362,0,user experience design
+uns-pmf:I321,utwente:202500343,0,programming practice
+uns-pmf:I321,utwente:202500342,0,programming
+uns-pmf:M3-22,utwente:202500331,0,algorithms and functional programming
+uns-pmf:M3-22,utwente:202500332,0,databases and machine learning
+uns-pmf:M3-22,utwente:202500342,0,programming
+uns-pmf:M3-22,utwente:202001046,0,"game theory, not interest and amortisation"
+uns-pmf:M3-22,utwente:202300357,0,concurrency and compilers
+uns-pmf:M3-22,utwente:202500361,0,artificial intelligence
+uns-pmf:M3-22,utwente:202500333,0,computer architecture and networks
+uns-pmf:M3-22,utwente:202500568,0,programming paradigms
+uns-pmf:M3-22,utwente:202001033,0,statistics
+uns-pmf:M3-22,utwente:202500343,0,programming practice
+uns-pmf:M3-22,utwente:202500354,0,agile project work
+uns-pmf:M3-22,utwente:202500353,0,agile process work
+uns-pmf:M3-22,utwente:202500352,0,databases
+uns-pmf:M3-22,utwente:202400444,0,project work
+uns-pmf:I322,utwente:202500341,0,"modelling with uml, one tool rather than a survey of it tooling"
+uns-pmf:I322,utwente:202500343,0,programming practice
+uns-pmf:I322,utwente:202500344,0,implementation project
+uns-pmf:I322,utwente:202500342,0,programming
+uns-pmf:I322,utwente:202500353,0,agile process work
+uns-pmf:I322,utwente:202500354,0,agile project work
+uns-pmf:I322,utwente:202400444,0,project work
+uns-pmf:I322,utwente:202500352,0,databases
+uns-pmf:I322,utwente:202500351,0,web development and security
+uns-pmf:I322,utwente:202001047,0,web science project
+uns-pmf:I322,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I322,utwente:202500358,0,systems project
+uns-pmf:M-01,utwente:202500331,0,algorithms and functional programming
+uns-pmf:M-01,utwente:202500361,0,artificial intelligence
+uns-pmf:M-01,utwente:202500333,1,"boolean logic, circuits and adders appear, but not lattices or minimisation theory"
+uns-pmf:M-01,utwente:202500568,0,programming paradigms
+uns-pmf:M-01,utwente:202001047,0,web science project
+uns-pmf:M-01,utwente:202500332,0,databases and machine learning
+uns-pmf:M-01,utwente:202500343,0,programming practice
+uns-pmf:M-01,utwente:202300357,0,concurrency and compilers
+uns-pmf:M-01,utwente:202500356,1,digital design uses boolean functions without the algebraic structures
+uns-pmf:M-01,utwente:202500342,0,programming
+uns-pmf:M-01,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:M-01,utwente:202500352,0,databases
+uns-pmf:M-01,utwente:202500353,0,agile process work
+uns-pmf:M-01,utwente:202500358,0,systems project
+uns-pmf:M-01,utwente:202500341,0,design models
+uns-pmf:I331,utwente:202400444,0,project work in a fixed subject
+uns-pmf:I331,utwente:202500354,0,agile project work
+uns-pmf:I331,utwente:202500353,0,agile process work
+uns-pmf:I331,utwente:202500352,0,databases
+uns-pmf:I331,utwente:202500344,0,implementation project
+uns-pmf:I331,utwente:202500342,0,programming
+uns-pmf:I331,utwente:202500361,0,artificial intelligence
+uns-pmf:I331,utwente:202500341,0,design models
+uns-pmf:I331,utwente:202001047,0,web science project
+uns-pmf:I331,utwente:202500358,0,systems project
+uns-pmf:I331,utwente:202300106,1,"an independent study ending in a written and presented result, but a research trajectory rather than tool mastery"
+uns-pmf:I331,utwente:202500331,0,algorithms and functional programming
+uns-pmf:I331,utwente:202200024,0,data science project
+uns-pmf:I331,utwente:202400608,0,internship in a company
+uns-pmf:I331,utwente:202500362,0,user experience design
+uns-pmf:I331,utwente:202500332,0,databases and machine learning
+uns-pmf:I331,utwente:202200022,0,knowledge representation and data quality
+uns-pmf:I331,utwente:202500346,0,computer networks
