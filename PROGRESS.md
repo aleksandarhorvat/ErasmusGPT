@@ -14,6 +14,57 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Twente scraper written, its data held back
+
+**Who:** Person A
+**Stage:** 1 - Real data, real surface. Lane A gate still open: `S1-A2` is blocked.
+**Commit:** `[A] add the twente osiris scraper`
+**Tasks touched:** `S1-A2` (blocked)
+
+### Done
+- `backend/scripts/scrape_utwente.py`. Osiris is a single-page app over a JSON API, found
+  by watching the requests the app makes:
+  - `POST /student/osiris/student/cursussen/zoeken` lists courses, filtered by
+    `collegejaar` and `coordinerend_onderdeel_oms`.
+  - `GET /student/osiris/owc/cursussen/{id}` returns one course, with Content
+    (`item-inhoud-3`) and Aim(s) (`item-inhoud-4`) as HTML.
+  - Both answer HTTP 500 unless the request carries a `taal: EN` header. That header is
+    the whole trick; everything else is a normal JSON request.
+- Run against 2025-2026 it produces 40 courses, 213 ECTS, every one with a description,
+  and `validate_curricula.py` passes on it.
+
+### Decisions
+- **Scraping 2025-2026, not 2026-2027.** Osiris publishes a year one quartile at a time.
+  As of today the 2026-2027 catalogue has 9 of year 1's units; 2025-2026 has all of them
+  (Diamonds, Software Systems, Network Systems, Data & Information).
+- Superseded units stay in the catalogue for resits. Units whose content says "only for
+  repeat students" are dropped, and where a title is still listed twice the earliest study
+  year wins, then the newest code.
+- Osiris does not say which units belong to a programme's curriculum, only which
+  department coordinates them. So the file covers the units TCS coordinates. The
+  mathematics line, run by Applied Mathematics, is missing. Worth stating at the defence:
+  it makes the Twente side smaller than the real programme.
+
+### Request to B
+- `scripts/check_style.py` applies the banned-word list to `data/curricula/*.json`. The
+  Twente course text hits one of the banned connectives 6 times (the one meaning "in
+  addition", which the checker names). That text is the university's, quoted as
+  published (`docs/03-data-schema.md`), so it cannot be edited to suit our style rules.
+  Please skip the banned-word and sentence-pattern checks for `data/curricula/`, keeping
+  the ASCII check. **Until then the scraped file is held back** and the sample Twente file
+  stays committed, so CI stays green. Re-running the scraper writes the real file in a few
+  seconds; nothing needs to be scraped again.
+
+### Broken / known issues
+- `data/curricula/utwente-tcs-bsc.json` is still the 9-course sample. Anyone evaluating
+  against Twente before this unblocks is measuring against placeholder data.
+
+### Next
+- **A:** waiting on B for the checker. Meanwhile pulling stage 2 lane A forward
+  (`S2-A1` embedder, `S2-A2` dense search), marked `early`.
+
+---
+
 ## 2026-09-19 - [A] Curriculum validator
 
 **Who:** Person A
