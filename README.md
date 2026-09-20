@@ -58,7 +58,8 @@ To prove it: build, stop the stack, disconnect, `docker compose up`, use the app
 
 ## Working on the code
 
-You need Python 3.11 (3.10 works) and Node 20.
+You need **Python 3.11** and Node 20. 3.10 no longer works: the scrapers and the
+evaluation harness import `datetime.UTC`, which 3.11 added.
 
 ```bash
 # backend - terminal 1
