@@ -1,0 +1,13 @@
+# Every text file is stored with LF in git and checked out with LF.
+#
+# Without this, one machine writes CRLF and the other LF, and every file either person
+# touches shows as fully rewritten. On 2026-09-20 that was 8376 changed lines, none of
+# them real. Editors on Windows handle LF fine.
+* text=auto eol=lf
+
+# Binary, never normalised.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.npy binary
+*.ico binary
