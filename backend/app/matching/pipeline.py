@@ -17,13 +17,15 @@ import logging
 from app.core.config import Settings, get_settings
 from app.ingest.loader import CurriculumStore
 from app.matching.dense import DenseIndex
-from app.matching.embedder import Embedder
+from app.matching.embedder import Embedder, programme_documents
+from app.matching.fusion import reciprocal_rank_fusion
+from app.matching.lexical import BM25Index
 from app.schemas.match import Confidence, CourseRef, MatchCandidate, Strategy
 from app.schemas.programme import CourseSummary, ProgrammeSummary
 
 log = logging.getLogger(__name__)
 
-IMPLEMENTED: set[Strategy] = {"dense"}
+IMPLEMENTED: set[Strategy] = {"dense", "bm25", "hybrid"}
 
 
 def score_to_pct(score: float) -> int:
@@ -35,6 +37,18 @@ def score_to_pct(score: float) -> int:
     This stretches 0.55 -> 0, 0.95 -> 100 and clamps.
     """
     return int(round(min(max((score - 0.55) / 0.40, 0.0), 1.0) * 100))
+
+
+def relative_pct(score: float, best: float) -> int:
+    """Display value for scores with no fixed range: BM25 and RRF.
+
+    A BM25 score means nothing on its own, and an RRF score is bounded by the number of
+    lists fused. Both are reported relative to the best hit for the same home course, so
+    the top row reads 100 %. S3-B1 replaces this with one calibration for all strategies.
+    """
+    if best <= 0:
+        return 0
+    return int(round(min(max(score / best, 0.0), 1.0) * 100))
 
 
 def confidence_of(score_pct: int) -> Confidence:
@@ -57,6 +71,8 @@ class PipelineMatcher:
         self.settings = settings or get_settings()
         self.embedder = Embedder(store, self.settings)
         self.indexes: dict[str, DenseIndex] = {}
+        self.lexical: dict[str, BM25Index] = {}
+        self.documents: dict[str, dict[str, str]] = {}
         self._warm()
 
     def _warm(self) -> None:
@@ -66,6 +82,9 @@ class PipelineMatcher:
             self.indexes[programme_id] = DenseIndex(
                 uids, self.embedder.encode_programme(programme_id)
             )
+            documents = programme_documents(self.store, programme_id)
+            self.lexical[programme_id] = BM25Index(uids, documents)
+            self.documents[programme_id] = dict(zip(uids, documents, strict=True))
         log.info(
             "pipeline ready: %d programmes encoded with %s",
             len(self.indexes),
@@ -88,11 +107,36 @@ class PipelineMatcher:
                 return index.matrix[index.uids.index(course_uid)]
         raise KeyError(course_uid)
 
+    def _document(self, course_uid: str) -> str:
+        for documents in self.documents.values():
+            if course_uid in documents:
+                return documents[course_uid]
+        raise KeyError(course_uid)
+
+    def _retrieve(
+        self, home_uid: str, host_programme_id: str, strategy: Strategy, n: int
+    ) -> list[tuple[str, float]]:
+        """Ranked (course_uid, score) for one home course, before any reranking."""
+        dense_index = self.indexes[host_programme_id]
+        bm25_index = self.lexical[host_programme_id]
+        if strategy == "dense":
+            return dense_index.search(self._vector(home_uid), n)
+        if strategy == "bm25":
+            return bm25_index.search(self._document(home_uid), n)
+
+        # hybrid: fuse the two full ranked lists by rank, not by score. Cosines and BM25
+        # scores are not comparable, and normalising them adds a knob nobody can defend.
+        candidates = self.settings.candidate_top_n
+        lists = [
+            [uid for uid, _ in dense_index.search(self._vector(home_uid), candidates)],
+            [uid for uid, _ in bm25_index.search(self._document(home_uid), candidates)],
+        ]
+        return reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=n)
+
     def _candidate(
-        self, home: CourseSummary, host_uid: str, score: float, rank: int
+        self, home: CourseSummary, host_uid: str, score: float, rank: int, pct: int
     ) -> MatchCandidate:
         host = self.store.get_course(host_uid)
-        pct = score_to_pct(score)
         return MatchCandidate(
             host_course=CourseRef(
                 course_uid=host.course_uid, title=host.title, ects=host.ects, url=host.url
@@ -117,9 +161,16 @@ class PipelineMatcher:
         if host_programme_id not in self.indexes:
             raise KeyError(host_programme_id)
         home = self.store.get_course(home_course_uid)
-        hits = self.indexes[host_programme_id].search(self._vector(home_course_uid), top_k)
+        hits = self._retrieve(home_course_uid, host_programme_id, strategy, top_k)
+        best = hits[0][1] if hits else 0.0
         return [
-            self._candidate(home, uid, score, rank)
+            self._candidate(
+                home,
+                uid,
+                score,
+                rank,
+                score_to_pct(score) if strategy == "dense" else relative_pct(score, best),
+            )
             for rank, (uid, score) in enumerate(hits, start=1)
         ]
 

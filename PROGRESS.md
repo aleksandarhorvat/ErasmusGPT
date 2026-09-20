@@ -14,6 +14,55 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] BM25 and hybrid fusion
+
+**Who:** Person A
+**Stage:** 3 - Lexical and hybrid, taken early. `S3-A3` (smoke sheet) still open.
+**Commit:** `[A] add bm25 and wire hybrid fusion into the pipeline`
+**Tasks touched:** `S3-A1`, `S3-A2` (done, early)
+
+### Done
+- `matching/lexical.py`: `BM25Index` over the same `build_document()` text the
+  bi-encoder embeds, using `rank_bm25.BM25Okapi` with default k1 and b.
+- `strategy="hybrid"` in the pipeline: both retrievers return `candidate_top_n` (25),
+  fused by `reciprocal_rank_fusion` at `rrf_k` (60).
+- The tokenisation is written down in `docs/05-evaluation.md` under "The BM25 baseline,
+  exactly as implemented". It is the number everything else is compared against, so it
+  has to be reproducible from the document alone.
+- `backend/tests/test_matching_lexical.py`, 16 tests, including S3-A2's acceptance:
+  fusion never loses a candidate that either input found.
+
+### Verified with the real model
+Per home course, top 3, against the Twente sample:
+
+| Home course | bm25 | dense | hybrid |
+|---|---|---|---|
+| Formal languages and automata | Theory of Computation | Theory of Computation | Theory of Computation |
+| Computer networks | Network Systems | Network Systems | Network Systems |
+| Databases 1 | Data and Information | Data and Information | Data and Information |
+
+A whole programme (50 home courses, hybrid, top 5) takes 72 ms once warm. BM25 costs
+about 2 ms per query, dense under 1 ms.
+
+### Decisions
+- No stemming in the tokeniser. It is an ablation worth measuring in stage 5, not a
+  default to assume. Same reasoning for leaving k1 and b untuned: a tuned baseline and
+  an untuned one are different claims, and the report has to say which one it made.
+
+### Broken / known issues
+- **Display scores for bm25 and hybrid are misleading, and this is B's `S3-B1`.** RRF
+  scores sit very close together, so ranks 2 and 3 read 96 % and 97 %. BM25 shows
+  "English 1" matching a computer science course at 96 %. The ranking is fine; the
+  percentage is not. `relative_pct` in pipeline.py is a placeholder that scales against
+  the best hit for the same home course, and `S3-B1` replaces both it and
+  `score_to_pct` with one calibration.
+
+### Next
+- **A:** `S4-A1` the cross-encoder reranker, then `S4-A2` `hybrid+ce`. `S3-A3`, the
+  smoke sheet, comes after that so it can cover all four strategies at once.
+
+---
+
 ## 2026-09-20 - [A] Dense retrieval works, stage 2 lane A pulled forward
 
 **Who:** Person A

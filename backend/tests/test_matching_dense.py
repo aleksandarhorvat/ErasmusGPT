@@ -181,7 +181,7 @@ def test_course_uids_filter_is_honoured(matcher: PipelineMatcher) -> None:
 
 def test_unimplemented_strategies_say_so(matcher: PipelineMatcher) -> None:
     home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
-    for strategy in ("bm25", "hybrid", "hybrid+ce"):
+    for strategy in ("hybrid+ce",):  # bm25 and hybrid landed in S3-A1 / S3-A2
         with pytest.raises(NotImplementedError):
             matcher.match_course(home.course_uid, "utwente-tcs-bsc", strategy, 5)
 

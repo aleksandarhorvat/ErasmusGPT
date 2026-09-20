@@ -40,6 +40,27 @@ Owner: **Person A**. The grade depends on this more than on the UI.
 | `hybrid+ce-large` *(Colab)* | RRF(BM25, bge-small) | mxbai-rerank-base-v2 |
 | `dense-gte+ce` *(Colab)* | gte-modernbert-base | ms-marco-MiniLM-L6-v2 |
 
+### The BM25 baseline, exactly as implemented
+
+Every other configuration is reported against `bm25`, so the baseline has to be stated
+precisely enough to reproduce. `backend/app/matching/lexical.py`:
+
+- Input text is `build_document()`, the same string the bi-encoder embeds. Neither side
+  gets a text advantage.
+- Tokens are lowercase runs of `[a-z0-9]`. Punctuation splits, so "TCP/IP" becomes
+  "tcp" and "ip".
+- Single-character tokens are dropped, and a 60-word stopword list: English function
+  words plus the words every syllabus repeats (course, student, lecture, learning,
+  instruction, introduction, basic). The list is short on purpose. A long one quietly
+  does the ranking function's job and makes the baseline look weaker than it is.
+- No stemming. "algorithm" and "algorithms" are different terms. Stemming is an
+  ablation to measure (section Ablations), not a default to assume.
+- `rank_bm25.BM25Okapi` with its default k1 = 1.5 and b = 0.75. Not Lucene, not tuned;
+  a tuned baseline and an untuned one are different claims.
+
+Ties are broken by course order, in BM25 and dense retrieval alike, so a reported
+ranking is reproducible across runs.
+
 Output table goes to `eval/report/results.md` and `eval/report/results.csv`, produced
 by `eval/run_eval.py`. The script must import the **same** `matching/` code the API
 uses. Do not reimplement scoring in the eval script: the report would then describe a

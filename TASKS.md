@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | stage 2 lane A done early; next `S3-A1` BM25. `S1-A2` still blocked |
+| **Person A is on** | `S3-A1` and `S3-A2` done early; next the cross-encoder. `S1-A2` still blocked |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | `S1-A2`: `scripts/check_style.py` rejects Twente's own course text |
-| **Last updated** | 2026-09-20 - stage 2 lane A done early, dense retrieval works |
+| **Last updated** | 2026-09-20 - bm25, dense and hybrid all run through the pipeline |
 
 ### Stage ladder
 
@@ -129,8 +129,8 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S3-A1` | todo | `matching/lexical.py`: BM25 over the same `build_document()` text. Document the tokenisation in `docs/05-evaluation.md` - it defines the baseline everyone is compared against | `strategy=bm25` works; an exact title match ranks 1st | Stage 2 |
-| `S3-A2` | todo | Wire `matching/fusion.py` (RRF is already written) into the pipeline as `strategy=hybrid`; `settings.candidate_top_n` controls the cut | `strategy=hybrid` returns >= the union recall of the two inputs | `S3-A1` |
+| `S3-A1` | done (early) | `matching/lexical.py`: BM25 over the same `build_document()` text. Document the tokenisation in `docs/05-evaluation.md` - it defines the baseline everyone is compared against | `strategy=bm25` works; an exact title match ranks 1st | Stage 2 |
+| `S3-A2` | done (early) | Wire `matching/fusion.py` (RRF is already written) into the pipeline as `strategy=hybrid`; `settings.candidate_top_n` controls the cut | `strategy=hybrid` returns >= the union recall of the two inputs | `S3-A1` |
 | `S3-A3` | todo | Quick manual smoke sheet: 10 home courses x 4 strategies, eyeballed, committed as `eval/report/smoke.md` | the table exists and the obvious pairs look right | `S3-A2` |
 
 **Lane A gate:** [ ] all of `bm25`, `dense`, `hybrid` work through the same pipeline.
