@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S1-A2` blocked on B, see PROGRESS. Scraper written, data held back |
+| **Person A is on** | stage 2 lane A done early; next `S3-A1` BM25. `S1-A2` still blocked |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | `S1-A2`: `scripts/check_style.py` rejects Twente's own course text |
-| **Last updated** | 2026-09-20 - `S1-A1` and `S1-A3` done, `S1-A2` blocked |
+| **Last updated** | 2026-09-20 - stage 2 lane A done early, dense retrieval works |
 
 ### Stage ladder
 
@@ -28,7 +28,7 @@ lanes have passed their gate.
 |---|---|---|---|
 | 0 - Scaffold | done | done | closed |
 | 1 - Real data, real surface | todo | done | todo |
-| 2 - Dense retrieval | todo | todo | todo |
+| 2 - Dense retrieval | done (early) | todo | todo |
 | 3 - Lexical + hybrid | todo | todo | todo |
 | 4 - Cross-encoder rerank | todo | todo | todo |
 | 5 - Gold set + evaluation | todo | todo | todo |
@@ -98,13 +98,13 @@ replaces the stub. `strategy=dense` returns genuinely sensible top-5 lists.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S2-A1` | todo | Implement `matching/embedder.py`: load the bi-encoder from `settings.bi_encoder_repo`, encode course documents, L2-normalise, cache to `data/.cache/{programme}.{model_tag}.npy` keyed by a content hash | second startup loads from cache; encoding never happens inside a request | - |
-| `S2-A2` | todo | Implement `matching/dense.py` - exact NumPy cosine search returning `[(course_uid, score)]` | unit test: a course matches itself with score ~ 1.0 | `S2-A1` |
-| `S2-A3` | todo | Implement `matching/pipeline.py` `PipelineMatcher` satisfying the `Matcher` protocol, supporting `strategy="dense"`. Other strategies may raise `NotImplementedError` for now | `MATCHER_IMPL=real` no longer falls back to the stub; `/health` reports `models_loaded: true` | `S2-A2` |
-| `S2-A4` | todo | Tests: `backend/tests/test_matching_dense.py` - self-match, cache hit, deterministic ordering | `pytest backend/tests` green | `S2-A3` |
+| `S2-A1` | done (early) | Implement `matching/embedder.py`: load the bi-encoder from `settings.bi_encoder_repo`, encode course documents, L2-normalise, cache to `data/.cache/{programme}.{model_tag}.npy` keyed by a content hash | second startup loads from cache; encoding never happens inside a request | - |
+| `S2-A2` | done (early) | Implement `matching/dense.py` - exact NumPy cosine search returning `[(course_uid, score)]` | unit test: a course matches itself with score ~ 1.0 | `S2-A1` |
+| `S2-A3` | done (early) | Implement `matching/pipeline.py` `PipelineMatcher` satisfying the `Matcher` protocol, supporting `strategy="dense"`. Other strategies may raise `NotImplementedError` for now | `MATCHER_IMPL=real` no longer falls back to the stub; `/health` reports `models_loaded: true` | `S2-A2` |
+| `S2-A4` | done (early) | Tests: `backend/tests/test_matching_dense.py` - self-match, cache hit, deterministic ordering | `pytest backend/tests` green | `S2-A3` |
 
-**Lane A gate:** [ ] `strategy=dense` returns real results and *Formal Languages and Automata*
-finds *Theory of Computation* in the top 5.
+**Lane A gate:** [x] `strategy=dense` returns real results and *Formal Languages and Automata*
+finds *Theory of Computation* in the top 5 (rank 1, cosine 0.878, verified 2026-09-20).
 
 ### Lane B
 

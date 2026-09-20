@@ -14,6 +14,55 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Dense retrieval works, stage 2 lane A pulled forward
+
+**Who:** Person A
+**Stage:** 2 - Dense retrieval, taken early because `S1-A2` is blocked on B.
+**Commit:** `[A] implement the bi-encoder embedder and dense retrieval`
+**Tasks touched:** `S2-A1`, `S2-A2`, `S2-A3`, `S2-A4` (all done, early)
+
+### Done
+- `matching/embedder.py`: loads the bi-encoder lazily, encodes each programme once and
+  caches to `data/.cache/{programme}.{tag}.npy` with a sidecar `.json` holding a
+  SHA-256 of the concatenated documents. A changed curriculum re-encodes; an unchanged
+  one loads in 0.1 s.
+- `matching/dense.py`: exact cosine over the normalised matrix (`DenseIndex`). Ties break
+  on course order so the eval harness sees a stable ranking.
+- `matching/pipeline.py`: `PipelineMatcher` with `strategy="dense"`. Every programme is
+  encoded in `__init__`, which runs in the FastAPI lifespan, so no request ever encodes.
+  The other three strategies raise NotImplementedError, as planned for this stage.
+- `backend/tests/test_matching_dense.py`, 17 tests, no model downloaded: the bi-encoder is
+  replaced by a hash-based fake, so CI stays offline and the suite runs in 2 s.
+
+### Verified with the real model (bge-small-en-v1.5, CPU)
+- **The lane A gate: "Formal languages and automata" finds "Theory of Computation" at
+  rank 1, cosine 0.878.** Computer networks -> Network Systems (0.817), Operating
+  systems 1 -> Computer Systems (0.800), Databases 1 -> Data and Information (0.807).
+- Cold start 43 s, almost all of it loading the model. Second start 0.1 s from cache.
+  Matching all 50 PMF courses against Twente takes under 10 ms once warm.
+
+### Decisions
+- `score_to_pct` in pipeline.py is a placeholder until `S3-B1`, which owns calibration.
+  Raw cosines here run 0.63 (unrelated) to 0.88 (best pair), so it stretches 0.55 to 0.95
+  onto 0 to 100. Without that, "English 1" scored 57 % against a computer science course.
+- Embeddings are cached per programme and model tag, so switching `BI_ENCODER` between
+  bge-small and minilm does not invalidate the other model's cache. The eval sweep in
+  stage 5 needs both.
+
+### Broken / known issues
+- Verified against the **sample** Twente file, since the real one is held back (see the
+  entry below). The PMF side is real.
+- torch 2.5.1 does not import on this Windows machine until `libiomp5md.dll` in
+  `torch/lib` is copied to `libomp140.x86_64.dll`, and `transformers` picks the
+  TensorFlow path unless `USE_TF=0` is set. Both are local environment quirks, not the
+  project's: the Docker image is Linux and unaffected.
+
+### Next
+- **A:** `S3-A1` BM25, then `S3-A2` hybrid fusion. Both are in my lane and need nothing
+  from B.
+
+---
+
 ## 2026-09-20 - [A] Twente scraper written, its data held back
 
 **Who:** Person A
