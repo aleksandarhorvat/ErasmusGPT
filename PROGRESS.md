@@ -14,6 +14,34 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Pooling script for the gold set
+
+**Who:** Person A
+**Stage:** 5. `S5-A0` stays blocked: the script is written, the run needs real data.
+**Commit:** `[A] add the gold set pooling script`
+**Tasks touched:** `S5-A0` (blocked, script written)
+
+### Done
+- `eval/make_pool.py` pools the union of the top 10 from `dense` and `hybrid+ce` per home
+  course and writes `data/gold/pool.csv` (both course texts, and which strategy and rank
+  found the pair) plus an empty `data/gold/llm_prelabels.csv` to fill in.
+- It refuses to overwrite `llm_prelabels.csv` once it exists. That file is the frozen
+  record the correction rate is measured against, and a re-run must not quietly replace it.
+- Trial run against the Twente sample: 45 pairs over 5 home courses, 9 per course. With
+  the real 40-course catalogue and 40 home courses, expect 500 to 600 pairs, which
+  matches the estimate in `docs/03-data-schema.md`.
+
+### Broken / known issues
+- Nothing in lane A can now progress without the real Twente file. `S5-A0` needs it to
+  pool against, `S5-A1` needs the pool, `S5-A3` needs the labels, and stage 6 starts by
+  ingesting another university, which would hit the same style checker problem.
+
+### Next
+- **A:** waiting on the style checker request to B, the one in the entry of 2026-09-20
+  titled "Twente scraper written, its data held back".
+
+---
+
 ## 2026-09-20 - [A] The image was baking 724 MB of models, not 220 MB
 
 **Who:** Person A

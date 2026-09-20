@@ -17,7 +17,7 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | eval harness done; `S5-A0`/`S5-A1` blocked on the Twente data |
+| **Person A is on** | nothing runnable: every remaining lane A task needs the Twente data |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | `S1-A2` and the whole gold set: `scripts/check_style.py` rejects Twente's own course text |
 | **Last updated** | 2026-09-20 - eval harness runs; baked models cut 724 MB -> 318 MB |
