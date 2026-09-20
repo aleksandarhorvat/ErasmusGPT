@@ -16,6 +16,7 @@ from app.matching.embedder import Embedder
 from app.matching.fusion import reciprocal_rank_fusion
 from app.matching.lexical import BM25Index, tokenise
 from app.matching.pipeline import PipelineMatcher, relative_pct
+from app.matching.reranker import Reranker
 from tests.test_matching_dense import fake_encode
 
 CURRICULA = Path(__file__).resolve().parents[2] / "data" / "curricula"
@@ -92,6 +93,7 @@ def test_rrf_keeps_documents_only_one_list_found() -> None:
 def matcher(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> PipelineMatcher:
     monkeypatch.setattr(Settings, "cache_dir", property(lambda _: tmp_path))
     monkeypatch.setattr(Embedder, "encode", staticmethod(fake_encode))
+    monkeypatch.setattr(Reranker, "warm", lambda _: None)
     settings = Settings(data_dir=CURRICULA.parent)
     return PipelineMatcher(CurriculumStore(CURRICULA), settings)
 

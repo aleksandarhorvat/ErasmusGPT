@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S3-A1` and `S3-A2` done early; next the cross-encoder. `S1-A2` still blocked |
+| **Person A is on** | lane A done through stage 4, early. Next `S5-A0` pooling. `S1-A2` still blocked |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | `S1-A2`: `scripts/check_style.py` rejects Twente's own course text |
-| **Last updated** | 2026-09-20 - bm25, dense and hybrid all run through the pipeline |
+| **Last updated** | 2026-09-20 - all four strategies work, cross-encoder included |
 
 ### Stage ladder
 
@@ -29,8 +29,8 @@ lanes have passed their gate.
 | 0 - Scaffold | done | done | closed |
 | 1 - Real data, real surface | todo | done | todo |
 | 2 - Dense retrieval | done (early) | todo | todo |
-| 3 - Lexical + hybrid | todo | todo | todo |
-| 4 - Cross-encoder rerank | todo | todo | todo |
+| 3 - Lexical + hybrid | done (early) | todo | todo |
+| 4 - Cross-encoder rerank | done (early) | todo | todo |
 | 5 - Gold set + evaluation | todo | todo | todo |
 | 6 - Scale out + polish | todo | todo | todo |
 | 7 - Defence | todo | todo | todo |
@@ -131,9 +131,9 @@ as the candidate generator that feeds the reranker.
 |---|---|---|---|---|
 | `S3-A1` | done (early) | `matching/lexical.py`: BM25 over the same `build_document()` text. Document the tokenisation in `docs/05-evaluation.md` - it defines the baseline everyone is compared against | `strategy=bm25` works; an exact title match ranks 1st | Stage 2 |
 | `S3-A2` | done (early) | Wire `matching/fusion.py` (RRF is already written) into the pipeline as `strategy=hybrid`; `settings.candidate_top_n` controls the cut | `strategy=hybrid` returns >= the union recall of the two inputs | `S3-A1` |
-| `S3-A3` | todo | Quick manual smoke sheet: 10 home courses x 4 strategies, eyeballed, committed as `eval/report/smoke.md` | the table exists and the obvious pairs look right | `S3-A2` |
+| `S3-A3` | done (early) | Quick manual smoke sheet: 10 home courses x 4 strategies, eyeballed, committed as `eval/report/smoke.md` | the table exists and the obvious pairs look right | `S3-A2` |
 
-**Lane A gate:** [ ] all of `bm25`, `dense`, `hybrid` work through the same pipeline.
+**Lane A gate:** [x] all of `bm25`, `dense`, `hybrid` work through the same pipeline.
 
 ### Lane B
 
@@ -157,12 +157,12 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S4-A1` | todo | `matching/reranker.py`: batched `CrossEncoder` over `(home_doc, host_doc)` pairs, sigmoid-squashed to 0-1 before leaving the module | a full 50-course programme reranks in < 45 s on CPU | Stage 3 |
-| `S4-A2` | todo | `strategy=hybrid+ce` in the pipeline: RRF -> top-`candidate_top_n` -> rerank -> top-`k` | default strategy in the UI returns visibly better lists than `dense` | `S4-A1` |
-| `S4-A3` | todo | Evidence extraction: best-scoring sentence pair per match, returned as `Evidence` | `evidence` is non-null for every match | `S4-A2` |
-| `S4-A4` | todo | Latency guard: cap pairs per request, log ms/query, add `backend/tests/test_matching_rerank.py` | tests green, no request over 120 s | `S4-A2` |
+| `S4-A1` | done (early) | `matching/reranker.py`: batched `CrossEncoder` over `(home_doc, host_doc)` pairs, sigmoid-squashed to 0-1 before leaving the module | a full 50-course programme reranks in < 45 s on CPU | Stage 3 |
+| `S4-A2` | done (early) | `strategy=hybrid+ce` in the pipeline: RRF -> top-`candidate_top_n` -> rerank -> top-`k` | default strategy in the UI returns visibly better lists than `dense` | `S4-A1` |
+| `S4-A3` | done (early) | Evidence extraction: best-scoring sentence pair per match, returned as `Evidence` | `evidence` is non-null for every match | `S4-A2` |
+| `S4-A4` | done (early) | Latency guard: cap pairs per request, log ms/query, add `backend/tests/test_matching_rerank.py` | tests green, no request over 120 s | `S4-A2` |
 
-**Lane A gate:** [ ] `hybrid+ce` is the default and is demonstrably better by eye.
+**Lane A gate:** [x] `hybrid+ce` is the default and is demonstrably better by eye (see `eval/report/smoke.md`).
 
 ### Lane B
 

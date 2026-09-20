@@ -18,6 +18,7 @@ from app.ingest.loader import CurriculumStore
 from app.matching.dense import DenseIndex, cosine_scores, top_n
 from app.matching.embedder import Embedder, content_hash, programme_documents
 from app.matching.pipeline import PipelineMatcher, score_to_pct
+from app.matching.reranker import Reranker
 
 CURRICULA = Path(__file__).resolve().parents[2] / "data" / "curricula"
 DIM = 16
@@ -143,6 +144,7 @@ def matcher(store: CurriculumStore, settings: Settings, tmp_path: Path,
             monkeypatch: pytest.MonkeyPatch) -> PipelineMatcher:
     monkeypatch.setattr(Settings, "cache_dir", property(lambda _: tmp_path))
     monkeypatch.setattr(Embedder, "encode", staticmethod(fake_encode))
+    monkeypatch.setattr(Reranker, "warm", lambda _: None)
     return PipelineMatcher(store, settings)
 
 
@@ -179,11 +181,13 @@ def test_course_uids_filter_is_honoured(matcher: PipelineMatcher) -> None:
     assert [course.course_uid for course, _ in rows] == wanted
 
 
-def test_unimplemented_strategies_say_so(matcher: PipelineMatcher) -> None:
+def test_an_unknown_strategy_is_refused(matcher: PipelineMatcher) -> None:
+    """All four contract strategies are implemented now; anything else must not run."""
     home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
-    for strategy in ("hybrid+ce",):  # bm25 and hybrid landed in S3-A1 / S3-A2
-        with pytest.raises(NotImplementedError):
-            matcher.match_course(home.course_uid, "utwente-tcs-bsc", strategy, 5)
+    with pytest.raises(NotImplementedError):
+        matcher.match_course(home.course_uid, "utwente-tcs-bsc", "magic", 5)
+    with pytest.raises(NotImplementedError):
+        matcher.match_programme("uns-pmf-informatics-bsc", "utwente-tcs-bsc", "magic", 5)
 
 
 def test_unknown_ids_raise_key_error(matcher: PipelineMatcher) -> None:

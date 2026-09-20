@@ -14,6 +14,61 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Cross-encoder reranking, evidence, smoke sheet
+
+**Who:** Person A
+**Stage:** 4 - Cross-encoder rerank, taken early. Lane A is now through its stage 3 and
+stage 4 gates.
+**Commit:** `[A] add cross-encoder reranking and evidence`
+**Tasks touched:** `S3-A3`, `S4-A1`, `S4-A2`, `S4-A3`, `S4-A4` (done, early)
+
+### Done
+- `matching/reranker.py`: batched `CrossEncoder` over (home, host) pairs, sigmoid-squashed
+  to 0..1 inside the module. Nothing outside needs to know it emits logits.
+- `strategy="hybrid+ce"`: RRF -> `candidate_top_n` -> rerank -> `top_k`.
+- Evidence (`S4-A3`): every course's sentences are embedded once at startup, and the
+  evidence for a pair is the most similar sentence pair between the two courses. No model
+  call during a request.
+- Latency guard (`S4-A4`): a request may score at most 1500 pairs. Candidates past the
+  budget keep their fused order, so a huge request degrades instead of hanging.
+- `eval/make_smoke.py` writes `eval/report/smoke.md`: 10 home courses x 4 strategies with
+  evidence and per-strategy latency. That is `S3-A3`.
+
+### Verified with both real models on CPU
+- Startup 24 s, both models loaded. A `hybrid+ce` query is 400 ms; a whole 50-course
+  programme is 19.5 s, well inside the 45 s the task asks for. BM25 2 ms, dense under 1 ms.
+- Ranking looks right where it matters: Formal languages and automata -> Theory of
+  Computation, Computer networks -> Network Systems, Databases 1 -> Data and Information,
+  Data structures and algorithms 1 -> Algorithms and Data Structures. The reranker
+  separates the winner from the rest far better than cosine does: 21 % against 6 % for the
+  runner-up where dense had 82 % against 42 %.
+- Evidence reads like an explanation. For Data structures and algorithms 1 it quotes
+  "Implementation of various data structures (list, stack, queue...)" against Twente's
+  "Fundamental data structures such as lists, trees, heaps, hash tables and graphs".
+
+### Decisions
+- The cross-encoder is loaded in `_warm()`, not on first use. Lazily, the first
+  `hybrid+ce` request paid 17.5 s for the model load and looked like a hung demo. Startup
+  now costs that instead, once.
+- `PipelineMatcher` takes an optional `reranker`, so tests inject a fake and CI never
+  downloads a model. All 61 tests run offline in 3 s.
+- The pair cap lives in `reranker.py` as a constant, not in `Settings`: `app/core/config.py`
+  is Person B's file. If it should be configurable, that is a request to B, not an edit.
+
+### Broken / known issues
+- Cross-encoder percentages are low in absolute terms (rank 1 often 10 to 30 %) because
+  ms-marco was trained on search relevance, not course equivalence. The ranking is sound;
+  the number is not meaningful yet. Calibration is `S3-B1`, and the smoke sheet says so
+  in its own words.
+- The smoke sheet is against the 9-course Twente **sample**. Re-run `eval/make_smoke.py`
+  once the real file lands.
+
+### Next
+- **A:** `S5-A0`, pooling the pairs worth labelling. That needs the real Twente data to be
+  worth doing, so it waits on B's answer about the style checker.
+
+---
+
 ## 2026-09-20 - [A] BM25 and hybrid fusion
 
 **Who:** Person A
