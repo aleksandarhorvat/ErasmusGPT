@@ -44,7 +44,7 @@ class MatchRow(BaseModel):
 class MatchRequest(BaseModel):
     home_programme_id: str
     host_programme_id: str
-    strategy: Strategy = "hybrid+ce"
+    strategy: Strategy = "hybrid"
     top_k: int = Field(default=5, ge=1, le=10)
     course_uids: list[str] | None = None
 
@@ -52,7 +52,7 @@ class MatchRequest(BaseModel):
 class SingleCourseMatchRequest(BaseModel):
     home_course_uid: str
     host_programme_id: str
-    strategy: Strategy = "hybrid+ce"
+    strategy: Strategy = "hybrid"
     top_k: int = Field(default=5, ge=1, le=10)
 
 
@@ -94,7 +94,7 @@ class RecognitionRequest(BaseModel):
 
     home_programme_id: str
     host_programme_id: str
-    strategy: Strategy = "hybrid+ce"
+    strategy: Strategy = "hybrid"
     module: str | None = Field(default=None, description="null means every course offered")
     ects_budget: float | None = Field(
         default=None, ge=1, description="degree size, usually the programme's total_ects"
@@ -128,3 +128,18 @@ class RecognitionResponse(BaseModel):
     unlikely_ects: float
     ects_shortfall: float
     courses: list[CourseOutcome]
+
+
+# --- evaluation results (S5-B3) ---------------------------------------------
+
+
+class EvaluationResponse(BaseModel):
+    """What eval/report/ currently contains, and how far the human pass has got."""
+
+    available: bool = Field(description="results.csv exists and has rows")
+    provisional: bool = Field(description="no gold row has been checked by a human yet")
+    gold_checked: int
+    gold_total: int
+    columns: list[str] = Field(default_factory=list)
+    rows: list[dict[str, str]] = Field(default_factory=list)
+    reports: list[str] = Field(default_factory=list, description="markdown files in eval/report")

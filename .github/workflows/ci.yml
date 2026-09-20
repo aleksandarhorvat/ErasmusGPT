@@ -25,6 +25,10 @@ jobs:
         working-directory: .
         env:
           PYTHONPATH: backend
+      - name: Curricula must parse and carry the fields the pipeline reads
+        run: python backend/scripts/validate_curricula.py
+      - name: The gold set must stay well formed
+        run: python scripts/check_gold.py
 
   frontend:
     runs-on: ubuntu-latest

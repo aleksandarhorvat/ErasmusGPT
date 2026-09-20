@@ -34,7 +34,7 @@ Request:
 {
   "home_programme_id": "uns-pmf-informatics-bsc",
   "host_programme_id": "utwente-tcs-bsc",
-  "strategy": "hybrid+ce",          // bm25 | dense | hybrid | hybrid+ce
+  "strategy": "hybrid",             // bm25 | dense | hybrid | hybrid+ce (default: hybrid)
   "top_k": 5,                       // 1..10
   "course_uids": null               // null = all home courses; or a subset
 }

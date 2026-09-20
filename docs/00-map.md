@@ -20,7 +20,7 @@ flowchart TD
     BM["BM25<br/>rank_bm25"]
     DEN["bi-encoder cosine<br/>bge-small-en-v1.5, 384-d"]
     RRF["Reciprocal Rank Fusion<br/>k = 60"]
-    CE["cross-encoder rerank<br/>ms-marco-MiniLM-L6-v2"]
+    CE["cross-encoder rerank<br/>ms-marco-MiniLM-L6-v2<br/>(selectable, not the default)"]
     OUT["top 5 + score + confidence<br/>+ ECTS delta + evidence"]
   end
 
@@ -83,7 +83,7 @@ is against a shape that is already frozen in `app/schemas/`, so neither lane has
 | Baseline | `sentence-transformers/all-MiniLM-L6-v2` | A |
 | Lexical | `rank_bm25` | A |
 | Fusion | Reciprocal Rank Fusion, k = 60 | A |
-| Reranking | `cross-encoder/ms-marco-MiniLM-L6-v2` | A |
+| Reranking | `cross-encoder/ms-marco-MiniLM-L6-v2`, selectable, not the default (ADR-0005) | A |
 | Vector maths | NumPy exact cosine, no vector database | A |
 | GPU work | Colab T4, evaluation sweep and optional fine-tune | A |
 | API | FastAPI, uvicorn, pydantic v2 | B |

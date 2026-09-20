@@ -72,6 +72,16 @@ export interface MatchResponse {
   results: MatchRow[]
 }
 
+export interface EvaluationResponse {
+  available: boolean
+  provisional: boolean
+  gold_checked: number
+  gold_total: number
+  columns: string[]
+  rows: Record<string, string>[]
+  reports: string[]
+}
+
 export interface StrategyInfo {
   id: Strategy
   label: string
@@ -154,6 +164,7 @@ export const api = {
   courses: (programmeId: string) =>
     request<CourseSummary[]>(`/programmes/${encodeURIComponent(programmeId)}/courses`),
   strategies: () => request<StrategyInfo[]>('/strategies'),
+  evaluation: () => request<EvaluationResponse>('/evaluation'),
   match: (body: MatchBody) =>
     request<MatchResponse>('/match', { method: 'POST', body: JSON.stringify(body) }, MATCH_TIMEOUT_MS),
   matchCourse: (body: {

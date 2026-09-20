@@ -79,6 +79,8 @@ class Settings(BaseSettings):
     max_seq_tokens: int = 512
 
     data_dir: Path = _default_data_dir()
+    # eval/ is not copied into the image, so docker-compose mounts it and sets REPORT_DIR.
+    report_dir: Path = REPO_ROOT / "eval" / "report"
     database_url: str = "sqlite:///./erasmusgpt.db"
 
     cors_origins: list[str] = ["http://localhost:8080", "http://localhost:5173"]

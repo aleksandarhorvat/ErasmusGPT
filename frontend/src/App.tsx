@@ -13,6 +13,7 @@ import ProgrammePicker from './components/ProgrammePicker'
 import ResultsTable from './components/ResultsTable'
 import CourseBrowser from './components/CourseBrowser'
 import RecognitionPanel from './components/RecognitionPanel'
+import EvaluationPanel from './components/EvaluationPanel'
 
 // Appearance is explicitly not graded (CONTEXT.md section 9). Keep this file readable
 // and put the real work in the backend.
@@ -25,7 +26,8 @@ export default function App() {
   const [health, setHealth] = useState<HealthResponse | null>(null)
   const [home, setHome] = useState('')
   const [host, setHost] = useState('')
-  const [strategy, setStrategy] = useState<Strategy>('hybrid+ce')
+  // Default changed from hybrid+ce on 2026-09-20: see docs/adr/0005-hybrid-is-the-default.md
+  const [strategy, setStrategy] = useState<Strategy>('hybrid')
   const [modules, setModules] = useState<string[]>([])
   const [module, setModule] = useState<string>('')
   const [result, setResult] = useState<MatchResponse | null>(null)
@@ -33,6 +35,7 @@ export default function App() {
   const [phase, setPhase] = useState<Phase>('booting')
   const [error, setError] = useState<string | null>(null)
   const [browsing, setBrowsing] = useState<string | null>(null)
+  const [showEval, setShowEval] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const timer = useRef<number | null>(null)
 
@@ -234,6 +237,13 @@ export default function App() {
           {browsed && <CourseBrowser programme={browsed} />}
         </section>
       )}
+
+      <p className="actions">
+        <button type="button" className="chip" onClick={() => setShowEval((v) => !v)}>
+          {showEval ? 'hide' : 'how well does this work?'}
+        </button>
+      </p>
+      {showEval && <EvaluationPanel />}
 
       {health && (
         <footer className="foot">

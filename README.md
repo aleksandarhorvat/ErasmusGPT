@@ -84,13 +84,15 @@ The backend reads the same `.env`, so `MATCHER_IMPL=stub` there applies here too
 Before every commit:
 
 ```bash
-python scripts/check_style.py        # writing style, CONTEXT.md section 11
-ruff check backend eval scripts      # lint, including the 100-character line limit
+python scripts/check_style.py                  # writing style, CONTEXT.md section 11
+ruff check backend eval scripts                # lint, including the 100-character line limit
+python backend/scripts/validate_curricula.py   # curricula parse and carry the fields
+python scripts/check_gold.py                   # gold set is well formed
 cd backend && pytest tests -q
 cd frontend && npm run build
 ```
 
-CI runs exactly these four, plus a smoke test that starts the whole stack. Run them all
+CI runs exactly these six, plus a smoke test that starts the whole stack. Run them all
 before you push: a docstring one character too long fails the build.
 
 ## How it works
@@ -105,12 +107,16 @@ before you push: a docstring one character too long fails the build.
 |---|---|
 | Dense retrieval | `BAAI/bge-small-en-v1.5` (33 M params) |
 | Lexical retrieval | BM25 (`rank_bm25`) |
-| Reranking | `cross-encoder/ms-marco-MiniLM-L6-v2` (22.7 M params) |
+| Reranking (selectable, not the default) | `cross-encoder/ms-marco-MiniLM-L6-v2` (22.7 M params) |
 | Baseline to beat | `sentence-transformers/all-MiniLM-L6-v2`, cosine only |
 
 All four strategies (`bm25`, `dense`, `hybrid`, `hybrid+ce`) are selectable in the UI and
-in the API, and the evaluation harness runs the identical code path. Numbers:
-`eval/report/results.md`.
+in the API, and the evaluation harness runs the identical code path.
+
+**The default is `hybrid`.** The project set out to show that cross-encoder reranking beats
+naive retrieval. Measured, it does not: `hybrid+ce` loses to plain `hybrid` on P@1, recall
+and MRR, and costs about 500 times more per query. That comparison is the main result
+rather than a footnote. Ablations: `eval/report/ablations.md`. Reasoning: ADR-0005.
 
 ## Repository map
 

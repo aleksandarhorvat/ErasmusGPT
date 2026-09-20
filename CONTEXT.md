@@ -64,7 +64,12 @@ evaluation story is "the cross-encoder measurably beats the naive approach":
 - `bm25` - lexical only (naive baseline #1)
 - `dense` - bi-encoder only (naive baseline #2)
 - `hybrid` - RRF(bm25, dense)
-- `hybrid+ce` - RRF then cross-encoder rerank (**the product**)
+- `hybrid+ce` - RRF then cross-encoder rerank
+
+**`hybrid` is the default** (ADR-0005). The proposal expected `hybrid+ce` to win; measured,
+it loses on every metric and costs about 500 times more per query. The reranker stays
+implemented and selectable because that comparison is the project's main result. See
+`eval/report/ablations.md`.
 
 The configuration is a request parameter (`strategy`) so the UI and the eval harness
 hit exactly the same code path.

@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
-| **Person B is on** | stages 2-4 lane B done, plus `S6-B4`. `S2-B3` and `S5-B1` next |
-| **Blocked on** | a decision: `hybrid+ce` is the documented product and it measures worse than `hybrid` |
-| **Last updated** | 2026-09-20 - lane B through stage 4; ablations say the cross-encoder loses to hybrid |
+| **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is mine to sit and do |
+| **Blocked on** | nothing. The strategy decision is settled: ADR-0005 makes `hybrid` the default |
+| **Last updated** | 2026-09-20 - ADR-0005 accepted, lane B through stage 5 |
 
 ### Stage ladder
 
@@ -28,10 +28,10 @@ lanes have passed their gate.
 |---|---|---|---|
 | 0 - Scaffold | done | done | closed |
 | 1 - Real data, real surface | done | done | closed |
-| 2 - Dense retrieval | done (early) | done | todo |
-| 3 - Lexical + hybrid | done (early) | done | todo |
-| 4 - Cross-encoder rerank | done (early) | done | todo |
-| 5 - Gold set + evaluation | todo | todo | todo |
+| 2 - Dense retrieval | done (early) | done | closed |
+| 3 - Lexical + hybrid | done (early) | done | closed |
+| 4 - Cross-encoder rerank | done (early) | done | closed |
+| 5 - Gold set + evaluation | wip | wip | todo |
 | 6 - Scale out + polish | todo | todo | todo |
 | 7 - Defence | todo | todo | todo |
 
@@ -199,9 +199,9 @@ as the candidate generator that feeds the reranker.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S5-B0` | done (early) | Annotation tool `tools/annotate.html`: side-by-side course cards, keyboard labelling, saves back to the CSV in place | the tool loads curricula and a pairs CSV and writes checked rows back | - |
-| `S5-B1` | todo | Label ~30 of the pooled pairs **cold**, without seeing the LLM labels or A's file, into `data/gold/gold_pairs_b.csv`, so Cohen's kappa measures two humans rather than two people anchoring on a machine | the file exists; A computes kappa against his final labels | `S5-A0` |
-| `S5-B2` | todo | CI green: `ruff`, `pytest` with `MATCHER_IMPL=stub`, frontend build, curriculum validator | the badge is green on `main` | `S1-A3` |
-| `S5-B3` | todo | Serve the evaluation table in the UI (read `eval/report/results.csv`) as an "About / how well does this work" page | the numbers are one click away during the defence | `S5-A2` |
+| `S5-B1` | wip | `scripts/make_kappa_slice.py` has drawn the 30 pairs into `data/gold/gold_pairs_b.csv`, unlabelled. Label them **cold**, without seeing the LLM labels or A's file, into `data/gold/gold_pairs_b.csv`, so Cohen's kappa measures two humans rather than two people anchoring on a machine | the file exists; A computes kappa against his final labels | `S5-A0` |
+| `S5-B2` | done | CI green: `ruff`, `pytest` with `MATCHER_IMPL=stub`, frontend build, curriculum validator | the badge is green on `main` | `S1-A3` |
+| `S5-B3` | done | Serve the evaluation table in the UI (read `eval/report/results.csv`) as an "About / how well does this work" page | the numbers are one click away during the defence | `S5-A2` |
 
 **Lane B gate:** [ ] CI green, kappa slice annotated, numbers visible in the app.
 

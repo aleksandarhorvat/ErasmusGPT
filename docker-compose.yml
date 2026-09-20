@@ -13,11 +13,14 @@ services:
       CROSS_ENCODER: "ms-marco-l6"
       # Must match the ./data mount below. Pinned so the two cannot drift apart.
       DATA_DIR: "/srv/data"
+      REPORT_DIR: "/srv/eval-report"
       DATABASE_URL: "sqlite:////data/erasmusgpt.db"
     volumes:
       # Curricula and the gold set are read from the repo so they can be edited
       # without rebuilding the image.
       - ./data:/srv/data
+      # eval/ is not in the image; the evaluation page reads the reports from here.
+      - ./eval/report:/srv/eval-report:ro
       - backend-db:/data
     ports:
       - "8000:8000"

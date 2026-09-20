@@ -14,6 +14,62 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [B] ADR-0005 accepted: hybrid is the default. Stage 5 lane B
+
+**Who:** Person B
+**Stage:** 5. Stage 2, 3 and 4 gates ticked, both lanes.
+**Commit:** `[B] make hybrid the default and close stage 5 lane B`
+**Tasks touched:** `S5-B2` `S5-B3` (done), `S5-B1` (wip), ADR-0005 written
+
+### The decision
+A's recommendation accepted: `hybrid` is the default, `hybrid+ce` stays implemented and
+selectable, and the comparison becomes the project's main result rather than a footnote.
+Reasoning and the measurement table are in `docs/adr/0005-hybrid-is-the-default.md`.
+
+Changed: the three request defaults in `app/schemas/match.py`, the UI default in
+`App.tsx`, the blurbs in `interface.py`, `docs/04-api-contract.md`, `CONTEXT.md` section 4,
+`README.md` and `docs/00-map.md`. Nothing in lane A had to move.
+
+**CONTRACT CHANGE:** `MatchRequest`, `SingleCourseMatchRequest` and `RecognitionRequest`
+now default to `hybrid`. A caller that sent no strategy gets a different and much faster
+one. Any caller that wants the reranker names it.
+
+### A consequence A should know about
+The only calibration in `data/calibration/` is for `hybrid+ce`. With `hybrid` as the
+default, `score_pct` is no longer a probability on the default path, so the recognition
+panel drops its share and says why. **Refitting the calibration for `hybrid` is `S6-A4`
+again**, and it needs `S5-A1` first. Until then the panel is honest rather than pretty.
+
+### Stage 5 lane B
+- `S5-B1` is drawn but not done. `scripts/make_kappa_slice.py` samples 30 pairs,
+  stratified over the model's label distribution so the slice is not 30 obvious zeroes,
+  and **strips every label on the way out**. `data/gold/gold_pairs_b.csv` has 30 rows over
+  25 home courses, all blank. Labelling them is a person's job and deliberately not the
+  agent's: if these were filled in automatically, kappa would measure two machines
+  agreeing and the number would be worthless. Aleksandar labels them in
+  `tools/annotate.html` without opening `gold_pairs.csv` first.
+- `S5-B2`: CI now also runs `validate_curricula.py` and a new `scripts/check_gold.py`,
+  which catches the things that silently corrupt an evaluation - a duplicate pair counted
+  twice, a course id that no longer exists after a re-scrape, a label that is not 0, 1 or
+  2, a row marked checked with no label, and pairs present in the pre-labels but missing
+  from the gold file. Both are in the README's pre-push list, because a check that only
+  exists in CI is a check nobody runs.
+- `S5-B3`: `GET /api/v1/evaluation` plus a "how well does this work?" panel. It reports
+  how far the human pass has got (0 of 1142 today), lists the reports in `eval/report/`,
+  and where there is no `results.csv` it says so instead of inventing a table. The panel
+  leads with the cross-encoder finding, because that is the honest headline.
+  `docker-compose.yml` mounts `./eval/report` read-only, since `eval/` is not in the image.
+
+### Verified
+`ruff`, `check_style`, `check_gold`, `validate_curricula`, 89 backend tests, `tsc` and
+`npm run build`, all clean.
+
+### Next
+- **B:** sit down and label the 30 cold pairs, then `S6-B1` to `S6-B3`.
+- **A:** `S5-A1`. Everything provisional turns real there, including the ADR above.
+
+---
+
 ## 2026-09-20 - [B] Lane B catches up: stages 2 to 4, plus the recognition panel
 
 **Who:** Person B

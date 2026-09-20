@@ -94,3 +94,23 @@ def test_strategies_report_which_scores_are_probabilities() -> None:
     by_id = {s["id"]: s for s in client.get("/api/v1/strategies").json()}
     assert by_id["hybrid+ce"]["calibrated"] is True
     assert by_id["bm25"]["calibrated"] is False
+
+
+# --- evaluation page (S5-B3) ------------------------------------------------
+
+
+def test_evaluation_reports_how_far_the_human_pass_has_got() -> None:
+    body = client.get("/api/v1/evaluation").json()
+    assert body["gold_total"] > 0
+    assert 0 <= body["gold_checked"] <= body["gold_total"]
+    assert body["provisional"] is (body["gold_checked"] == 0)
+
+
+def test_evaluation_lists_the_reports_that_exist() -> None:
+    assert "ablations.md" in client.get("/api/v1/evaluation").json()["reports"]
+
+
+def test_evaluation_says_no_results_rather_than_inventing_them() -> None:
+    body = client.get("/api/v1/evaluation").json()
+    if not body["available"]:
+        assert body["rows"] == [] and body["columns"] == []
