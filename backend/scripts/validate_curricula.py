@@ -102,17 +102,35 @@ def validate(path: Path) -> list[str]:
             if isinstance(items, list) and not all(isinstance(i, str) for i in items):
                 errors.append(f"{where}: '{name}' must contain only strings")
 
-    codes = {c.get("code") for c in courses if isinstance(c, dict)}
-    for course in courses:
-        if not isinstance(course, dict) or not isinstance(course.get("prerequisites"), list):
-            continue
-        for prerequisite in course["prerequisites"]:
-            if prerequisite not in codes:
-                errors.append(
-                    f"course {course.get('code')}: prerequisite {prerequisite!r} is not a "
-                    "course in this programme"
-                )
     return errors
+
+
+def warnings_for(path: Path) -> list[str]:
+    """Things worth seeing that are not schema violations, so they never fail a build.
+
+    A prerequisite outside the programme is normal for a master's catalogue: EPFL's MSc
+    courses require EPFL bachelor courses that this file does not contain.
+    """
+    data = json.loads(path.read_text(encoding="utf-8"))
+    courses = data.get("courses", [])
+    codes = {c.get("code") for c in courses if isinstance(c, dict)}
+    out = []
+    dangling = {
+        prerequisite
+        for course in courses
+        if isinstance(course, dict) and isinstance(course.get("prerequisites"), list)
+        for prerequisite in course["prerequisites"]
+        if prerequisite not in codes
+    }
+    if dangling:
+        out.append(
+            f"{len(dangling)} prerequisites name courses outside this programme, "
+            f"for example {', '.join(sorted(dangling)[:3])}"
+        )
+    empty = [c.get("code") for c in courses if isinstance(c, dict) and not c.get("description")]
+    if empty:
+        out.append(f"{len(empty)} courses have an empty description: {', '.join(empty[:5])}")
+    return out
 
 
 def main(argv: list[str]) -> int:
@@ -129,6 +147,8 @@ def main(argv: list[str]) -> int:
                 print(f"{path.name}: {error}")
         else:
             print(f"{path.name}: ok")
+            for warning in warnings_for(path):
+                print(f"{path.name}: note: {warning}")
     return 1 if failed else 0
 
 

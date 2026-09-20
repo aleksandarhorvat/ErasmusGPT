@@ -17,9 +17,9 @@ lanes have passed their gate.
 | **Current stage** | **Stage 1 - Real data, real surface** |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | nothing runnable: every remaining lane A task needs the Twente data |
+| **Person A is on** | `S6-A1` more universities; their data is held back by the same checker |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
-| **Blocked on** | `S1-A2` and the whole gold set: `scripts/check_style.py` rejects Twente's own course text |
+| **Blocked on** | every curriculum file: `scripts/check_style.py` rejects the universities' own course text |
 | **Last updated** | 2026-09-20 - eval harness runs; baked models cut 724 MB -> 318 MB |
 
 ### Stage ladder
@@ -215,7 +215,7 @@ as the candidate generator that feeds the reranker.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S6-A1` | todo | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
+| `S6-A1` | wip (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
 | `S6-A2` | todo | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 

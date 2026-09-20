@@ -71,6 +71,32 @@ cross-encoder's improvement. Add 4-6 during M4 only if ingestion is already auto
   If a site disallows scraping, copy the 30-60 courses by hand - it is one afternoon
   and it is not a research contribution either way.
 
+## Language decides what we can ingest (checked 2026-09-20)
+
+The pipeline is English-only by design (ADR-0001): `bge-small-en-v1.5` and
+`ms-marco-MiniLM` have no useful representation of German or Dutch text, so feeding them
+a German syllabus does not degrade politely, it returns near-random neighbours. The
+smallest decent multilingual bi-encoder, `multilingual-e5-small`, is about 470 MB on its
+own and would break the 400 MB image budget in AGENTS.md by itself.
+
+So the rule for adding a university is: **ingest a programme that is taught in English**,
+and accept that for several of them this means the master's rather than the bachelor's.
+
+| University | English programme to ingest | Level | Catalogue |
+|---|---|---|---|
+| Twente | BSc Technical Computer Science | BSc | Osiris JSON API, done |
+| EPFL | MSc Computer Science | MSc | `edu.epfl.ch`, server-rendered, done |
+| Delft | BSc Computer Science and Engineering | BSc | `studiegids.tudelft.nl`, JavaScript app |
+| JKU Linz | BSc Artificial Intelligence | BSc | JKU online catalogue |
+| TU Munich | MSc Informatics | MSc | TUMonline (CAMPUSonline) |
+| TU Graz | MSc Computer Science | MSc | TUGRAZonline (CAMPUSonline) |
+| TU Wien | MSc programmes in informatics | MSc | TISS |
+| ETH Zurich | MSc Computer Science | MSc | VVZ, session-bound URLs |
+
+Mixing master's catalogues into a bachelor's comparison is a level mismatch, not a bug.
+It is the case S6-A2 has to write up: a master's course should match a bachelor's course
+less confidently, and a system that reports that honestly is showing it works.
+
 ## Known data hazards (write these into the error analysis)
 
 - **Granularity mismatch** - Twente 15-ECTS modules vs PMF 6-ECTS courses.

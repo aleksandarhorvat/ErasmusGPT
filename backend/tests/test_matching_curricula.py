@@ -54,10 +54,14 @@ def test_file_name_must_match_programme_id(tmp_path: Path, pmf: dict) -> None:
     assert any("file name" in e for e in validator.validate(path))
 
 
-def test_dangling_prerequisite_is_rejected(tmp_path: Path, pmf: dict) -> None:
+def test_prerequisite_outside_the_programme_is_a_note_not_an_error(
+    tmp_path: Path, pmf: dict
+) -> None:
+    """Master's catalogues require bachelor courses this file does not contain."""
     pmf["courses"][0]["prerequisites"] = ["NOPE"]
-    errors = validator.validate(_write(tmp_path, pmf))
-    assert any("'NOPE'" in e for e in errors)
+    path = _write(tmp_path, pmf)
+    assert validator.validate(path) == []
+    assert any("NOPE" in w for w in validator.warnings_for(path))
 
 
 def test_main_exits_non_zero_on_a_broken_file(tmp_path: Path, pmf: dict) -> None:

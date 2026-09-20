@@ -14,6 +14,50 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] EPFL scraper, and what language costs us
+
+**Who:** Person A
+**Stage:** 6 - more curricula, pulled forward. `S6-A1` is `wip`: scrapers land, data does not.
+**Commit:** `[A] add the epfl scraper`
+**Tasks touched:** `S6-A1` (wip, early)
+
+### Done
+- `backend/scripts/scrape_epfl.py`. `edu.epfl.ch` renders on the server and gives one
+  English page per course with Summary, Content, Keywords and Learning Outcomes, which
+  maps onto our schema almost field for field. It produces **78 courses** for MSc
+  Computer Science, every one with a description and topics, and the validator passes.
+- `validate_curricula.py` now separates errors from notes. A prerequisite naming a course
+  outside the file used to be an error; for a master's catalogue that is normal, since
+  EPFL's MSc courses require EPFL bachelor courses. It is reported as a note instead.
+
+### The language question, answered with a measurement
+Adding German or Dutch curricula is not free. `bge-small-en-v1.5` and `ms-marco-MiniLM`
+are English-only (ADR-0001), and the smallest multilingual bi-encoder worth using,
+`multilingual-e5-small`, is about 470 MB, which breaks the 400 MB image budget on its
+own. So the rule is to ingest the **English-taught** programme at each university, which
+for Munich, Graz, Vienna, Zurich and Lausanne means the master's. `docs/01-universities.md`
+now carries the table of which programme to take at each of the eight universities.
+
+### Broken / known issues
+- **The style checker now blocks every curriculum file, not just Twente's.** EPFL's own
+  course text trips 11 rules, four distinct banned words and one banned pattern, all of
+  them ordinary prospectus English. Universities write marketing prose; our style rules
+  exist for prose we write. Both the
+  Twente and EPFL JSON files are parsed, cached and held back.
+- Delft and ETH need more work than EPFL did: Delft's study guide is a JavaScript app
+  with no plain API found yet, and ETH's VVZ uses session-bound course ids.
+
+### Request to B (second time, now larger)
+`scripts/check_style.py` has to skip the banned-word and sentence-pattern checks for
+`data/curricula/`, keeping the ASCII check. Until it does, no real curriculum can be
+committed, which blocks the gold set, the evaluation, and every university after Twente.
+
+### Next
+- **A:** Delft and JKU Linz if the checker is resolved; there is no point scraping more
+  data that cannot be committed.
+
+---
+
 ## 2026-09-20 - [A] Pooling script for the gold set
 
 **Who:** Person A
