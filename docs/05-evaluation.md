@@ -66,6 +66,36 @@ by `eval/run_eval.py`. The script must import the **same** `matching/` code the 
 uses. Do not reimplement scoring in the eval script: the report would then describe a
 system that is not the one being demonstrated.
 
+## The recognition estimate, and its arithmetic (S6-A4, S6-A5)
+
+The metrics above score a ranking. A student asks something else: how much of my degree
+would be recognised over there? `backend/app/matching/aggregate.py` answers it as
+
+```
+expected recognised ECTS = sum over home courses of p(best match) x ECTS(home course)
+```
+
+with these rules, each of them a judgement worth defending or attacking at the defence:
+
+- **Only the best candidate per home course counts.** One course is replaced by one
+  course, so summing the top five would count the same credits repeatedly.
+- **`p` is a calibrated probability, not a similarity.** `eval/fit_calibration.py` fits
+  `p = sigmoid(a * score + b)` on the gold labels, treating labels 1 and 2 as matches,
+  and writes `data/calibration/<strategy>.json`, which the pipeline loads at startup.
+  The reliability table in that file is the evidence: over the current fit, pairs
+  predicted at 0.48 were recognised 50 % of the time.
+- **Credits counted are the home course's**, because that is what the student needs to
+  replace. Where the host course is smaller, the difference is reported as
+  `ects_shortfall` rather than hidden: a coordinator may ask for extra work.
+- **Buckets, not false precision.** Likely at p >= 0.7, borderline at 0.4, unlikely
+  below. The summary carries `calibrated: false` when no calibration has been fitted,
+  and then the number is a heuristic and has to be presented as one.
+
+Two limits to state in the report. Unlabelled pairs count as 0, so the estimate is a
+lower bound on a pooled collection. And a calibration fitted on pre-labels rather than
+human-checked rows describes the model's own opinion, which is why the file records
+where its labels came from.
+
 ## Building the gold set
 
 A language model proposes every label, and Person A reads every row and corrects it

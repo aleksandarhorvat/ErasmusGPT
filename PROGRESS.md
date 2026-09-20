@@ -14,6 +14,56 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-20 - [A] Calibrated scores and the ECTS recognition estimate
+
+**Who:** Person A
+**Stage:** 6, pulled forward. This is the feature that turns a course comparator into
+something a student can act on, so it goes before more universities.
+**Commit:** `[A] calibrate scores and estimate recognised ects`
+**Tasks touched:** `S6-A4`, `S6-A5` (done)
+
+### Done
+- `eval/fit_calibration.py` fits `p = sigmoid(a * score + b)` on the gold labels by plain
+  gradient descent, no new dependency, and writes `data/calibration/hybrid-ce.json`. The
+  pipeline loads it at startup, so `score_pct` is now a probability rather than a
+  display number. Where no calibration exists the old heuristics still apply and the app
+  works as before.
+- The fit is honest on its own data: pairs predicted at 0.10 were matches 10 % of the
+  time, at 0.27 they were 23 %, at 0.48 they were 50 %. That table is saved in the file.
+- `matching/aggregate.py` sums the per-course probabilities into
+  `expected recognised ECTS = sum of p(best) x ECTS(home)`, with likely, borderline and
+  unlikely buckets and a separate `ects_shortfall` where the host course carries fewer
+  credits. The arithmetic and every rule behind it are written into
+  `docs/05-evaluation.md`.
+- 12 new tests. 91 in total, still offline.
+
+### The first real numbers
+Against Twente, 24 % of the 353 ECTS pooled here would be expected to be recognised,
+with 108 ECTS borderline, none yet likely, and a 50 ECTS shortfall where host courses
+are smaller. Against EPFL's master's, 22 %. Both are provisional: the calibration is
+fitted on my pre-labels, not on checked ones, and the file says so.
+
+### A latency regression, found and fixed with a measurement
+The real 40-course Twente catalogue pushed `hybrid+ce` to **157 s for a programme**, over
+the 120 s ceiling in `S4-A4`. The cross-encoder was running at 512 tokens over documents
+of about 1400 characters. At 256 tokens it is 2.4 times faster, and measured against the
+pre-labels over 28 home courses it is not worse but better: P@1 and MRR@10 unchanged,
+Recall@5 up from 0.51 to 0.65. A whole programme is now **65 s, 1.3 s per query**.
+
+### Request to B
+`score_pct` is now a calibrated probability for `hybrid+ce`, which is what `S6-B4` needs.
+`aggregate.summarise()` and `aggregate.as_dict()` produce the summary payload; the
+endpoint that exposes it is yours, since `app/api/**` is your zone. Nothing in the frozen
+contract changes.
+
+### Next
+- **A:** `S6-A1`, more universities, cheapest catalogue first.
+- **Luka:** `S5-A1`, the human pass over `data/gold/gold_pairs.csv`. Everything
+  provisional above becomes real the moment those rows are checked, and I refit in one
+  command.
+
+---
+
 ## 2026-09-20 - [A] Gold set pooled and pre-labelled, 562 pairs
 
 **Who:** Person A

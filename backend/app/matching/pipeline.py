@@ -12,7 +12,9 @@ so the app still boots and Person B is never blocked.
 """
 from __future__ import annotations
 
+import json
 import logging
+import math
 import time
 
 import numpy as np
@@ -56,9 +58,48 @@ def relative_pct(score: float, best: float) -> int:
     return int(round(min(max(score / best, 0.0), 1.0) * 100))
 
 
-def _display_pct(strategy: Strategy, score: float, best: float) -> int:
-    """Until S3-B1: cross-encoder scores are already 0..1, cosines get stretched, and
-    BM25 and RRF have no fixed range at all."""
+def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float]]:
+    """strategy -> (a, b) of p = sigmoid(a * score + b), from data/calibration/.
+
+    Written by eval/fit_calibration.py (S6-A4). Missing file means the heuristics below
+    are used instead, which keeps the app working before a gold set exists.
+    """
+    fitted: dict[Strategy, tuple[float, float]] = {}
+    directory = settings.data_dir / "calibration"
+    if not directory.is_dir():
+        return fitted
+    for path in sorted(directory.glob("*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            fitted[data["strategy"]] = (float(data["a"]), float(data["b"]))
+            log.info("calibration for %s from %s (%s)", data["strategy"], path.name,
+                     data.get("label_source", "unknown source"))
+        except (OSError, KeyError, ValueError, json.JSONDecodeError):
+            log.warning("ignoring unreadable calibration file %s", path)
+    return fitted
+
+
+def probability(score: float, coefficients: tuple[float, float] | None) -> float | None:
+    """Calibrated probability that a coordinator would recognise the pair, or None."""
+    if coefficients is None:
+        return None
+    a, b = coefficients
+    x = a * score + b
+    if x < -700:  # exp overflows below this
+        return 0.0
+    return 1.0 / (1.0 + math.exp(-x))
+
+
+def _display_pct(strategy: Strategy, score: float, best: float,
+                 calibration: dict[Strategy, tuple[float, float]] | None = None) -> int:
+    """A calibrated probability where one has been fitted, a heuristic otherwise.
+
+    The heuristics exist only so the app is usable before the gold set: cross-encoder
+    scores are already 0..1, cosines get stretched, and BM25 and RRF have no fixed range.
+    """
+    calibrated = probability(score, (calibration or {}).get(strategy))
+    if calibrated is not None:
+        return int(round(calibrated * 100))
     if strategy == "hybrid+ce":
         return int(round(min(max(score, 0.0), 1.0) * 100))
     if strategy == "dense":
@@ -92,6 +133,7 @@ class PipelineMatcher:
         self.embedder = Embedder(store, self.settings)
         # Injectable so tests can supply a fake and never touch a real model.
         self.reranker = reranker or Reranker(self.settings)
+        self.calibration = load_calibration(self.settings)
         self.indexes: dict[str, DenseIndex] = {}
         self.lexical: dict[str, BM25Index] = {}
         self.documents: dict[str, dict[str, str]] = {}
@@ -263,7 +305,7 @@ class PipelineMatcher:
                 uid,
                 score,
                 rank,
-                _display_pct(strategy, score, best),
+                _display_pct(strategy, score, best, self.calibration),
             )
             for rank, (uid, score) in enumerate(hits, start=1)
         ]

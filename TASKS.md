@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | waiting on `S5-A1`, which is Luka's own reading pass in the annotator |
+| **Person A is on** | recognition estimate done; next `S6-A1`, more universities |
 | **Person B is on** | stage 1 lane B done, waiting on A for the stage gate |
 | **Blocked on** | nothing |
-| **Last updated** | 2026-09-20 - 562 pairs pooled and pre-labelled, ready for the human pass |
+| **Last updated** | 2026-09-20 - calibrated scores and the ECTS recognition estimate work |
 
 ### Stage ladder
 
@@ -225,8 +225,8 @@ probability until it has been calibrated against real labels.
 | `S6-A2` | todo | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 
-| `S6-A4` | todo | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |
-| `S6-A5` | todo | **Recognition estimate, part 2: aggregate over a programme.** `GET`/`POST` returns, per home course, the best match and its calibrated probability; the expected recognised ECTS of a whole programme is the sum of `ects x p`. Decide and document the rule for partial matches (label 1) and for ECTS shortfall (6 ECTS home vs 4 ECTS host) | a programme-level number exists with its arithmetic written down in `docs/05-evaluation.md` | `S6-A4` |
+| `S6-A4` | done | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |
+| `S6-A5` | done | **Recognition estimate, part 2: aggregate over a programme.** `GET`/`POST` returns, per home course, the best match and its calibrated probability; the expected recognised ECTS of a whole programme is the sum of `ects x p`. Decide and document the rule for partial matches (label 1) and for ECTS shortfall (6 ECTS home vs 4 ECTS host) | a programme-level number exists with its arithmetic written down in `docs/05-evaluation.md` | `S6-A4` |
 
 **Lane A gate:** [ ] >= 4 host programmes, error analysis committed, recognition estimate
 calibrated.

@@ -1,0 +1,31 @@
+{
+  "strategy": "hybrid+ce",
+  "a": 2.892945,
+  "b": -2.449217,
+  "pairs": 562,
+  "positives": 83,
+  "positive_label": 1,
+  "label_source": "PROVISIONAL: llm_prelabels.csv, no human pass yet",
+  "host_programme": "utwente-tcs-bsc",
+  "fitted_at": "2026-09-20T11:04:11Z",
+  "reliability": [
+    {
+      "bin": "0.0-0.2",
+      "pairs": 454,
+      "predicted": 0.098,
+      "observed": 0.101
+    },
+    {
+      "bin": "0.2-0.4",
+      "pairs": 64,
+      "predicted": 0.273,
+      "observed": 0.234
+    },
+    {
+      "bin": "0.4-0.6",
+      "pairs": 44,
+      "predicted": 0.479,
+      "observed": 0.5
+    }
+  ]
+}

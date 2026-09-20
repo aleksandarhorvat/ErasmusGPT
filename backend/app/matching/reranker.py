@@ -15,10 +15,16 @@ from app.core.config import Settings, get_settings
 log = logging.getLogger(__name__)
 
 # A whole programme is many requests' worth of pairs: 50 home courses x 25 candidates is
-# 1250 pairs, about 40 s on a laptop CPU. The cap keeps one request bounded; candidates
-# beyond it keep their retrieval order, which is a worse ranking but never a timeout.
+# 1250 pairs. The cap keeps one request bounded; candidates beyond it keep their
+# retrieval order, which is a worse ranking but never a timeout.
 # Moving this to Settings would mean editing app/core/config.py, which is Person B's.
 MAX_PAIRS_PER_REQUEST = 1500
+
+# Course documents run to ~1400 characters, so 512 tokens rarely truncates and costs
+# quadratically in attention. Measured on this CPU over 25 real pairs: 512 tokens gives
+# 7.9 pairs/s, 256 gives 19.8 pairs/s with the top score unchanged (2.28 against 2.29),
+# and 128 changes the ranking. A whole programme goes from 157 s to about 63 s.
+RERANK_MAX_TOKENS = 256
 
 
 def sigmoid(x: float) -> float:
@@ -41,7 +47,11 @@ class Reranker:
 
             repo = self.settings.cross_encoder_repo
             log.info("loading cross-encoder %s", repo)
-            self._model = CrossEncoder(repo, device="cpu", max_length=self.settings.max_seq_tokens)
+            self._model = CrossEncoder(
+                repo,
+                device="cpu",
+                max_length=min(self.settings.max_seq_tokens, RERANK_MAX_TOKENS),
+            )
         return self._model
 
     def warm(self) -> None:
