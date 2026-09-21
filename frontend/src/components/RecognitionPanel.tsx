@@ -8,6 +8,28 @@ export default function RecognitionPanel({ data }: { data: RecognitionResponse }
   const pct = Math.round(data.expected_share * 100)
   const bar = (ects: number) => ({ width: `${data.total_ects ? (ects / data.total_ects) * 100 : 0}%` })
 
+  // Without a calibration, score_pct is a display value, so summing ects x score is
+  // arithmetic over numbers that are not probabilities. Warning the reader while still
+  // printing the total in the headline would be having it both ways, so the headline
+  // goes away and the buckets stay, labelled for what they are.
+  if (!data.calibrated) {
+    return (
+      <section className="recog">
+        <h2>No recognition estimate for <code>{data.strategy}</code></h2>
+        <p className="warn">
+          An expected-ECTS figure is a sum of probabilities, and <code>{data.strategy}</code>
+          has no fitted calibration, so its scores are display values rather than
+          probabilities. Switch to a calibrated strategy, or ask Person A to fit one for
+          this strategy (<code>eval/fit_calibration.py</code>, `S6-A4`).
+        </p>
+        <p className="hint">
+          {data.courses.length} courses on this path, {data.total_ects} ECTS. The table below
+          still ranks them; only the whole-programme number needs a probability.
+        </p>
+      </section>
+    )
+  }
+
   return (
     <section className="recog">
       <h2>
@@ -32,13 +54,6 @@ export default function RecognitionPanel({ data }: { data: RecognitionResponse }
         )}
       </ul>
 
-      {!data.calibrated && (
-        <p className="warn">
-          <code>{data.strategy}</code> has no fitted calibration, so these shares come from a
-          display score rather than a probability. Switch to a calibrated strategy for a number
-          that means something.
-        </p>
-      )}
       {data.calibrated && data.provisional && (
         <p className="warn">
           Provisional. The calibration behind these probabilities was fitted on machine labels,

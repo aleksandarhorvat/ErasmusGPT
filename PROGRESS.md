@@ -14,6 +14,50 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [B] ADR-0005 amended, and the panel stops doing arithmetic on display scores
+
+**Who:** Person B
+**Stage:** 5 and 6
+**Commit:** `[B] amend adr-0005 and stop estimating ects without a calibration`
+**Tasks touched:** none; a correctness fix and a doc correction
+
+### Reviewed A's four commits
+`64f949c` `7f80102` `214411c` `30e9424`. No lane B file touched, 90 tests pass, ruff,
+style, `check_gold` and `validate_curricula` all clean, and `/strategies`,
+`/recognition` and `/evaluation` all still work against the new engine. Fusing the
+reranker instead of letting it replace the ranking is the right call and the end-to-end
+run in `30e9424` is the first time anyone checked B's defaults against A's engine
+together.
+
+### ADR-0005 amended rather than left standing
+The ADR said `hybrid+ce` "loses on every metric". After `64f949c` that is false: fused,
+it wins Recall@5 on Twente TCS and wins P@1 and MRR on Applied Mathematics. Leaving the
+claim in place would be the same drift A corrected in himself in `6d75b24`, so the ADR
+now carries the new table and a narrower reason: `hybrid` stays the default because it is
+level and three hundred times cheaper, not because the reranker is bad. The reranker is
+no longer a negative result, it is a result about how to combine one.
+
+### The bug that fix exposed on my side
+Only `hybrid+ce` has a calibration. With `hybrid` as the default, `score_pct` is a display
+value, and the recognition panel was still printing "About 108 of 180 ECTS would likely be
+recognised" from a sum of `ects x display_score`. Warning underneath while keeping the
+headline was having it both ways. The panel now refuses the whole-programme estimate for
+an uncalibrated strategy, says why, and keeps the per-course table, which needs no
+probability.
+
+### Request to A
+Fit a calibration for `hybrid` as well. Since `64f949c` standardises the scores before
+fitting, `fit_calibration.py` should handle it unchanged. Until then the recognition
+estimate, which is the feature that makes this more than a course comparator, only works
+on a strategy that is not the default.
+
+### Next
+- **B:** label the 30 cold pairs in `data/gold/gold_pairs_b.csv` (`S5-B1`), then `S6-B1`
+  to `S6-B3`.
+- **A:** `S5-A1`.
+
+---
+
 ## 2026-09-21 - [A] End-to-end smoke test, and a tie-breaking fix it found
 
 **Who:** Person A
