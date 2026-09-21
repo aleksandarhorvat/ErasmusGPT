@@ -30,25 +30,33 @@ def candidate(uid: str, pct: int, ects: float = 6.0) -> MatchCandidate:
 # --- calibration ------------------------------------------------------------
 
 def test_probability_is_the_logistic_of_the_score() -> None:
-    assert probability(0.0, (1.0, 0.0)) == pytest.approx(0.5)
-    assert probability(10.0, (1.0, 0.0)) > 0.99
-    assert probability(-10.0, (1.0, 0.0)) < 0.01
-    assert probability(-1e6, (1.0, 0.0)) == 0.0  # must not overflow
+    assert probability(0.0, (1.0, 0.0, 0.0, 1.0)) == pytest.approx(0.5)
+    assert probability(10.0, (1.0, 0.0, 0.0, 1.0)) > 0.99
+    assert probability(-10.0, (1.0, 0.0, 0.0, 1.0)) < 0.01
+    assert probability(-1e6, (1.0, 0.0, 0.0, 1.0)) == 0.0  # must not overflow
 
 
 def test_no_calibration_means_no_probability() -> None:
     assert probability(0.5, None) is None
 
 
+def test_the_score_is_standardised_before_the_logistic() -> None:
+    """RRF scores sit near 0.02; without standardising the curve comes out flat."""
+    low = probability(0.01, (2.0, 0.0, 0.02, 0.005))
+    high = probability(0.03, (2.0, 0.0, 0.02, 0.005))
+    assert high - low > 0.5
+
+
 def test_calibration_is_loaded_from_data_directory(tmp_path: Path) -> None:
     directory = tmp_path / "calibration"
     directory.mkdir()
     (directory / "hybrid-ce.json").write_text(
-        json.dumps({"strategy": "hybrid+ce", "a": 2.5, "b": -1.5}), encoding="utf-8"
+        json.dumps({"strategy": "hybrid+ce", "a": 2.5, "b": -1.5, "mean": 0.1, "std": 2.0}),
+        encoding="utf-8",
     )
     (directory / "broken.json").write_text("{not json", encoding="utf-8")
     fitted = load_calibration(Settings(data_dir=tmp_path))
-    assert fitted == {"hybrid+ce": (2.5, -1.5)}  # the broken file is skipped, not fatal
+    assert fitted == {"hybrid+ce": (2.5, -1.5, 0.1, 2.0)}  # the broken file is skipped, not fatal
 
 
 def test_missing_calibration_directory_is_fine(tmp_path: Path) -> None:

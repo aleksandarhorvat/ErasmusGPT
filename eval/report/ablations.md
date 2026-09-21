@@ -21,7 +21,11 @@ This is the project's headline claim, and on the current labels it does not hold
 | `bm25` | 0.86 | 0.75 | 0.91 | 2 |
 | `dense` | 0.75 | 0.77 | 0.81 | <1 |
 | **`hybrid`** | **0.86** | **0.80** | **0.90** | 2 |
-| `hybrid+ce` | 0.68 | 0.72 | 0.77 | 979 |
+| `hybrid+ce`, as it was then | 0.68 | 0.72 | 0.77 | 979 |
+
+Section 1b fixes most of this: fusing the reranker into the order instead of replacing it
+brings `hybrid+ce` to 0.82 / 0.82 / 0.88. The table above is what the original design
+scored.
 
 Against Applied Mathematics: `hybrid` 0.82 / 0.85 / 0.87, `hybrid+ce` 0.82 / 0.73 / 0.87.
 So the reranker is neutral at best on one host and clearly worse on the other, for about
@@ -33,6 +37,49 @@ descriptions, and "which passage answers this query" is not the same question as
 coordinator accept this course in place of that one".
 
 Two things were tried and did not rescue it (sections 2 and 3).
+
+## 1b. Fusing the reranker instead of letting it replace the ranking
+
+The pipeline used to hand the cross-encoder the retrieved candidates and take its order
+as final. Fusing the two orders by RRF, exactly as `hybrid` fuses BM25 and dense, changes
+the picture:
+
+| Twente TCS | P@1 | Recall@5 | MRR@10 |
+|---|---|---|---|
+| `hybrid` (no reranker) | 0.86 | 0.80 | 0.90 |
+| reranker replaces the order (old) | 0.68 | 0.72 | 0.77 |
+| **reranker fused into the order (now)** | 0.82 | **0.82** | 0.88 |
+
+| Twente Applied Mathematics | P@1 | Recall@5 | MRR@10 |
+|---|---|---|---|
+| `hybrid` (no reranker) | 0.82 | 0.85 | 0.87 |
+| reranker replaces the order (old) | 0.82 | 0.73 | 0.87 |
+| **reranker fused into the order (now)** | **0.86** | 0.79 | **0.91** |
+
+Adopted. The reranker goes from worst of four to level with `hybrid`, winning on recall
+against one host and on P@1 and MRR against the other. It is still not a clear win, and
+it still costs about 850 ms per query against 2 ms, so the choice of default remains open
+until the labels are checked.
+
+Worth saying at the defence: no production search system lets one neural reranker
+overrule everything else either. It is one signal among several, which is what this row
+shows empirically.
+
+## 1c. Sentence-level matching
+
+Instead of one vector per course, score a pair by its best-matching sentence pair, which
+should suit Twente's habit of bundling several subjects into one module:
+
+| Variant | P@1 (TCS) | Recall@5 | P@1 (AM) | Recall@5 |
+|---|---|---|---|---|
+| `hybrid` | 0.86 | 0.80 | 0.82 | 0.85 |
+| sentence max-similarity alone | 0.46 | 0.63 | 0.68 | 0.68 |
+| `hybrid` + sentences as a third list | 0.79 | 0.82 | 0.86 | 0.81 |
+
+Not adopted. Alone it is much worse: a single sentence match is easy to find between any
+two technical courses, so precision collapses. Fused as a third list it trades P@1 for
+recall on one host and the reverse on the other, which is not enough to justify the
+complexity. Revisit if the granularity cases turn out to dominate the error analysis.
 
 ## 2. What the reranker gets as its query
 
@@ -98,15 +145,20 @@ and the honest write-up is stronger than the claim would have been: the standard
 from IR (retrieve then rerank) was tested on a task it was not trained for, with the
 evidence and the reasoning for why.
 
+Section 1b changes what is on the table. With the reranker fused rather than given a
+veto, `hybrid+ce` is level with `hybrid`: better recall against one host, better P@1 and
+MRR against the other, for 400 times the latency. So the question is no longer "is the
+reranker harmful" but "is it worth 850 ms a query", and that is a question about the
+demo as much as about the metrics.
+
 Three options, for A and B to decide together:
 
-1. **Make `hybrid` the default and report the ablation.** Cheapest, and the numbers
-   support it today.
-2. **Keep `hybrid+ce` as the default** and present the reranker as the thing that was
-   tried and did not work. Harder to defend when the UI ships the slower, worse option.
-3. **Fine-tune the reranker** on the gold set (`S6-A3`, Colab). This is the version where
-   the claim could survive: a cross-encoder trained on course equivalence rather than web
-   search. It needs the human-checked labels first, and it is a day of work.
+1. **Make `hybrid` the default** and present the reranker as an option the evaluation
+   measured. Fastest demo by far, and defensible on today's numbers.
+2. **Keep `hybrid+ce`**, now that fusing has made it competitive, and show the ablation
+   that explains why it is fused rather than final.
+3. **Fine-tune the reranker** on the gold set (`S6-A3`, Colab), which is the version
+   where it could win outright rather than draw. Needs the human-checked labels first.
 
 Nothing should be decided from these numbers alone. They rest on labels the model wrote
 about its own behaviour, which is precisely what `S5-A1` exists to fix.

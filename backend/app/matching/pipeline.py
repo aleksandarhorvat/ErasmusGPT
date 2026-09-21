@@ -58,20 +58,23 @@ def relative_pct(score: float, best: float) -> int:
     return int(round(min(max(score / best, 0.0), 1.0) * 100))
 
 
-def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float]]:
-    """strategy -> (a, b) of p = sigmoid(a * score + b), from data/calibration/.
+def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float, float, float]]:
+    """strategy -> (a, b, mean, std) of p = sigmoid(a * (score - mean) / std + b).
 
     Written by eval/fit_calibration.py (S6-A4). Missing file means the heuristics below
     are used instead, which keeps the app working before a gold set exists.
     """
-    fitted: dict[Strategy, tuple[float, float]] = {}
+    fitted: dict[Strategy, tuple[float, float, float, float]] = {}
     directory = settings.data_dir / "calibration"
     if not directory.is_dir():
         return fitted
     for path in sorted(directory.glob("*.json")):
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            fitted[data["strategy"]] = (float(data["a"]), float(data["b"]))
+            fitted[data["strategy"]] = (
+                float(data["a"]), float(data["b"]),
+                float(data.get("mean", 0.0)), float(data.get("std", 1.0)) or 1.0,
+            )
             log.info("calibration for %s from %s (%s)", data["strategy"], path.name,
                      data.get("label_source", "unknown source"))
         except (OSError, KeyError, ValueError, json.JSONDecodeError):
@@ -79,19 +82,22 @@ def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float]]:
     return fitted
 
 
-def probability(score: float, coefficients: tuple[float, float] | None) -> float | None:
+def probability(
+    score: float, coefficients: tuple[float, float, float, float] | None
+) -> float | None:
     """Calibrated probability that a coordinator would recognise the pair, or None."""
     if coefficients is None:
         return None
-    a, b = coefficients
-    x = a * score + b
+    a, b, mean, std = coefficients
+    x = a * (score - mean) / (std or 1.0) + b
     if x < -700:  # exp overflows below this
         return 0.0
     return 1.0 / (1.0 + math.exp(-x))
 
 
 def _display_pct(strategy: Strategy, score: float, best: float,
-                 calibration: dict[Strategy, tuple[float, float]] | None = None) -> int:
+                 calibration: dict[Strategy, tuple[float, float, float, float]] | None = None,
+                 ) -> int:
     """A calibrated probability where one has been fitted, a heuristic otherwise.
 
     The heuristics exist only so the app is usable before the gold set: cross-encoder
@@ -257,17 +263,35 @@ class PipelineMatcher:
         if strategy == "hybrid":
             return fused[:n]
 
-        # hybrid+ce: rerank the fused candidates as (home, host) pairs.
+        # hybrid+ce: rerank the fused candidates, then fuse the reranker's order with the
+        # retrieval order rather than letting it overrule them. Measured over the pooled
+        # labels against Twente TCS, replacing gives P@1 0.68 and Recall@5 0.72; blending
+        # gives 0.82 and 0.82. A reranker trained on web search is one opinion among
+        # three, not a veto (eval/report/ablations.md).
         pairs = [(uid, self.documents[host_programme_id][uid]) for uid, _ in fused]
         query = rerank_query(self.store.get_course(home_uid).title, self._document(home_uid))
         if self._pair_budget < len(pairs):
             # Over budget: keep the fused order for the rest rather than risk a timeout.
-            kept = self.reranker.rerank(query, pairs[:self._pair_budget], n)
-            rest = [(uid, 0.0) for uid, _ in fused[self._pair_budget:]]
+            kept = self.reranker.rerank(query, pairs[:self._pair_budget], len(pairs))
             self._pair_budget = 0
-            return (kept + rest)[:n]
+            return self._blend(fused, kept, n)
         self._pair_budget -= len(pairs)
-        return self.reranker.rerank(query, pairs, n)
+        reranked = self.reranker.rerank(query, pairs, len(pairs))
+        return self._blend(fused, reranked, n)
+
+    def _blend(
+        self,
+        retrieved: list[tuple[str, float]],
+        reranked: list[tuple[str, float]],
+        n: int,
+    ) -> list[tuple[str, float]]:
+        """Fuse the retrieval order with the reranker's order by rank, as RRF does.
+
+        Rank-based again, for the same reason as `hybrid`: an RRF score and a squashed
+        cross-encoder logit are not on a comparable scale.
+        """
+        lists = [[uid for uid, _ in retrieved], [uid for uid, _ in reranked]]
+        return reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=n)
 
     def _candidate(
         self, home: CourseSummary, host_uid: str, score: float, rank: int, pct: int

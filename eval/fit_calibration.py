@@ -56,7 +56,23 @@ def sigmoid(x: float) -> float:
     return 1.0 / (1.0 + math.exp(-x))
 
 
-def fit_platt(scores: list[float], positives: list[int], steps: int = 2000,
+def standardise(scores: list[float]) -> tuple[float, float]:
+    """Mean and standard deviation of the raw scores.
+
+    Strategies produce wildly different ranges: a cross-encoder probability spans 0..1,
+    an RRF score sits near 0.02. Fitting a logistic on the raw value makes the gradient
+    vanish for the small-range strategies and the curve comes out flat, predicting the
+    base rate for every pair. Standardising first removes that.
+    """
+    n = len(scores)
+    if n == 0:
+        return 0.0, 1.0
+    mean = sum(scores) / n
+    variance = sum((s - mean) ** 2 for s in scores) / n
+    return mean, math.sqrt(variance) or 1.0
+
+
+def fit_platt(scores: list[float], positives: list[int], steps: int = 4000,
               learning_rate: float = 0.5) -> tuple[float, float]:
     """Logistic regression on one feature, by gradient descent. Returns (a, b).
 
@@ -133,14 +149,18 @@ def main() -> int:
                 scores.append(candidate.score)
                 positives.append(int(labels[key] >= args.positive_label))
 
-    a, b = fit_platt(scores, positives)
-    table = reliability(scores, positives, a, b)
+    mean, std = standardise(scores)
+    normalised = [(score - mean) / std for score in scores]
+    a, b = fit_platt(normalised, positives)
+    table = reliability(normalised, positives, a, b)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / f"{args.strategy.replace('+', '-')}.json"
     out.write_text(json.dumps({
         "strategy": args.strategy,
         "a": round(a, 6),
         "b": round(b, 6),
+        "mean": round(mean, 6),
+        "std": round(std, 6),
         "pairs": len(scores),
         "positives": sum(positives),
         "positive_label": args.positive_label,
@@ -151,7 +171,8 @@ def main() -> int:
     }, indent=2) + "\n", encoding="utf-8")
 
     print(f"fitted on {len(scores)} pairs ({sum(positives)} positive) from {source}")
-    print(f"  p = sigmoid({a:.3f} * score + {b:.3f}) -> {out.relative_to(REPO_ROOT)}")
+    print(f"  p = sigmoid({a:.3f} * (score - {mean:.4f}) / {std:.4f} + {b:.3f})"
+          f" -> {out.relative_to(REPO_ROOT)}")
     for row in table:
         print(f"  {row['bin']}: {row['pairs']:4d} pairs, predicted {row['predicted']:.2f},"
               f" observed {row['observed']:.2f}")

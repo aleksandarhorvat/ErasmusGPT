@@ -14,6 +14,51 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [A] Fusing the reranker rescues it
+
+**Who:** Person A
+**Stage:** 6
+**Commit:** `[A] fuse the reranker into the ranking instead of replacing it`
+**Tasks touched:** `S4-A2` (reworked), `S6-A4` (calibration made robust)
+
+### Done
+- `hybrid+ce` no longer lets the cross-encoder overrule retrieval. Its order is fused
+  with the retrieval order by RRF, the same way `hybrid` fuses BM25 and dense.
+
+| Twente TCS | P@1 | Recall@5 | MRR@10 |
+|---|---|---|---|
+| `hybrid` | 0.86 | 0.80 | 0.90 |
+| reranker replaces (before) | 0.68 | 0.72 | 0.77 |
+| reranker fused (now) | 0.82 | 0.82 | 0.88 |
+
+  Against Applied Mathematics the fused version wins on P@1 (0.86) and MRR (0.91). The
+  reranker goes from worst of four to level with the best, which is what it should have
+  been all along: one opinion among three, not a veto.
+- Sentence-level matching was tested and **not** adopted: 0.46 P@1 alone against 0.86
+  for `hybrid`. One shared sentence is easy to find between any two technical courses.
+  Written up anyway, since the granularity problem is in `docs/01-universities.md` as a
+  known hazard and this is the evidence about it.
+
+### A bug this exposed, worth knowing about
+Fusing changed the score from a cross-encoder probability (0..1) to an RRF score (about
+0.02). The calibration then fitted a flat curve and predicted 15 % for every pair: the
+gradient vanishes when the feature never moves. `fit_calibration.py` now standardises
+the scores before fitting and stores the mean and standard deviation alongside the
+coefficients, so any strategy can be calibrated regardless of its range. The reliability
+table is honest again: 0.05 predicted against 0.04 observed, 0.47 against 0.47.
+
+### Where the recognition estimate stands
+With the fused strategy and the refitted calibration, a Computer Science path scores
+95.5 of 180 ECTS expected recognised against Twente TCS, 53 %, with 163 ECTS borderline
+and nothing yet in the likely band. Provisional, as always, until `S5-A1`.
+
+### Next
+- **A:** error analysis (`S6-A2`) on the provisional labels, then the defence notes.
+- **Luka:** the labelling pass. Instructions are in `tools/README.md`; do whole home
+  courses rather than skimming, because a query only counts when all its pairs are judged.
+
+---
+
 ## 2026-09-20 - [B] ADR-0005 accepted: hybrid is the default. Stage 5 lane B
 
 **Who:** Person B

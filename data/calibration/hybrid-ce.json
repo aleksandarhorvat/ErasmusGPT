@@ -1,37 +1,39 @@
 {
   "strategy": "hybrid+ce",
-  "a": 3.310194,
-  "b": -2.432501,
+  "a": 1.846849,
+  "b": -2.683846,
+  "mean": 0.028664,
+  "std": 0.002458,
   "pairs": 562,
   "positives": 83,
   "positive_label": 1,
   "label_source": "PROVISIONAL: llm_prelabels.csv, no human pass yet",
   "host_programme": "utwente-tcs-bsc",
-  "fitted_at": "2026-09-20T14:23:43Z",
+  "fitted_at": "2026-09-20T23:43:23Z",
   "reliability": [
     {
       "bin": "0.0-0.2",
-      "pairs": 460,
-      "predicted": 0.095,
-      "observed": 0.091
+      "pairs": 399,
+      "predicted": 0.053,
+      "observed": 0.04
     },
     {
       "bin": "0.2-0.4",
-      "pairs": 61,
-      "predicted": 0.283,
-      "observed": 0.393
+      "pairs": 89,
+      "predicted": 0.282,
+      "observed": 0.303
     },
     {
       "bin": "0.4-0.6",
-      "pairs": 31,
-      "predicted": 0.509,
-      "observed": 0.355
+      "pairs": 59,
+      "predicted": 0.465,
+      "observed": 0.475
     },
     {
       "bin": "0.6-0.8",
-      "pairs": 10,
-      "predicted": 0.646,
-      "observed": 0.6
+      "pairs": 15,
+      "predicted": 0.605,
+      "observed": 0.8
     }
   ]
 }

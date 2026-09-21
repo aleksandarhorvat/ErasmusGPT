@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
-| **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is mine to sit and do |
-| **Blocked on** | nothing. The strategy decision is settled: ADR-0005 makes `hybrid` the default |
-| **Last updated** | 2026-09-20 - ADR-0005 accepted, lane B through stage 5 |
+| **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is his to sit and do |
+| **Blocked on** | nothing. ADR-0005 settles the default; `S5-A1` gates the real numbers |
+| **Last updated** | 2026-09-21 - ADR-0005 accepted; fusing the reranker brings it level with hybrid |
 
 ### Stage ladder
 
