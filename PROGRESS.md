@@ -14,6 +14,37 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [A] Defence notes, and lane A is done bar the labels
+
+**Who:** Person A
+**Stage:** 7
+**Commit:** `[A] write the defence notes for the nlp and ir questions`
+**Tasks touched:** `S7-A1` (done)
+
+### Done
+`docs/06-defence-notes-a.md`: prepared answers for why RRF rather than score
+normalisation, why a cross-encoder at all and why it is not the default, why these three
+models, why BM25 and not Lucene, what the confidence intervals mean, what `score_pct` is
+after calibration, how the gold set was pooled and what its two biases are, and the
+limits to state before an examiner finds them.
+
+The awkward question is anticipated in writing: if the reranker lost, did the project
+fail? The answer is that the comparison is the project, and a measured negative with an
+explanation is worth more than an untested claim.
+
+### State of lane A
+Everything in my lane is now done except what the labelling pass gates: `S5-A1` is
+Luka's, `S5-A3` needs checked rows before a real `results.md` can exist, and `S6-A3`
+(fine-tuning) needs them before it is worth starting.
+
+### Next
+- **Luka:** `S5-A1`. Whole home courses at a time; a query only counts once all its pairs
+  are judged, so 15 complete courses beat 600 scattered rows.
+- **A:** on the day the labels land: refit the calibration, re-run `eval/run_eval.py`,
+  regenerate the error analysis and the ablations, then decide about `S6-A3`.
+
+---
+
 ## 2026-09-21 - [A] Error analysis. The common failure is not a ranking failure
 
 **Who:** Person A

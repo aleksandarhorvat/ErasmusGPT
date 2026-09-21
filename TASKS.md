@@ -17,7 +17,7 @@ lanes have passed their gate.
 | **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | error analysis done; next the defence notes. `S5-A1` gates the numbers |
+| **Person A is on** | lane A is done except what `S5-A1` gates. Waiting on the labelling pass |
 | **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is his to sit and do |
 | **Blocked on** | nothing. ADR-0005 settles the default; `S5-A1` gates the real numbers |
 | **Last updated** | 2026-09-21 - error analysis written; 42 of 50 queries right at rank 1 |
@@ -252,7 +252,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 |---|---|---|---|
 | `S7-AB1` | both | todo | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
 | `S7-AB2` | both | todo | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
-| `S7-A1` | A | todo | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
+| `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
 | `S7-B1` | B | todo | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
 
 ---
