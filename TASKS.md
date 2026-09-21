@@ -236,7 +236,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S6-B1` | done | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
-| `S6-B2` | todo | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
+| `S6-B2` | done | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
 | `S6-B3` | done | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
 | `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
 

@@ -35,7 +35,13 @@ ENV HF_HUB_OFFLINE=1 \
     OMP_NUM_THREADS=4
 
 EXPOSE 8000
-HEALTHCHECK --interval=15s --timeout=5s --start-period=90s --retries=5 \
+# start-period has to cover a COLD start, not the warm one you get while data/.cache is
+# on the host. On a fresh clone the cache is empty (it is git-ignored), so boot encodes
+# about 596 course vectors and 3096 sentence vectors with bge-small on CPU before the
+# first health probe can succeed. If this window is too short the container is marked
+# unhealthy and the frontend, which waits on service_healthy, never starts at all.
+# A generous window costs nothing when startup is fast.
+HEALTHCHECK --interval=15s --timeout=5s --start-period=300s --retries=10 \
   CMD curl -fsS http://localhost:8000/api/v1/health || exit 1
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

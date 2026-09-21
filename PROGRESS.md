@@ -14,6 +14,51 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [B] Clean-machine build measured, and a healthcheck that would have failed
+
+**Who:** Person B
+**Stage:** 6. `S6-B2` done, so lane B is complete except the `S5-B1` labelling.
+**Commit:** `[B] record the clean-machine build and widen the healthcheck`
+**Tasks touched:** `S6-B2` (done)
+
+### The run
+After `docker system prune -a`, on Windows with Docker Desktop: **297 s for the full
+build**, about 1 GB pulled. The CPU torch wheel is 126 s of it and the rest of the Python
+dependencies 70 s; the models are only 30 s. Then five programmes, 298 courses,
+`models_loaded: true`, `PipelineMatcher`, healthcheck green, nginx serving. The ingest log
+reported all five curricula as new, which is right: the database volume was pruned too.
+
+### What the run quietly hid
+Every programme logged `embedding cache hit`. That is only true because `data/.cache/` was
+still on the host from earlier runs. The cache is git-ignored, so **a genuinely fresh
+clone has none**, and the first boot has to encode roughly 596 course vectors and 3096
+sentence vectors with bge-small on CPU before the API can answer its first health probe.
+
+The healthcheck allowed `start-period=90s` with five retries. On a slower machine a cold
+encode can outlast that, the container gets marked unhealthy, and because the frontend
+waits on `service_healthy` it never starts at all. So the one-command promise would have
+failed on exactly the machine the promise is for: somebody else's, with a fresh clone.
+
+Widened to `start-period=300s` with ten retries, with the reason written above the line.
+A generous window costs nothing when startup is fast.
+
+This is the value of `S6-B2` as a task. The build number was the point of it; the defect
+it exposed is worth more.
+
+### Recorded
+The README now carries the real 297 s, its breakdown, and the distinction between a warm
+start and a cold one, instead of the "5 to 10 minutes" guess that was there before.
+
+### Broken / known issues
+- The cold-start encode time itself is still unmeasured. Whoever next clones fresh should
+  time it and put the number in the README beside the build time.
+
+### Next
+- **B:** `S5-B1`, the 30 cold pairs. That is the last thing in lane B.
+- **A:** `S5-A1`, and a calibration for `hybrid`.
+
+---
+
 ## 2026-09-21 - [B] Lane B reaches stage 6, and three robustness bugs it found
 
 **Who:** Person B

@@ -36,8 +36,17 @@ MATCHER_IMPL=real
 BAKE_MODELS=1
 ```
 
-and rebuild. That build takes 5 to 10 minutes and pulls about 1 GB once, because it
-downloads the models and bakes them into the image. Builds after that are cached.
+and rebuild.
+
+Measured on 2026-09-21 on Windows with Docker Desktop, after `docker system prune -a`:
+**the full build takes 5 minutes** (297 s) and pulls about 1 GB. Most of it is the CPU
+torch wheel (126 s) and the rest of the Python dependencies (70 s); the models themselves
+are 30 s. Builds after that are cached.
+
+First **startup** is slower than the one you will usually see. `data/.cache/` holds the
+embeddings and is git-ignored, so a fresh clone has none and the first boot encodes about
+596 course vectors and 3096 sentence vectors before the API answers. The healthcheck
+allows five minutes for that. Later starts read the cache and are immediate.
 
 ### Offline
 
