@@ -14,6 +14,44 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [A] End-to-end smoke test, and a tie-breaking fix it found
+
+**Who:** Person A
+**Stage:** 6
+**Commit:** `[A] break rrf ties with the reranker score`
+**Tasks touched:** none; verification of what is already in
+
+### The run
+Started the API locally with `MATCHER_IMPL=real` against all five programmes:
+
+- `/health` reports `models_loaded: true`, five programmes, 298 courses.
+- `POST /match` with B's new default (`hybrid`): **50 home courses in 108 ms**.
+- Computer networks returns Network Systems Part 2, 3 and 1, with an evidence pair that
+  reads like an explanation rather than a paragraph.
+- `POST /match/course` with `hybrid+ce`: 0.8 s for one course.
+
+So B's ADR-0005 defaults and my engine changes work together, which nothing had checked
+until now.
+
+### What it found
+Every match in a response showed the same percentage: 41, 41, 41. Fusing the reranker
+into the ranking left the score as an RRF value, and RRF scores are coarse. Two
+candidates at the same pair of ranks are exactly equal, so the API showed three matches
+as equally likely and the ECTS estimate treated them that way.
+
+Fixed by adding a ten-thousandth of the reranker's own score to the fused score. That is
+smaller than the smallest gap RRF can produce between adjacent ranks, so it never
+reorders anything, and it makes the percentages distinguish: Databases 1 now reads 62,
+52, 29, 26 where it read one number four times.
+
+Where ties remain they are honest. Network Systems Parts 1, 2 and 3 publish the same
+module description, so the system is right to score them equally.
+
+### Next
+- **Luka:** `S5-A1`.
+
+---
+
 ## 2026-09-21 - [A] Defence notes, and lane A is done bar the labels
 
 **Who:** Person A

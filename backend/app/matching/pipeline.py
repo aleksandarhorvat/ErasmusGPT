@@ -291,7 +291,17 @@ class PipelineMatcher:
         cross-encoder logit are not on a comparable scale.
         """
         lists = [[uid for uid, _ in retrieved], [uid for uid, _ in reranked]]
-        return reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=n)
+        fused = reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=n)
+
+        # RRF scores are coarse: two candidates that swap one rank differ by about
+        # 0.0003, and candidates at the same pair of ranks are exactly equal. The API
+        # then shows three matches at the same percentage and the ECTS estimate treats
+        # them as equally likely. Add a thousandth of the reranker's own score to break
+        # ties, small enough never to reorder the fusion.
+        scores = dict(reranked)
+        return [
+            (uid, score + 1e-4 * scores.get(uid, 0.0)) for uid, score in fused
+        ]
 
     def _candidate(
         self, home: CourseSummary, host_uid: str, score: float, rank: int, pct: int
