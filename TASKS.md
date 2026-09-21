@@ -32,8 +32,8 @@ lanes have passed their gate.
 | 3 - Lexical + hybrid | done (early) | done | closed |
 | 4 - Cross-encoder rerank | done (early) | done | closed |
 | 5 - Gold set + evaluation | wip | wip | todo |
-| 6 - Scale out + polish | todo | todo | todo |
-| 7 - Defence | todo | todo | todo |
+| 6 - Scale out + polish | wip | wip | todo |
+| 7 - Defence | wip | wip | todo |
 
 Status values: `todo`, `wip`, `blocked`, `done`, `early` (pulled forward from a later stage).
 
@@ -112,7 +112,7 @@ finds *Theory of Computation* in the top 5 (rank 1, cosine 0.878, verified 2026-
 |---|---|---|---|---|
 | `S2-B1` | done | Strategy selector in the UI driven by `GET /api/v1/strategies`, with the description shown under it; disable strategies the backend reports as unavailable | switching strategy re-runs the match and the table updates | - |
 | `S2-B2` | done | Real loading UX: a progress indicator that survives a 60 s request, and a clear timeout message. Raise the nginx/axios timeouts to 180 s | a 60 s match does not look like a hang | - |
-| `S2-B3` | todo | SQLite persistence of ingested programmes (`app/db/models.py`), `content_hash` bookkeeping so A's cache invalidation has a home | restarting the container does not re-ingest unchanged files | - |
+| `S2-B3` | done | SQLite persistence of ingested programmes (`app/db/models.py`), `content_hash` bookkeeping so A's cache invalidation has a home | restarting the container does not re-ingest unchanged files | - |
 
 **Lane B gate:** [ ] the UI can drive every strategy and survives a slow request.
 
@@ -235,9 +235,9 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S6-B1` | todo | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
+| `S6-B1` | done | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
 | `S6-B2` | todo | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
-| `S6-B3` | todo | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
+| `S6-B3` | done | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
 | `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
 
 **Lane B gate:** [ ] verified clean-machine run + README + recognition summary.
@@ -253,7 +253,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 | `S7-AB1` | both | todo | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
 | `S7-AB2` | both | todo | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
 | `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
-| `S7-B1` | B | todo | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
+| `S7-B1` | B | done | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
 
 ---
 

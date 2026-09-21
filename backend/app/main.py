@@ -23,6 +23,10 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     from app.matching.factory import get_matcher
 
     matcher = get_matcher()
+
+    from app.db.ingest_log import record_curricula
+
+    record_curricula(settings)
     log.info(
         "matcher=%s models_loaded=%s programmes=%d",
         type(matcher).__name__,

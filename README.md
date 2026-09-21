@@ -95,6 +95,31 @@ cd frontend && npm run build
 CI runs exactly these six, plus a smoke test that starts the whole stack. Run them all
 before you push: a docstring one character too long fails the build.
 
+## What we found
+
+The project set out to show that cross-encoder reranking beats naive retrieval. It does
+not, at least not the way we first built it. Over the pooled labels against Twente
+Technical Computer Science, 28 queries:
+
+| Strategy | P@1 | Recall@5 | MRR@10 | ms/query |
+|---|---|---|---|---|
+| `bm25` | 0.86 | 0.75 | 0.91 | 2 |
+| `dense` | 0.75 | 0.77 | 0.81 | <1 |
+| **`hybrid`** (default) | **0.86** | 0.80 | **0.90** | **2** |
+| `hybrid+ce`, reranker replaces the order | 0.68 | 0.72 | 0.77 | 979 |
+| `hybrid+ce`, reranker fused by RRF | 0.82 | **0.82** | 0.88 | 979 |
+
+Letting the cross-encoder overrule retrieval made it the worst of the four. Fusing its
+opinion with the retrieval order instead, the way BM25 and dense are fused, makes it
+level. So the finding is about **how** to combine a reranker rather than whether to have
+one, and `hybrid` is the default because it is level and about three hundred times
+cheaper. Reasoning: `docs/adr/0005-hybrid-is-the-default.md`. Full ablations:
+`eval/report/ablations.md`.
+
+**These numbers are provisional.** They come from labels a model wrote about our own
+retrieval. They become results when the human pass over `data/gold/gold_pairs.csv` is
+done; the app's "how well does this work?" panel reports how far that has got.
+
 ## How it works
 
 ```
@@ -127,6 +152,8 @@ rather than a footnote. Ablations: `eval/report/ablations.md`. Reasoning: ADR-00
 | `PROGRESS.md` | Running log of what each author did |
 | `TASKS.md` | Staged board: project state, per-stage lane A / lane B tasks |
 | `docs/00-map.md` | Diagrams: request path, ownership boundary, stage graph |
+| `docs/adr/` | The decisions, including ADR-0005 on why `hybrid` is the default |
+| `eval/report/` | `ablations.md`, `errors.md`, `smoke.md` |
 | `docs/` | Universities, models, data schema, API contract, evaluation protocol, ADRs |
 | `backend/` | FastAPI service and the matching pipeline |
 | `frontend/` | React + Vite UI |

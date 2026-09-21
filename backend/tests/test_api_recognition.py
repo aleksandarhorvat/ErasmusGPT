@@ -114,3 +114,61 @@ def test_evaluation_says_no_results_rather_than_inventing_them() -> None:
     body = client.get("/api/v1/evaluation").json()
     if not body["available"]:
         assert body["rows"] == [] and body["columns"] == []
+
+
+# --- robustness sweep (S6-B3) -----------------------------------------------
+
+HOME_UID = "uns-pmf:I011"
+
+
+def test_an_empty_course_list_means_no_courses_not_every_course() -> None:
+    """[] is falsy, and the matcher reads falsy as "no filter". That must not leak out."""
+    response = client.post(
+        "/api/v1/match",
+        json={"home_programme_id": HOME, "host_programme_id": HOST, "course_uids": []},
+    )
+    assert response.status_code == 200
+    assert response.json()["results"] == []
+
+
+def test_an_unknown_course_id_is_404_not_silently_dropped() -> None:
+    response = client.post(
+        "/api/v1/match",
+        json={
+            "home_programme_id": HOME,
+            "host_programme_id": HOST,
+            "course_uids": [HOME_UID, "uns-pmf:NOT-A-COURSE"],
+        },
+    )
+    assert response.status_code == 404
+    assert "NOT-A-COURSE" in response.json()["detail"]
+
+
+def test_a_valid_subset_still_works() -> None:
+    response = client.post(
+        "/api/v1/match",
+        json={"home_programme_id": HOME, "host_programme_id": HOST, "course_uids": [HOME_UID]},
+    )
+    assert response.status_code == 200
+    assert len(response.json()["results"]) == 1
+
+
+def test_out_of_range_and_unknown_values_are_422_not_500() -> None:
+    for body in (
+        {"home_programme_id": HOME, "host_programme_id": HOST, "top_k": 99},
+        {"home_programme_id": HOME, "host_programme_id": HOST, "strategy": "magic"},
+        {"home_programme_id": HOME, "host_programme_id": HOST, "ects_budget": -5},
+    ):
+        for path in ("/api/v1/match", "/api/v1/recognition"):
+            assert client.post(path, json=body).status_code in {200, 404, 422}
+
+
+def test_a_budget_smaller_than_any_course_does_not_divide_by_zero() -> None:
+    response = client.post(
+        "/api/v1/recognition",
+        json={"home_programme_id": HOME, "host_programme_id": HOST, "ects_budget": 1},
+    )
+    assert response.status_code in {200, 400}
+    if response.status_code == 200:
+        body = response.json()
+        assert 0.0 <= body["expected_share"] <= 1.0

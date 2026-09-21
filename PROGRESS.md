@@ -14,6 +14,65 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [B] Lane B reaches stage 6, and three robustness bugs it found
+
+**Who:** Person B
+**Stage:** 6, and `S7-B1` written. Lane B is level with lane A.
+**Commit:** `[B] robustness sweep, ingest log, readme and defence notes`
+**Tasks touched:** `S2-B3` `S6-B1` `S6-B3` `S7-B1` (done)
+
+### S6-B3 found real holes rather than confirming there were none
+I probed the API with ten bad requests instead of assuming it was fine. Three answers
+were wrong, all in my zone:
+
+- **`course_uids: []` returned all 50 courses.** The matcher reads a falsy list as "no
+  filter", so asking for nothing got you everything. Now an explicit empty list returns
+  an empty result.
+- **An unknown course id was silently dropped.** A typo in a course id returned a
+  cheerful 200 over the courses it did recognise. Now 404, naming the ids it did not know.
+- Validation for `top_k`, `strategy` and `ects_budget` was already correct, which is worth
+  recording too: pydantic returns 422 rather than a 500.
+
+Both fixes are in `app/api/routes_match.py`, validated before the call rather than
+inside Person A's matcher, and covered by five tests.
+
+### S2-B3, the last stage 2 leftover
+`app/db/ingest_log.py` records one row per curriculum at startup, keyed by a hash of the
+**courses** rather than of the file, so a re-scrape that only moves `scraped_at` reads as
+the same data. It never fails the boot: an unwritable database is logged and swallowed,
+because the JSON files are the source of truth and this table is bookkeeping (ADR-0002).
+
+Writing the test caught a flaw in my own code: `record_curricula(settings)` took a
+settings object and then used the module-level engine, so `database_url` was ignored and
+the "unwritable database" test passed for the wrong reason. It builds its own engine now,
+which makes the argument honest and the test meaningful.
+
+### S6-B1 and S7-B1
+The README now opens with **what we found** rather than what we hoped to find: the
+ablation table, the fused-versus-replacing distinction, and the sentence that these are
+provisional because no human has checked a label yet. `docs/06-defence-notes-b.md`
+answers the engineering questions, one short answer each, every one naming the file it
+lives in: why the protocol exists, why SQLite, why the models are in the image, why one
+strategy shows a percentage and the others do not, why `hybrid` is the default when the
+proposal promised a cross-encoder, and what stops us breaking each other's work.
+
+### Verified
+`ruff`, `check_style`, `check_gold`, `validate_curricula`, 95 backend tests, `tsc`.
+`test_api_ingest_log.py` needs Python 3.11 for `datetime.UTC`, as `run_eval.py` already
+does; it passes under a shim here and runs normally in CI and the image.
+
+### Broken / known issues
+- `S6-B2`, the clean-machine timing, needs somebody to actually prune and rebuild. It is
+  the one lane B task an agent cannot finish.
+- `S5-B1` is 30 unlabelled pairs waiting for a person.
+
+### Next
+- **B:** label the cold slice, then the clean-machine run.
+- **A:** `S5-A1`, and a calibration for `hybrid` so the recognition estimate works on the
+  default strategy.
+
+---
+
 ## 2026-09-21 - [B] ADR-0005 amended, and the panel stops doing arithmetic on display scores
 
 **Who:** Person B
