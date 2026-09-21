@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | B's review items; `S5-A1` is Luka's pass and gates the real numbers |
+| **Person A is on** | error analysis done; next the defence notes. `S5-A1` gates the numbers |
 | **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is his to sit and do |
 | **Blocked on** | nothing. ADR-0005 settles the default; `S5-A1` gates the real numbers |
-| **Last updated** | 2026-09-21 - ADR-0005 accepted; fusing the reranker brings it level with hybrid |
+| **Last updated** | 2026-09-21 - error analysis written; 42 of 50 queries right at rank 1 |
 
 ### Stage ladder
 
@@ -222,14 +222,14 @@ probability until it has been calibrated against real labels.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S6-A1` | wip (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
-| `S6-A2` | todo | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
+| `S6-A2` | done (provisional) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 
 | `S6-A4` | done | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |
 | `S6-A5` | done | **Recognition estimate, part 2: aggregate over a programme.** `GET`/`POST` returns, per home course, the best match and its calibrated probability; the expected recognised ECTS of a whole programme is the sum of `ects x p`. Decide and document the rule for partial matches (label 1) and for ECTS shortfall (6 ECTS home vs 4 ECTS host) | a programme-level number exists with its arithmetic written down in `docs/05-evaluation.md` | `S6-A4` |
 
-**Lane A gate:** [x] >= 4 host programmes; [ ] error analysis committed; [x] recognition
-estimate calibrated.
+**Lane A gate:** [x] >= 4 host programmes; [x] error analysis committed (provisional, re-run
+after `S5-A1`); [x] recognition estimate calibrated.
 
 ### Lane B
 

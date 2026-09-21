@@ -14,6 +14,52 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-21 - [A] Error analysis. The common failure is not a ranking failure
+
+**Who:** Person A
+**Stage:** 6
+**Commit:** `[A] add the error analysis`
+**Tasks touched:** `S6-A2` (done, provisional)
+
+### The numbers
+`eval/error_analysis.py` lists the queries where the first acceptable answer lands
+worst. With `hybrid`, the default since ADR-0005:
+
+| Host programme | Queries | Right at rank 1 | Nothing relevant in the top 10 |
+|---|---|---|---|
+| Twente Technical Computer Science | 28 | 24 | 1 |
+| Twente Applied Mathematics | 22 | 18 | 1 |
+
+### The finding
+The most common way this system is wrong is that **it answers when it should decline**.
+Introduction to algebra against a computer science faculty has no right answer, and the
+ranker returns Software Diamond at 100 % because 100 % means "the best of these", not
+"good". Five home courses have no acceptable match in either Twente catalogue and still
+get five candidates each.
+
+That is not a ranking defect, it is a missing threshold, and it sits on B's board as
+`S3-B1`. The same course against Applied Mathematics finds Algebra at rank 1, which is
+the evidence that the data was the problem and not the model.
+
+The rest, with examples, in `eval/report/errors.md`: granularity mismatch (the right
+answer is half of a 15 ECTS module), project courses that are textually
+indistinguishable from every other project, and one level collision where Modelling and
+Programming 3 outranks 1 because the sequence number is invisible to the ranker by
+design (ADR-0004).
+
+### Note for B on ADR-0005
+The ADR was written before the fusion change. `hybrid+ce` no longer scores 0.68 P@1; it
+is 0.82 against TCS and 0.86 against Applied Mathematics, level with `hybrid` rather
+than far behind. The decision to default to `hybrid` still looks right to me on latency
+alone, 2 ms against 850, but the evidence table inside the ADR is now out of date and
+should quote the fused numbers at the defence.
+
+### Next
+- **A:** defence notes (`S7-A1`).
+- **Luka:** `S5-A1`, which turns every provisional number in the last three entries real.
+
+---
+
 ## 2026-09-21 - [A] Fusing the reranker rescues it
 
 **Who:** Person A
