@@ -1,0 +1,16 @@
+{
+  "note": "Who produced each label in the gold set. Read by eval/run_eval.py, eval/kappa.py and eval/fit_calibration.py so every report states it.",
+  "decided": "2026-09-26, by Luka Cubrilo (Person A), for lack of time",
+  "files": {
+    "llm_prelabels.csv": "model pre-labels for all 1142 pooled pairs, frozen, shown to the human checkers",
+    "half_b_aleksandar.csv": "504 rows, human: Aleksandar Horvat, checked with the pre-label shown",
+    "gold_pairs_b.csv": "30 cold pairs, human: Aleksandar Horvat, labelled blind, before his half",
+    "half_a_luka.csv": "638 rows: the first 176 human, Luka Cubrilo, checked with the pre-label shown; the other 462 labelled by Claude (Anthropic, via Claude Code), blind to the pre-labels, not checked by a human",
+    "claude_labels_a.csv": "Claude's blind label and reason for all 638 rows of half A; final=yes marks the 462 used in the gold set"
+  },
+  "counts": {
+    "human": 680,
+    "model": 462,
+    "total": 1142
+  }
+}

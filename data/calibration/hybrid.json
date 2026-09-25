@@ -4,48 +4,48 @@
     "score",
     "cosine"
   ],
-  "a": 1.073927,
-  "b": -3.386918,
+  "a": 1.106104,
+  "b": -3.837522,
   "mean": 0.028142,
   "std": 0.002574,
-  "cosine_coef": 1.639609,
+  "cosine_coef": 1.747219,
   "cosine_mean": 0.687463,
   "cosine_std": 0.056642,
   "pairs": 1142,
-  "positives": 150,
+  "positives": 128,
   "positive_label": 1,
-  "label_source": "PROVISIONAL: llm_prelabels.csv, no human pass yet",
+  "label_source": "PROVISIONAL, partly model-labelled: gold_pairs.csv, all 1142 rows: 680 human-checked, 462 labelled by a second model (Claude), see data/gold/provenance.json",
   "host_programme": "utwente-tcs-bsc, utwente-am-bsc",
-  "fitted_at": "2026-09-25T19:26:32Z",
+  "fitted_at": "2026-09-25T23:38:40Z",
   "reliability": [
     {
       "bin": "0.0-0.2",
-      "pairs": 905,
-      "predicted": 0.033,
+      "pairs": 944,
+      "predicted": 0.029,
       "observed": 0.033
     },
     {
       "bin": "0.2-0.4",
-      "pairs": 101,
-      "predicted": 0.284,
-      "observed": 0.267
+      "pairs": 94,
+      "predicted": 0.291,
+      "observed": 0.277
     },
     {
       "bin": "0.4-0.6",
-      "pairs": 60,
-      "predicted": 0.483,
-      "observed": 0.483
+      "pairs": 38,
+      "predicted": 0.498,
+      "observed": 0.342
     },
     {
       "bin": "0.6-0.8",
-      "pairs": 31,
-      "predicted": 0.684,
-      "observed": 0.613
+      "pairs": 24,
+      "predicted": 0.679,
+      "observed": 0.667
     },
     {
       "bin": "0.8-1.0",
-      "pairs": 45,
-      "predicted": 0.908,
+      "pairs": 42,
+      "predicted": 0.903,
       "observed": 1.0
     }
   ]

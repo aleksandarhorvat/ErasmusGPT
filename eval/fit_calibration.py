@@ -31,6 +31,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "backend"))
+sys.path.insert(0, str(REPO_ROOT / "eval"))
 
 GOLD = REPO_ROOT / "data" / "gold" / "gold_pairs.csv"
 PRELABELS = REPO_ROOT / "data" / "gold" / "llm_prelabels.csv"
@@ -56,6 +57,16 @@ def load_labels(path: Path = GOLD, prelabels: Path = PRELABELS) -> tuple[dict, s
         return checked, (f"PROVISIONAL: human-checked gold_pairs.csv, {len(checked)} of "
                          f"{total} rows, so only part of the home courses")
     if checked:
+        from provenance import model_pairs
+
+        model = len(model_pairs() & set(checked))
+        if model:
+            # Still PROVISIONAL for app/core/calibration.py: part of the answer key is a
+            # model's opinion, so the UI keeps its warning (docs/05-evaluation.md).
+            return checked, (f"PROVISIONAL, partly model-labelled: gold_pairs.csv, all "
+                             f"{len(checked)} rows: "
+                             f"{len(checked) - model} human-checked, {model} labelled by "
+                             "a second model (Claude), see data/gold/provenance.json")
         return checked, "human-checked gold_pairs.csv"
 
     machine: dict[tuple[str, str], int] = {}

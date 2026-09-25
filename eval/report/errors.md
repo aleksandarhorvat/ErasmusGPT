@@ -1,10 +1,9 @@
 # Error analysis (S6-A2)
 
-Written by Person A on 2026-09-21, from `eval/error_analysis.py`, strategy `hybrid`
-(the default since ADR-0005).
-
-**Provisional.** The labels are the frozen pre-labels, not the human-checked set, so
-these are the queries the system disagrees with *a model* about. Re-run after `S5-A1`:
+Written by Person A on 2026-09-21 from the pre-labels, re-run on 2026-09-26 against the
+final gold set, strategy `hybrid` (the default since ADR-0005). 680 of the gold rows
+were checked by a human and 462 labelled by a second model (Claude); see
+`data/gold/provenance.json`. Commands:
 
 ```bash
 python eval/error_analysis.py --host-programme utwente-tcs-bsc
@@ -15,11 +14,18 @@ python eval/error_analysis.py --host-programme utwente-am-bsc
 
 | Host programme | Queries | Right at rank 1 | Nothing relevant in the top 10 |
 |---|---|---|---|
-| Twente Technical Computer Science | 28 | 24 | 1 |
-| Twente Applied Mathematics | 22 | 18 | 1 |
+| Twente Technical Computer Science | 27 | 21 | 1 |
+| Twente Applied Mathematics | 19 | 16 | 0 |
 
-So 42 of 50 queries put an acceptable course first, and 2 fail completely. The failures
-are more interesting than the rate.
+So 37 of 46 queries put an acceptable course first, and 1 fails completely. A query is a
+home course with at least one relevant course at that host, as the protocol defines it.
+On the pre-labels it was 42 of 50: the final labels accept fewer partial matches, so
+fewer home courses count as queries and slightly fewer are right first time.
+
+The one complete failure is Introduction to algebra against TCS, and its only relevant
+label is borderline: the Cybersecurity and Law Diamond, accepted as a partial match
+(1) for its number theory. The second model labelled the same pair 0. The categories
+below were written from the pre-label run; the examples still hold on the final labels.
 
 ## The failures, by category
 

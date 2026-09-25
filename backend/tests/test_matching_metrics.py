@@ -147,3 +147,15 @@ def test_correction_rate_without_prelabels_is_empty(tmp_path: Path) -> None:
 def test_every_reported_configuration_has_a_setup() -> None:
     assert set(run_eval.CONFIGS) == set(run_eval.CONFIG_SETUP)
     assert run_eval.BASELINE in run_eval.CONFIG_SETUP
+
+
+# --- which queries count (host_view) -----------------------------------------
+
+def test_host_view_drops_other_programmes_and_queries_with_nothing_to_find() -> None:
+    gold = {
+        "home:a": {"tcs:1": 2, "am:9": 1},   # relevant at both hosts
+        "home:b": {"tcs:2": 0, "am:8": 2},   # relevant only at the other host
+        "home:c": {"tcs:3": 1},
+    }
+    view = run_eval.host_view(gold, {"tcs:1", "tcs:2", "tcs:3"})
+    assert view == {"home:a": {"tcs:1": 2}, "home:c": {"tcs:3": 1}}

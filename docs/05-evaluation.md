@@ -193,6 +193,22 @@ Most pooled pairs are obvious non-matches, so the real pace is much faster than 
 full descriptions per pair" suggests. In the annotation tool, accepting a proposed label
 is one keystroke.
 
+### What was actually done (2026-09-26)
+
+The procedure above was followed for 680 of the 1142 rows: Aleksandar checked all 504
+of his half and Luka the first 176 of his, both with the pre-label shown. For lack of
+time, Luka decided that the remaining 462 rows of his half take the labels of a second
+model, Claude, which labelled all 638 rows of that half blind to the pre-labels. Those
+rows are not human-checked, and every report says so: `data/gold/provenance.json`
+records the split, `data/gold/claude_labels_a.csv` holds Claude's label and reason for
+every row of the half with `final=yes` on the 462 used, and `eval/provenance.py` feeds
+the same facts into `results.md`, `kappa.md` and the calibration files.
+
+What that costs, measured on the 30 cold pairs: Claude against Aleksandar reaches
+weighted kappa 0.52, Luka against Aleksandar 0.73 on the 8 cold pairs Luka checked
+himself, and the pre-labels against Aleksandar 0.63. Claude is stricter than the
+pre-labels, mostly turning partial matches (1) into 0.
+
 ### Known weakness of this design
 
 Reviewing a suggested label is not the same as forming one. People agree with a proposed
@@ -221,8 +237,11 @@ separately, the same way a coordinator does.
 - Pooled judgements favour the strategies that contributed to the pool.
 - Labels come from students, not from the faculty office that signs the learning
   agreement.
-- Each row was checked by one of two people, so kappa measures agreement on a 30-pair
-  slice rather than on the whole set. The slice sits in Luka's half and Aleksandar
+- 462 of 1142 gold rows were labelled by a second model rather than checked by a
+  human, so part of the answer key is a model's opinion; kappa on the 30 cold pairs
+  says how far that opinion sits from a blind human.
+- Each human row was checked by one of two people, so kappa measures agreement on a
+  30-pair slice rather than on the whole set. The slice sits in Luka's half and Aleksandar
   labels it cold, before his own half, so he has never seen those pairs' pre-labels.
 
 ## Statistical honesty

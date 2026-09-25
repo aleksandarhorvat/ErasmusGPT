@@ -26,6 +26,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "backend"))
+sys.path.insert(0, str(REPO_ROOT / "eval"))
 
 GOLD = REPO_ROOT / "data" / "gold" / "gold_pairs.csv"
 
@@ -43,6 +44,23 @@ CONFIG_SETUP: dict[str, tuple[str, str]] = {
 BASELINE = "dense-minilm"
 TREATMENTS = ["hybrid", "hybrid+ce"]
 SEED = 20260920
+
+
+def host_view(gold: dict[str, dict[str, int]], host_uids: set[str]
+              ) -> dict[str, dict[str, int]]:
+    """The gold set as one host programme sees it (docs/05-evaluation.md, Setup).
+
+    Labels for courses of another programme are dropped, because the ranking can never
+    return them and they would sit in every recall denominator. A home course with no
+    relevant course at this host is not a query: there is nothing to find, and scoring
+    it 0 would measure the catalogue rather than the ranking.
+    """
+    view: dict[str, dict[str, int]] = {}
+    for home_uid, labels in gold.items():
+        here = {uid: label for uid, label in labels.items() if uid in host_uids}
+        if any(label >= 1 for label in here.values()):
+            view[home_uid] = here
+    return view
 
 
 def load_gold(path: Path = GOLD) -> dict[str, dict[str, int]]:
@@ -68,10 +86,14 @@ def load_gold(path: Path = GOLD) -> dict[str, dict[str, int]]:
 def correction_rate(
     prelabels: Path = REPO_ROOT / "data" / "gold" / "llm_prelabels.csv",
     final: Path = GOLD,
+    only: set[tuple[str, str]] | None = None,
+    exclude: set[tuple[str, str]] | None = None,
 ) -> tuple[int, int]:
     """(corrections, compared) between the frozen pre-labels and the checked labels.
 
     This is the number the report quotes as evidence that the human pass was real.
+    `only` and `exclude` restrict it to one source of labels, so human corrections and
+    a second model's disagreements are never added together.
     """
     if not prelabels.exists():
         return (0, 0)
@@ -87,6 +109,8 @@ def correction_rate(
             if row.get("checked", "").strip().lower() != "yes":
                 continue
             key = (row["home_uid"], row["host_uid"])
+            if (only is not None and key not in only) or (exclude and key in exclude):
+                continue
             if key in proposed:
                 compared += 1
                 corrections += int(proposed[key] != int(row["label"]))
@@ -183,6 +207,7 @@ def evaluate(
     matcher = PipelineMatcher(CurriculumStore(settings.curricula_dir), settings)
 
     known = {c.course_uid for c in matcher.get_courses(home_programme)}
+    gold = host_view(gold, {c.course_uid for c in matcher.get_courses(host_programme)})
     queries = sorted(uid for uid in gold if uid in known)
     per_query: dict[str, list[float]] = {name: [] for name in METRICS}
     total_ms = 0.0
@@ -202,8 +227,12 @@ def write_report(
     results: dict[str, dict[str, list[float]]], latency: dict[str, float],
     queries: list[str], out_dir: Path, host_programme: str,
 ) -> None:
+    from provenance import describe, model_pairs
+
     out_dir.mkdir(parents=True, exist_ok=True)
-    corrections, compared = correction_rate()
+    model = model_pairs()
+    corrections, compared = correction_rate(exclude=model)
+    disagreements, model_compared = correction_rate(only=model)
 
     rows = []
     for config, per_query in results.items():
@@ -271,18 +300,27 @@ def write_report(
         "",
         "## How the labels were made",
         "",
-        "Pairs were pooled from the top 10 of `dense` and `hybrid+ce`, pre-labelled by a",
-        "model, then read and corrected by hand (`docs/05-evaluation.md`).",
+        "Pairs were pooled from the top 10 of `dense` and `hybrid+ce` and pre-labelled by a",
+        "model (`docs/05-evaluation.md`).",
     ]
+    provenance = describe()
+    if provenance:
+        lines.append(provenance)
     if compared:
         lines.append(
-            f"The human pass changed {corrections} of {compared} pre-labels "
+            f"The human checkers changed {corrections} of {compared} pre-labels "
             f"({corrections / compared:.1%})."
         )
-    else:
+    if model_compared:
+        lines.append(
+            f"The second model disagreed with {disagreements} of {model_compared} "
+            f"pre-labels ({disagreements / model_compared:.1%}), mostly by rejecting "
+            "partial matches the pre-labels had accepted."
+        )
+    if not compared and not model_compared:
         lines.append("There is no pre-label file to diff, so no correction rate is reported.")
     lines += [
-        "Rows no human has read are excluded from every number above.",
+        "Unchecked rows are excluded from every number above.",
         "",
         "Unlabelled pairs count as 0. That slightly favours the strategies that fed the",
         "pool, which is a known property of pooled collections rather than a fault here.",

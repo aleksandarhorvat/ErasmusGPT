@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 5 - Gold set + evaluation** (stages 2 to 4 closed; 6 and 7 pulled early) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S5-A1`, the labelling pass, now split in two: Luka checks `data/gold/half_a_luka.csv` (638 rows), Aleksandar `half_b_aleksandar.csv` (504), `scripts/merge_gold.py` joins them. All tooling for what follows is in: kappa, hybrid calibration, paired tests |
+| **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
 | **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`). Cold slice and his half of `S5-A1` are done (504 of 504) |
-| **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
-| **Last updated** | 2026-09-25 - B: cold slice labelled, B half checked and merged (gold 504 of 1142); A's four frontend fixes in |
+| **Blocked on** | nothing. Stage 5 needs B's gate tick; `Request to B` in PROGRESS lists what the final labels change on his side |
+| **Last updated** | 2026-09-26 - A: final gold set, real results, lane A gate for stage 5 ticked, Delft and Polimi added |
 
 ### Stage ladder
 
@@ -187,12 +187,12 @@ as the candidate generator that feeds the reranker.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S5-A0` | done | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
-| `S5-A1` | todo (split A/B) | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md`. **Split since 2026-09-25**: Luka works in `data/gold/half_a_luka.csv` (638 rows, holds all 30 cold pairs), Aleksandar in `half_b_aleksandar.csv` (504 rows, after his cold slice); `python scripts/merge_gold.py` writes `gold_pairs.csv`, see `tools/README.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
+| `S5-A1` | done (680 human, 462 model, see `data/gold/provenance.json`) | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md`. **Split since 2026-09-25**: Luka works in `data/gold/half_a_luka.csv` (638 rows, holds all 30 cold pairs), Aleksandar in `half_b_aleksandar.csv` (504 rows, after his cold slice); `python scripts/merge_gold.py` writes `gold_pairs.csv`, see `tools/README.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
 | `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
-| `S5-A3` | wip (code done, waits on `S5-A1`) | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
+| `S5-A3` | done | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
 | `S5-A4` | done (early) | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
 
-**Lane A gate:** [ ] `eval/report/results.md` is committed with real numbers and CIs.
+**Lane A gate:** [x] `eval/report/results.md` is committed with real numbers and CIs.
 
 ### Lane B
 
@@ -222,7 +222,7 @@ probability until it has been calibrated against real labels.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S6-A1` | done (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
-| `S6-A2` | done (provisional) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
+| `S6-A2` | done (re-run on the final labels) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 
 | `S6-A4` | done | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |

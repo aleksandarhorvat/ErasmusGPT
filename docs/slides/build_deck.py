@@ -106,14 +106,22 @@ def correction_rate() -> str:
         proposed = {(r["home_uid"], r["host_uid"]): r["llm_label"]
                     for r in csv.DictReader(handle)}
     changed = checked = 0
+    model = set()
+    claude = GOLD_PAIRS.parent / "claude_labels_a.csv"
+    if claude.exists():
+        with claude.open(encoding="utf-8") as handle:
+            model = {(r["home_uid"], r["host_uid"]) for r in csv.DictReader(handle)
+                     if r.get("final") == "yes"}
     with GOLD_PAIRS.open(encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
+            if (row["home_uid"], row["host_uid"]) in model:
+                continue  # a model's disagreement is not a human correction
             if row.get("checked", "").strip().lower() == "yes":
                 checked += 1
                 changed += int(proposed.get((row["home_uid"], row["host_uid"])) != row["label"])
     if not checked:
         return "pending"
-    return f"{changed / checked:.0%} of {checked} rows"
+    return f"{changed / checked:.1%} of {checked} human rows"
 
 
 # --- drawing helpers --------------------------------------------------------
@@ -340,7 +348,8 @@ def slide_gold(deck, provisional):
         ("Pool", "Top 10 of dense and hybrid+ce for 40 home courses: 562 pairs per host."),
         ("Pre-label", "A model proposes 0, 1 or 2 per pair from the two course texts, "
                       "never seeing our scores."),
-        ("Check", "A human reads every row and corrects it. Only checked rows count."),
+        ("Check", "680 rows checked by a person; 462 labelled by a second model "
+                  "(Claude) for lack of time, and reported as such."),
         ("Cold slice", "30 pairs labelled independently by the second person, for "
                        "Cohen's kappa."),
     ]
@@ -602,7 +611,7 @@ def slide_limits(deck):
     limits = [
         "Pooled judgements favour the strategies that built the pool.",
         "Labels come from students, not from the office that signs learning agreements.",
-        "Two people checked half the rows each; kappa on 30 blind pairs checks they agree.",
+        "462 of 1142 gold labels come from a second model, not a human check.",
         "English only: a multilingual model alone would break the image budget.",
         "Master's catalogues sit a level above a bachelor's programme.",
     ]

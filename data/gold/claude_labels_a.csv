@@ -1,0 +1,639 @@
+home_uid,host_uid,claude_label,claude_reason,final
+uns-pmf:I011,utwente:202500342,2,Covers imperative basics - types control flow arrays methods recursion - plus OO; home substance is inside it.,no
+uns-pmf:I011,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500343,1,Continuation course covering I/O and collections; assumes intro programming so only partial.,no
+uns-pmf:I011,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202400444,0,Host is about agile web project; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500331,1,Algorithmics half teaches basic imperative constructs and simple algorithms; only a slice of the home course.,no
+uns-pmf:I011,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500354,0,Host is about agile development project; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I011,utwente:202500358,0,Host is about computer systems project; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202200022,0,Host is about knowledge representation and data quality; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202001047,0,Host is about web science group project; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500342,0,Host is about imperative and OO programming in Java; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202200024,0,Host is about DS&AI project; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500356,0,Host is about computer architecture; no substantive overlap with the home course.,no
+uns-pmf:I111,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500334,0,Host is about cryptography and IT law; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202001033,0,Host is about applied statistics; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202001047,0,Host is about web science group project; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500343,0,Host is about advanced Java programming; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202200024,0,Host is about DS&AI project; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202500362,0,Host is about UX design; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202400362,0,Host is about networking project; no substantive overlap with the home course.,no
+uns-pmf:I112,utwente:202200023,0,Host is about explainable AI and ethics; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500342,0,Host is about imperative and OO programming in Java; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202400444,0,Host is about agile web project; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202200021,0,Host is about neural networks for data types; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500356,0,Host is about computer architecture; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500343,1,Uses lists sets and maps and choosing data structures but via library collections not pointer-based implementation.,no
+uns-pmf:I021,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202500344,0,Host is about Java OO implementation project; no substantive overlap with the home course.,no
+uns-pmf:I021,utwente:202001045,0,Host is about social network science; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500342,0,Host is about imperative and OO programming in Java; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202001047,0,Host is about web science group project; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500356,0,Host is about computer architecture; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500334,0,Host is about cryptography and IT law; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202001045,0,Host is about social network science; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500343,0,Host is about advanced Java programming; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202001033,0,Host is about applied statistics; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202400362,0,Host is about networking project; no substantive overlap with the home course.,no
+uns-pmf:I121,utwente:202500362,0,Host is about UX design; no substantive overlap with the home course.,no
+uns-pmf:I031,utwente:202200022,0,Host is about knowledge representation and data quality; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500342,1,Covers Java basics classes inheritance and polymorphism; exceptions and I/O streams are left to a follow-up unit.,no
+uns-pmf:I032,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202400444,0,Host is about agile web project; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500343,1,Covers exceptions I/O and collections in Java; complements but does not cover the OO basics.,no
+uns-pmf:I032,utwente:202500341,0,Host is about UML and software design; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500354,0,Host is about agile development project; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500344,1,Practical Java OO implementation of 10-20 classes; applies OO but does not teach the language fundamentals.,no
+uns-pmf:I032,utwente:202500356,0,Host is about computer architecture; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I032,utwente:202500351,0,Host is about secure web development; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500331,1,Algorithmics half covers searching and sorting with complexity; no trees hashing backtracking or DP.,no
+uns-pmf:I033,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500342,0,Host is about imperative and OO programming in Java; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202400444,0,Host is about agile web project; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202001047,0,Host is about web science group project; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202200021,0,Host is about neural networks for data types; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202001045,0,Host is about social network science; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500343,0,Host is about advanced Java programming; no substantive overlap with the home course.,no
+uns-pmf:I033,utwente:202500354,0,Host is about agile development project; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500331,0,Host is about search and sort algorithms plus functional programming; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202001045,0,Host is about social network science; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202001047,0,Host is about web science group project; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500361,0,Host is about AI and machine learning; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500333,0,Host is about computer architecture and networks basics; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500332,0,Host is about intro databases and AI; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500334,0,Host is about cryptography and IT law; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202001046,0,Host is about game theory and auctions; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202001033,0,Host is about applied statistics; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202300357,0,Host is about concurrency and compilers; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202200024,0,Host is about DS&AI project; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500568,0,Host is about functional and logic programming; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500356,0,Host is about computer architecture; no substantive overlap with the home course.,no
+uns-pmf:I034,utwente:202500352,0,Host is about databases (SQL normalisation transactions); no substantive overlap with the home course.,no
+uns-pmf:I141,utwente:202500568,1,"Covers functional and logic paradigms and language technology in depth, but not the broad comparative history of paradigms.",no
+uns-pmf:I141,utwente:202500342,0,"Host covers introductory Java programming, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202300357,1,"Covers the concurrent paradigm plus syntax and semantic analysis, only part of a comparative languages course.",no
+uns-pmf:I141,utwente:202500343,0,"Host covers advanced Java programming, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202400444,0,"Host covers an agile web and data project, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500352,0,"Host covers databases and SQL, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500344,0,"Host covers a Java networked game project, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500331,0,"Host covers intro algorithmics and functional programming, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500341,0,"Host covers UML-based software design and modelling, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500361,0,"Host covers introductory AI and machine learning, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500333,0,"Host covers intro computer architecture, OS and networks, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202500332,0,"Host covers intro databases and AI, not a comparative programming languages and paradigms course.",no
+uns-pmf:I141,utwente:202200021,0,"Host covers neural networks for data types, not a comparative programming languages and paradigms course.",no
+uns-pmf:I142,utwente:202001047,0,"Web science project on networks and game theory, unrelated to automata and formal languages.",no
+uns-pmf:I052,utwente:202500341,2,"UML class, activity and statechart modelling with CASE tools matches the UML system modelling course.",no
+uns-pmf:I052,utwente:202400783,0,"Host covers embedded hardware architectures, not UML information system modelling.",no
+uns-pmf:I052,utwente:202200022,0,"Host covers knowledge representation and data quality, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500356,0,"Host covers computer architecture, not UML information system modelling.",no
+uns-pmf:I052,utwente:202400444,0,"Host covers an agile web and data project, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500342,0,"Host covers introductory Java programming, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500362,0,"Host covers user experience design, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500352,0,"Host covers databases and SQL, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500351,0,"Host covers secure web development, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500361,0,"Host covers introductory AI and machine learning, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500332,0,"Host covers intro databases and AI, not UML information system modelling.",no
+uns-pmf:I052,utwente:202200021,0,"Host covers neural networks for data types, not UML information system modelling.",no
+uns-pmf:I052,utwente:202500354,0,"Host covers an agile software project, not UML information system modelling.",no
+uns-pmf:I151,utwente:202500361,2,"Covers AI history, logic, search, uncertainty and ML, the substance of an intro AI course.",no
+uns-pmf:I152,utwente:202500331,0,"Host covers intro algorithmics and functional programming, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500361,0,"Host covers introductory AI and machine learning, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202300357,0,"Host covers concurrent programming and compiler construction, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500568,0,"Host covers functional and logic programming, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500333,0,"Host covers intro computer architecture, OS and networks, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500342,0,"Host covers introductory Java programming, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500356,0,"Host covers computer architecture, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500343,0,"Host covers advanced Java programming, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202500332,0,"Host covers intro databases and AI, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202001047,0,"Host covers a web science group project, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202001045,0,"Host covers social network analysis, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202200024,0,"Host covers a data science and AI project, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202200022,0,"Host covers knowledge representation and data quality, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202001033,0,"Host covers applied statistics, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202200201,0,"Host covers embedded software engineering, not computability and complexity theory.",no
+uns-pmf:I152,utwente:202200023,0,"Host covers explainable AI and ethics, not computability and complexity theory.",no
+uns-pmf:I211,utwente:202500361,0,"Host covers introductory AI and machine learning, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500331,0,"Host covers intro algorithmics and functional programming, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202200022,0,"Host covers knowledge representation and data quality, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500568,0,"Host covers functional and logic programming, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500333,0,"Host covers intro computer architecture, OS and networks, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500332,0,"Host covers intro databases and AI, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500356,0,"Host covers computer architecture, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202300357,0,"Host covers concurrent programming and compiler construction, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500343,0,"Host covers advanced Java programming, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202500352,0,"Host covers databases and SQL, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202200024,0,"Host covers a data science and AI project, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202400608,0,"Host covers a professional internship, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202400444,0,"Host covers an agile web and data project, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202001045,0,"Host covers social network analysis, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I211,utwente:202200021,0,"Host covers neural networks for data types, not discrete foundations (sets, relations, logic, lattices).",no
+uns-pmf:I212,utwente:202001047,0,"Host covers a web science group project, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500361,0,"Host covers introductory AI and machine learning, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500331,0,"Host covers intro algorithmics and functional programming, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500343,0,"Host covers advanced Java programming, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500334,0,"Host covers cryptography and IT law, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500332,0,"Host covers intro databases and AI, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500352,0,"Host covers databases and SQL, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500341,0,"Host covers UML-based software design and modelling, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500568,0,"Host covers functional and logic programming, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202300357,0,"Host covers concurrent programming and compiler construction, not single-variable real analysis and calculus.",no
+uns-pmf:I212,utwente:202500333,0,"Host covers intro computer architecture, OS and networks, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:202200022,0,"Host covers knowledge representation and data quality, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:202001033,0,"Host covers applied statistics, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:202200024,0,"Host covers a data science and AI project, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:202300106,0,"Host covers an individual research project, not single-variable real analysis and calculus.",yes
+uns-pmf:I221,utwente:202001046,1,"Its auctions and sponsored-search part touches web business models, but it is game theory, not e-business.",yes
+uns-pmf:I221,utwente:202500361,0,"Host covers introductory AI and machine learning, not e-business.",yes
+uns-pmf:I221,utwente:202500332,0,"Host covers intro databases and AI, not e-business.",yes
+uns-pmf:I221,utwente:202500351,1,"Covers web development and web security, two topics of the e-business course, not business models or e-commerce.",yes
+uns-pmf:I221,utwente:202500344,0,"Host covers a Java networked game project, not e-business.",yes
+uns-pmf:I221,utwente:202500352,0,"Host covers databases and SQL, not e-business.",yes
+uns-pmf:I221,utwente:202001047,0,"Host covers a web science group project, not e-business.",yes
+uns-pmf:I221,utwente:202500343,0,"Host covers advanced Java programming, not e-business.",yes
+uns-pmf:I221,utwente:202500342,0,"Host covers introductory Java programming, not e-business.",yes
+uns-pmf:I221,utwente:202400444,0,"Host covers an agile web and data project, not e-business.",yes
+uns-pmf:I221,utwente:202500331,0,"Host covers intro algorithmics and functional programming, not e-business.",yes
+uns-pmf:I221,utwente:202001041,0,"Host covers smart spaces and IoT, not e-business.",yes
+uns-pmf:I221,utwente:202400362,0,"Host covers a network systems project, not e-business.",yes
+uns-pmf:I221,utwente:202500354,0,"Host covers an agile software project, not e-business.",yes
+uns-pmf:I221,utwente:202500341,0,"Host covers UML-based software design and modelling, not e-business.",yes
+uns-pmf:I241,utwente:202500352,2,"Covers normalization to BCNF, JDBC access, transactions and indices in a multi-tier setting, the core of Databases 2; distributed DBMS and data warehouses are thinner.",yes
+uns-pmf:I241,utwente:202400444,0,"Agile team project on a web application; teaches process skills, not DBMS principles or JDBC.",yes
+uns-pmf:I241,utwente:202500332,0,"Only introductory ER modelling and SQL, which is Databases 1 level, plus unrelated AI half.",yes
+uns-pmf:I241,utwente:202500354,0,Project sprint deliverables for a client; no database theory content.,yes
+uns-pmf:I241,utwente:202500351,0,Web security and requirements; touches multi-tier web but not DBMS internals or JDBC.,yes
+uns-pmf:I241,utwente:202500353,0,Agile process and teamwork skills only.,yes
+uns-pmf:I241,utwente:202500342,0,"Introduction to Programming does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500344,0,"Software Systems Implementation Project does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500356,0,"Computer Architecture and Organisation does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500341,0,"Software Design and Modelling does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500333,0,"Hardware Diamond does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500347,0,"Network Systems Part 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202200023,0,"Explainable AI & Ethics does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202400362,0,"Network Systems Project does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I243,utwente:202500346,1,"Covers basics, link and application layers of the Internet stack; network and transport layers are in Part 2, so only half of the home course.",yes
+uns-pmf:I243,utwente:202500347,1,"Covers network and transport layers (IP, routing, TCP); link and application layers are in Part 1, so only half of the home course.",yes
+uns-pmf:I243,utwente:202500333,1,"Half of the course introduces layered packet-switched networks and TCP/IP, but only at an introductory level next to computer architecture.",yes
+uns-pmf:I251,utwente:202500341,1,"Covers UML modelling, waterfall process and metrics, but not requirements engineering, formal specification, cost estimation or testing practice.",yes
+uns-pmf:I262,utwente:202500352,1,"Covers multi-tier systems with JDBC database access, but not ORM, servlets, JSP or building a full information system.",yes
+uns-pmf:M-02,utwente:202001033,0,Statistical Methods for Data Analysis does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500332,0,Information Diamond does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500568,0,Functional and Logic Programming does not cover academic English.,yes
+uns-pmf:M-02,utwente:202001047,0,Web Science Final Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500361,0,Introduction to Artificial Intelligence and Machine Learning does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500344,0,Software Systems Implementation Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202200024,0,DS&AI Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500342,0,Introduction to Programming does not cover academic English.,yes
+uns-pmf:M-02,utwente:202200021,0,Machine Learning for Datatypes does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500333,0,Hardware Diamond does not cover academic English.,yes
+uns-pmf:M-02,utwente:202400362,0,Network Systems Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202300106,0,Research Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500343,0,Advanced Programming does not cover academic English.,yes
+uns-pmf:M-02,utwente:202400444,0,Data & Information Project does not cover academic English.,yes
+uns-pmf:M-02,utwente:202500352,0,Databases does not cover academic English.,yes
+uns-pmf:M3-21,utwente:202001046,1,"Game theory, auctions and market clearing overlap with microeconomic modelling, but there is no macroeconomics or classic supply and demand theory.",yes
+uns-pmf:M3-21,utwente:202001047,0,Web Science Final Project does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500361,0,Introduction to Artificial Intelligence and Machine Learning does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001033,0,Statistical Methods for Data Analysis does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001045,0,Social Network Structure and Dynamics does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500332,0,Information Diamond does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202200024,0,DS&AI Project does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500568,0,Functional and Logic Programming does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500342,0,Introduction to Programming does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500356,0,Computer Architecture and Organisation does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500331,0,Software Diamond does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500333,0,Hardware Diamond does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202400444,0,Data & Information Project does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500354,0,Agile Project Technical Development does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001041,0,Smart Spaces Core does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202200021,0,Machine Learning for Datatypes does not cover micro- and macroeconomics.,yes
+uns-pmf:M-09,utwente:202500332,0,Information Diamond does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500568,0,Functional and Logic Programming does not cover academic English.,yes
+uns-pmf:M-09,utwente:202001033,0,Statistical Methods for Data Analysis does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500344,0,Software Systems Implementation Project does not cover academic English.,yes
+uns-pmf:M-09,utwente:202200024,0,DS&AI Project does not cover academic English.,yes
+uns-pmf:M-09,utwente:202001047,0,Web Science Final Project does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500333,0,Hardware Diamond does not cover academic English.,yes
+uns-pmf:M-09,utwente:202400362,0,Network Systems Project does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500361,0,Introduction to Artificial Intelligence and Machine Learning does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500342,0,Introduction to Programming does not cover academic English.,yes
+uns-pmf:M-09,utwente:202200022,0,Knowledge Representation and Reasoning & Data Quality does not cover academic English.,yes
+uns-pmf:M-09,utwente:202400444,0,Data & Information Project does not cover academic English.,yes
+uns-pmf:M-09,utwente:202400608,0,Internship TCS does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500354,0,Agile Project Technical Development does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500352,0,Databases does not cover academic English.,yes
+uns-pmf:M-15,utwente:202001033,0,Statistical Methods for Data Analysis does not cover sociology.,yes
+uns-pmf:I321,utwente:202500333,0,Only binary representation and Boolean logic as a small part of a computer architecture intro; no electronics or sequential circuits.,yes
+uns-pmf:I321,utwente:202500356,1,"Covers logic-gate circuit design, memory and digital system basics but none of the analogue electronics half (diodes, transistors, op-amps).",yes
+uns-pmf:I321,utwente:202500361,0,"Introduction to Artificial Intelligence and Machine Learning does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202400783,0,"HDL modelling and FPGA synthesis of embedded architectures, not electronic components or basic logic circuits.",yes
+uns-pmf:I321,utwente:202400591,0,"Cyber-Physical Systems Core does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500346,0,"Network Systems Part 1 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500347,0,"Network Systems Part 2 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500332,0,"Information Diamond does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500348,0,"Network Systems Part 3 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202300357,0,"Concurrency and Compiler Construction does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500362,0,"User Experience Design does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500343,0,"Advanced Programming does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500342,0,"Introduction to Programming does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:M3-22,utwente:202500331,0,"Software Diamond does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500332,0,"Information Diamond does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500342,0,"Introduction to Programming does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202001046,0,"Game theory and auctions for web markets, not interest, amortisation, bonds or options.",yes
+uns-pmf:M3-22,utwente:202300357,0,"Concurrency and Compiler Construction does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500361,0,"Introduction to Artificial Intelligence and Machine Learning does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500333,0,"Hardware Diamond does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500568,0,"Functional and Logic Programming does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202001033,0,"Statistical Methods for Data Analysis does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500343,0,"Advanced Programming does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500354,0,"Agile Project Technical Development does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500353,0,"Agile Project Process Development does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500352,0,"Databases does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202400444,0,"Data & Information Project does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:I322,utwente:202500344,0,"A Java networked-game team project, not advanced use of office, multimedia or symbolic software tools.",yes
+uns-pmf:M-01,utwente:202500331,0,"Software Diamond does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500361,0,"Introduction to Artificial Intelligence and Machine Learning does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500333,1,"Its first half covers Boolean algebra and binary logic, but no lattices, ordered structures or minimisation theory.",yes
+uns-pmf:M-01,utwente:202500568,0,"Functional and Logic Programming does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202001047,0,"Web Science Final Project does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500332,0,"Information Diamond does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500343,0,"Advanced Programming does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202300357,0,"Concurrency and Compiler Construction does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500356,1,"Designing circuits with logic gates overlaps the switching-circuit part, but no lattice or Boolean algebra theory.",yes
+uns-pmf:M-01,utwente:202500342,0,"Introduction to Programming does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202200022,0,"Knowledge Representation and Reasoning & Data Quality does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500352,0,"Databases does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500353,0,"Agile Project Process Development does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500358,0,"Computer Systems Project does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500341,0,"Software Design and Modelling does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:I331,utwente:202400444,0,Data & Information Project does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500354,0,Agile Project Technical Development does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500353,0,Agile Project Process Development does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500352,0,Databases does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500344,0,Software Systems Implementation Project does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500342,0,Introduction to Programming does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500361,0,Introduction to Artificial Intelligence and Machine Learning does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500341,0,Software Design and Modelling does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202001047,0,"Group essay on network science topics from a fixed book, not a study of a chosen IT discipline and its tools.",yes
+uns-pmf:I331,utwente:202500358,0,Computer Systems Project does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202300106,1,Individual research paper and presentation on an IT topic resembles a seminar paper but is a much larger thesis-level project.,yes
+uns-pmf:I331,utwente:202500331,0,Software Diamond does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202200024,0,DS&AI Project does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202400608,0,Internship TCS does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500362,0,User Experience Design does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500332,0,Information Diamond does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202200022,0,Knowledge Representation and Reasoning & Data Quality does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500346,0,Network Systems Part 1 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I011,utwente:202001363,0,Host is about graph isomorphism implementation project; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202200142,1,About 40 percent basic Python programming constructs; overlapping but not sufficient alone.,yes
+uns-pmf:I011,utwente:202001193,0,Host is about sets logic combinatorics and basic calculus; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202200243,0,Host is about dynamical-systems modelling project; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:201600167,0,Host is about rigorous foundations of real analysis; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202500368,0,Host is about formal languages and automata; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202500367,0,Host is about algorithms and data structures; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202200339,0,Host is about stochastic modelling project; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202200239,0,Host is about modelling project with some Python; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202400634,0,Host is about learning theory; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202001379,0,Host is about bachelor thesis; no substantive overlap with the home course.,yes
+uns-pmf:I011,utwente:202500460,0,Host is about real analysis of sequences and continuity; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202001234,1,Covers logic sets functions relations equivalences and partial orders but lacks predicate calculus depth resolution and formal theories.,yes
+uns-pmf:I111,utwente:202001193,1,Intro part covers propositional and predicate logic sets and proofs; calculus half unrelated and no formal theories.,yes
+uns-pmf:I111,utwente:201600167,1,Propositional and first-order logic axiomatic set theory and relations overlap strongly but course is aimed at real analysis.,yes
+uns-pmf:I111,utwente:202500460,0,Host is about real analysis of sequences and continuity; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202300018,0,Host is about reflection on mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202400348,0,Host is about philosophy of mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202200236,0,Host is about eigenvalues and inner product spaces; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202001215,0,Host is about calculus with ODEs and complex numbers; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202300026,0,Host is about mathematical statistics; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202300028,0,Host is about nonlinear optimisation; no substantive overlap with the home course.,yes
+uns-pmf:I111,utwente:202200243,0,Host is about dynamical-systems modelling project; no substantive overlap with the home course.,yes
+uns-pmf:I112,utwente:202400660,1,Covers differentiation Taylor Riemann and improper integrals; lacks sequences and series which are in Analysis 1.,yes
+uns-pmf:I112,utwente:202001201,1,Covers single-variable integration and improper integrals only; no limits sequences or series.,yes
+uns-pmf:I112,utwente:202500460,1,Covers axiomatic reals sequences series and continuity; lacks differentiation and integration.,yes
+uns-pmf:I112,utwente:202200179,1,Covers series Taylor and single-variable integration but mostly multivariable; no limits or derivatives basics.,yes
+uns-pmf:I112,utwente:202001193,1,Calculus 1A part covers limits continuity differentiation and Taylor; no integrals or series.,yes
+uns-pmf:I112,utwente:202300055,1,Covers limits continuity differentiation and Taylor only; no integration or series.,yes
+uns-pmf:I112,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I112,utwente:202300017,0,Host is about multivariable analysis; no substantive overlap with the home course.,yes
+uns-pmf:I112,utwente:202001215,1,Limits continuity and differentiation overlap but course centres on ODEs complex numbers and vectors.,yes
+uns-pmf:I112,utwente:201500405,0,Host is about complex function theory; no substantive overlap with the home course.,yes
+uns-pmf:I112,utwente:202300018,0,Host is about reflection on mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I112,utwente:201600167,1,Construction of reals and real series overlap but no differentiation or integration.,yes
+uns-pmf:I021,utwente:202500367,1,Elementary data structures and complexity overlap but focus is heaps trees sorting; linked lists stacks and queues not central.,yes
+uns-pmf:I021,utwente:202001363,0,Host is about graph isomorphism implementation project; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202200236,0,Host is about eigenvalues and inner product spaces; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202500368,0,Host is about formal languages and automata; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202001237,0,Host is about linear algebra; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202001193,0,Host is about sets logic combinatorics and basic calculus; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202200243,0,Host is about dynamical-systems modelling project; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202200239,0,Host is about modelling project with some Python; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202200142,0,Host is about mathematical modelling with basic Python; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202500366,0,Host is about algorithmic discrete mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202400634,0,Host is about learning theory; no substantive overlap with the home course.,yes
+uns-pmf:I021,utwente:202300018,0,Host is about reflection on mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202500369,1,Covers groups rings fields and Euclidean algorithm; lacks the linear systems matrices and determinants half.,yes
+uns-pmf:I121,utwente:202200141,1,Covers linear systems vector spaces and determinants; lacks algebraic structures and number theory.,yes
+uns-pmf:I121,utwente:202001237,1,Covers Gaussian elimination matrices inverses and determinants; lacks algebraic structures and polynomials.,yes
+uns-pmf:I121,utwente:202200236,0,Host is about eigenvalues and inner product spaces; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202001193,0,Host is about sets logic combinatorics and basic calculus; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202500460,0,Host is about real analysis of sequences and continuity; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:201600167,0,Host is about rigorous foundations of real analysis; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202400631,0,Host is about graph theory; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202500367,0,Host is about algorithms and data structures; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202200238,0,Host is about systems and control theory; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202001201,0,Host is about integration and ODEs; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202500366,0,Host is about algorithmic discrete mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202400632,0,Host is about partial differential equations; no substantive overlap with the home course.,yes
+uns-pmf:I121,utwente:202300055,0,Host is about differential calculus; no substantive overlap with the home course.,yes
+uns-pmf:I122,utwente:202300017,2,"Covers multivariable differentiation, Taylor, implicit functions, extrema, multiple integrals and Green/Stokes/Gauss, more rigorously.",yes
+uns-pmf:I032,utwente:202001363,0,Host is about graph isomorphism implementation project; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200243,0,Host is about dynamical-systems modelling project; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200239,0,Host is about modelling project with some Python; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202500367,0,Host is about algorithms and data structures; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200142,0,Host is about mathematical modelling with basic Python; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200236,0,Host is about eigenvalues and inner product spaces; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202500368,0,Host is about formal languages and automata; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202001193,0,Host is about sets logic combinatorics and basic calculus; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:201600167,0,Host is about rigorous foundations of real analysis; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202400634,0,Host is about learning theory; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202300028,0,Host is about nonlinear optimisation; no substantive overlap with the home course.,yes
+uns-pmf:I032,utwente:202200337,0,Host is about stochastic models and queueing; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202500367,2,Covers sorting complexity binary trees traversal divide and conquer and dynamic programming - the core of the home course.,yes
+uns-pmf:I033,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202001363,0,Host is about graph isomorphism implementation project; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202400631,0,Host is about graph theory; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202500366,0,Host is about algorithmic discrete mathematics; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202001193,0,Host is about sets logic combinatorics and basic calculus; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202200236,0,Host is about eigenvalues and inner product spaces; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202001237,0,Host is about linear algebra; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202200337,0,Host is about stochastic models and queueing; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202400634,0,Host is about learning theory; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202300026,0,Host is about mathematical statistics; no substantive overlap with the home course.,yes
+uns-pmf:I033,utwente:202200239,0,Host is about modelling project with some Python; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202400631,1,Covers graph basics trees and connectivity but no combinatorics or BFS/DFS algorithms.,yes
+uns-pmf:I034,utwente:202500366,1,Recurrence relations and graph algorithms overlap; combinatorial counting and basic graph theory mostly missing.,yes
+uns-pmf:I034,utwente:202001234,0,Host is about logic sets functions and relations; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202001193,1,Intro part covers permutations combinations inclusion-exclusion and binomial theorem; no graph theory.,yes
+uns-pmf:I034,utwente:202500367,0,Host is about algorithms and data structures; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202500369,0,Host is about abstract algebra; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202001363,0,Host is about graph isomorphism implementation project; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202001237,0,Host is about linear algebra; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202200141,0,Host is about linear algebra (vector spaces); no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:201600167,0,Host is about rigorous foundations of real analysis; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202400634,0,Host is about learning theory; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202500460,0,Host is about real analysis of sequences and continuity; no substantive overlap with the home course.,yes
+uns-pmf:I034,utwente:202300027,0,Host is about linear optimisation; no substantive overlap with the home course.,yes
+uns-pmf:I141,utwente:202500368,0,"Host covers formal languages and automata, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202200142,0,"Host covers mathematical modelling and Python basics, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202300018,0,"Host covers philosophy and history of mathematics, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202200141,0,"Host covers linear algebra, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202001234,0,"Host covers logic, sets, functions and relations, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202001363,0,"Host covers a graph isomorphism implementation project, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202500367,0,"Host covers algorithms and data structures, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202200243,0,"Host covers a dynamical-systems modelling project with Python, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:201600167,0,"Host covers logic, set theory and foundations of real analysis, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202400635,0,"Host covers sequential decision-making and online algorithms, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202500369,0,"Host covers abstract algebra, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202200239,0,"Host covers a modelling project with Python, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202001193,0,"Host covers sets, logic and differential calculus, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202400634,0,"Host covers mathematical learning theory, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I141,utwente:202001237,0,"Host covers linear algebra, not a comparative programming languages and paradigms course.",yes
+uns-pmf:I144,utwente:202200141,1,"Shares vector spaces, linear maps and determinants but lacks lines, planes, conics and 3D geometric problem solving.",yes
+uns-pmf:I052,utwente:202200243,0,"Host covers a dynamical-systems modelling project with Python, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202300157,0,"Host covers a modelling project, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202500368,0,"Host covers formal languages and automata, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202200142,0,"Host covers mathematical modelling and Python basics, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202200339,0,"Host covers a stochastic modelling project, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202200336,0,"Host covers Markov chains, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202001234,0,"Host covers logic, sets, functions and relations, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202200338,0,"Host covers stochastic simulation, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202300018,0,"Host covers philosophy and history of mathematics, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202400348,0,"Host covers philosophy of mathematics, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202300196,0,"Host covers a modelling project, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202300156,0,"Host covers a modelling project, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202400634,0,"Host covers mathematical learning theory, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202001237,0,"Host covers linear algebra, not UML information system modelling.",yes
+uns-pmf:I052,utwente:202200239,0,"Host covers a modelling project with Python, not UML information system modelling.",yes
+uns-pmf:I152,utwente:202500367,1,Covers complexity analysis of classical algorithms but not computability or complexity classes.,yes
+uns-pmf:I152,utwente:202500366,1,"Covers graph algorithms and computation time but not computability, Turing machines or NP-completeness.",yes
+uns-pmf:I152,utwente:202001234,0,"Host covers logic, sets, functions and relations, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202300028,0,"Host covers nonlinear optimisation and neural networks, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202400631,0,"Host covers graph theory, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202500368,1,"Covers Turing machines, recursive languages and decidability but not recursive functions or NP-completeness.",yes
+uns-pmf:I152,utwente:202001193,0,"Host covers sets, logic and differential calculus, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202200241,0,"Host covers numerical mathematics, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202500460,0,"Host covers real analysis foundations, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:201600167,0,"Host covers logic, set theory and foundations of real analysis, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202300026,0,"Host covers mathematical statistics, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202400660,0,"Host covers differential and integral calculus with proofs, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202300027,0,"Host covers linear optimisation, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202200238,0,"Host covers control and systems theory, not computability and complexity theory.",yes
+uns-pmf:I152,utwente:202300017,0,"Host covers multivariable analysis and vector calculus, not computability and complexity theory.",yes
+uns-pmf:I211,utwente:202001234,2,"Logic, set theory, functions, relations, partial orders and equivalence relations cover the core of the home course.",yes
+uns-pmf:I211,utwente:202001193,1,"Its introduction-to-mathematics half covers sets, logic and proofs; the rest is calculus.",yes
+uns-pmf:I211,utwente:202500368,0,"Host covers formal languages and automata, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:201600167,1,"Covers propositional and predicate logic, set theory and relations, but half is real analysis.",yes
+uns-pmf:I211,utwente:202500460,0,"Host covers real analysis foundations, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202500369,0,"Host covers abstract algebra, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202200141,0,"Host covers linear algebra, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202500367,0,"Host covers algorithms and data structures, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202400631,0,"Host covers graph theory, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202400634,0,"Host covers mathematical learning theory, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202300157,0,"Host covers a modelling project, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202200243,0,"Host covers a dynamical-systems modelling project with Python, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202200142,0,"Host covers mathematical modelling and Python basics, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202001344,0,"Host covers probability theory, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I211,utwente:202300018,0,"Host covers philosophy and history of mathematics, not discrete foundations (sets, relations, logic, lattices).",yes
+uns-pmf:I212,utwente:202400660,1,"Covers differentiation, MVT, Taylor, Riemann integral and FTC but assumes reals, limits and continuity from Analysis 1.",yes
+uns-pmf:I212,utwente:202001215,1,"Covers limits, continuity and differentiation but not integration, alongside ODEs and vectors.",yes
+uns-pmf:I212,utwente:202500460,1,"Covers reals, limits, sequences and continuity but not differentiation or integration.",yes
+uns-pmf:I212,utwente:202001201,1,"Covers single-variable integration and FTC but not limits, continuity or differentiation.",yes
+uns-pmf:I212,utwente:202300055,1,"Covers limits, continuity and differentiation but not integration.",yes
+uns-pmf:I212,utwente:202001234,0,"Host covers logic, sets, functions and relations, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:201600167,1,"Constructs the reals and their topology and real series, but not differential or integral calculus.",yes
+uns-pmf:I212,utwente:202200179,1,Covers single-variable integration and series but not limits and differential calculus basics.,yes
+uns-pmf:I212,utwente:202300018,0,"Host covers philosophy and history of mathematics, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:202001193,1,Its Calculus 1A half covers limits and differentiation; integration is missing.,yes
+uns-pmf:I212,utwente:202300017,0,"Host covers multivariable analysis and vector calculus, not single-variable real analysis and calculus.",yes
+uns-pmf:I212,utwente:201500405,0,"Host covers complex function theory, not single-variable real analysis and calculus.",yes
+uns-pmf:I221,utwente:202200338,0,"Host covers stochastic simulation, not e-business.",yes
+uns-pmf:I221,utwente:202400635,0,"Host covers sequential decision-making and online algorithms, not e-business.",yes
+uns-pmf:I221,utwente:202200339,0,"Host covers a stochastic modelling project, not e-business.",yes
+uns-pmf:I221,utwente:202200142,0,"Host covers mathematical modelling and Python basics, not e-business.",yes
+uns-pmf:I221,utwente:202400633,0,"Host covers philosophy of science and literature study, not e-business.",yes
+uns-pmf:I221,utwente:202001363,0,"Host covers a graph isomorphism implementation project, not e-business.",yes
+uns-pmf:I221,utwente:202300026,0,"Host covers mathematical statistics, not e-business.",yes
+uns-pmf:I221,utwente:202300157,0,"Host covers a modelling project, not e-business.",yes
+uns-pmf:I221,utwente:202200243,0,"Host covers a dynamical-systems modelling project with Python, not e-business.",yes
+uns-pmf:I221,utwente:202001237,0,"Host covers linear algebra, not e-business.",yes
+uns-pmf:I221,utwente:201600167,0,"Host covers logic, set theory and foundations of real analysis, not e-business.",yes
+uns-pmf:I221,utwente:202001379,0,"Host covers the mathematics bachelor thesis, not e-business.",yes
+uns-pmf:I221,utwente:202400631,0,"Host covers graph theory, not e-business.",yes
+uns-pmf:I221,utwente:202300018,0,"Host covers philosophy and history of mathematics, not e-business.",yes
+uns-pmf:I221,utwente:202300028,0,"Host covers nonlinear optimisation and neural networks, not e-business.",yes
+uns-pmf:I221,utwente:202400634,0,"Host covers mathematical learning theory, not e-business.",yes
+uns-pmf:I221,utwente:202300027,0,"Host covers linear optimisation, not e-business.",yes
+uns-pmf:I221,utwente:202200238,0,"Host covers control and systems theory, not e-business.",yes
+uns-pmf:I222,utwente:202200236,0,"Eigenvectors and inner product spaces; none of the algebraic structures, number theory or polynomial content.",yes
+uns-pmf:I241,utwente:202200236,0,"Linear Structures 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202200243,0,"Modelling and Programming 3 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202500367,0,"Algorithms and Data Structures does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202300157,0,"Modelling 3 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202300196,0,"Modelling 2 and Project for AM-TN does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202001363,0,"Implementation Project on Graph Isomorphism does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202300026,0,"Mathematical Statistics 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202200141,0,"Linear Structures 1 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202200239,0,"Modelling and Programming 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202200339,0,"Project Stochastic Models in Practice does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202400633,0,"Reflection 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202400634,0,"Mathematics behind Data-Driven Methods: Learning Theory from First Principles does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202300156,0,"Modelling 2 does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:202300028,0,"Nonlinear Optimisation and Learning does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:I241,utwente:201600167,0,"Introduction to Mathematical Analysis does not cover databases, JDBC, transactions and distributed DBMS.",yes
+uns-pmf:M-02,utwente:202400633,0,Reflection 2 does not cover academic English.,yes
+uns-pmf:M-02,utwente:201600167,0,Introduction to Mathematical Analysis does not cover academic English.,yes
+uns-pmf:M-02,utwente:202001385,0,Bachelor Assignment does not cover academic English.,yes
+uns-pmf:M-02,utwente:202300018,0,Reflection 1 does not cover academic English.,yes
+uns-pmf:M-02,utwente:202200142,0,Modelling and Programming 1 does not cover academic English.,yes
+uns-pmf:M-02,utwente:202001379,0,Bachelor's Assignment does not cover academic English.,yes
+uns-pmf:M-02,utwente:202300156,0,Modelling 2 does not cover academic English.,yes
+uns-pmf:M-02,utwente:202001380,0,Reflection on Mathematical Research II does not cover academic English.,yes
+uns-pmf:M-02,utwente:202400348,0,Reflection 3 does not cover academic English.,yes
+uns-pmf:M-02,utwente:202001234,0,Discrete Mathematics does not cover academic English.,yes
+uns-pmf:M-02,utwente:202200239,0,Modelling and Programming 2 does not cover academic English.,yes
+uns-pmf:M-02,utwente:202300196,0,Modelling 2 and Project for AM-TN does not cover academic English.,yes
+uns-pmf:M3-21,utwente:201600167,0,Introduction to Mathematical Analysis does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202200142,0,Modelling and Programming 1 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001344,0,Probability Theory does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202500380,0,Mathematical Statistics 1 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202300018,0,Reflection 1 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001193,0,Introduction to Mathematics + Calculus 1A does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202300157,0,Modelling 3 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202200243,0,Modelling and Programming 3 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202300026,0,Mathematical Statistics 2 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202400633,0,Reflection 2 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001215,0,Calculus 1 does not cover micro- and macroeconomics.,yes
+uns-pmf:M3-21,utwente:202001379,0,Bachelor's Assignment does not cover micro- and macroeconomics.,yes
+uns-pmf:M-09,utwente:202400633,0,Reflection 2 does not cover academic English.,yes
+uns-pmf:M-09,utwente:201600167,0,Introduction to Mathematical Analysis does not cover academic English.,yes
+uns-pmf:M-09,utwente:202001385,0,Bachelor Assignment does not cover academic English.,yes
+uns-pmf:M-09,utwente:202300156,0,Modelling 2 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202200142,0,Modelling and Programming 1 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202200239,0,Modelling and Programming 2 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202400348,0,Reflection 3 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202300018,0,Reflection 1 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202001380,0,Reflection on Mathematical Research II does not cover academic English.,yes
+uns-pmf:M-09,utwente:202001379,0,Bachelor's Assignment does not cover academic English.,yes
+uns-pmf:M-09,utwente:202400660,0,Analysis 2 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202500460,0,Analysis 1 does not cover academic English.,yes
+uns-pmf:M-09,utwente:202300196,0,Modelling 2 and Project for AM-TN does not cover academic English.,yes
+uns-pmf:I321,utwente:202001234,0,"Discrete Mathematics does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202001193,0,"Introduction to Mathematics + Calculus 1A does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:201600167,0,"Introduction to Mathematical Analysis does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202001237,0,"Linear Algebra does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202001215,0,"Calculus 1 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202200236,0,"Linear Structures 2 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202400631,0,"Graph Theory does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202200338,0,"Stochastic Simulation does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202200141,0,"Linear Structures 1 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202200241,0,"Numerical Mathematics does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202200238,0,"Systems Theory does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500369,0,"Algebra does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202001201,0,"Calculus 1B does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:I321,utwente:202500460,0,"Analysis 1 does not cover analogue and digital electronics (semiconductors, amplifiers, logic circuits, flip-flops).",yes
+uns-pmf:M3-22,utwente:202500460,0,"Analysis 1 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500380,0,"Mathematical Statistics 1 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202300018,0,"Reflection 1 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202001193,0,"Introduction to Mathematics + Calculus 1A does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202200141,0,"Linear Structures 1 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202001234,0,"Discrete Mathematics does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202300055,0,"Calculus 1A does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202500369,0,"Algebra does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202001201,0,"Calculus 1B does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:201600167,0,"Introduction to Mathematical Analysis does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202300026,0,"Mathematical Statistics 2 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202200142,0,"Modelling and Programming 1 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202300157,0,"Modelling 3 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M3-22,utwente:202200243,0,"Modelling and Programming 3 does not cover financial mathematics (interest, loans, bonds, options).",yes
+uns-pmf:M-01,utwente:202001234,1,"Covers relations, partial orders and Hasse diagrams, but not lattices, Boolean algebras or minimisation.",yes
+uns-pmf:M-01,utwente:202500367,0,"Algorithms and Data Structures does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202001193,0,"Introduction to Mathematics + Calculus 1A does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500369,0,"Groups, rings and fields; no lattices or Boolean algebras.",yes
+uns-pmf:M-01,utwente:202200141,0,"Linear Structures 1 does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202001237,0,"Linear Algebra does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500460,0,"Analysis 1 does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202300028,0,"Continuous nonlinear optimisation, unrelated to Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:201600167,0,"Introduction to Mathematical Analysis does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202200236,0,"Linear Structures 2 does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202300027,0,"Linear programming optimisation, unrelated to Boolean function minimisation despite the shared word.",yes
+uns-pmf:M-01,utwente:202200241,0,"Numerical Mathematics does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202500366,0,"Algorithmic Discrete Mathematics does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:M-01,utwente:202200142,0,"Modelling and Programming 1 does not cover ordered sets, lattices, Boolean algebras and Boolean function minimisation.",yes
+uns-pmf:I331,utwente:202200339,0,Project Stochastic Models in Practice does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202300018,0,Reflection 1 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202200338,0,Stochastic Simulation does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202200142,0,Modelling and Programming 1 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202400633,0,Reflection 2 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202400635,0,Topics in Sequential Decision-Making does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202200239,0,Modelling and Programming 2 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202001363,0,Implementation Project on Graph Isomorphism does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202001385,0,"Mathematics-heavy double-degree bachelor thesis, not a seminar paper on an IT discipline.",yes
+uns-pmf:I331,utwente:202400348,0,Reflection 3 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202300028,0,Nonlinear Optimisation and Learning does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202400634,0,Mathematics behind Data-Driven Methods: Learning Theory from First Principles does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:201600167,0,Introduction to Mathematical Analysis does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202300026,0,Mathematical Statistics 2 does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202500367,0,Algorithms and Data Structures does not cover a seminar paper on a chosen IT discipline.,yes
+uns-pmf:I331,utwente:202001380,0,Reflection on Mathematical Research II does not cover a seminar paper on a chosen IT discipline.,yes

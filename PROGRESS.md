@@ -14,6 +14,91 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [A] Gold set complete, real results, Delft and Polimi added
+
+**Who:** Person A
+**Stage:** 5 and 6
+**Commits:** `[A] add tu delft and politecnico di milano`,
+`[A] complete the gold set and report the final results`
+**Tasks touched:** `S5-A1` (done), `S5-A3` (done), `S6-A2` (re-run), lane A gate of
+stage 5 ticked
+
+### How the A half was finished, stated plainly
+Luka checked the first 176 rows of his half himself. For lack of time he decided that
+the other 462 take the labels of a second model: Claude labelled all 638 rows of the
+half blind to the pre-labels, and those 462 are in the gold set as Claude labelled them.
+They are not human-checked, and nothing claims they are:
+
+- `data/gold/provenance.json` says who produced which rows.
+- `data/gold/claude_labels_a.csv` has Claude's label and reason for all 638, `final=yes`
+  on the 462 used.
+- `eval/provenance.py` puts the same facts into `results.md`, `kappa.md`, the error
+  analysis and the calibration files. `docs/05-evaluation.md` has a section on it and
+  a limit to state; the deck's gold-set and limits slides say it.
+- The calibration source reads "PROVISIONAL, partly model-labelled", so the UI keeps
+  its warning. That also keeps `test_api_recognition.py` green as written.
+
+Gold set: 1142 of 1142 rows, 680 human (1.6 % of pre-labels changed), 462 model (5.4 %
+differ from the pre-label, mostly partial matches turned into 0).
+
+### Kappa (`eval/report/kappa.md`)
+
+| Comparison | Pairs | Weighted kappa |
+|---|---|---|
+| Luka vs Aleksandar, cold pairs Luka checked himself | 8 | 0.73 |
+| Claude vs Aleksandar | 30 | 0.52 |
+| Pre-label vs Aleksandar | 30 | 0.63 |
+
+### Results (`eval/report/results.md`, `eval/report/utwente-am-bsc/results.md`)
+A bug found on the way: `run_eval.py` counted every labelled home course as a query,
+including those with nothing relevant at the host, and put labels for the other Twente
+programme into every recall denominator. `host_view()` now applies the protocol's
+definition, with a test. That took TCS from 40 to 27 queries and AM from 40 to 19.
+
+| | TCS R@5 | TCS P@1 | AM R@5 | AM P@1 | ms/query |
+|---|---|---|---|---|---|
+| `bm25` | 0.74 | 0.85 | 0.78 | 0.79 | 3 |
+| `dense-minilm` | 0.83 | 0.78 | 0.82 | 0.84 | <1 |
+| `dense-bge` | 0.78 | 0.70 | 0.95 | 0.89 | <1 |
+| `hybrid` | 0.83 | 0.78 | 0.95 | 0.84 | 3 |
+| `hybrid+ce` | 0.82 | 0.78 | 0.84 | 0.84 | about 860 |
+
+The one significant result: `hybrid` beats `dense-minilm` on Recall@5 against Applied
+Mathematics, +0.13, paired bootstrap p = 0.021. Everything else is level within the
+intervals, and the reranker buys nothing measurable at about 300 times the cost of
+`hybrid`. ADR-0005's decision holds; its numbers need the final table.
+
+### Calibration refitted on the final labels
+Reliability stays close (0.29 predicted, 0.28 observed; 0.68 against 0.67).
+
+### TU Delft and Politecnico di Milano
+Added at Luka's request, for the demo only (no gold labels). `docs/01-universities.md`
+has the details:
+- `tudelft-cse-bsc`: 35 courses, 2026/2027, every one with description and outcomes.
+- `polimi-ecs-bsc`: 45 courses, Engineering of Computing Systems. Polimi has no
+  English-taught computer science bachelor; this one is taught in Italian and its
+  catalogue gives English descriptions, which is what we match on.
+Both match cleanly: Operating systems 1 finds Delft's Operating Systems at 99 %.
+
+### Request to B
+- `EvaluationPanel.tsx` line 26 prints "N of M pairs checked by a human". With
+  provenance it would read 1142 of 1142, which is false for 462 rows. Suggest reading
+  `data/gold/provenance.json` (`counts.human`, `counts.model`) through
+  `/evaluation`, or at least wording it "labelled" with the split under it.
+- `RecognitionPanel` provisional text says the calibration "was fitted on machine
+  labels, not on the human-checked gold set". Now it is "partly": 462 of 1142 rows.
+- ADR-0005, README and `docs/06-defence-notes-b.md`: the final table above replaces
+  the provisional numbers. Headline: no significant gain except `hybrid` on AM R@5.
+- The demo can use Delft now: Novi Sad against Delft reads better than against Twente.
+
+### Next
+- **A:** nothing left in lane A except the optional `S6-A3`, which I would close as a
+  documented decision not to fine-tune: 46 queries and a gold set partly written by a
+  model are no training data to report a delta on.
+- **B:** the requests above, the stage 5 gate, `S7-AB2`.
+
+---
+
 ## 2026-09-25 - [A] A half-checked gold set stays provisional in the calibration
 
 **Who:** Person A

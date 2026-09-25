@@ -16,6 +16,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "backend"))
+sys.path.insert(0, str(REPO_ROOT / "eval"))
 
 GOLD = REPO_ROOT / "data" / "gold" / "gold_pairs.csv"
 PRELABELS = REPO_ROOT / "data" / "gold" / "llm_prelabels.csv"
@@ -30,6 +31,13 @@ def load_labels() -> tuple[dict[str, dict[str, int]], str]:
                 if row.get("checked", "").strip().lower() == "yes":
                     checked[row["home_uid"]][row["host_uid"]] = int(row["label"])
     if checked:
+        from provenance import model_pairs
+
+        model = sum(1 for home, hosts in checked.items() for host in hosts
+                    if (home, host) in model_pairs())
+        if model:
+            return dict(checked), (f"gold_pairs.csv, {model} of its rows labelled by a "
+                                   "second model (Claude), see data/gold/provenance.json")
         return dict(checked), "human-checked gold_pairs.csv"
 
     machine: dict[str, dict[str, int]] = defaultdict(dict)
