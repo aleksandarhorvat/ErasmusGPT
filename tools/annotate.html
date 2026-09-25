@@ -162,8 +162,9 @@ input[type=file] { display:none; }
     </div>
     <p class="hint">
       Curricula: every <code>data/curricula/*.json</code> the pairs refer to.<br>
-      Pairs: <code>data/gold/llm_prelabels.csv</code> to start, or a part-finished
-      <code>data/gold/gold_pairs.csv</code> to carry on.
+      Pairs: your half, <code>data/gold/half_a_luka.csv</code> or
+      <code>data/gold/half_b_aleksandar.csv</code>. Run <code>python scripts/merge_gold.py</code>
+      afterwards to put both halves into <code>gold_pairs.csv</code>.
     </p>
     <p class="hint" id="fsNote"></p>
   </section>

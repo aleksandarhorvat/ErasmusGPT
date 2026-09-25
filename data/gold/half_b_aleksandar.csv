@@ -1,0 +1,505 @@
+home_uid,host_uid,llm_label,llm_reason,label,checked
+uns-pmf:I122,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I122,utwente:202500334,0,cryptography and law,0,no
+uns-pmf:I122,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I122,utwente:202001047,0,web science project,0,no
+uns-pmf:I122,utwente:202001033,0,"statistics, not multivariable analysis",0,no
+uns-pmf:I122,utwente:202500333,0,computer architecture,0,no
+uns-pmf:I122,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I122,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I122,utwente:202200024,0,data science project,0,no
+uns-pmf:I122,utwente:202500343,0,programming,0,no
+uns-pmf:I122,utwente:202500352,0,databases,0,no
+uns-pmf:I122,utwente:202500354,0,agile project work,0,no
+uns-pmf:I122,utwente:202200022,0,knowledge representation and data quality,0,no
+uns-pmf:I122,utwente:202400362,0,networking project,0,no
+uns-pmf:I122,utwente:202500362,0,user experience design,0,no
+uns-pmf:I031,utwente:202500332,2,"the databases half covers er modelling, a relational dbms and sql, which is the home substance",2,no
+uns-pmf:I031,utwente:202500352,2,"the host course is a databases course: relational design, sql and dbms use",2,no
+uns-pmf:I031,utwente:202400444,1,applies database management systems inside a project rather than teaching the model,1,no
+uns-pmf:I031,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I031,utwente:202500341,1,modelling with uml overlaps with er modelling but not with sql or dbms internals,1,no
+uns-pmf:I031,utwente:202200021,0,machine learning per data type,0,no
+uns-pmf:I031,utwente:202500342,0,programming,0,no
+uns-pmf:I031,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I031,utwente:202001047,0,web science project,0,no
+uns-pmf:I031,utwente:202500354,1,"same module, data-centric development, but project work rather than database theory",1,no
+uns-pmf:I031,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I031,utwente:202500353,0,agile process side of the project,0,no
+uns-pmf:I031,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I031,utwente:202500357,0,operating systems,0,no
+uns-pmf:I142,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I142,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I142,utwente:202300357,1,"parsing and compilation use grammars, but automata theory and decidability are absent",1,no
+uns-pmf:I142,utwente:202500568,1,language technology and parsing overlap; the formal language theory itself is not taught,1,no
+uns-pmf:I142,utwente:202500343,0,programming practice,0,no
+uns-pmf:I142,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I142,utwente:202200022,0,"knowledge representation, a different kind of formalism",0,no
+uns-pmf:I142,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I142,utwente:202500342,0,programming,0,no
+uns-pmf:I142,utwente:202400444,0,project work,0,no
+uns-pmf:I142,utwente:202300106,0,a research project with no fixed subject matter,0,no
+uns-pmf:I142,utwente:202400608,0,internship,0,no
+uns-pmf:I142,utwente:202500334,0,cryptography and law,0,no
+uns-pmf:I144,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I144,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I144,utwente:202001047,0,web science project,0,no
+uns-pmf:I144,utwente:202200024,0,data science project,0,no
+uns-pmf:I144,utwente:202500334,0,cryptography and law,0,no
+uns-pmf:I144,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I144,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I144,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I144,utwente:202001045,0,"graph theory for social networks, not analytic geometry",0,no
+uns-pmf:I144,utwente:202500352,0,databases,0,no
+uns-pmf:I144,utwente:202001041,0,smart environments,0,no
+uns-pmf:I144,utwente:202001033,0,statistics,0,no
+uns-pmf:I144,utwente:202001046,0,game theory,0,no
+uns-pmf:I051,utwente:202500357,2,"an operating systems course covering the same processes, memory and file system material",2,no
+uns-pmf:I051,utwente:202500356,0,processor architecture rather than the operating system above it,0,no
+uns-pmf:I051,utwente:202300357,1,concurrent programming and synchronisation overlap; memory and file systems do not,1,no
+uns-pmf:I051,utwente:202500342,0,programming,0,no
+uns-pmf:I051,utwente:202500358,1,the module project applies operating systems material rather than teaching it,1,no
+uns-pmf:I051,utwente:202500333,1,the second half covers operating systems briefly alongside networks,1,no
+uns-pmf:I051,utwente:202500343,0,programming practice,0,no
+uns-pmf:I051,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I051,utwente:202500346,0,computer networks,0,no
+uns-pmf:I051,utwente:202500344,0,implementation project,0,no
+uns-pmf:I051,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I051,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I051,utwente:202500354,0,agile project work,0,no
+uns-pmf:I051,utwente:202400444,0,project work,0,no
+uns-pmf:I151,utwente:202200022,1,knowledge representation and reasoning is one part of the home syllabus,1,no
+uns-pmf:I151,utwente:202500332,1,the intelligent interaction half introduces ai concepts and machine learning workflows,1,no
+uns-pmf:I151,utwente:202200024,0,project work on data science,0,no
+uns-pmf:I151,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I151,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I151,utwente:202500342,0,programming,0,no
+uns-pmf:I151,utwente:202500356,0,processor architecture,0,no
+uns-pmf:I151,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I151,utwente:202001046,0,"game theory equilibria, not adversarial search in ai",0,no
+uns-pmf:I151,utwente:202200203,0,embedded systems project,0,no
+uns-pmf:I151,utwente:202001041,0,smart environments,0,no
+uns-pmf:I151,utwente:202200201,0,software engineering for embedded systems,0,no
+uns-pmf:I151,utwente:202500351,0,web development and security,0,no
+uns-pmf:I151,utwente:202500354,0,agile project work,0,no
+uns-pmf:I143,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I143,utwente:202500361,0,"artificial intelligence; linear algebra is assumed, not taught",0,no
+uns-pmf:I143,utwente:202001047,0,web science project,0,no
+uns-pmf:I143,utwente:202001045,0,graph theory for social networks,0,no
+uns-pmf:I143,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I143,utwente:202001033,0,statistics,0,no
+uns-pmf:I143,utwente:202200024,0,data science project,0,no
+uns-pmf:I143,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I143,utwente:202001046,0,game theory,0,no
+uns-pmf:I143,utwente:202500342,0,programming,0,no
+uns-pmf:I143,utwente:202001041,0,smart environments,0,no
+uns-pmf:I143,utwente:202500362,0,user experience design,0,no
+uns-pmf:I143,utwente:202500352,0,databases,0,no
+uns-pmf:I143,utwente:202200022,0,knowledge representation and data quality,0,no
+uns-pmf:I143,utwente:202500356,0,processor architecture,0,no
+uns-pmf:I162,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I162,utwente:202001047,0,web science project,0,no
+uns-pmf:I162,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I162,utwente:202001033,0,"statistics, not numerical methods",0,no
+uns-pmf:I162,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I162,utwente:202500341,0,design models,0,no
+uns-pmf:I162,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I162,utwente:202500343,0,programming practice,0,no
+uns-pmf:I162,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I162,utwente:202500354,0,agile project work,0,no
+uns-pmf:I162,utwente:202500353,0,agile project work,0,no
+uns-pmf:I162,utwente:202500362,0,user experience design,0,no
+uns-pmf:I162,utwente:202400444,0,project work,0,no
+uns-pmf:I162,utwente:202200024,0,data science project,0,no
+uns-pmf:I162,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I162,utwente:202500352,0,databases,0,no
+uns-pmf:I222,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I222,utwente:202500342,0,programming,0,no
+uns-pmf:I222,utwente:202001047,0,web science project,0,no
+uns-pmf:I222,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I222,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I222,utwente:202500352,0,databases,0,no
+uns-pmf:I222,utwente:202500333,0,"digital circuits, not algebraic structures",0,no
+uns-pmf:I222,utwente:202500343,0,programming practice,0,no
+uns-pmf:I222,utwente:202500356,0,processor architecture,0,no
+uns-pmf:I222,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I222,utwente:202001033,0,statistics,0,no
+uns-pmf:I222,utwente:202200024,0,data science project,0,no
+uns-pmf:I222,utwente:202400362,0,networking project,0,no
+uns-pmf:I222,utwente:202500358,0,systems project,0,no
+uns-pmf:I242,utwente:202500356,2,"computer organisation, processor structure and digital design, the same material",2,no
+uns-pmf:I242,utwente:202500333,2,"the architecture half covers binary representation, boolean logic, registers, the alu and machine language",2,no
+uns-pmf:I242,utwente:202400783,1,"microcontroller and fpga architecture, narrower and applied to embedded devices",1,no
+uns-pmf:I242,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I242,utwente:202500358,1,the project applies the architecture material rather than teaching it,1,no
+uns-pmf:I242,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I242,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I242,utwente:202500357,1,"same module, but the operating system side rather than the hardware",1,no
+uns-pmf:I242,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I242,utwente:202500346,0,computer networks,0,no
+uns-pmf:I242,utwente:202400444,0,project work,0,no
+uns-pmf:I242,utwente:202500352,0,databases,0,no
+uns-pmf:I242,utwente:202500347,0,computer networks,0,no
+uns-pmf:I242,utwente:202500348,0,computer networks,0,no
+uns-pmf:I243,utwente:202500348,2,"the third part of the same networking course, covering the upper layers",2,no
+uns-pmf:I243,utwente:202500356,0,processor architecture,0,no
+uns-pmf:I243,utwente:202400362,1,the networking project applies protocols rather than teaching the stack,1,no
+uns-pmf:I243,utwente:202500358,0,systems project,0,no
+uns-pmf:I243,utwente:202001047,0,web science project,0,no
+uns-pmf:I243,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I243,utwente:202500357,0,operating systems,0,no
+uns-pmf:I243,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I243,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I243,utwente:202001045,0,"social network analysis, networks in the graph sense",0,no
+uns-pmf:I251,utwente:202500342,0,programming,0,no
+uns-pmf:I251,utwente:202500344,1,"team project with professional skills, practice rather than method",1,no
+uns-pmf:I251,utwente:202500354,1,"the technical half of the same project, implementation and testing",1,no
+uns-pmf:I251,utwente:202500353,1,"agile process, requirements and teamwork, one process model out of several",1,no
+uns-pmf:I251,utwente:202400444,1,"design, implementation and testing of a system in a team",1,no
+uns-pmf:I251,utwente:202500343,0,programming practice,0,no
+uns-pmf:I251,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I251,utwente:202500351,0,web development and security,0,no
+uns-pmf:I251,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I251,utwente:202500358,0,systems project,0,no
+uns-pmf:I251,utwente:202500352,0,databases,0,no
+uns-pmf:I251,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I251,utwente:202500356,0,processor architecture,0,no
+uns-pmf:I252,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I252,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:I252,utwente:202200022,0,knowledge representation and data quality,0,no
+uns-pmf:I252,utwente:202500568,1,language technology touches the same machinery from the implementation side,1,no
+uns-pmf:I252,utwente:202300357,1,parsing and compilation apply regular and context-free machinery without the automata theory,1,no
+uns-pmf:I252,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I252,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I252,utwente:202500334,0,cryptography and law,0,no
+uns-pmf:I252,utwente:202500343,0,programming practice,0,no
+uns-pmf:I252,utwente:202001047,0,web science project,0,no
+uns-pmf:I252,utwente:202400444,0,project work,0,no
+uns-pmf:I252,utwente:202400608,0,internship,0,no
+uns-pmf:I252,utwente:202500352,0,databases,0,no
+uns-pmf:I252,utwente:202200024,0,data science project,0,no
+uns-pmf:I263,utwente:202500351,2,"server and client side web development over a database, with security, the core of the home course",2,no
+uns-pmf:I263,utwente:202500343,0,programming practice,0,no
+uns-pmf:I263,utwente:202500352,1,the database tier that the home course connects to,1,no
+uns-pmf:I263,utwente:202400444,1,builds a multi-tier web system as a project rather than teaching the technologies,1,no
+uns-pmf:I263,utwente:202500342,0,programming,0,no
+uns-pmf:I263,utwente:202500354,1,the technical half of the same web project,1,no
+uns-pmf:I263,utwente:202500344,0,networked game project,0,no
+uns-pmf:I263,utwente:202001047,0,"web science in the analytical sense, not web development",0,no
+uns-pmf:I263,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I263,utwente:202500568,0,programming paradigms,0,no
+uns-pmf:I263,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I263,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I263,utwente:202500341,0,design models,0,no
+uns-pmf:I262,utwente:202400444,2,"designing and implementing a multi-tier information system over a database, the same practice",2,no
+uns-pmf:I262,utwente:202500351,1,"the web tier with security, part of the three-tier architecture taught here",1,no
+uns-pmf:I262,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:I262,utwente:202500344,0,networked game project,0,no
+uns-pmf:I262,utwente:202500342,0,programming,0,no
+uns-pmf:I262,utwente:202500341,0,design models,0,no
+uns-pmf:I262,utwente:202500343,0,programming practice,0,no
+uns-pmf:I262,utwente:202500354,1,the technical half of the same project,1,no
+uns-pmf:I262,utwente:202300357,0,concurrency and compilers,0,no
+uns-pmf:I262,utwente:202500357,0,operating systems,0,no
+uns-pmf:I262,utwente:202500358,0,systems project,0,no
+uns-pmf:I262,utwente:202500333,0,computer architecture and networks,0,no
+uns-pmf:I262,utwente:202400783,0,embedded architectures,0,no
+uns-pmf:I311,utwente:202500341,0,"modelling with uml, one tool rather than a survey of it tooling",0,no
+uns-pmf:I311,utwente:202500343,0,programming practice,0,no
+uns-pmf:I311,utwente:202500344,0,implementation project,0,no
+uns-pmf:I311,utwente:202500342,0,programming,0,no
+uns-pmf:I311,utwente:202500354,0,agile project work,0,no
+uns-pmf:I311,utwente:202500353,0,agile process work,0,no
+uns-pmf:I311,utwente:202500352,0,databases,0,no
+uns-pmf:I311,utwente:202400444,0,project work,0,no
+uns-pmf:I311,utwente:202500351,0,web development and security,0,no
+uns-pmf:I311,utwente:202500358,0,systems project,0,no
+uns-pmf:I311,utwente:202001041,0,smart environments,0,no
+uns-pmf:M-15,utwente:202001045,1,"studies social structure, but as network analysis rather than as sociological theory",1,no
+uns-pmf:M-15,utwente:202001047,0,web science project,0,no
+uns-pmf:M-15,utwente:202001046,0,game theory,0,no
+uns-pmf:M-15,utwente:202200024,0,data science project,0,no
+uns-pmf:M-15,utwente:202500332,0,databases and machine learning,0,no
+uns-pmf:M-15,utwente:202400362,0,networking project,0,no
+uns-pmf:M-15,utwente:202500361,0,artificial intelligence,0,no
+uns-pmf:M-15,utwente:202500342,0,programming,0,no
+uns-pmf:M-15,utwente:202500344,0,implementation project,0,no
+uns-pmf:M-15,utwente:202200023,0,"ethics of ai systems, a narrower ethical question",0,no
+uns-pmf:M-15,utwente:202500356,0,processor architecture,0,no
+uns-pmf:M-15,utwente:202500352,0,databases,0,no
+uns-pmf:I322,utwente:202500341,0,"modelling with uml, one tool rather than a survey of it tooling",0,no
+uns-pmf:I322,utwente:202500343,0,programming practice,0,no
+uns-pmf:I322,utwente:202500342,0,programming,0,no
+uns-pmf:I322,utwente:202500353,0,agile process work,0,no
+uns-pmf:I322,utwente:202500354,0,agile project work,0,no
+uns-pmf:I322,utwente:202400444,0,project work,0,no
+uns-pmf:I322,utwente:202500352,0,databases,0,no
+uns-pmf:I322,utwente:202500351,0,web development and security,0,no
+uns-pmf:I322,utwente:202001047,0,web science project,0,no
+uns-pmf:I322,utwente:202500331,0,algorithms and functional programming,0,no
+uns-pmf:I322,utwente:202500358,0,systems project,0,no
+uns-pmf:I122,utwente:202400660,1,continues analysis into several variables in part,1,no
+uns-pmf:I122,utwente:202001201,0,one-variable integration,0,no
+uns-pmf:I122,utwente:202200179,1,sequences and series rather than functions of several variables,1,no
+uns-pmf:I122,utwente:202200148,1,"vector fields, divergence and gradient, the vector calculus half only",1,no
+uns-pmf:I122,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I122,utwente:201500405,0,complex function theory,0,no
+uns-pmf:I122,utwente:202300028,0,optimisation,0,no
+uns-pmf:I122,utwente:202500460,0,"one-variable analysis, which is the first calculus course",0,no
+uns-pmf:I122,utwente:202200242,0,differential equations,0,no
+uns-pmf:I122,utwente:201600167,0,foundations of analysis,0,no
+uns-pmf:I122,utwente:202001215,0,differential equations,0,no
+uns-pmf:I122,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I122,utwente:202001344,0,probability theory,0,no
+uns-pmf:I031,utwente:202200142,0,"mathematical modelling, no data modelling or sql",0,no
+uns-pmf:I031,utwente:202200243,0,modelling project,0,no
+uns-pmf:I031,utwente:202300157,0,modelling project,0,no
+uns-pmf:I031,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I031,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I031,utwente:202400634,0,learning theory,0,no
+uns-pmf:I031,utwente:202200141,0,linear systems,0,no
+uns-pmf:I031,utwente:202500368,0,grammars and automata,0,no
+uns-pmf:I031,utwente:202300026,0,mathematical statistics,0,no
+uns-pmf:I031,utwente:202200239,0,modelling project,0,no
+uns-pmf:I031,utwente:202300156,0,modelling project,0,no
+uns-pmf:I031,utwente:202200337,0,stochastic models,0,no
+uns-pmf:I031,utwente:202001363,0,graph algorithm project,0,no
+uns-pmf:I031,utwente:202500367,0,"data structures, not databases",0,no
+uns-pmf:I142,utwente:202500368,2,"grammars and automata models, the subject of the home course",2,no
+uns-pmf:I142,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I142,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I142,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I142,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I142,utwente:202200236,0,linear structures,0,no
+uns-pmf:I142,utwente:202200141,0,linear systems,0,no
+uns-pmf:I142,utwente:202200238,0,systems theory in the control sense,0,no
+uns-pmf:I142,utwente:202500460,0,real analysis,0,no
+uns-pmf:I142,utwente:202500367,0,data structures,0,no
+uns-pmf:I142,utwente:202400632,0,partial differential equations,0,no
+uns-pmf:I142,utwente:202400631,0,graph theory,0,no
+uns-pmf:I142,utwente:202500366,0,discrete algorithms,0,no
+uns-pmf:I144,utwente:202300017,0,multidimensional analysis,0,no
+uns-pmf:I144,utwente:202200236,1,"continues linear structures, still the algebraic half only",1,no
+uns-pmf:I144,utwente:202200148,0,vector fields rather than analytic geometry,0,no
+uns-pmf:I144,utwente:202400660,0,real analysis,0,no
+uns-pmf:I144,utwente:202001237,1,"linear systems and matrices, the computational half",1,no
+uns-pmf:I144,utwente:202300018,0,reflection course,0,no
+uns-pmf:I144,utwente:202200179,0,sequences and series,0,no
+uns-pmf:I144,utwente:202500460,0,real analysis,0,no
+uns-pmf:I144,utwente:202001215,0,differential equations,0,no
+uns-pmf:I144,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I144,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I144,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I144,utwente:202300027,0,linear optimisation,0,no
+uns-pmf:I144,utwente:202200238,0,systems theory,0,no
+uns-pmf:I051,utwente:202200338,0,"stochastic simulation, not process scheduling",0,no
+uns-pmf:I051,utwente:202200141,0,linear systems,0,no
+uns-pmf:I051,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I051,utwente:202500367,0,data structures,0,no
+uns-pmf:I051,utwente:202500368,0,grammars and automata,0,no
+uns-pmf:I051,utwente:202400635,0,sequential decision-making,0,no
+uns-pmf:I051,utwente:202001237,0,linear algebra,0,no
+uns-pmf:I051,utwente:202200243,0,modelling project,0,no
+uns-pmf:I051,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I051,utwente:202500460,0,real analysis,0,no
+uns-pmf:I051,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I051,utwente:202300018,0,reflection course,0,no
+uns-pmf:I051,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I051,utwente:202200236,0,linear structures,0,no
+uns-pmf:I051,utwente:202200238,0,systems theory,0,no
+uns-pmf:I051,utwente:202200239,0,modelling project,0,no
+uns-pmf:I051,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I151,utwente:202300028,1,"optimisation and learning, the machine learning side only",1,no
+uns-pmf:I151,utwente:202400635,1,"decision-making under uncertainty, one component of the home course",1,no
+uns-pmf:I151,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I151,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I151,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I151,utwente:202400634,1,"the mathematics of learning, one component of the home course",1,no
+uns-pmf:I151,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I151,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I151,utwente:202200239,0,modelling project,0,no
+uns-pmf:I151,utwente:202200141,0,linear systems,0,no
+uns-pmf:I151,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I151,utwente:202500367,0,data structures,0,no
+uns-pmf:I151,utwente:202200337,0,stochastic models,0,no
+uns-pmf:I151,utwente:202300018,0,reflection course,0,no
+uns-pmf:I151,utwente:202001379,0,graduation project,0,no
+uns-pmf:I151,utwente:202300027,0,linear optimisation,0,no
+uns-pmf:I143,utwente:202001237,2,"linear algebra: systems, matrices and the structure behind them",2,no
+uns-pmf:I143,utwente:202200141,1,"the first half of the same material, systems and vector spaces",1,no
+uns-pmf:I143,utwente:202200236,1,"the continuation, eigenvalues and further structure",1,no
+uns-pmf:I143,utwente:202500369,1,"abstract algebra, which covers the structures but not the matrix techniques",1,no
+uns-pmf:I143,utwente:202200238,0,systems theory,0,no
+uns-pmf:I143,utwente:202300027,0,linear optimisation,0,no
+uns-pmf:I143,utwente:202400631,0,graph theory,0,no
+uns-pmf:I143,utwente:202300028,0,optimisation,0,no
+uns-pmf:I143,utwente:202200241,0,numerical mathematics,0,no
+uns-pmf:I143,utwente:202500460,0,real analysis,0,no
+uns-pmf:I143,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I143,utwente:202001201,0,calculus,0,no
+uns-pmf:I143,utwente:202500366,0,discrete algorithms,0,no
+uns-pmf:I143,utwente:202400634,0,learning theory,0,no
+uns-pmf:I143,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I162,utwente:202200241,2,"numerical mathematics: interpolation, quadrature and iterative solving",2,no
+uns-pmf:I162,utwente:202200243,0,modelling project,0,no
+uns-pmf:I162,utwente:202300157,0,modelling project,0,no
+uns-pmf:I162,utwente:202500460,0,real analysis,0,no
+uns-pmf:I162,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I162,utwente:202001215,0,differential equations,0,no
+uns-pmf:I162,utwente:202001201,0,calculus,0,no
+uns-pmf:I162,utwente:202400660,0,real analysis,0,no
+uns-pmf:I162,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I162,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I162,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I162,utwente:202300018,0,reflection course,0,no
+uns-pmf:I162,utwente:202400634,0,learning theory,0,no
+uns-pmf:I162,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I222,utwente:202500369,2,"an introduction to abstract algebra: groups, rings and fields",2,no
+uns-pmf:I222,utwente:202200141,1,systems of linear equations and their structure,1,no
+uns-pmf:I222,utwente:202001237,1,"linear systems and matrices, one part of the home syllabus",1,no
+uns-pmf:I222,utwente:202500460,0,real analysis,0,no
+uns-pmf:I222,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I222,utwente:202001193,1,introductory mathematics covering number structures,1,no
+uns-pmf:I222,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I222,utwente:202500367,0,data structures,0,no
+uns-pmf:I222,utwente:202400631,0,graph theory,0,no
+uns-pmf:I222,utwente:202500366,0,discrete algorithms,0,no
+uns-pmf:I222,utwente:202200238,0,systems theory,0,no
+uns-pmf:I222,utwente:202300018,0,reflection course,0,no
+uns-pmf:I222,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I222,utwente:202300027,0,linear optimisation,0,no
+uns-pmf:I242,utwente:202001234,0,"discrete mathematics, no hardware",0,no
+uns-pmf:I242,utwente:202500367,0,data structures,0,no
+uns-pmf:I242,utwente:202200236,0,linear structures,0,no
+uns-pmf:I242,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I242,utwente:202200141,0,linear systems,0,no
+uns-pmf:I242,utwente:202500368,0,grammars and automata,0,no
+uns-pmf:I242,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I242,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I242,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I242,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I242,utwente:202400634,0,learning theory,0,no
+uns-pmf:I242,utwente:202001385,0,graduation project,0,no
+uns-pmf:I242,utwente:202300028,0,optimisation,0,no
+uns-pmf:I242,utwente:202200336,0,markov chains,0,no
+uns-pmf:I242,utwente:202300018,0,reflection course,0,no
+uns-pmf:I243,utwente:202400631,0,"graph theory in the mathematical sense, not protocol layers",0,no
+uns-pmf:I243,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I243,utwente:202500367,0,data structures,0,no
+uns-pmf:I243,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I243,utwente:202001385,0,graduation project,0,no
+uns-pmf:I243,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I243,utwente:202200336,0,"markov chains, used for traffic models but not networking",0,no
+uns-pmf:I243,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I243,utwente:202001237,0,linear algebra,0,no
+uns-pmf:I243,utwente:202300028,0,optimisation,0,no
+uns-pmf:I243,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I243,utwente:202200239,0,modelling project,0,no
+uns-pmf:I243,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I243,utwente:202500366,0,discrete algorithms,0,no
+uns-pmf:I243,utwente:202300027,0,linear optimisation,0,no
+uns-pmf:I243,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I251,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I251,utwente:202200239,0,modelling project,0,no
+uns-pmf:I251,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I251,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I251,utwente:202300156,0,modelling project,0,no
+uns-pmf:I251,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I251,utwente:202300196,0,modelling project,0,no
+uns-pmf:I251,utwente:202200336,0,markov chains,0,no
+uns-pmf:I251,utwente:202200243,0,modelling project,0,no
+uns-pmf:I251,utwente:202000148,0,statistics,0,no
+uns-pmf:I251,utwente:202500367,0,data structures,0,no
+uns-pmf:I251,utwente:202300028,0,optimisation,0,no
+uns-pmf:I251,utwente:202001379,0,graduation project,0,no
+uns-pmf:I251,utwente:202300018,0,reflection course,0,no
+uns-pmf:I251,utwente:202400634,0,learning theory,0,no
+uns-pmf:I251,utwente:202300055,0,basic calculus,0,no
+uns-pmf:I252,utwente:202500368,2,"automata, grammars and regular languages, the subject of the home course",2,no
+uns-pmf:I252,utwente:202001234,0,discrete mathematics,0,no
+uns-pmf:I252,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I252,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I252,utwente:202500367,0,data structures,0,no
+uns-pmf:I252,utwente:202001193,0,introductory mathematics,0,no
+uns-pmf:I252,utwente:202500366,0,discrete algorithms,0,no
+uns-pmf:I252,utwente:202500460,0,real analysis,0,no
+uns-pmf:I252,utwente:202200141,0,linear systems,0,no
+uns-pmf:I252,utwente:202200236,0,linear structures,0,no
+uns-pmf:I252,utwente:202400634,0,learning theory,0,no
+uns-pmf:I252,utwente:202400660,0,real analysis,0,no
+uns-pmf:I252,utwente:202300026,0,mathematical statistics,0,no
+uns-pmf:I252,utwente:202400631,0,graph theory,0,no
+uns-pmf:I263,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I263,utwente:202200141,0,linear systems,0,no
+uns-pmf:I263,utwente:202200243,0,modelling project,0,no
+uns-pmf:I263,utwente:202500368,0,grammars and automata,0,no
+uns-pmf:I263,utwente:202400635,0,sequential decision-making,0,no
+uns-pmf:I263,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I263,utwente:202200239,0,modelling project,0,no
+uns-pmf:I263,utwente:202200236,0,linear structures,0,no
+uns-pmf:I263,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I263,utwente:202300018,0,reflection course,0,no
+uns-pmf:I263,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I263,utwente:202300028,0,optimisation,0,no
+uns-pmf:I263,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I263,utwente:202500367,0,data structures,0,no
+uns-pmf:I262,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I262,utwente:202200236,0,linear structures,0,no
+uns-pmf:I262,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:I262,utwente:202200239,0,modelling project,0,no
+uns-pmf:I262,utwente:202200243,0,modelling project,0,no
+uns-pmf:I262,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:I262,utwente:202500367,0,data structures,0,no
+uns-pmf:I262,utwente:202400633,0,reflection course,0,no
+uns-pmf:I262,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I262,utwente:202001385,0,graduation project,0,no
+uns-pmf:I262,utwente:202300018,0,reflection course,0,no
+uns-pmf:I262,utwente:201600167,0,mathematical analysis,0,no
+uns-pmf:I262,utwente:202001379,0,graduation project,0,no
+uns-pmf:I262,utwente:202001380,0,reflection course,0,no
+uns-pmf:I311,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I311,utwente:202200142,0,"programming for mathematical modelling, not it tooling",0,no
+uns-pmf:I311,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I311,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I311,utwente:202200239,0,modelling project,0,no
+uns-pmf:I311,utwente:202200141,0,linear systems,0,no
+uns-pmf:I311,utwente:202200243,0,modelling project,0,no
+uns-pmf:I311,utwente:202300018,0,reflection course,0,no
+uns-pmf:I311,utwente:202300157,0,modelling project,0,no
+uns-pmf:I311,utwente:202300156,0,modelling project,0,no
+uns-pmf:I311,utwente:202001385,0,graduation project,0,no
+uns-pmf:I311,utwente:202300028,0,optimisation,0,no
+uns-pmf:I311,utwente:202400634,0,learning theory,0,no
+uns-pmf:I311,utwente:202001379,0,graduation project,0,no
+uns-pmf:I311,utwente:202300055,0,basic calculus,0,no
+uns-pmf:M-15,utwente:202300018,0,"reflection on statistics and calculus, not society",0,no
+uns-pmf:M-15,utwente:202500369,0,abstract algebra,0,no
+uns-pmf:M-15,utwente:202400633,0,reflection course,0,no
+uns-pmf:M-15,utwente:202001380,0,reflection course,0,no
+uns-pmf:M-15,utwente:202200141,0,linear systems,0,no
+uns-pmf:M-15,utwente:202300157,0,modelling project,0,no
+uns-pmf:M-15,utwente:202300026,0,mathematical statistics,0,no
+uns-pmf:M-15,utwente:202400631,0,graph theory,0,no
+uns-pmf:M-15,utwente:202200243,0,modelling project,0,no
+uns-pmf:M-15,utwente:202200142,0,modelling and programming,0,no
+uns-pmf:M-15,utwente:202400348,0,philosophy of mathematics,0,no
+uns-pmf:M-15,utwente:202300028,0,optimisation,0,no
+uns-pmf:M-15,utwente:202001237,0,linear algebra,0,no
+uns-pmf:M-15,utwente:202200242,0,differential equations,0,no
+uns-pmf:M-15,utwente:202200236,0,linear structures,0,no
+uns-pmf:I322,utwente:202200339,0,stochastic modelling project,0,no
+uns-pmf:I322,utwente:202200239,0,modelling project,0,no
+uns-pmf:I322,utwente:202200142,0,"programming for mathematical modelling, not it tooling",0,no
+uns-pmf:I322,utwente:202300196,0,modelling project,0,no
+uns-pmf:I322,utwente:202300156,0,modelling project,0,no
+uns-pmf:I322,utwente:202001363,0,algorithm project,0,no
+uns-pmf:I322,utwente:202200243,0,modelling project,0,no
+uns-pmf:I322,utwente:202200338,0,stochastic simulation,0,no
+uns-pmf:I322,utwente:202300157,0,modelling project,0,no
+uns-pmf:I322,utwente:202400633,0,reflection course,0,no
+uns-pmf:I322,utwente:202001385,0,graduation project,0,no
+uns-pmf:I322,utwente:202400660,0,real analysis,0,no
+uns-pmf:I322,utwente:202300028,0,optimisation,0,no
+uns-pmf:I322,utwente:202300018,0,reflection course,0,no
+uns-pmf:I322,utwente:202001379,0,graduation project,0,no
+uns-pmf:I322,utwente:202200236,0,linear structures,0,no

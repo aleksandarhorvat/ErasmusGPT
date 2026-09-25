@@ -17,8 +17,8 @@ lanes have passed their gate.
 | **Current stage** | **Stage 5 - Gold set + evaluation** (stages 2 to 4 closed; 6 and 7 pulled early) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | `S5-A1`, the labelling pass (Luka, by hand). All tooling for what follows is in: kappa, hybrid calibration, paired tests |
-| **Person B is on** | `S7-AB2`, running the offline rehearsal on the demo laptop (`docs/07-demo-script.md`), and `S5-B1`, the 30 cold pairs. All lane B code is done |
+| **Person A is on** | `S5-A1`, the labelling pass, now split in two: Luka checks `data/gold/half_a_luka.csv` (638 rows), Aleksandar `half_b_aleksandar.csv` (504), `scripts/merge_gold.py` joins them. All tooling for what follows is in: kappa, hybrid calibration, paired tests |
+| **Person B is on** | `S5-B1`, the 30 cold pairs **first**, then his half of `S5-A1` (`half_b_aleksandar.csv`), then `S7-AB2`, the offline rehearsal on the demo laptop. All lane B code is done |
 | **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
 | **Last updated** | 2026-09-25 - B: product slide, rehearsal script, evaluation stays provisional until every row is checked |
 
@@ -187,7 +187,7 @@ as the candidate generator that feeds the reranker.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S5-A0` | done | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
-| `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
+| `S5-A1` | todo (split A/B) | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md`. **Split since 2026-09-25**: Luka works in `data/gold/half_a_luka.csv` (638 rows, holds all 30 cold pairs), Aleksandar in `half_b_aleksandar.csv` (504 rows, after his cold slice); `python scripts/merge_gold.py` writes `gold_pairs.csv`, see `tools/README.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
 | `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
 | `S5-A3` | wip (code done, waits on `S5-A1`) | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
 | `S5-A4` | done (early) | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |

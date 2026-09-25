@@ -16,6 +16,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 GOLD = REPO_ROOT / "data" / "gold" / "gold_pairs.csv"
 SLICE = REPO_ROOT / "data" / "gold" / "gold_pairs_b.csv"
 PRELABELS = REPO_ROOT / "data" / "gold" / "llm_prelabels.csv"
+HALF_A = REPO_ROOT / "data" / "gold" / "half_a_luka.csv"
+HALF_B = REPO_ROOT / "data" / "gold" / "half_b_aleksandar.csv"
 
 
 def known_uids() -> set[str]:
@@ -56,12 +58,37 @@ def check(path: Path, uids: set[str], label_column: str, problems: list[str]) ->
             problems.append(f"{name}:{number}: checked is {checked!r}, expected yes or no")
 
 
+def pairs(path: Path) -> set[tuple[str, str]]:
+    with path.open(encoding="utf-8") as handle:
+        return {(r["home_uid"], r["host_uid"]) for r in csv.DictReader(handle)}
+
+
+def check_halves(problems: list[str]) -> None:
+    """The split made by split_gold.py still covers gold_pairs.csv exactly once."""
+    if not (HALF_A.exists() and HALF_B.exists() and GOLD.exists()):
+        return
+    half_a, half_b, gold = pairs(HALF_A), pairs(HALF_B), pairs(GOLD)
+    if half_a & half_b:
+        problems.append(f"{len(half_a & half_b)} pairs are in both halves")
+    if (half_a | half_b) != gold:
+        problems.append(
+            f"the halves cover {len(half_a | half_b)} pairs, gold_pairs.csv has {len(gold)}; "
+            "they have drifted apart")
+    if SLICE.exists() and pairs(SLICE) & half_b:
+        problems.append(
+            f"{len(pairs(SLICE) & half_b)} cold-slice pairs are in Aleksandar's half, so he "
+            "would see the model's label before labelling them blind")
+
+
 def main() -> int:
     uids = known_uids()
     problems: list[str] = []
     check(GOLD, uids, "label", problems)
     check(SLICE, uids, "label", problems)
     check(PRELABELS, uids, "llm_label", problems)
+    check(HALF_A, uids, "label", problems)
+    check(HALF_B, uids, "label", problems)
+    check_halves(problems)
 
     if GOLD.exists() and PRELABELS.exists():
         with GOLD.open(encoding="utf-8") as handle:

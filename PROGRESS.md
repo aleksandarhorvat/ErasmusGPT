@@ -14,6 +14,50 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [B] Split the gold-set check between A and B
+
+**Who:** Person B
+**Stage:** 5
+**Commit:** `[B] split the gold-set check into one file per person`
+**Tasks touched:** `S5-A1` (now shared), `S5-B1` (order)
+
+### Why
+1142 rows is about 3.5 hours for one person. Split in two it is about two
+hours each, and each of us writes only our own file, so there is no CSV to merge in git.
+Proposed by B; Luka, say so if you would rather keep the whole pass.
+
+### Done
+- `scripts/split_gold.py` wrote `data/gold/half_a_luka.csv` (638 rows, 33 home courses,
+  about 128 min) and `data/gold/half_b_aleksandar.csv` (504 rows, 18 home courses, about
+  88 min plus 38 min for the cold slice). Split by home course, balanced on estimated
+  time, all 30 cold pairs in Luka's half so Aleksandar never sees their model label.
+  Re-running it keeps the split and copies over anything already checked in
+  `gold_pairs.csv`, so checks done before the split are not lost.
+- `scripts/merge_gold.py` writes `gold_pairs.csv` back from the halves in its own order
+  and format. Tested: an untouched split round-trips byte for byte, partial checks merge,
+  and a pair checked with two different labels stops the merge.
+- `tools/annotate.js`: a half keeps `llm_label` and `llm_reason` when saved (quoted, round
+  trip tested on the real file), so reopening shows the proposal and the correction count
+  still works. Before this, resuming from `gold_pairs.csv` lost the model's reason.
+- `scripts/check_gold.py` (CI) also checks the halves: every gold pair in exactly one
+  half, no cold pair in Aleksandar's.
+- Deck limits slide: "Two people checked half the rows each".
+
+### For A (cross-zone, please read)
+`data/gold/` is your zone. I added the two half files there and changed the `S5-A1` row
+and your line in the Project state block to describe the split; correct them if you
+want it worded differently. Not touched, yours to update: `docs/05-evaluation.md` lines
+107 and 205 and `docs/03-data-schema.md` line 92 still say one person checks every row.
+If you already checked rows locally in `gold_pairs.csv`, commit that first, pull, then
+run `python scripts/split_gold.py` once: it copies your checks into your half.
+
+### Next
+- **Aleksandar:** the 30 cold pairs first, then `half_b_aleksandar.csv`.
+- **Luka:** `half_a_luka.csv`.
+- Either of us: `python scripts/merge_gold.py` before each commit.
+
+---
+
 ## 2026-09-25 - [B] Product slide, rehearsal script, provisional until every row is checked
 
 **Who:** Person B

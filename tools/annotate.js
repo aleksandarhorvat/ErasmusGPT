@@ -7,6 +7,7 @@ const S = {
   i: 0,
   handle: null,         // FileSystemFileHandle, when the browser supports it
   name: "gold_pairs.csv",
+  keepLlm: false,       // a half from scripts/split_gold.py: write the proposal back too
   loadedJson: [],
 };
 
@@ -37,9 +38,24 @@ function parseCsv(text) {
     .map((r) => Object.fromEntries(head.map((h, j) => [h, (r[j] ?? "").trim()])));
 }
 
+function quote(value) {
+  const s = String(value ?? "");
+  return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
 function toCsv() {
-  const out = ["home_uid,host_uid,label,checked"];
-  for (const r of S.rows) out.push(`${r.home_uid},${r.host_uid},${r.label},${r.checked ? "yes" : "no"}`);
+  // gold_pairs.csv has four columns. The halves made by scripts/split_gold.py also keep
+  // the model's proposal, so reopening a half-finished file still shows it and still
+  // counts corrections; they go back into gold_pairs.csv via scripts/merge_gold.py.
+  const out = [S.keepLlm
+    ? "home_uid,host_uid,llm_label,llm_reason,label,checked"
+    : "home_uid,host_uid,label,checked"];
+  for (const r of S.rows) {
+    const checked = r.checked ? "yes" : "no";
+    out.push(S.keepLlm
+      ? [r.home_uid, r.host_uid, r.llm_label ?? "", r.llm_reason, r.label, checked].map(quote).join(",")
+      : `${r.home_uid},${r.host_uid},${r.label},${checked}`);
+  }
   return out.join("\n") + "\n";
 }
 
@@ -70,6 +86,7 @@ function loadPairs(text, filename) {
       checked: String(r.checked || "").toLowerCase() === "yes",
     };
   });
+  S.keepLlm = "llm_label" in raw[0] && "label" in raw[0];
   S.name = filename.replace("llm_prelabels", "gold_pairs");
   restore();
   S.i = Math.max(0, S.rows.findIndex((r) => !r.checked));
@@ -302,5 +319,5 @@ window.addEventListener("beforeunload", (e) => {
 });
 
 $("fsNote").textContent = hasFS
-  ? "This browser can write back to the file you opened, so Save overwrites gold_pairs.csv in place."
-  : "This browser cannot write files in place, so Save downloads a new gold_pairs.csv. Chrome or Edge can overwrite in place.";
+  ? "This browser can write back to the file you opened, so Save overwrites it in place."
+  : "This browser cannot write files in place, so Save downloads a new copy of the file. Chrome or Edge can overwrite in place.";

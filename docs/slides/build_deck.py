@@ -601,7 +601,7 @@ def slide_limits(deck):
     limits = [
         "Pooled judgements favour the strategies that built the pool.",
         "Labels come from students, not from the office that signs learning agreements.",
-        "One person checked every row; kappa covers a 30-pair slice.",
+        "Two people checked half the rows each; kappa on 30 blind pairs checks they agree.",
         "English only: a multilingual model alone would break the image budget.",
         "Master's catalogues sit a level above a bachelor's programme.",
     ]
