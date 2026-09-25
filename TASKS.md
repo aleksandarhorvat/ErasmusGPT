@@ -20,7 +20,7 @@ lanes have passed their gate.
 | **Person A is on** | `S5-A1`, the labelling pass, now split in two: Luka checks `data/gold/half_a_luka.csv` (638 rows), Aleksandar `half_b_aleksandar.csv` (504), `scripts/merge_gold.py` joins them. All tooling for what follows is in: kappa, hybrid calibration, paired tests |
 | **Person B is on** | `S5-B1`, the 30 cold pairs **first**, then his half of `S5-A1` (`half_b_aleksandar.csv`), then `S7-AB2`, the offline rehearsal on the demo laptop. All lane B code is done |
 | **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
-| **Last updated** | 2026-09-25 - B: product slide, rehearsal script, evaluation stays provisional until every row is checked |
+| **Last updated** | 2026-09-25 - A: calibration uses the cosine too; 4 frontend fixes requested from B in PROGRESS |
 
 ### Stage ladder
 

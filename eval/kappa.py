@@ -1,8 +1,9 @@
 """Inter-annotator agreement on the cold slice. Stage 5, tasks S5-B1 and S5-A3.
 
 Person B labels about 30 pooled pairs cold, into data/gold/gold_pairs_b.csv, without
-seeing the model's labels or Person A's corrections. This script compares those labels
-with Person A's checked labels on the same pairs.
+seeing the model's labels or Person A's corrections. All 30 sit in Person A's half of
+the split pool, so this script compares B's cold labels with A's checked labels in the
+merged gold_pairs.csv.
 
     python eval/kappa.py
 

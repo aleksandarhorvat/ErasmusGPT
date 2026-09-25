@@ -120,9 +120,12 @@ where its labels came from.
 
 ## Building the gold set
 
-A language model proposes every label, and Person A reads every row and corrects it
-where he disagrees. His corrected file is the gold standard; the model's raw output is
-kept unedited in a second file so the two can be compared afterwards.
+A language model proposes every label, and a person reads every row and corrects it
+where they disagree. The rows are split by home course between the two of us
+(`scripts/split_gold.py`): Luka checks `data/gold/half_a_luka.csv`, Aleksandar
+`data/gold/half_b_aleksandar.csv`, and `scripts/merge_gold.py` joins the halves into
+`gold_pairs.csv`, the gold standard. The model's raw output is kept unedited in a second
+file so the two can be compared afterwards.
 
 ### Why the human pass is not optional
 
@@ -148,8 +151,8 @@ what breaks that loop.
    pooled pair into `data/gold/llm_prelabels.csv`. Give it the two course documents and
    the rubric below, and nothing else: never the system's scores or ranks, or it anchors
    on them. Commit that file and do not edit it again.
-3. **Check.** Open `tools/annotate.html`, load the curricula and the pre-labels, and read
-   every row. The proposed label and its reason are shown under the two course cards;
+3. **Check.** Open `tools/annotate.html`, load the curricula and your half of the
+   pool, and read every row. The proposed label and its reason are shown under the two course cards;
    `0` `1` `2` change it and `Enter` accepts. Only `checked=yes` rows count.
 4. **Cold slice.** Person B labels about 30 of the same pairs without seeing any of the
    above, for Cohen's kappa. See `docs/03-data-schema.md`.
@@ -218,8 +221,9 @@ separately, the same way a coordinator does.
 - Pooled judgements favour the strategies that contributed to the pool.
 - Labels come from students, not from the faculty office that signs the learning
   agreement.
-- One expert checked every row, so kappa measures agreement on a 30-pair slice rather
-  than on the whole set.
+- Each row was checked by one of two people, so kappa measures agreement on a 30-pair
+  slice rather than on the whole set. The slice sits in Luka's half and Aleksandar
+  labels it cold, before his own half, so he has never seen those pairs' pre-labels.
 
 ## Statistical honesty
 

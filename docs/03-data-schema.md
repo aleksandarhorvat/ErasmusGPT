@@ -89,8 +89,10 @@ uns-pmf:I203,utwente:TCS-M1,2,"host module teaches object-oriented programming i
 ### `data/gold/gold_pairs.csv` - the working file
 
 Starts as a copy of the pre-labels, with `llm_label` renamed to `label` and `llm_reason`
-dropped. Person A reads every row, corrects `label` where he disagrees, and sets
-`checked` to `yes`. Four columns, no free text: use `tools/annotate.html`.
+dropped. It is split by home course into `half_a_luka.csv` and
+`half_b_aleksandar.csv`; each person reads every row of their half, corrects `label`
+where they disagree, and sets `checked` to `yes`, and `scripts/merge_gold.py` writes
+this file back from the halves. Four columns, no free text: use `tools/annotate.html`.
 
 ```csv
 home_uid,host_uid,label,checked
