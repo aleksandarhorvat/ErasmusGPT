@@ -213,6 +213,12 @@ separately, the same way a coordinator does.
   result. Say so; hiding it costs more marks than reporting it.
 - Fix seeds. Log model revisions (commit hashes from the HF repos) in the report.
 - Report the annotation overlap and Cohen's kappa (see `docs/03-data-schema.md`).
+  `eval/kappa.py` writes `eval/report/kappa.md`: unweighted and linearly weighted kappa
+  for A against B, and each of them against the model's pre-labels. The labels are
+  ordinal, so the weighted figure is the one to quote. B against the model is the
+  control for anchoring: B never saw the pre-labels.
+- The paired test runs for both `hybrid` (the served default) and `hybrid+ce` against
+  `dense-minilm`.
 
 ## Error analysis (S6-A2)
 

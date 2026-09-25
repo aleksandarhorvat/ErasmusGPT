@@ -66,10 +66,11 @@ evaluation story is "the cross-encoder measurably beats the naive approach":
 - `hybrid` - RRF(bm25, dense)
 - `hybrid+ce` - RRF then cross-encoder rerank
 
-**`hybrid` is the default** (ADR-0005). The proposal expected `hybrid+ce` to win; measured,
-it loses on every metric and costs about 500 times more per query. The reranker stays
-implemented and selectable because that comparison is the project's main result. See
-`eval/report/ablations.md`.
+**`hybrid` is the default** (ADR-0005). The proposal expected `hybrid+ce` to win. Since
+the reranker is fused into the ranking by RRF rather than replacing it, it is level with
+`hybrid` on the provisional labels, and it costs about 400 times more per query, so the
+cheaper one is served. The reranker stays selectable because that comparison is the
+project's main result. See `eval/report/ablations.md` and ADR-0005.
 
 The configuration is a request parameter (`strategy`) so the UI and the eval harness
 hit exactly the same code path.

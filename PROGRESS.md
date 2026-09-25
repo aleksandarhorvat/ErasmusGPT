@@ -14,6 +14,64 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [A] Calibrate hybrid, and kappa ready for the cold slice
+
+**Who:** Person A
+**Stage:** 5 and 6
+**Commit:** `[A] calibrate hybrid and add the kappa script`
+**Tasks touched:** `S5-A3` (code done, waits on `S5-A1`), `S6-A1` (done), B's request
+
+### B's request: a calibration for `hybrid`
+`data/calibration/hybrid.json`, fitted by `fit_calibration.py` unchanged, as B expected.
+Provisional like the `hybrid+ce` one, 562 Twente TCS pairs from the pre-labels:
+
+| Predicted band | Pairs | Predicted | Observed |
+|---|---|---|---|
+| 0.0-0.2 | 420 | 0.05 | 0.05 |
+| 0.2-0.4 | 65 | 0.30 | 0.28 |
+| 0.4-0.6 | 50 | 0.51 | 0.48 |
+| 0.6-0.8 | 27 | 0.67 | 0.78 |
+
+`/recognition` with `hybrid` now returns `calibrated: true`, so B's panel shows the
+whole-programme estimate on the default strategy again. Checked through the API against
+both Twente programmes. Nothing reaches the likely band (p >= 0.7) under either strategy:
+the curve tops out around 0.7 on these labels. That is the calibration being honest
+about 83 positives in 562, and it is the first number to look at again after `S5-A1`.
+
+### Kappa
+`eval/kappa.py` compares B's cold slice with my checked labels: raw agreement,
+unweighted and linearly weighted Cohen's kappa, a confusion table, and each of us
+against the model's pre-labels. B against the model is the anchoring control, since B
+never saw them. Seven hand-computed tests in `test_matching_kappa.py`. It exits 1 and
+says why until `gold_pairs_b.csv` has labels.
+
+### Paired tests
+`run_eval.py` now tests `hybrid` against `dense-minilm` as well as `hybrid+ce`. `hybrid`
+is what the app serves, so it is the claim the report has to defend.
+
+### A test that pinned the display rule
+`test_strategies_return_ranked_candidates[hybrid]` expected the top hit at 100 %, which
+is the uncalibrated heuristic. It read whatever `data/calibration/` held, so the new
+file broke it. The fixture now clears the calibration, and a separate test checks that a
+calibrated strategy reports a probability that falls with rank.
+
+### Also
+- `CONTEXT.md` section 4 still said `hybrid+ce` "loses on every metric". Corrected to
+  the fused result, the same fix B made in ADR-0005.
+- `S6-A1` closed: four host programmes are live, which is what it asked for.
+- Project state block said stage 2. It says stage 5 now.
+
+### Verified
+`ruff`, `check_style`, `check_gold`, 124 backend tests with `MATCHER_IMPL=stub`.
+
+### Next
+- **Luka:** `S5-A1`.
+- **B:** `S5-B1`, the 30 cold pairs.
+- **A:** once labels land: refit both calibrations, `run_eval.py` on both Twente
+  programmes, `kappa.py`, rerun the error analysis, tick the stage 5 gate.
+
+---
+
 ## 2026-09-21 - [B] Clean-machine build measured, and a healthcheck that would have failed
 
 **Who:** Person B

@@ -95,7 +95,11 @@ def matcher(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> PipelineMatcher:
     monkeypatch.setattr(Embedder, "encode", staticmethod(fake_encode))
     monkeypatch.setattr(Reranker, "warm", lambda _: None)
     settings = Settings(data_dir=CURRICULA.parent)
-    return PipelineMatcher(CurriculumStore(CURRICULA), settings)
+    matcher = PipelineMatcher(CurriculumStore(CURRICULA), settings)
+    # The heuristic display rule is under test here, so ignore any fitted calibration
+    # that data/calibration/ happens to hold. The calibrated path has its own test.
+    matcher.calibration = {}
+    return matcher
 
 
 @pytest.mark.parametrize("strategy", ["bm25", "hybrid"])
@@ -105,6 +109,16 @@ def test_strategies_return_ranked_candidates(matcher: PipelineMatcher, strategy:
     assert [c.rank for c in candidates] == [1, 2, 3, 4, 5]
     assert candidates[0].score_pct == 100
     assert all(0 <= c.score_pct <= 100 for c in candidates)
+
+
+def test_calibrated_strategy_reports_a_probability(matcher: PipelineMatcher) -> None:
+    """With a fitted calibration the top hit is a probability, not a pinned 100."""
+    matcher.calibration = {"hybrid": (2.0, -3.0, 0.028, 0.0025)}
+    home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
+    candidates = matcher.match_course(home.course_uid, "utwente-tcs-bsc", "hybrid", 5)
+    percentages = [c.score_pct for c in candidates]
+    assert all(0 <= pct <= 100 for pct in percentages)
+    assert percentages == sorted(percentages, reverse=True)
 
 
 def test_hybrid_covers_at_least_the_union_of_its_inputs(matcher: PipelineMatcher) -> None:

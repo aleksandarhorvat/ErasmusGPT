@@ -14,13 +14,13 @@ lanes have passed their gate.
 
 | | |
 |---|---|
-| **Current stage** | **Stage 2 - Dense retrieval** (stage 1 closed 2026-09-20) |
+| **Current stage** | **Stage 5 - Gold set + evaluation** (stages 2 to 4 closed; 6 and 7 pulled early) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | lane A is done except what `S5-A1` gates. Waiting on the labelling pass |
-| **Person B is on** | stage 5 lane B done bar the `S5-B1` labelling, which is his to sit and do |
-| **Blocked on** | nothing. ADR-0005 settles the default; `S5-A1` gates the real numbers |
-| **Last updated** | 2026-09-21 - error analysis written; 42 of 50 queries right at rank 1 |
+| **Person A is on** | `S5-A1`, the labelling pass (Luka, by hand). All tooling for what follows is in: kappa, hybrid calibration, paired tests |
+| **Person B is on** | `S5-B1`, the 30 cold pairs. Everything else in lane B is done |
+| **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
+| **Last updated** | 2026-09-25 - `hybrid` calibrated, so the recognition estimate works on the default |
 
 ### Stage ladder
 
@@ -189,7 +189,7 @@ as the candidate generator that feeds the reranker.
 | `S5-A0` | done | Pool the pairs worth labelling: union of the top 10 from `dense` and `hybrid+ce` over ~40 home courses (~500 pairs), then pre-label the pool into `data/gold/llm_prelabels.csv` and commit it unedited | the pool is reproducible from a script and the pre-label file exists | Stage 4 |
 | `S5-A1` | todo | Read every pooled row in `tools/annotate.html`, correct `label` where you disagree with the model, `Enter` to accept. Rubric: `docs/05-evaluation.md` | ~500 checked rows over 40 home courses, no duplicate `(home_uid, host_uid)` | `S5-A0` |
 | `S5-A2` | done (early) | Finish `eval/run_eval.py`: every configuration, Recall@5, Recall@10, MRR@10, nDCG@10, P@1, ms/query, importing the **same** `app.matching` code the API uses | `python eval/run_eval.py --host-programme utwente-tcs-bsc` writes `eval/report/results.md` | `S5-A1` |
-| `S5-A3` | wip | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
+| `S5-A3` | wip (code done, waits on `S5-A1`) | Statistics: 95 % bootstrap CIs over queries, paired test `hybrid+ce` vs `dense-minilm`, plus the correction rate from diffing `llm_prelabels.csv` against `gold_pairs.csv` | the report states whether the gain is significant, and discloses the pre-labelling and the correction rate | `S5-A2` |
 | `S5-A4` | done (early) | Unit tests for the metric functions (`test_matching_metrics.py`) - hand-computed expected values | green | `S5-A2` |
 
 **Lane A gate:** [ ] `eval/report/results.md` is committed with real numbers and CIs.
@@ -221,7 +221,7 @@ probability until it has been calibrated against real labels.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S6-A1` | wip (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
+| `S6-A1` | done (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
 | `S6-A2` | done (provisional) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 

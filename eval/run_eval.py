@@ -41,6 +41,7 @@ CONFIG_SETUP: dict[str, tuple[str, str]] = {
     "hybrid+ce": ("bge-small", "hybrid+ce"),
 }
 BASELINE = "dense-minilm"
+TREATMENTS = ["hybrid", "hybrid+ce"]
 SEED = 20260920
 
 
@@ -244,19 +245,27 @@ def write_report(
         )
 
     lines += ["", "## Is the gain real?", ""]
-    if BASELINE in results and "hybrid+ce" in results:
+    # hybrid is the served default (ADR-0005), hybrid+ce the configuration the proposal
+    # made its claim about, so both are tested against the naive baseline.
+    compared_any = False
+    for treatment_name in TREATMENTS:
+        if BASELINE not in results or treatment_name not in results:
+            continue
+        compared_any = True
+        lines += [f"`{treatment_name}` against `{BASELINE}`:", ""]
         for name in METRICS:
-            treatment = results["hybrid+ce"][name]
+            treatment = results[treatment_name][name]
             baseline = results[BASELINE][name]
             gain = (sum(treatment) - sum(baseline)) / max(len(treatment), 1)
             p = paired_bootstrap_p(treatment, baseline)
             verdict = "significant at 0.05" if p < 0.05 else "not significant at 0.05"
             lines.append(
-                f"- **{name}**: `hybrid+ce` minus `{BASELINE}` = {gain:+.3f}, "
+                f"- **{name}**: difference {gain:+.3f}, "
                 f"paired bootstrap p = {p:.3f}, {verdict}."
             )
-    else:
-        lines.append(f"- Not computed: both `hybrid+ce` and `{BASELINE}` have to run.")
+        lines.append("")
+    if not compared_any:
+        lines.append(f"- Not computed: `{BASELINE}` and a treatment have to run.")
 
     lines += [
         "",
