@@ -20,6 +20,10 @@ import EvaluationPanel from './components/EvaluationPanel'
 
 type Phase = 'booting' | 'ready' | 'matching' | 'failed'
 
+// The demo case (docs/07-demo-script.md): our bachelor's against Twente TCS.
+const DEFAULT_HOME = 'uns-pmf-informatics-bsc'
+const DEFAULT_HOST = 'utwente-tcs-bsc'
+
 export default function App() {
   const [programmes, setProgrammes] = useState<ProgrammeSummary[]>([])
   const [strategies, setStrategies] = useState<StrategyInfo[]>([])
@@ -46,8 +50,15 @@ export default function App() {
         setStrategies(s)
         setHealth(h)
         if (p.length >= 2) {
-          setHome(p[0].programme_id)
-          setHost(p[1].programme_id)
+          // Open on the case the app is for: our own bachelor's against Twente TCS, when
+          // both are loaded. Otherwise the first two, which may be two master's programmes.
+          const has = (id: string) => p.some((x) => x.programme_id === id)
+          const home0 = has(DEFAULT_HOME) ? DEFAULT_HOME : p[0].programme_id
+          const host0 = has(DEFAULT_HOST) && DEFAULT_HOST !== home0
+            ? DEFAULT_HOST
+            : p.find((x) => x.programme_id !== home0)!.programme_id
+          setHome(home0)
+          setHost(host0)
         } else if (p.length === 1) {
           setHome(p[0].programme_id)
         }

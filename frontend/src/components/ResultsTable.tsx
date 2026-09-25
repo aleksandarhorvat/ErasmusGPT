@@ -7,7 +7,7 @@ import {
   type Strategy,
   type StrategyInfo,
 } from '../lib/api'
-import { badgeClass, scoreKind, scoreText, scoreTitle } from '../lib/score'
+import { badgeClass, noSuitableMatch, scoreKind, scoreText, scoreTitle } from '../lib/score'
 
 interface Props {
   data: MatchResponse
@@ -123,13 +123,17 @@ export default function ResultsTable({ data, strategies, hostProgrammeId }: Prop
   const [open, setOpen] = useState<string | null>(null)
   const info = strategies.find((s) => s.id === data.strategy)
   const withNone = data.results.filter((r) => r.matches.length === 0).length
+  const kind = scoreKind(info)
+  const weak = (row: MatchRow) => noSuitableMatch(kind, row.matches.map((m) => m.score_pct))
+  const withWeak = data.results.filter(weak).length
 
   return (
     <section>
       <p className="hint">
         {data.results.length} courses matched with <code>{data.strategy}</code> in{' '}
         {(data.took_ms / 1000).toFixed(1)}s
-        {withNone > 0 && `, ${withNone} with no candidate`}.{' '}
+        {withNone > 0 && `, ${withNone} with no candidate`}
+        {withWeak > 0 && `, ${withWeak} with no suitable match`}.{' '}
         {info?.calibrated
           ? 'Scores are estimated probabilities of recognition.'
           : 'Scores are relative to the best hit for each course, not probabilities.'}
@@ -162,6 +166,21 @@ export default function ResultsTable({ data, strategies, hostProgrammeId }: Prop
               <td>
                 {row.matches.length === 0 ? (
                   <em className="hint">no candidate above threshold</em>
+                ) : weak(row) ? (
+                  <>
+                    <span className="nomatch">no suitable match</span>{' '}
+                    <span className="hint">
+                      (best candidate {Math.max(...row.matches.map((m) => m.score_pct))}%)
+                    </span>
+                    <details>
+                      <summary>show the {row.matches.length} candidates anyway</summary>
+                      <ol className="matches">
+                        {row.matches.map((m) => (
+                          <Candidate key={m.host_course.course_uid} m={m} info={info} />
+                        ))}
+                      </ol>
+                    </details>
+                  </>
                 ) : (
                   <ol className="matches">
                     {row.matches.map((m) => (

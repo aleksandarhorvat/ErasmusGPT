@@ -73,8 +73,10 @@ export default function EvaluationPanel() {
 
       <p className="hint">
         The headline finding so far: cross-encoder reranking, which this project set out to
-        show would win, measures worse than plain hybrid retrieval and costs about 500 times
-        more per query. See <code>ablations.md</code> and ADR-0005.
+        show would win, only helps when it is fused with the other two rankings instead of
+        replacing them. Fused, it is level with plain hybrid retrieval and costs about 400
+        times more per query, so hybrid is the default. See <code>ablations.md</code> and
+        ADR-0005.
       </p>
     </section>
   )

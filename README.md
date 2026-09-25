@@ -153,9 +153,11 @@ All four strategies (`bm25`, `dense`, `hybrid`, `hybrid+ce`) are selectable in t
 in the API, and the evaluation harness runs the identical code path.
 
 **The default is `hybrid`.** The project set out to show that cross-encoder reranking beats
-naive retrieval. Measured, it does not: `hybrid+ce` loses to plain `hybrid` on P@1, recall
-and MRR, and costs about 500 times more per query. That comparison is the main result
-rather than a footnote. Ablations: `eval/report/ablations.md`. Reasoning: ADR-0005.
+naive retrieval. Measured, it only helps when fused with the other two rankings rather
+than replacing them, and fused it is level with plain `hybrid` at about 400 times the
+cost per query. That comparison is the main result rather than a footnote. Ablations:
+`eval/report/ablations.md`. Reasoning: ADR-0005. All numbers are provisional until the
+human labelling pass is done.
 
 ## Repository map
 

@@ -33,7 +33,7 @@ export default function RecognitionPanel({ data }: { data: RecognitionResponse }
   return (
     <section className="recog">
       <h2>
-        About <b>{data.expected_recognised_ects}</b> of {data.total_ects} ECTS would likely be
+        About <b>{data.expected_recognised_ects}</b> of {data.total_ects} ECTS expected to be
         recognised <span className="hint">({pct} %)</span>
       </h2>
 

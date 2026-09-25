@@ -21,6 +21,15 @@ export function scoreKind(info: StrategyInfo | undefined): ScoreKind {
   return info?.calibrated ? 'probability' : 'relative'
 }
 
+// S3-B1's floor. When even the most probable candidate for a course is below this, the
+// honest answer is "no suitable match", not a weak top hit in amber. Only applies to
+// calibrated scores: a relative score of 12 says nothing about whether the match is good.
+export const NO_MATCH_BELOW = 20
+
+export function noSuitableMatch(kind: ScoreKind, pcts: number[]): boolean {
+  return kind === 'probability' && pcts.length > 0 && Math.max(...pcts) < NO_MATCH_BELOW
+}
+
 export function bandOf(pct: number): Band {
   if (pct >= LIKELY) return 'likely'
   if (pct >= BORDERLINE) return 'borderline'

@@ -14,6 +14,37 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [B] A's four front-end requests
+
+**Who:** Person B
+**Stage:** 6
+**Commit:** `[B] open on the demo case, no suitable match below 20 percent`
+**Tasks touched:** `S3-B1`, `S6-B4`, `S5-B3` (fixes from A's end-to-end run)
+
+### Done
+- `App.tsx` opens on `uns-pmf-informatics-bsc` against `utwente-tcs-bsc` when both are
+  loaded, and falls back to the first two otherwise.
+- Recognition headline: "expected to be recognised", so it no longer reads as the
+  "likely" bucket.
+- Evaluation page and README: the reranker is level with `hybrid` when fused, at about
+  400 times the cost, instead of "measures worse" and "500 times".
+- `lib/score.ts` `NO_MATCH_BELOW = 20`: for a calibrated strategy, a course whose most
+  probable candidate is under 20 % shows "no suitable match" with that best value, and
+  the candidates stay behind a "show anyway" toggle. The summary line counts these rows.
+  Uses the maximum over the candidates, not rank 1, to match A's new `aggregate.py`.
+  Relative scores never trigger it.
+
+### Checks
+check_style, pytest (129 passed), frontend build (tsc and vite).
+
+### For A
+`docs/02-models.md` line 118 still says "about 500 times the latency"; yours to change.
+
+### Next
+- **Aleksandar:** `half_b_aleksandar.csv`.
+
+---
+
 ## 2026-09-25 - [B] Split the gold-set check between A and B
 
 **Who:** Person B
