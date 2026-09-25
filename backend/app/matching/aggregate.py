@@ -126,7 +126,11 @@ def summarise(
     rows = study_path(rows, module, ects_budget)
     summary = RecognitionSummary(calibrated=calibrated)
     for course, candidates in rows:
-        best = candidates[0] if candidates else None
+        # The candidate most likely to be accepted, which is what a student would put on
+        # the learning agreement. With a cosine-aware calibration it is usually, but not
+        # always, rank 1: the ranking orders by fused rank, the probability also weighs
+        # absolute similarity.
+        best = max(candidates, key=lambda c: c.score_pct) if candidates else None
         probability = (best.score_pct / 100) if best else 0.0
         bucket = bucket_of(probability)
         shortfall = (

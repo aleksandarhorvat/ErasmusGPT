@@ -1,8 +1,15 @@
 """Turn raw strategy scores into probabilities. Stage 6, task S6-A4.
 
-A cross-encoder score is not a probability. Platt scaling fits one logistic curve,
-p = sigmoid(a * score + b), from the gold labels, so that "70 %" means roughly seven in
-ten such pairs were labelled 1 or 2 by a human. Without it, the number in the UI cannot
+A ranking score is not a probability. Platt scaling fits a logistic curve,
+p = sigmoid(a * z(score) + c * z(cosine) + b), from the gold labels, so that "70 %"
+means roughly seven in ten such pairs were labelled 1 or 2 by a human.
+
+The cosine is there because the fused scores are rank-based. The top hit of a course
+with no equivalent abroad gets the same RRF score as the top hit of a perfect match, so
+a score-only fit printed 68 % for Calculus 1 against Software Diamond. Grouped by home
+course, 10-fold, on the 2026-09-25 pre-labels, adding the cosine took log loss from
+0.273 to 0.219 and AUC from 0.87 to 0.91 for `hybrid`, and the mean top-1 probability
+of a wrong match from 0.47 to 0.21. `--score-only` reproduces the old fit. Without it, the number in the UI cannot
 be summed, and `S6-A5` (expected recognised ECTS) has nothing to add up.
 
     python eval/fit_calibration.py --host-programme utwente-tcs-bsc
@@ -74,44 +81,61 @@ def standardise(scores: list[float]) -> tuple[float, float]:
 
 def fit_platt(scores: list[float], positives: list[int], steps: int = 4000,
               learning_rate: float = 0.5) -> tuple[float, float]:
-    """Logistic regression on one feature, by gradient descent. Returns (a, b).
+    """Logistic regression on one feature, by gradient descent. Returns (a, b)."""
+    weights, b = fit_logistic([[score] for score in scores], positives, steps,
+                              learning_rate)
+    return weights[0], b
 
-    Hand-rolled rather than pulling in scikit-learn: one feature, a few hundred points,
-    and no new dependency in a project that ships its dependencies in an image.
+
+def fit_logistic(rows: list[list[float]], positives: list[int], steps: int = 4000,
+                 learning_rate: float = 0.5) -> tuple[list[float], float]:
+    """Logistic regression by gradient descent on standardised features.
+
+    Returns (weights, intercept). Hand-rolled rather than pulling in scikit-learn: two
+    features, a few hundred points, and no new dependency in a project that ships its
+    dependencies in an image.
     """
-    a, b = 1.0, 0.0
-    n = len(scores)
+    n = len(rows)
+    width = len(rows[0]) if rows else 1
+    weights, b = [1.0] * width, 0.0
     if n == 0:
-        return a, b
+        return weights, b
     for _ in range(steps):
-        grad_a = grad_b = 0.0
-        for score, positive in zip(scores, positives, strict=True):
-            error = sigmoid(a * score + b) - positive
-            grad_a += error * score
+        grads, grad_b = [0.0] * width, 0.0
+        for row, positive in zip(rows, positives, strict=True):
+            linear = sum(w * x for w, x in zip(weights, row, strict=True)) + b
+            error = sigmoid(linear) - positive
+            for index, x in enumerate(row):
+                grads[index] += error * x
             grad_b += error
-        a -= learning_rate * grad_a / n
+        weights = [w - learning_rate * g / n for w, g in zip(weights, grads, strict=True)]
         b -= learning_rate * grad_b / n
-    return a, b
+    return weights, b
 
 
 def reliability(scores: list[float], positives: list[int], a: float, b: float,
                 bins: int = 5) -> list[dict]:
+    """Predicted against observed rate per bin for a one-feature fit."""
+    return reliability_of([sigmoid(a * score + b) for score in scores], positives, bins)
+
+
+def reliability_of(predicted: list[float], positives: list[int],
+                   bins: int = 5) -> list[dict]:
     """Predicted against observed rate per bin: the evidence that the fit is honest."""
     table = []
     for index in range(bins):
         low, high = index / bins, (index + 1) / bins
         chosen = [
-            (score, positive) for score, positive in zip(scores, positives, strict=True)
-            if low <= sigmoid(a * score + b) < high or (index == bins - 1 and
-                                                        sigmoid(a * score + b) == 1.0)
+            (p, positive) for p, positive in zip(predicted, positives, strict=True)
+            if low <= p < high or (index == bins - 1 and p == 1.0)
         ]
         if not chosen:
             continue
         table.append({
             "bin": f"{low:.1f}-{high:.1f}",
             "pairs": len(chosen),
-            "predicted": round(sum(sigmoid(a * s + b) for s, _ in chosen) / len(chosen), 3),
-            "observed": round(sum(p for _, p in chosen) / len(chosen), 3),
+            "predicted": round(sum(p for p, _ in chosen) / len(chosen), 3),
+            "observed": round(sum(y for _, y in chosen) / len(chosen), 3),
         })
     return table
 
@@ -123,7 +147,12 @@ def main() -> int:
     parser.add_argument("--strategy", default="hybrid+ce")
     parser.add_argument("--positive-label", type=int, default=1,
                         help="lowest label counted as a match (1 keeps partials)")
+    parser.add_argument("--host-programmes", nargs="*",
+                        help="fit over several host programmes; overrides --host-programme")
+    parser.add_argument("--score-only", action="store_true",
+                        help="fit on the strategy score alone, the pre-2026-09-25 model")
     args = parser.parse_args()
+    hosts = args.host_programmes or [args.host_programme]
 
     from app.core.config import get_settings
     from app.ingest.loader import CurriculumStore
@@ -139,40 +168,59 @@ def main() -> int:
     homes = {uid for uid, _ in labels}
 
     scores: list[float] = []
+    cosines: list[float] = []
     positives: list[int] = []
-    for home_uid in sorted(homes):
-        depth = len(matcher.get_courses(args.host_programme))
-        for candidate in matcher.match_course(home_uid, args.host_programme,
-                                              args.strategy, depth):
-            key = (home_uid, candidate.host_course.course_uid)
-            if key in labels:
-                scores.append(candidate.score)
-                positives.append(int(labels[key] >= args.positive_label))
+    for host in hosts:
+        depth = len(matcher.get_courses(host))
+        for home_uid in sorted(homes):
+            for candidate in matcher.match_course(home_uid, host, args.strategy, depth):
+                key = (home_uid, candidate.host_course.course_uid)
+                if key in labels:
+                    scores.append(candidate.score)
+                    cosines.append(matcher.cosine(home_uid, host, key[1]))
+                    positives.append(int(labels[key] >= args.positive_label))
 
     mean, std = standardise(scores)
-    normalised = [(score - mean) / std for score in scores]
-    a, b = fit_platt(normalised, positives)
-    table = reliability(normalised, positives, a, b)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out = OUT_DIR / f"{args.strategy.replace('+', '-')}.json"
-    out.write_text(json.dumps({
+    cosine_mean, cosine_std = standardise(cosines)
+    z_scores = [(score - mean) / std for score in scores]
+    z_cosines = [(cosine - cosine_mean) / cosine_std for cosine in cosines]
+    if args.score_only:
+        rows = [[z] for z in z_scores]
+    else:
+        rows = [[z, zc] for z, zc in zip(z_scores, z_cosines, strict=True)]
+    weights, b = fit_logistic(rows, positives)
+    predicted = [sigmoid(sum(w * x for w, x in zip(weights, row, strict=True)) + b)
+                 for row in rows]
+    table = reliability_of(predicted, positives)
+    fitted = {
         "strategy": args.strategy,
-        "a": round(a, 6),
+        "features": ["score"] if args.score_only else ["score", "cosine"],
+        "a": round(weights[0], 6),
         "b": round(b, 6),
         "mean": round(mean, 6),
         "std": round(std, 6),
+    }
+    if not args.score_only:
+        fitted |= {"cosine_coef": round(weights[1], 6),
+                   "cosine_mean": round(cosine_mean, 6),
+                   "cosine_std": round(cosine_std, 6)}
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / f"{args.strategy.replace('+', '-')}.json"
+    out.write_text(json.dumps(fitted | {
         "pairs": len(scores),
         "positives": sum(positives),
         "positive_label": args.positive_label,
         "label_source": source,
-        "host_programme": args.host_programme,
+        "host_programme": ", ".join(hosts),
         "fitted_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "reliability": table,
     }, indent=2) + "\n", encoding="utf-8")
 
     print(f"fitted on {len(scores)} pairs ({sum(positives)} positive) from {source}")
-    print(f"  p = sigmoid({a:.3f} * (score - {mean:.4f}) / {std:.4f} + {b:.3f})"
-          f" -> {out.relative_to(REPO_ROOT)}")
+    terms = f"{weights[0]:.3f} * z(score)"
+    if not args.score_only:
+        terms += f" + {weights[1]:.3f} * z(cosine)"
+    print(f"  p = sigmoid({terms} + {b:.3f}) -> {out.relative_to(REPO_ROOT)}")
     for row in table:
         print(f"  {row['bin']}: {row['pairs']:4d} pairs, predicted {row['predicted']:.2f},"
               f" observed {row['observed']:.2f}")

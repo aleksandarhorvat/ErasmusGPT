@@ -1,39 +1,52 @@
 {
   "strategy": "hybrid+ce",
-  "a": 1.855199,
-  "b": -2.691458,
-  "mean": 0.02867,
-  "std": 0.002465,
-  "pairs": 562,
-  "positives": 83,
+  "features": [
+    "score",
+    "cosine"
+  ],
+  "a": 1.057338,
+  "b": -3.392016,
+  "mean": 0.028521,
+  "std": 0.002507,
+  "cosine_coef": 1.804034,
+  "cosine_mean": 0.687463,
+  "cosine_std": 0.056642,
+  "pairs": 1142,
+  "positives": 150,
   "positive_label": 1,
   "label_source": "PROVISIONAL: llm_prelabels.csv, no human pass yet",
-  "host_programme": "utwente-tcs-bsc",
-  "fitted_at": "2026-09-21T00:26:45Z",
+  "host_programme": "utwente-tcs-bsc, utwente-am-bsc",
+  "fitted_at": "2026-09-25T19:29:22Z",
   "reliability": [
     {
       "bin": "0.0-0.2",
-      "pairs": 403,
-      "predicted": 0.055,
-      "observed": 0.04
+      "pairs": 915,
+      "predicted": 0.036,
+      "observed": 0.039
     },
     {
       "bin": "0.2-0.4",
-      "pairs": 89,
-      "predicted": 0.29,
-      "observed": 0.326
+      "pairs": 96,
+      "predicted": 0.286,
+      "observed": 0.219
     },
     {
       "bin": "0.4-0.6",
-      "pairs": 55,
-      "predicted": 0.473,
-      "observed": 0.473
+      "pairs": 59,
+      "predicted": 0.492,
+      "observed": 0.559
     },
     {
       "bin": "0.6-0.8",
-      "pairs": 15,
-      "predicted": 0.612,
-      "observed": 0.8
+      "pairs": 26,
+      "predicted": 0.698,
+      "observed": 0.577
+    },
+    {
+      "bin": "0.8-1.0",
+      "pairs": 46,
+      "predicted": 0.916,
+      "observed": 0.978
     }
   ]
 }

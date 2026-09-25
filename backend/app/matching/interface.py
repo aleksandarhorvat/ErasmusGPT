@@ -25,14 +25,14 @@ STRATEGIES: dict[Strategy, tuple[str, str]] = {
     "hybrid": (
         "Hybrid (BM25 + dense, RRF)",
         "Reciprocal Rank Fusion of the lexical and dense candidate lists. The default: "
-        "it measured best on every metric and costs about 2 ms per query.",
+        "level with the reranked version on quality and about 2 ms per query.",
     ),
     "hybrid+ce": (
         "Hybrid + cross-encoder rerank",
-        "Hybrid retrieval, then every candidate pair is scored jointly by a "
-        "cross-encoder. The approach the proposal expected to win. Measured against "
- "these labels it loses to plain hybrid on P@1, recall and MRR, and costs about "
- "500 times more per query. Kept selectable because the comparison is the result.",
+        "Hybrid retrieval, then a cross-encoder scores every candidate pair and its "
+        "order is fused with the retrieval order. The approach the proposal expected to "
+        "win: fused, it is level with plain hybrid and costs about 400 times more per "
+        "query. Kept selectable because the comparison is the result.",
     ),
 }
 

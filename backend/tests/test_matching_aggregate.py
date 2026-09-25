@@ -162,3 +162,38 @@ def test_bands_agree_with_the_contract_confidence() -> None:
 
     for pct in range(0, 101, 5):
         assert BUCKET_OF_CONFIDENCE[confidence_of(pct)] == bucket_of(pct / 100)
+
+
+# --- cosine-aware calibration (2026-09-25) ------------------------------------
+
+COSINE_AWARE = (1.0, -3.0, 0.03, 0.002, 2.0, 0.75, 0.03)
+
+
+def test_cosine_separates_equal_rank_scores() -> None:
+    """Two top hits with the same fused score, one similar and one not."""
+    similar = probability(0.033, COSINE_AWARE, cosine=0.81)
+    unrelated = probability(0.033, COSINE_AWARE, cosine=0.70)
+    assert similar is not None and unrelated is not None
+    assert similar - unrelated > 0.3
+
+
+def test_cosine_aware_calibration_refuses_to_guess_without_the_cosine() -> None:
+    assert probability(0.033, COSINE_AWARE) is None
+
+
+def test_cosine_terms_are_loaded_when_present(tmp_path: Path) -> None:
+    directory = tmp_path / "calibration"
+    directory.mkdir()
+    (directory / "hybrid.json").write_text(json.dumps({
+        "strategy": "hybrid", "a": 1.0, "b": -3.0, "mean": 0.03, "std": 0.002,
+        "cosine_coef": 2.0, "cosine_mean": 0.75, "cosine_std": 0.03,
+    }), encoding="utf-8")
+    assert load_calibration(Settings(data_dir=tmp_path)) == {"hybrid": COSINE_AWARE}
+
+
+def test_the_most_probable_candidate_counts_not_rank_one() -> None:
+    """With cosine in the calibration, rank 2 can be the likelier recognition."""
+    rows = [(course("a", 6.0), [candidate("x", 40), candidate("y", 80)])]
+    summary = summarise(rows, calibrated=True)
+    assert summary.expected_recognised_ects == pytest.approx(4.8)
+    assert summary.courses[0].best_match_uid == "y"

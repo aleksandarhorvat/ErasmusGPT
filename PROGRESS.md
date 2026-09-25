@@ -111,6 +111,85 @@ PROVISIONAL, which is intended.
 
 ---
 
+## 2026-09-25 - [A] The percentage now says how good a match is, not only its rank
+
+**Who:** Person A
+**Stage:** 6
+**Commit:** `[A] calibrate on cosine as well as the fused score`
+**Tasks touched:** `S6-A4` (reworked), `S6-A5` (best candidate redefined)
+
+### What was wrong
+Running the app end to end, Calculus 1, Calculus 2 and Introduction to algebra against
+Twente TCS all showed Software Diamond at 68 %, and 23 of 50 courses showed exactly
+68 % at rank 1. The calibration was fitted on the fused score, and a fused score is
+rank-based: being first in both BM25 and dense gives the same number whether the match
+is perfect or the best of a bad lot. So the percentage measured rank agreement, the
+ECTS headline was inflated, and a "no suitable match" state could never trigger. My
+`hybrid` calibration from this morning had the same flaw as the older `hybrid+ce` one.
+
+### Done
+- `eval/fit_calibration.py` fits `p = sigmoid(a * z(score) + c * z(cosine) + b)`, where
+  the cosine is the dense similarity of the pair, over both Twente programmes (1142
+  pairs). `--score-only` keeps the old model. Cross-validated by home course:
+
+  | `hybrid` calibration | Log loss | AUC | Top-1 p, right | Top-1 p, wrong |
+  |---|---|---|---|---|
+  | score alone | 0.273 | 0.87 | 0.60 | 0.47 |
+  | score and cosine | 0.219 | 0.91 | 0.76 | 0.21 |
+
+- `pipeline.py` passes the cosine into the calibration; old score-only files load and
+  behave as before. The file keeps the `a` and `b` keys, so B's
+  `core/calibration.py` needs no change.
+- `aggregate.py`: the best candidate is the most probable of the five, not rank 1. With
+  the cosine in the fit they differ in 8 of 80 queries.
+- Both calibration files refitted. Reliability is close in every bin (0.48 predicted,
+  0.48 observed).
+- Through the API, `hybrid`, best candidate per course:
+
+  | Home course | Twente TCS before | Twente TCS now | Twente Applied Maths now |
+  |---|---|---|---|
+  | Calculus 1 | 68 | 27 | 98 (Analysis 2) |
+  | Introduction to programming | 64 | 87 | 70 |
+  | Operating systems 1 | 68 | 84 | 6 |
+
+  The likely band is no longer empty: 113 ECTS against TCS, 145 against Applied
+  Mathematics.
+- Five tests in `test_matching_aggregate.py`; `docs/05-evaluation.md` states the model
+  and the table; deck slide 8 says why the cosine is there.
+
+### Decisions
+- The ranking is unchanged. Re-ranking by the calibrated probability would be a learned
+  fusion trained on the labels it is evaluated on; it needs cross-validated evaluation
+  after `S5-A1` before it can be a strategy.
+
+### CONTRACT CHANGE
+- Text only: the `hybrid` and `hybrid+ce` descriptions in `interface.py` still said
+  hybrid "measured best on every metric" and that the reranker "loses", which stopped
+  being true after `64f949c`. No field, type or endpoint changed, and
+  `docs/04-api-contract.md` elides the descriptions, so it needs no edit. B has nothing
+  to do about it.
+
+### Request to B
+Found by running the app with the real models, all in `frontend/src`:
+- `App.tsx` defaults: home to `uns-pmf-informatics-bsc` and host to `utwente-tcs-bsc`
+  when they exist, instead of the first two programmes. It opens on EPFL against KTH,
+  two master's programmes, which is not the case the app is for.
+- `RecognitionPanel.tsx` headline: "About 99.1 of 179 ECTS would likely be recognised"
+  sits above "likely 0 ECTS". "Likely" is a bucket name there. Suggest "expected to be
+  recognised", which is what `expected_recognised_ects` is.
+- `EvaluationPanel.tsx` line 76 still says the reranker "measures worse than plain
+  hybrid" and "500 times". Since the fusion change it is level, at about 400 times the
+  cost. Same wording fix as ADR-0005.
+- Optional, now that the percentage means something: show "no suitable match" when the
+  best candidate is below 20 %. That is `S3-B1`'s floor, and 15 of 50 courses against
+  TCS fall under it.
+
+### Next
+- **Luka:** `S5-A1`. The calibration is refitted from his labels automatically.
+- **B:** the four items above, then `S5-B1`.
+
+---
+
 ## 2026-09-25 - [A] Draft defence deck, generated from the eval outputs
 
 **Who:** Person A

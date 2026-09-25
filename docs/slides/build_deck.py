@@ -489,8 +489,9 @@ def slide_recognition(deck, provisional):
          ["expected ECTS =", "sum of p(best match) x ECTS(home course)"],
          size=17, color=WHITE, font=HEAD_FONT, anchor=MSO_ANCHOR.MIDDLE)
     text(slide, Inches(7.6), Inches(3.4), Inches(5.1), Inches(3.4), [
-        "Platt scaling turns a fused rank score into the probability that a human "
-        "labelled the pair a match. Bars that agree mean 70 % really is 70 %.",
+        "Platt scaling on the fused rank score and the embedding cosine gives the "
+        "probability that a human labelled the pair a match. Rank alone cannot tell a "
+        "good top hit from the best of a bad lot; the cosine can.",
         "Only the best candidate per home course counts, partial matches count as "
         "matches, and an ECTS shortfall is shown rather than hidden.",
     ], size=15)

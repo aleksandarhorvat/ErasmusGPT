@@ -58,23 +58,35 @@ def relative_pct(score: float, best: float) -> int:
     return int(round(min(max(score / best, 0.0), 1.0) * 100))
 
 
-def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float, float, float]]:
-    """strategy -> (a, b, mean, std) of p = sigmoid(a * (score - mean) / std + b).
+# (a, b, mean, std) for p = sigmoid(a * z(score) + b), or with three more entries
+# (c, cosine_mean, cosine_std) for p = sigmoid(a * z(score) + c * z(cosine) + b).
+Coefficients = tuple[float, ...]
+
+
+def load_calibration(settings: Settings) -> dict[Strategy, Coefficients]:
+    """strategy -> coefficients of the fitted logistic, see `Coefficients`.
 
     Written by eval/fit_calibration.py (S6-A4). Missing file means the heuristics below
-    are used instead, which keeps the app working before a gold set exists.
+    are used instead, which keeps the app working before a gold set exists. Files with
+    `cosine_coef` also use the dense cosine of the pair, older files the score alone.
     """
-    fitted: dict[Strategy, tuple[float, float, float, float]] = {}
+    fitted: dict[Strategy, Coefficients] = {}
     directory = settings.data_dir / "calibration"
     if not directory.is_dir():
         return fitted
     for path in sorted(directory.glob("*.json")):
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            fitted[data["strategy"]] = (
+            coefficients: Coefficients = (
                 float(data["a"]), float(data["b"]),
                 float(data.get("mean", 0.0)), float(data.get("std", 1.0)) or 1.0,
             )
+            if "cosine_coef" in data:
+                coefficients += (
+                    float(data["cosine_coef"]), float(data["cosine_mean"]),
+                    float(data["cosine_std"]) or 1.0,
+                )
+            fitted[data["strategy"]] = coefficients
             log.info("calibration for %s from %s (%s)", data["strategy"], path.name,
                      data.get("label_source", "unknown source"))
         except (OSError, KeyError, ValueError, json.JSONDecodeError):
@@ -83,27 +95,39 @@ def load_calibration(settings: Settings) -> dict[Strategy, tuple[float, float, f
 
 
 def probability(
-    score: float, coefficients: tuple[float, float, float, float] | None
+    score: float, coefficients: Coefficients | None, cosine: float | None = None
 ) -> float | None:
-    """Calibrated probability that a coordinator would recognise the pair, or None."""
+    """Calibrated probability that a coordinator would recognise the pair, or None.
+
+    A rank-fusion score says how a candidate compares with the other candidates, not
+    whether it is any good: the top hit of a course with no equivalent abroad gets the
+    same RRF score as the top hit of a perfect match. The dense cosine carries the
+    absolute similarity, so calibrations fitted on both use it. Such a calibration needs
+    `cosine`, and returns None without it rather than guessing.
+    """
     if coefficients is None:
         return None
-    a, b, mean, std = coefficients
+    a, b, mean, std = coefficients[:4]
     x = a * (score - mean) / (std or 1.0) + b
+    if len(coefficients) == 7:
+        if cosine is None:
+            return None
+        c, cosine_mean, cosine_std = coefficients[4:]
+        x += c * (cosine - cosine_mean) / (cosine_std or 1.0)
     if x < -700:  # exp overflows below this
         return 0.0
     return 1.0 / (1.0 + math.exp(-x))
 
 
 def _display_pct(strategy: Strategy, score: float, best: float,
-                 calibration: dict[Strategy, tuple[float, float, float, float]] | None = None,
-                 ) -> int:
+                 calibration: dict[Strategy, Coefficients] | None = None,
+                 cosine: float | None = None) -> int:
     """A calibrated probability where one has been fitted, a heuristic otherwise.
 
     The heuristics exist only so the app is usable before the gold set: cross-encoder
     scores are already 0..1, cosines get stretched, and BM25 and RRF have no fixed range.
     """
-    calibrated = probability(score, (calibration or {}).get(strategy))
+    calibrated = probability(score, (calibration or {}).get(strategy), cosine)
     if calibrated is not None:
         return int(round(calibrated * 100))
     if strategy == "hybrid+ce":
@@ -233,6 +257,12 @@ class PipelineMatcher:
                 return index.matrix[index.uids.index(course_uid)]
         raise KeyError(course_uid)
 
+    def cosine(self, home_uid: str, host_programme_id: str, host_uid: str) -> float:
+        """Dense cosine between a home course and one host course, the calibration's
+        second feature. Both sides are L2-normalised, so this is one dot product."""
+        index = self.indexes[host_programme_id]
+        return float(index.matrix[index.uids.index(host_uid)] @ self._vector(home_uid))
+
     def _document(self, course_uid: str) -> str:
         for documents in self.documents.values():
             if course_uid in documents:
@@ -354,7 +384,8 @@ class PipelineMatcher:
                 uid,
                 score,
                 rank,
-                _display_pct(strategy, score, best, self.calibration),
+                _display_pct(strategy, score, best, self.calibration,
+                             self.cosine(home_course_uid, host_programme_id, uid)),
             )
             for rank, (uid, score) in enumerate(hits, start=1)
         ]

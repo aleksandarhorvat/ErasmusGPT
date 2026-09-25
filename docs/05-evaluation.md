@@ -78,7 +78,9 @@ expected recognised ECTS = sum over home courses of p(best match) x ECTS(home co
 with these rules, each of them a judgement worth defending or attacking at the defence:
 
 - **Only the best candidate per home course counts.** One course is replaced by one
-  course, so summing the top five would count the same credits repeatedly.
+  course, so summing the top five would count the same credits repeatedly. Best means
+  the most probable of the five shown, which is usually rank 1 but not always: the
+  ranking orders by fused rank, the probability also weighs absolute similarity.
 - **Partial matches count as matches, and that choice moves the number.** The fit uses
   `--positive-label 1`, so a label of 1 ("overlapping but not sufficient on its own")
   counts as recognised, exactly like a 2. That is the optimistic reading, it inflates
@@ -86,10 +88,24 @@ with these rules, each of them a judgement worth defending or attacking at the d
   **Report both**: run `eval/fit_calibration.py --positive-label 2` as well and quote
   the pair, because the gap between them is most of the headline figure.
 - **`p` is a calibrated probability, not a similarity.** `eval/fit_calibration.py` fits
-  `p = sigmoid(a * score + b)` on the gold labels, treating labels 1 and 2 as matches,
-  and writes `data/calibration/<strategy>.json`, which the pipeline loads at startup.
-  The reliability table in that file is the evidence: over the current fit, pairs
-  predicted at 0.48 were recognised 50 % of the time.
+  `p = sigmoid(a * z(score) + c * z(cosine) + b)` on the gold labels, treating labels 1
+  and 2 as matches, and writes `data/calibration/<strategy>.json`, which the pipeline
+  loads at startup. The reliability table in that file is the evidence: over the
+  current fit, pairs predicted at 0.48 were recognised 48 % of the time.
+- **Why the cosine is in the fit.** The fused scores of `hybrid` and `hybrid+ce` are
+  rank-based, so the top hit of a course with no equivalent abroad scores the same as
+  the top hit of a perfect match. Fitted on the score alone, Calculus 1 against a
+  computer science catalogue showed 68 % for Software Diamond, and 23 of 50 courses
+  showed exactly 68 % at rank 1. The dense cosine of the pair carries the absolute
+  similarity. Grouped by home course, 10-fold cross-validation on the pre-labels:
+
+  | `hybrid` calibration | Log loss | AUC | Mean top-1 p, right match | Mean top-1 p, wrong match |
+  |---|---|---|---|---|
+  | score alone | 0.273 | 0.87 | 0.60 | 0.47 |
+  | cosine alone | 0.238 | 0.89 | 0.67 | 0.10 |
+  | score and cosine | 0.219 | 0.91 | 0.76 | 0.21 |
+
+  The ranking itself is unchanged; only the probability shown beside it moved.
 - **Credits counted are the home course's**, because that is what the student needs to
   replace. Where the host course is smaller, the difference is reported as
   `ects_shortfall` rather than hidden: a coordinator may ask for extra work.

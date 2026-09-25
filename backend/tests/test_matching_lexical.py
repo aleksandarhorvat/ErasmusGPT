@@ -113,7 +113,7 @@ def test_strategies_return_ranked_candidates(matcher: PipelineMatcher, strategy:
 
 def test_calibrated_strategy_reports_a_probability(matcher: PipelineMatcher) -> None:
     """With a fitted calibration the top hit is a probability, not a pinned 100."""
-    matcher.calibration = {"hybrid": (2.0, -3.0, 0.028, 0.0025)}
+    matcher.calibration = {"hybrid": (2.0, -3.0, 0.028, 0.0025)}  # score-only, legacy
     home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
     candidates = matcher.match_course(home.course_uid, "utwente-tcs-bsc", "hybrid", 5)
     percentages = [c.score_pct for c in candidates]
