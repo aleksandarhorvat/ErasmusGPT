@@ -99,6 +99,20 @@ Mixing master's catalogues into a bachelor's comparison is a level mismatch, not
 It is the case S6-A2 has to write up: a master's course should match a bachelor's course
 less confidently, and a system that reports that honestly is showing it works.
 
+## Added 2026-09-26: TU Delft and Politecnico di Milano
+
+Added at Luka's request because they are names students in Serbia recognise. Neither
+has gold labels, so they are in the demo and not in the evaluation.
+
+| Institution | Programme | Courses | Source | Caveat |
+|---|---|---|---|---|
+| TU Delft (NL) | BSc Computer Science and Engineering, 2026/2027 | 35 | study guide JSON API behind `studiegids.tudelft.nl` (`backend/scripts/scrape_tudelft.py`) | Delft's Osiris records are placeholders, so the study guide is used. The 30 EC minor and free electives are not listed under the programme and are missing |
+| Politecnico di Milano (IT) | BSc Engineering of Computing Systems (Ingegneria Informatica), 2025/2026 | 45 | English course catalogue on `onlineservices.polimi.it` (`backend/scripts/scrape_polimi.py`) | Polimi has no English-taught computer science bachelor. This one is taught in Italian, but its catalogue publishes an English description for every course, so it breaks criterion 1 for teaching language and meets it for the text we match on. Only 5 courses have English learning outcomes |
+
+The rejected list above (TU Munich, Graz, Wien, ETH) stands: those bachelor's
+programmes are taught and described in German. Oxford and Cambridge are out of scope
+because the UK left Erasmus+ in 2021.
+
 ## Known data hazards (write these into the error analysis)
 
 - **Granularity mismatch** - Twente 15-ECTS modules vs PMF 6-ECTS courses.
