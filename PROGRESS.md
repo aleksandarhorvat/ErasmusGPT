@@ -14,6 +14,36 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [A] A half-checked gold set stays provisional in the calibration
+
+**Who:** Person A
+**Stage:** 5
+**Commit:** `[A] keep a partial human pass provisional`
+**Tasks touched:** none; a guard before `S5-A1` lands, and B's docs request
+
+### Done
+- `fit_calibration.load_labels()` switched to human labels as soon as any row was
+  checked, and then wrote "human-checked" as the source. With B's half in, that is 504
+  of 1142 rows over 18 home courses, and `core/calibration.py` would have dropped the
+  PROVISIONAL flag in the UI. A partial pass now writes "PROVISIONAL: human-checked,
+  N of M rows"; only a complete pass reads as final. Three tests in
+  `test_matching_calibration_labels.py`.
+- `docs/02-models.md`: the "about 500 times" line, as B asked. It now separates the
+  replacing reranker (lost) from the fused one (level, about 400 times the cost).
+- Calibrations not refitted yet: they wait for Luka's half, so both halves are fitted
+  together and kappa can run on the same push.
+
+### Noted from B's entry
+Aleksandar against the model on the cold slice: kappa 0.50, weighted 0.63, while he
+changed 2.2 % of labels with the proposal shown. That gap is the anchoring the cold slice
+exists to catch, and it goes in the report next to A-against-B kappa.
+
+### Next
+- **Luka:** `half_a_luka.csv`.
+- **A:** on Luka's push, refit, `run_eval.py`, `kappa.py`, error analysis, deck.
+
+---
+
 ## 2026-09-25 - [B] Cold slice labelled, B half of the gold set checked
 
 **Who:** Person B

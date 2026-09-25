@@ -38,13 +38,23 @@ OUT_DIR = REPO_ROOT / "data" / "calibration"
 
 
 def load_labels(path: Path = GOLD, prelabels: Path = PRELABELS) -> tuple[dict, str]:
-    """{(home, host): 0|1|2} and where it came from. Checked rows win."""
+    """{(home, host): 0|1|2} and where it came from. Checked rows win.
+
+    A partly checked gold set is still provisional: its checked rows cover whichever
+    home courses were labelled first, so the source string says PROVISIONAL, which is
+    what `app/core/calibration.py` looks for before the UI calls a probability final.
+    """
     checked: dict[tuple[str, str], int] = {}
+    total = 0
     if path.exists():
         with path.open(encoding="utf-8") as handle:
             for row in csv.DictReader(handle):
+                total += 1
                 if row.get("checked", "").strip().lower() == "yes":
                     checked[(row["home_uid"], row["host_uid"])] = int(row["label"])
+    if checked and len(checked) < total:
+        return checked, (f"PROVISIONAL: human-checked gold_pairs.csv, {len(checked)} of "
+                         f"{total} rows, so only part of the home courses")
     if checked:
         return checked, "human-checked gold_pairs.csv"
 

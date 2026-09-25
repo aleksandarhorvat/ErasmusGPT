@@ -114,8 +114,10 @@ the other formats, and it fails the build if one model passes 200 MB or the set 
 
 `eval/report/ablations.md` has the tables. The short version, on provisional labels:
 
-- The **cross-encoder loses to plain hybrid retrieval** on both host programmes, by
-  0.18 of P@1 against Twente TCS, for about 500 times the latency. Two rescues were
+- The **cross-encoder, used to replace the retrieval order, lost to plain hybrid
+  retrieval** on both host programmes, by 0.18 of P@1 against Twente TCS. Fused into
+  the order by RRF instead (`64f949c`), it is level with `hybrid`, for about 400 times
+  the latency. Two rescues were
   tried: a shorter query side (recovers a third of the gap, adopted) and three other
   rerankers inside the budget (all worse, including both sentence-similarity models).
 - The **bge query instruction** was missing and is worth up to 0.09 of Recall@5.
