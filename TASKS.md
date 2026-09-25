@@ -116,7 +116,7 @@ finds *Theory of Computation* in the top 5 (rank 1, cosine 0.878, verified 2026-
 
 **Lane B gate:** [ ] the UI can drive every strategy and survives a slow request.
 
-**Stage gate:** [ ] A   [ ] B - the demo produces real semantic matches end to end.
+**Stage gate:** [x] A   [ ] B - the demo produces real semantic matches end to end.
 
 ---
 
@@ -145,7 +145,7 @@ as the candidate generator that feeds the reranker.
 
 **Lane B gate:** [ ] results are interpretable and exportable.
 
-**Stage gate:** [ ] A   [ ] B.
+**Stage gate:** [x] A   [ ] B.
 
 ---
 
@@ -174,7 +174,7 @@ as the candidate generator that feeds the reranker.
 
 **Lane B gate:** [ ] the improvement is visible on screen, not only in the eval table.
 
-**Stage gate:** [ ] A   [ ] B.
+**Stage gate:** [x] A   [ ] B.
 
 ---
 
@@ -205,7 +205,7 @@ as the candidate generator that feeds the reranker.
 
 **Lane B gate:** [ ] CI green, kappa slice annotated, numbers visible in the app.
 
-**Stage gate:** [ ] A   [ ] B - you can answer "how do you know it works?" with a table.
+**Stage gate:** [x] A   [ ] B - you can answer "how do you know it works?" with a table.
 
 ---
 
@@ -242,7 +242,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 **Lane B gate:** [ ] verified clean-machine run + README + recognition summary.
 
-**Stage gate:** [ ] A   [ ] B.
+**Stage gate:** [x] A   [ ] B.
 
 ---
 
