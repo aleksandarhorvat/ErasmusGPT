@@ -14,6 +14,35 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [B] Cold slice labelled, B half of the gold set checked
+
+**Who:** Person B
+**Stage:** 5
+**Commit:** `[B] label the cold slice and check the b half of the gold set`
+**Tasks touched:** `S5-B1` (done), `S5-A1` (B half done)
+
+### Done
+- `data/gold/gold_pairs_b.csv`: all 30 cold pairs labelled by Aleksandar without the
+  model's labels, before opening his half. 13 zeros, 8 ones, 9 twos.
+- `data/gold/half_b_aleksandar.csv`: 504 of 504 checked. 11 corrections (2.2 %): 8 model
+  1s to 0, 2 model 0s to 1, one 1 to 2. Merged with `scripts/merge_gold.py`;
+  `gold_pairs.csv` is at 504 of 1142 checked, `check_gold.py` passes.
+
+### Worth knowing for the report
+On the 30 cold pairs, Aleksandar and the model agree on 20 (67 %, Cohen's kappa 0.50,
+linearly weighted 0.63). With the model's label shown, in his half, he changed only 2.2 %.
+Some of that gap is the slice itself (it has far more 1s and 2s than the pool, and those
+are the hard cases), but some is likely anchoring on the proposal, which is the effect
+the cold slice exists to measure. Suggest reporting both numbers side by side. The
+A-versus-B kappa waits on Luka's checks of the same 30 pairs, which are in his half.
+
+### Next
+- **Luka:** `half_a_luka.csv`, then `python scripts/merge_gold.py`, then the re-runs
+  (`run_eval.py`, `fit_calibration.py`, `kappa.py`, `error_analysis.py`).
+- **Aleksandar:** `S7-AB2`.
+
+---
+
 ## 2026-09-25 - [B] A's four front-end requests
 
 **Who:** Person B

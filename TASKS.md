@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | `S5-A1`, the labelling pass, now split in two: Luka checks `data/gold/half_a_luka.csv` (638 rows), Aleksandar `half_b_aleksandar.csv` (504), `scripts/merge_gold.py` joins them. All tooling for what follows is in: kappa, hybrid calibration, paired tests |
-| **Person B is on** | `S5-B1`, the 30 cold pairs **first**, then his half of `S5-A1` (`half_b_aleksandar.csv`), then `S7-AB2`, the offline rehearsal on the demo laptop. All lane B code is done |
+| **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`). Cold slice and his half of `S5-A1` are done (504 of 504) |
 | **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
-| **Last updated** | 2026-09-25 - A: calibration uses the cosine too; 4 frontend fixes requested from B in PROGRESS |
+| **Last updated** | 2026-09-25 - B: cold slice labelled, B half checked and merged (gold 504 of 1142); A's four frontend fixes in |
 
 ### Stage ladder
 
@@ -199,7 +199,7 @@ as the candidate generator that feeds the reranker.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S5-B0` | done (early) | Annotation tool `tools/annotate.html`: side-by-side course cards, keyboard labelling, saves back to the CSV in place | the tool loads curricula and a pairs CSV and writes checked rows back | - |
-| `S5-B1` | wip | `scripts/make_kappa_slice.py` has drawn the 30 pairs into `data/gold/gold_pairs_b.csv`, unlabelled. Label them **cold**, without seeing the LLM labels or A's file, into `data/gold/gold_pairs_b.csv`, so Cohen's kappa measures two humans rather than two people anchoring on a machine | the file exists; A computes kappa against his final labels | `S5-A0` |
+| `S5-B1` | done | `scripts/make_kappa_slice.py` has drawn the 30 pairs into `data/gold/gold_pairs_b.csv`, unlabelled. Label them **cold**, without seeing the LLM labels or A's file, into `data/gold/gold_pairs_b.csv`, so Cohen's kappa measures two humans rather than two people anchoring on a machine | the file exists; A computes kappa against his final labels | `S5-A0` |
 | `S5-B2` | done | CI green: `ruff`, `pytest` with `MATCHER_IMPL=stub`, frontend build, curriculum validator | the badge is green on `main` | `S1-A3` |
 | `S5-B3` | done | Serve the evaluation table in the UI (read `eval/report/results.csv`) as an "About / how well does this work" page | the numbers are one click away during the defence | `S5-A2` |
 
