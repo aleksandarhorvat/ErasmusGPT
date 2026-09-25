@@ -65,6 +65,11 @@ No GPU either: CPU only.
 To prove it: build, stop the stack, disconnect, `docker compose up`, use the app at
 :8080. Running `--build` while disconnected fails, and that is expected.
 
+`python scripts/rehearse_demo.py --start` does the checking part for you: it starts the
+stack, times the boot, runs every step of the live demo against the API and fails if
+huggingface.co is reachable. The full rehearsal, with the demo script and the fallback
+screenshots, is `docs/07-demo-script.md`.
+
 ## Working on the code
 
 You need **Python 3.11** and Node 20. 3.10 no longer works: the scrapers and the
@@ -169,7 +174,7 @@ rather than a footnote. Ablations: `eval/report/ablations.md`. Reasoning: ADR-00
 | `data/` | Curriculum JSON + the labelled gold set |
 | `eval/` | Evaluation harness and report |
 | `tools/` | `annotate.html`, the gold-set annotator |
-| `scripts/` | Repository checks (writing style, curriculum validation) |
+| `scripts/` | Repository checks (writing style, gold set), the kappa slice and the demo rehearsal |
 
 ## Development without Docker
 

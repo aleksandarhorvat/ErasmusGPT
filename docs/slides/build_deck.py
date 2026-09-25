@@ -60,14 +60,32 @@ PROVISIONAL = {
 
 
 # --- data -------------------------------------------------------------------
+def gold_progress() -> tuple[int, int]:
+    """(checked rows, total rows) in the gold set."""
+    if not GOLD_PAIRS.exists():
+        return 0, 0
+    with GOLD_PAIRS.open(encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    checked = sum(r.get("checked", "").strip().lower() == "yes" for r in rows)
+    return checked, len(rows)
+
+
 def load_results() -> tuple[dict[str, dict[str, float]], bool]:
-    """config -> metrics, and whether they come from human-checked labels."""
+    """config -> metrics, and whether they come from human-checked labels.
+
+    results.csv alone is not enough: run_eval.py scores whatever rows are checked, so
+    halfway through S5-A1 it exists but covers only the home courses labelled first.
+    The numbers count as final only once every gold row is checked, the same rule
+    GET /api/v1/evaluation applies.
+    """
+    checked, total = gold_progress()
+    complete = total > 0 and checked == total
     if RESULTS.exists():
         with RESULTS.open(encoding="utf-8") as handle:
             rows = {row["config"]: {k: float(v) for k, v in row.items() if k != "config"}
                     for row in csv.DictReader(handle)}
         if rows:
-            return rows, True
+            return rows, complete
     return PROVISIONAL, False
 
 
@@ -300,7 +318,7 @@ def slide_demo(deck):
         "Home UNS PMF Informatics, host Twente TCS, strategy hybrid: 50 courses in about 0.1 s.",
         "Open Computer networks: the evidence sentence pair explains the match.",
         "Recognition panel: expected ECTS carried over, with likely and borderline bands.",
-        "Switch to hybrid+ce, then open the evaluation page: the table behind the choice.",
+        "Compare one row against hybrid+ce, then open the evaluation page behind the choice.",
     ]
     for index, step in enumerate(steps):
         top = Inches(1.65 + index * 1.0)
@@ -308,8 +326,9 @@ def slide_demo(deck):
         text(slide, Inches(1.65), top + Inches(0.05), Inches(10.8), Inches(0.6), step,
              size=18, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     slide.notes_slide.notes_text_frame.text = (
-        "B drives, A narrates the matches. Rehearsed offline (S7-AB2). If the demo "
-        "fails, the README screenshots are the fallback.")
+        "B drives, A narrates the matches. Rehearsed offline (S7-AB2), script in "
+        "docs/07-demo-script.md. If the demo fails, the screenshots taken during the "
+        "rehearsal, in docs/screenshots/, are the fallback.")
 
 
 def slide_gold(deck, provisional):
@@ -441,8 +460,10 @@ def slide_recognition(deck, provisional):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
     title(slide, "From a score to recognised ECTS")
-    badge(slide, provisional)
     calibration = json.loads(CALIBRATION.read_text(encoding="utf-8"))
+    # The chart is the calibration file, which stays provisional until it is refitted on
+    # checked labels, even after the results table stops being provisional.
+    badge(slide, provisional or "PROVISIONAL" in calibration.get("label_source", ""))
     table = calibration["reliability"]
     data = CategoryChartData()
     data.categories = [row["bin"] for row in table]
@@ -477,6 +498,41 @@ def slide_recognition(deck, provisional):
         "A. Without calibration the percentage is a display value and cannot be summed; "
         "the interface refuses the ECTS total for an uncalibrated strategy. Quote the "
         "estimate with positive label 1 and 2, the gap is the partial-match question.")
+
+
+def slide_honest_ui(deck):
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    background(slide, WHITE)
+    title(slide, "An interface that does not overstate")
+    checked, total = gold_progress()
+    cards = [
+        ("Two kinds of score", "A calibrated strategy shows a percentage and a likely, "
+         "borderline or unlikely band. The others show a bare relative number and a "
+         "tooltip saying it is not a probability. One file formats every score."),
+        ("No sum without a calibration", "The recognition panel will not add up "
+         "ECTS for a strategy without a fitted calibration. Summing display values "
+         "would be arithmetic on the wrong thing."),
+        ("Provisional says so", "While a calibration rests on machine labels, every "
+         "probability and the ECTS estimate carry a warning. The flag is read from "
+         "the calibration file, not typed into the interface."),
+        ("The evaluation page counts", f"It shows how many of the {total} gold pairs "
+         f"a human has checked ({checked} today) and stays provisional until every "
+         "one is."),
+    ]
+    for index, (name, detail) in enumerate(cards):
+        col, row = index % 2, index // 2
+        left, top = Inches(0.6 + col * 6.2), Inches(1.6 + row * 2.6)
+        box(slide, left, top, Inches(5.9), Inches(2.3), PALE)
+        circle_number(slide, left + Inches(0.3), top + Inches(0.3), index + 1,
+                      fill=NAVY, colour=WHITE)
+        text(slide, left + Inches(1.1), top + Inches(0.33), Inches(4.5), Inches(0.5),
+             name, size=18, bold=True, color=NAVY, font=HEAD_FONT)
+        text(slide, left + Inches(1.1), top + Inches(0.9), Inches(4.5), Inches(1.3),
+             detail, size=14, color=INK)
+    slide.notes_slide.notes_text_frame.text = (
+        "B. frontend/src/lib/score.ts, the calibrated and provisional flags on "
+        "GET /api/v1/strategies, and GET /api/v1/evaluation. The point: the numbers "
+        "are only as good as the labels, and the interface never claims more than that.")
 
 
 def slide_errors(deck, provisional):
@@ -573,6 +629,7 @@ def main() -> int:
     slide_results(deck, results, provisional)
     slide_reranker(deck, provisional)
     slide_recognition(deck, provisional)
+    slide_honest_ui(deck)
     slide_errors(deck, provisional)
     slide_engineering(deck)
     slide_limits(deck)

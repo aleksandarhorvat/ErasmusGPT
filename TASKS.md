@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | `S5-A1`, the labelling pass (Luka, by hand). All tooling for what follows is in: kappa, hybrid calibration, paired tests |
-| **Person B is on** | `S5-B1`, the 30 cold pairs. Everything else in lane B is done |
+| **Person B is on** | `S7-AB2`, running the offline rehearsal on the demo laptop (`docs/07-demo-script.md`), and `S5-B1`, the 30 cold pairs. All lane B code is done |
 | **Blocked on** | human labelling only: `S5-A1` (A) and `S5-B1` (B) gate `results.md`, kappa and the stage 5 gate |
-| **Last updated** | 2026-09-25 - `hybrid` calibrated, so the recognition estimate works on the default |
+| **Last updated** | 2026-09-25 - B: product slide, rehearsal script, evaluation stays provisional until every row is checked |
 
 ### Stage ladder
 
@@ -250,8 +250,8 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 | ID | Owner | Status | Task |
 |---|---|---|---|
-| `S7-AB1` | both | wip (draft in `docs/slides/`, rebuild after `S5-A1`) | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
-| `S7-AB2` | both | todo | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
+| `S7-AB1` | both | wip (A and B slides in `docs/slides/`, rebuild after `S5-A1`) | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
+| `S7-AB2` | both | wip (`scripts/rehearse_demo.py` and `docs/07-demo-script.md` in; the run itself is on the demo laptop) | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
 | `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
 | `S7-B1` | B | done | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
 

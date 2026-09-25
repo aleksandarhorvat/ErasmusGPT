@@ -87,9 +87,9 @@ class RecognitionRequest(BaseModel):
     """A whole-programme estimate, over one study path rather than every course.
 
     A curriculum file lists every course a programme offers. Nobody takes all of them:
-    UNS PMF Informatics offers 353 ECTS and the degree is 180. `module` and
-    `mandatory_only` narrow the home side to a path a student could actually follow, so
-    the denominator means something.
+    UNS PMF Informatics offers 353 ECTS and the degree is 180. `module` narrows the home
+    side to a path a student could actually follow and `ects_budget` caps the denominator
+    at the degree size, so the share means something.
     """
 
     home_programme_id: str
@@ -137,7 +137,9 @@ class EvaluationResponse(BaseModel):
     """What eval/report/ currently contains, and how far the human pass has got."""
 
     available: bool = Field(description="results.csv exists and has rows")
-    provisional: bool = Field(description="no gold row has been checked by a human yet")
+    provisional: bool = Field(
+        description="the human pass has not checked every gold row yet"
+    )
     gold_checked: int
     gold_total: int
     columns: list[str] = Field(default_factory=list)

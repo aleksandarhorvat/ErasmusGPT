@@ -44,10 +44,10 @@ starts the whole stack in about a minute.
 Because they are different kinds of number, and printing them the same way would be a
 lie. `frontend/src/lib/score.ts` is the only place allowed to format a score.
 
-`hybrid+ce` has a fitted calibration, so its `score_pct` is an estimated probability that
-a coordinator would recognise the pair. `dense` is a stretched cosine. `bm25` and `hybrid`
-are relative to the best hit for that course, so the top row always reads 100. The first
-gets recognition bands and a "% chance" tooltip; the others get neutral badges and a
+`hybrid` and `hybrid+ce` have a fitted calibration, so their `score_pct` is an estimated
+probability that a coordinator would recognise the pair. `dense` is a stretched cosine.
+`bm25` is relative to the best hit for that course, so the top row always reads 100. The
+calibrated ones get recognition bands and a "% chance" tooltip; the others get neutral badges and a
 tooltip saying so. For the same reason the recognition panel refuses to give a
 whole-programme ECTS estimate for an uncalibrated strategy: summing `ects x score` over
 display values is arithmetic on the wrong thing.
@@ -57,7 +57,8 @@ display values is arithmetic on the wrong thing.
 ADR-0005, and it was amended once. The reranker originally replaced the retrieval order
 and measured worst of four. Person A found that fusing it by RRF instead, the same way
 BM25 and dense are fused, makes it level. `hybrid` stays the default because it is level
-and roughly three hundred times cheaper, not because the reranker is bad.
+and about 400 times cheaper per query (2 ms against about 850 ms), not because the
+reranker is bad.
 
 The honest framing is that the finding is about **how** to combine a reranker rather than
 whether to have one, and that is a better result than the one we set out to get.
@@ -91,5 +92,5 @@ app work from a checkout and serve an empty list inside the image.
 Fine-tune the reranker on the gold set, which is the version where the original claim
 could still hold. Add a host university outside the two Twente catalogues, because the
 gold set currently measures generalisation across programmes rather than across
-institutions. And calibrate `hybrid` so the recognition estimate works on the default
-strategy instead of only on the slow one.
+institutions. And refit both calibrations on the checked labels: today they are fitted
+on the model's pre-labels, so the probabilities are flagged as provisional.

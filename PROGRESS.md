@@ -14,6 +14,59 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [B] Product slide, rehearsal script, provisional until every row is checked
+
+**Who:** Person B
+**Stage:** 5 and 7
+**Commit:** `[B] add the rehearsal script and the product slide, keep evaluation provisional`
+**Tasks touched:** `S7-AB1` (wip), `S7-AB2` (wip), `S5-B3` (fix), ADR-0005 (amended)
+
+### CONTRACT CHANGE
+`EvaluationResponse.provisional` in `backend/app/schemas/match.py` now means "the human
+pass has not checked every gold row yet", not "no row is checked". No field changes. A
+partial pass is still provisional because `run_eval.py` scores only checked rows, and
+those cover whichever home courses were labelled first. `docs/04-api-contract.md` now
+also documents `/recognition` and `/evaluation`, the `calibrated` and `provisional` flags
+on `/strategies`, and moves `hybrid` into the calibrated row of the `score_pct` table.
+The `RecognitionRequest` docstring no longer mentions the removed `mandatory_only`.
+
+### Done
+- `routes_evaluation.is_provisional()` with a test for 0, 200, 1141 and 1142 of 1142,
+  and for an empty gold set. The evaluation panel has a separate message for a pass in
+  progress.
+- `docs/slides/build_deck.py` (shared file, both owners): the same rule for the deck.
+  `results.csv` alone no longer drops the PROVISIONAL tag; every gold row has to be
+  checked. The recognition slide keeps its tag while `hybrid.json` says its labels are
+  provisional, even after the results table stops being. New slide after it, "An
+  interface that does not overstate": the two kinds of score, no ECTS sum without a
+  calibration, the provisional flags, the evaluation page. Demo step 5 now compares one
+  row against `hybrid+ce` instead of rerunning the whole programme, which takes about
+  40 s. Slides 4 and 10 read and otherwise left as they were. Deck rebuilt.
+- `scripts/rehearse_demo.py`: starts the stack if asked, times the boot, runs every demo
+  step against the API through nginx and fails if huggingface.co is reachable.
+  Standard library only. Tried against a stub backend; the real run is `S7-AB2`.
+- `docs/07-demo-script.md`: the evening-before steps, the rehearsal, the 4-minute demo
+  as a table (do, say, should see), and the six fallback screenshots for
+  `docs/screenshots/`. The deck's demo notes point to both.
+- ADR-0005, second amendment: `hybrid` is calibrated since `ce147eb`, so the gap the
+  first amendment described is closed. "Three hundred times" corrected to about 400,
+  matching `ablations.md`, CONTEXT.md and the deck. Same fixes in
+  `docs/06-defence-notes-b.md` and the comment in `frontend/src/lib/score.ts`.
+
+### Checks
+ruff, check_style, check_gold, validate_curricula, pytest (125 passed), frontend build.
+
+### For A
+Nothing blocks you. If you rebuild the deck halfway through `S5-A1`, it will now say
+PROVISIONAL, which is intended.
+
+### Next
+- **Aleksandar:** run the rehearsal on the demo laptop, take the six screenshots, put the
+  timings in the README. Then `S5-B1`.
+- **Luka:** `S5-A1`.
+
+---
+
 ## 2026-09-25 - [A] Draft defence deck, generated from the eval outputs
 
 **Who:** Person A

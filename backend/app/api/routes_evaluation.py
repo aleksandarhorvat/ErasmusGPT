@@ -33,6 +33,16 @@ def _gold_progress(settings: Settings) -> tuple[int, int]:
     return (checked, total)
 
 
+def is_provisional(checked: int, total: int) -> bool:
+    """True until the human pass has read every pooled row.
+
+    A partial pass is still provisional: `eval/run_eval.py` scores only checked rows, so
+    with 200 of 1142 checked the table covers whichever home courses happened to be
+    labelled first, and it is not the number the report will quote.
+    """
+    return total == 0 or checked < total
+
+
 @router.get("", response_model=EvaluationResponse)
 def evaluation(settings: Settings = Depends(get_settings)) -> EvaluationResponse:
     checked, total = _gold_progress(settings)
@@ -50,7 +60,7 @@ def evaluation(settings: Settings = Depends(get_settings)) -> EvaluationResponse
 
     return EvaluationResponse(
         available=bool(rows),
-        provisional=checked == 0,
+        provisional=is_provisional(checked, total),
         gold_checked=checked,
         gold_total=total,
         columns=columns,

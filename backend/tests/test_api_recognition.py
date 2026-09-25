@@ -103,7 +103,18 @@ def test_evaluation_reports_how_far_the_human_pass_has_got() -> None:
     body = client.get("/api/v1/evaluation").json()
     assert body["gold_total"] > 0
     assert 0 <= body["gold_checked"] <= body["gold_total"]
-    assert body["provisional"] is (body["gold_checked"] == 0)
+    assert body["provisional"] is (body["gold_checked"] < body["gold_total"])
+
+
+def test_a_partial_human_pass_is_still_provisional() -> None:
+    """200 of 1142 checked is not a result the report can quote."""
+    from app.api.routes_evaluation import is_provisional
+
+    assert is_provisional(0, 1142)
+    assert is_provisional(200, 1142)
+    assert is_provisional(1141, 1142)
+    assert not is_provisional(1142, 1142)
+    assert is_provisional(0, 0), "no gold set at all is not a finished one"
 
 
 def test_evaluation_lists_the_reports_that_exist() -> None:

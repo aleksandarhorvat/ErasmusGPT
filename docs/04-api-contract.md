@@ -79,14 +79,15 @@ Rules:
 
   | Strategy | What `score_pct` is | Safe to read as a probability |
   |---|---|---|
-  | `hybrid+ce` | calibrated probability that a coordinator recognises the pair, fitted on the gold set (`data/calibration/`) | yes |
+  | `hybrid`, `hybrid+ce` (since 2026-09-25) | calibrated probability that a coordinator recognises the pair, fitted on the gold set (`data/calibration/`) | yes |
   | `dense` | cosine stretched from 0.55-0.95 onto 0-100 | no |
-  | `bm25`, `hybrid` | score relative to the best hit for the same home course, so rank 1 always reads 100 | no |
+  | `bm25` | score relative to the best hit for the same home course, so rank 1 always reads 100 | no |
 
   The field is still an integer 0..100 and still ordered within one strategy, so nothing
-  in the schema changes. Only `hybrid+ce` should be shown as a percentage of anything;
-  for the others the UI should show a rank or a band. A calibration file for the other
-  strategies would make this distinction go away.
+  in the schema changes. Only a strategy that `GET /strategies` reports as `calibrated`
+  may be shown as a percentage chance; for the others the UI shows a bare number and a
+  band. A calibration file for another strategy moves it to the first row without a
+  schema change, and the UI follows because it reads the flag rather than a list.
 - `confidence` is derived from `score_pct` by one set of thresholds, in
   `aggregate.py`: high at 0.70, medium at 0.40. `aggregate.py` calls the same bands
   likely, borderline and unlikely when summarising a whole programme; the mapping is
@@ -101,6 +102,51 @@ Used by the UI for "re-rank this one row with a different strategy".
 
 ## `GET /api/v1/strategies`
 ```json
-[ { "id": "bm25", "label": "BM25 (lexical baseline)", "description": "..." } ]
+[ { "id": "hybrid", "label": "Hybrid (BM25 + dense, RRF)", "description": "...",
+    "calibrated": true, "provisional": true } ]
 ```
 Lets the UI build the selector without hardcoding the list.
+
+- `calibrated`: a file in `data/calibration/` exists for this strategy, so its
+  `score_pct` is a fitted probability of recognition. Otherwise it is a display number
+  and the UI must not print it as a percentage chance (`frontend/src/lib/score.ts`).
+- `provisional`: that calibration was fitted on machine labels (`label_source` starts
+  with `PROVISIONAL`). The UI says so next to every probability.
+
+## `POST /api/v1/recognition`
+The whole-programme estimate (S6-A5, S6-B4). Request:
+```json
+{ "home_programme_id": "uns-pmf-informatics-bsc", "host_programme_id": "utwente-tcs-bsc",
+  "strategy": "hybrid", "module": null, "ects_budget": 180 }
+```
+`module` (null means every course offered) narrows the home side to one study path;
+`ects_budget`, usually the programme's `total_ects`, caps the denominator at the degree
+size. Response:
+```json
+{ "home_programme_id": "uns-pmf-informatics-bsc", "host_programme_id": "utwente-tcs-bsc",
+  "strategy": "hybrid", "module": null, "calibrated": true, "provisional": true,
+  "took_ms": 451, "total_ects": 179.0, "expected_recognised_ects": 108.1,
+  "expected_share": 0.6039, "likely_ects": 18.0, "borderline_ects": 161.0,
+  "unlikely_ects": 0.0, "ects_shortfall": 50.5,
+  "courses": [ { "course_uid": "uns-pmf:I011", "title": "Introduction to programming",
+                 "ects": 9.0, "probability": 0.64, "bucket": "borderline",
+                 "best_match_uid": "utwente:202500342",
+                 "best_match_title": "Introduction to Programming",
+                 "ects_shortfall": 6.0 } ] }
+```
+The arithmetic (`ects x p`, the bands, the shortfall rule) is Person A's, in
+`backend/app/matching/aggregate.py` and `docs/05-evaluation.md`. When `calibrated` is
+false the sums are over display values, and the UI refuses to show them as an ECTS
+estimate. 404 for an unknown programme, 422 for an unknown strategy or a budget below 1.
+
+## `GET /api/v1/evaluation`
+What `eval/report/` holds and how far the human labelling pass has got (S5-B3).
+```json
+{ "available": false, "provisional": true, "gold_checked": 0, "gold_total": 1142,
+  "columns": [], "rows": [], "reports": ["ablations.md", "errors.md", "smoke.md"] }
+```
+- `available`: `eval/report/results.csv` exists and has rows. `columns` and `rows` are
+  that file as strings, so the harness can add a metric without a contract change.
+- `provisional`: true until **every** row of `data/gold/gold_pairs.csv` is checked. A
+  partial pass is still provisional, because `run_eval.py` scores only checked rows and
+  those cover whichever home courses were labelled first.

@@ -37,7 +37,7 @@ a central exhibit rather than an appendix.
 ## Consequences
 
 - Matching a whole programme drops from about 65 s to under a second.
-- The calibration in `data/calibration/` is fitted for `hybrid+ce` only, so with
+- (Closed on 2026-09-25, see the second amendment.) The calibration in `data/calibration/` is fitted for `hybrid+ce` only, so with
   `hybrid` as the default the recognition panel has no probability to show and says so.
   Refitting for `hybrid` is Person A's `S6-A4`, and it needs `S5-A1` first.
 - Every number above comes from machine-written labels that no human has checked. The
@@ -66,14 +66,30 @@ indistinguishable on 28 and 22 machine-labelled queries, and `hybrid` matches a 
 programme in 108 ms against about 40 s.
 
 ### The decision stands, for a narrower reason
-`hybrid` remains the default because it is level and three hundred times cheaper, not
+`hybrid` remains the default because it is level and about 400 times cheaper per query
+(about 850 ms against 2 ms in `eval/report/ablations.md`), not
 because the reranker is bad. The reranker is no longer a negative result; it is a result
 about **how** to combine a reranker, which is a better finding than either.
 
-### One thing this leaves broken
+### One thing this leaves broken (closed on 2026-09-25)
 Only `hybrid+ce` has a fitted calibration, so on the default path `score_pct` is not a
 probability and the recognition panel now refuses to give a whole-programme estimate
 rather than summing display values. Fitting a calibration for `hybrid` closes the gap;
 `fit_calibration.py` standardises scores since `64f949c`, so it should be one command.
 Until then, the product's headline feature only works on a non-default strategy, which
 is the strongest argument for revisiting this ADR once `S5-A1` gives real labels.
+
+## Amendment, 2026-09-25
+
+Person A fitted a calibration for `hybrid` (`ce147eb`, `data/calibration/hybrid.json`,
+562 pairs against Twente TCS). `hybrid` and `hybrid+ce` are now both calibrated, so on
+the default path `score_pct` is a probability again and the recognition panel gives a
+whole-programme estimate instead of refusing. The gap described above is closed.
+
+Two things have not changed:
+
+- The fit uses the machine pre-labels, so `/strategies` still flags `hybrid` as
+  provisional and the estimate carries that warning until `S5-A1` is done and the
+  calibration is refitted on checked labels.
+- The reason for the default is cost, not quality: the two strategies are level on the
+  provisional labels. If the human pass separates them, this ADR is revisited.

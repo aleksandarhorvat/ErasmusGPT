@@ -1,11 +1,12 @@
 // S3-B1: the one place that decides how a score is shown.
 //
 // `score_pct` does not mean the same thing for every strategy. Where
-// eval/fit_calibration.py has fitted one (S6-A4) it is a probability of recognition.
-// For `dense` it is a stretched cosine, and for `bm25` and `hybrid` it is relative to
-// the best hit for that home course, so the top row always reads 100. Printing
-// "87 % chance" over the last two would be a lie, so nothing outside this file is
-// allowed to format a score.
+// eval/fit_calibration.py has fitted one (S6-A4; today `hybrid` and `hybrid+ce`) it is a
+// probability of recognition. Otherwise it is a display number: a stretched cosine for
+// `dense`, and for `bm25` a value relative to the best hit for that home course, so the
+// top row always reads 100. Printing "87 % chance" over those would be a lie, so nothing
+// outside this file is allowed to format a score. The split is read from /strategies,
+// never hardcoded here.
 
 import type { Confidence, StrategyInfo } from './api'
 

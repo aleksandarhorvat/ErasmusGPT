@@ -27,7 +27,16 @@ export default function EvaluationPanel() {
         ({done} %).
       </p>
 
-      {data.provisional && (
+      {data.provisional && data.gold_checked > 0 && (
+        <p className="warn">
+          Human pass in progress. Any table below scores only the {data.gold_checked} checked
+          rows, which cover whichever home courses were labelled first, so it is not yet the
+          number the report will quote. It becomes final when all {data.gold_total} rows are
+          checked and the harness is re-run.
+        </p>
+      )}
+
+      {data.provisional && data.gold_checked === 0 && (
         <p className="warn">
           No measured results yet. The numbers in <code>eval/report/</code> were computed
           against labels a model wrote about our own retrieval, so they can choose between
