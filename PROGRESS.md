@@ -14,6 +14,37 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-25 - [A] Draft defence deck, generated from the eval outputs
+
+**Who:** Person A
+**Stage:** 7
+**Commit:** `[A] draft the defence deck from the eval outputs`
+**Tasks touched:** `S7-AB1` (wip, draft)
+
+### Done
+`docs/slides/build_deck.py` writes `docs/slides/erasmusgpt-defence.pptx`, eleven slides
+in the order the task names: problem, pipeline, live demo, gold set, results, the
+reranker finding, calibration and the ECTS estimate, error analysis, engineering,
+limits. Speaker notes on each slide say who presents it.
+
+The numbers are read, not typed: `eval/report/results.csv`, `kappa.md`, the correction
+rate from the two gold files, and the reliability table from
+`data/calibration/hybrid.json`. Until `S5-A1` the deck falls back to the provisional
+ablation numbers and carries a PROVISIONAL LABELS tag on every slide that shows them.
+After the labels land, one command rebuilds it.
+
+python-pptx is a development tool here, like the notebooks, and never enters the image.
+
+### For B
+The engineering slide and the demo steps are yours to correct. Edit the generator, not
+the pptx, or the next rebuild loses the change.
+
+### Next
+- **Luka:** `S5-A1`.
+- **B:** `S5-B1`; a look at slides 4 and 10.
+
+---
+
 ## 2026-09-25 - [A] Calibrate hybrid, and kappa ready for the cold slice
 
 **Who:** Person A

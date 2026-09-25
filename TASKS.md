@@ -250,7 +250,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 | ID | Owner | Status | Task |
 |---|---|---|---|
-| `S7-AB1` | both | todo | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
+| `S7-AB1` | both | wip (draft in `docs/slides/`, rebuild after `S5-A1`) | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
 | `S7-AB2` | both | todo | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
 | `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
 | `S7-B1` | B | done | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
