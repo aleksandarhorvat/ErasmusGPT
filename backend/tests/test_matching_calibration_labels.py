@@ -39,3 +39,13 @@ def test_a_complete_human_pass_is_final(tmp_path: Path) -> None:
     gold, pre = write(tmp_path, "h:1,x:1,1,yes\nh:2,x:1,0,yes\n")
     _, source = fit.load_labels(gold, pre)
     assert "PROVISIONAL" not in source
+
+
+def test_cross_validation_keeps_each_course_out_of_its_own_fit() -> None:
+    # Two courses, each with a perfectly separable pattern of its own. Predicted from the
+    # other course only, the held-out predictions cannot be perfect.
+    rows = [[0.0], [1.0], [0.0], [1.0]]
+    positives = [0, 1, 1, 0]
+    result = fit.cross_validate(rows, positives, ["a", "a", "b", "b"], folds=2)
+    assert result["log_loss"] > 0.6
+    assert sum(row["pairs"] for row in result["reliability"]) == 4

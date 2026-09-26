@@ -6,10 +6,14 @@ means roughly seven in ten such pairs were labelled 1 or 2 by a human.
 
 The cosine is there because the fused scores are rank-based. The top hit of a course
 with no equivalent abroad gets the same RRF score as the top hit of a perfect match, so
-a score-only fit printed 68 % for Calculus 1 against Software Diamond. Grouped by home
-course, 10-fold, on the 2026-09-25 pre-labels, adding the cosine took log loss from
-0.273 to 0.219 and AUC from 0.87 to 0.91 for `hybrid`, and the mean top-1 probability
-of a wrong match from 0.47 to 0.21. `--score-only` reproduces the old fit. Without it, the number in the UI cannot
+a score-only fit printed 68 % for Calculus 1 against Software Diamond. `--score-only`
+reproduces the old fit, and its `cross_validated` block is the comparison.
+
+The pairs are scored at the depth the app serves (`candidate_top_n`), not over the
+whole catalogue: the fused score of a pair depends on how deep the fused lists run.
+The file stores two reliability tables. `reliability` is in-sample and only shows the
+fit converged; `cross_validated` is 10-fold, grouped by home course so a course never
+predicts itself, and is the one to quote. Without it, the number in the UI cannot
 be summed, and `S6-A5` (expected recognised ECTS) has nothing to add up.
 
     python eval/fit_calibration.py --host-programme utwente-tcs-bsc
@@ -161,6 +165,37 @@ def reliability_of(predicted: list[float], positives: list[int],
     return table
 
 
+def cross_validate(rows: list[list[float]], positives: list[int], groups: list[str],
+                   folds: int = 10) -> dict:
+    """Out-of-fold predictions, folds grouped by home course. Log loss and reliability.
+
+    Standardisation is refitted inside each fold as well, so nothing about the held-out
+    courses leaks into their own predictions.
+    """
+    ordered = sorted(set(groups))
+    fold_of = {group: index % folds for index, group in enumerate(ordered)}
+    predicted = [0.0] * len(rows)
+    width = len(rows[0]) if rows else 0
+    for fold in range(folds):
+        train = [i for i, g in enumerate(groups) if fold_of[g] != fold]
+        test = [i for i, g in enumerate(groups) if fold_of[g] == fold]
+        if not train or not test:
+            continue
+        stats = [standardise([rows[i][c] for i in train]) for c in range(width)]
+        z = [[(rows[i][c] - stats[c][0]) / stats[c][1] for c in range(width)] for i in train]
+        weights, b = fit_logistic(z, [positives[i] for i in train])
+        for i in test:
+            x = [(rows[i][c] - stats[c][0]) / stats[c][1] for c in range(width)]
+            predicted[i] = sigmoid(sum(w * v for w, v in zip(weights, x, strict=True)) + b)
+    eps = 1e-9
+    log_loss = -sum(
+        y * math.log(p + eps) + (1 - y) * math.log(1 - p + eps)
+        for p, y in zip(predicted, positives, strict=True)
+    ) / max(len(positives), 1)
+    return {"folds": folds, "grouped_by": "home course", "log_loss": round(log_loss, 4),
+            "reliability": reliability_of(predicted, positives)}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--home-programme", default="uns-pmf-informatics-bsc")
@@ -191,8 +226,9 @@ def main() -> int:
     scores: list[float] = []
     cosines: list[float] = []
     positives: list[int] = []
+    groups: list[str] = []
     for host in hosts:
-        depth = len(matcher.get_courses(host))
+        depth = matcher.settings.candidate_top_n  # what the app serves, see docstring
         for home_uid in sorted(homes):
             for candidate in matcher.match_course(home_uid, host, args.strategy, depth):
                 key = (home_uid, candidate.host_course.course_uid)
@@ -200,6 +236,7 @@ def main() -> int:
                     scores.append(candidate.score)
                     cosines.append(matcher.cosine(home_uid, host, key[1]))
                     positives.append(int(labels[key] >= args.positive_label))
+                    groups.append(home_uid)
 
     mean, std = standardise(scores)
     cosine_mean, cosine_std = standardise(cosines)
@@ -213,6 +250,9 @@ def main() -> int:
     predicted = [sigmoid(sum(w * x for w, x in zip(weights, row, strict=True)) + b)
                  for row in rows]
     table = reliability_of(predicted, positives)
+    raw = ([[score] for score in scores] if args.score_only
+           else [[score, cosine] for score, cosine in zip(scores, cosines, strict=True)])
+    validated = cross_validate(raw, positives, groups)
     fitted = {
         "strategy": args.strategy,
         "features": ["score"] if args.score_only else ["score", "cosine"],
@@ -235,6 +275,7 @@ def main() -> int:
         "host_programme": ", ".join(hosts),
         "fitted_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "reliability": table,
+        "cross_validated": validated,
     }, indent=2) + "\n", encoding="utf-8")
 
     print(f"fitted on {len(scores)} pairs ({sum(positives)} positive) from {source}")
@@ -242,6 +283,10 @@ def main() -> int:
     if not args.score_only:
         terms += f" + {weights[1]:.3f} * z(cosine)"
     print(f"  p = sigmoid({terms} + {b:.3f}) -> {out.relative_to(REPO_ROOT)}")
+    print(f"  grouped 10-fold: log loss {validated['log_loss']:.3f}")
+    for row in validated["reliability"]:
+        print(f"  cv {row['bin']}: {row['pairs']:4d} pairs, predicted {row['predicted']:.2f},"
+              f" observed {row['observed']:.2f}")
     for row in table:
         print(f"  {row['bin']}: {row['pairs']:4d} pairs, predicted {row['predicted']:.2f},"
               f" observed {row['observed']:.2f}")
