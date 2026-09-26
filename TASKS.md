@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
-| **Person B is on** | nothing open. `S7-AB2` done (offline rehearsal passed, 7 screenshots in `docs/screenshots/`); left is the talk itself |
-| **Blocked on** | nothing. Left: `S7-AB1` final read of the deck (both), lane A findings in PROGRESS "For A" (A), optional `S6-A3` (A) |
-| **Last updated** | 2026-09-26 - B: offline rehearsal passed on the demo laptop, screenshots, readable evaluation table |
+| **Person B is on** | nothing open. `S7-AB2` done (offline rehearsal passed); left is the talk itself |
+| **Blocked on** | nothing. Left: `S7-AB1` final read of the deck and rehearsing the talk (both), optional `S6-A3` (A) |
+| **Last updated** | 2026-09-26 - B: demo opens on TU Delft (A's request), screenshots dropped |
 
 ### Stage ladder
 
@@ -235,7 +235,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S6-B1` | done (screenshots move to `S7-AB2`) | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
+| `S6-B1` | done (screenshots dropped 2026-09-26) | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
 | `S6-B2` | done | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
 | `S6-B3` | done | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
 | `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
@@ -251,7 +251,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 | ID | Owner | Status | Task |
 |---|---|---|---|
 | `S7-AB1` | both | wip (A and B slides in `docs/slides/`, rebuild after `S5-A1`) | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
-| `S7-AB2` | both | done (2026-09-26: offline run passed, timings in README, screenshots in `docs/screenshots/`) | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
+| `S7-AB2` | both | done (2026-09-26: offline run passed, timings in README) | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
 | `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
 | `S7-B1` | B | done | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
 

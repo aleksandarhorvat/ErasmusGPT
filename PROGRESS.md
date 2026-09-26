@@ -14,6 +14,40 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [B] Demo opens on TU Delft, screenshots dropped
+
+**Who:** Person B
+**Stage:** 7
+**Commit:** `[B] open the demo on tu delft and drop the screenshots`
+**Tasks touched:** A's two requests of 2026-09-26, `S7-AB2` (scope)
+
+### Done
+- `App.tsx`: no hard-coded host. The page opens on UNS PMF against the first bachelor's
+  programme in `/programmes` order, which A's `data/partners.json` makes TU Delft; a
+  master's catalogue is skipped unless nothing else is loaded.
+- `docs/07-demo-script.md`: the demo runs Novi Sad against TU Delft end to end; step 5 is
+  now the "no suitable match" row, and step 7 says the evaluation page is measured
+  against Twente, the one host with labels. `scripts/rehearse_demo.py` checks the
+  default host rule, uses Delft for every step, and checks that Operating systems 1
+  finds Delft's Operating Systems first. Deck demo slide: the duplicate Delft step
+  replaced by the no-suitable-match step; notes no longer point to screenshots. Deck
+  rebuilt.
+- Screenshots dropped, as decided by Aleksandar: `docs/screenshots/` removed, and the
+  README, demo script, deck notes and TASKS no longer mention them. If the live demo
+  fails, the fallback is to say what should have happened and go on to the evaluation
+  slides.
+
+### Checks
+check_style, check_gold, pytest, frontend build, rehearsal script against a stub
+backend (the stub-only failures are expected).
+
+### Next
+- **Aleksandar:** `docker compose up -d --build` once so the running app picks up the new
+  default, then `python scripts/rehearse_demo.py`.
+- **Both:** read the deck once end to end and rehearse the talk.
+
+---
+
 ## 2026-09-26 - [A] B's audit worked through, partners ordered by ranking and distance
 
 **Who:** Person A

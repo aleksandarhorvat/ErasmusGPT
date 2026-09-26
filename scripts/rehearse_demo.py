@@ -10,9 +10,10 @@ or let the script start the stack and time the boot itself:
 
 It goes through nginx on :8080, the same path the browser takes, and runs the steps of
 docs/07-demo-script.md: the page loads, the API reports the real matcher with its
-models, a whole programme matches with `hybrid`, the evidence for Computer networks is
-there, TU Delft matches too, the recognition estimate is calibrated, `hybrid+ce`
-finishes inside the UI's timeout, and the evaluation page has its reports.
+models, TU Delft is the host the page opens on, the whole programme matches against it
+with `hybrid`, the evidence for Computer networks is there, a pair we know is right comes
+out on top, the recognition estimate is calibrated, `hybrid+ce` finishes inside the UI's
+timeout, and the evaluation page (measured against Twente) has its reports.
 
 It also tries to reach huggingface.co. For the rehearsal that is supposed to fail: if it
 succeeds the network is up, and a demo that works with the network up proves nothing
@@ -32,9 +33,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 HOME = "uns-pmf-informatics-bsc"
-HOST = "utwente-tcs-bsc"
-UNSEEN_HOST = "tudelft-cse-bsc"          # never evaluated or tuned on: demo step 5
-UNSEEN_PAIR = ("Operating systems 1", "Operating Systems")
+HOST = "tudelft-cse-bsc"          # the demo host; Twente is only the evaluation host
+KNOWN_PAIR = ("Operating systems 1", "Operating Systems")
 EVIDENCE_COURSE = "Computer networks"
 FAST_LIMIT_S = 5.0     # hybrid over a whole programme; measured at about 0.1 s
 UI_TIMEOUT_S = 150.0   # MATCH_TIMEOUT_MS in frontend/src/lib/api.ts
@@ -121,13 +121,17 @@ def run(base: str, start: bool, wait_s: float) -> list[Step]:
     page.ok = status == 200 and b'id="root"' in raw
     page.detail = f"HTTP {status}" + ("" if page.ok else ", not the app's index.html")
 
-    programmes_step = step("both demo programmes are listed")
+    programmes_step = step("the page opens on UNS PMF against TU Delft")
     began = time.perf_counter()
-    programmes = {p["programme_id"]: p for p in get_json(f"{api}/programmes")}
+    listed = get_json(f"{api}/programmes")
+    programmes = {p["programme_id"]: p for p in listed}
     programmes_step.seconds = time.perf_counter() - began
-    programmes_step.ok = HOME in programmes and HOST in programmes
-    programmes_step.detail = f"{len(programmes)} programmes"
-    if not programmes_step.ok:
+    # Same rule as frontend/src/App.tsx: the first bachelor's host in /programmes order.
+    first = next((p["programme_id"] for p in listed
+                  if p["programme_id"] != HOME and p.get("level") == "bachelor"), None)
+    programmes_step.ok = HOME in programmes and first == HOST
+    programmes_step.detail = f"{len(programmes)} programmes, default host {first}"
+    if HOME not in programmes or HOST not in programmes:
         return steps
     home = programmes[HOME]
 
@@ -148,21 +152,12 @@ def run(base: str, start: bool, wait_s: float) -> list[Step]:
     evidence.detail = (f"top match {top['host_course']['title']!r}" if top
                        else "course or match missing")
 
-    unseen = step("match against TU Delft, never evaluated or tuned on")
-    if UNSEEN_HOST in programmes:
-        body = {"home_programme_id": HOME, "host_programme_id": UNSEEN_HOST,
-                "strategy": "hybrid", "top_k": 5}
-        began = time.perf_counter()
-        delft = get_json(f"{api}/match", body)
-        unseen.seconds = time.perf_counter() - began
-        home_title, expected = UNSEEN_PAIR
-        row = next((r for r in delft["results"] if r["home_course"]["title"] == home_title),
-                   None)
-        titles = [m["host_course"]["title"] for m in row["matches"]] if row else []
-        unseen.ok = expected in titles[:1] and unseen.seconds < FAST_LIMIT_S
-        unseen.detail = f"{home_title} -> {titles[0] if titles else 'nothing'}"
-    else:
-        unseen.detail = f"{UNSEEN_HOST} is not loaded"
+    home_title, expected = KNOWN_PAIR
+    known = step(f"{home_title} finds {expected} first")
+    row = next((r for r in rows if r["home_course"]["title"] == home_title), None)
+    titles = [m["host_course"]["title"] for m in row["matches"]] if row else []
+    known.ok = expected in titles[:1]
+    known.detail = f"{home_title} -> {titles[0] if titles else 'nothing'}"
 
     recognition = step("recognition estimate on the default strategy")
     body = {"home_programme_id": HOME, "host_programme_id": HOST, "strategy": "hybrid",

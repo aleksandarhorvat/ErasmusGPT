@@ -71,8 +71,8 @@ To prove it: build, stop the stack, disconnect, `docker compose up`, use the app
 
 `python scripts/rehearse_demo.py --start` does the checking part for you: it starts the
 stack, times the boot, runs every step of the live demo against the API and fails if
-huggingface.co is reachable. The full rehearsal, with the demo script and the fallback
-screenshots, is `docs/07-demo-script.md`.
+huggingface.co is reachable. The full rehearsal, with the demo script, is
+`docs/07-demo-script.md`.
 
 Rehearsed on 2026-09-26 on the demo laptop (Windows, Docker Desktop, CPU only) with the
 network off: every step passed. Measured, with the embedding cache already built:
@@ -88,7 +88,6 @@ network off: every step passed. Measured, with the embedding cache already built
 The last one is why the demo only uses the reranker on single rows. A cold first boot,
 with no `data/.cache/`, was not timed on that run.
 
-The screenshots in `docs/screenshots/` are the fallback if the live demo fails.
 ## Working on the code
 
 You need **Python 3.11** and Node 20. 3.10 no longer works: the scrapers and the

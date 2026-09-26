@@ -20,9 +20,10 @@ import EvaluationPanel from './components/EvaluationPanel'
 
 type Phase = 'booting' | 'ready' | 'matching' | 'failed'
 
-// The demo case (docs/07-demo-script.md): our bachelor's against Twente TCS.
+// The demo case (docs/07-demo-script.md): our bachelor's as home. The host is the first
+// bachelor's programme in /programmes order, which the backend sorts by ranking band and
+// distance (data/partners.json), so today TU Delft. Twente stays the evaluation host.
 const DEFAULT_HOME = 'uns-pmf-informatics-bsc'
-const DEFAULT_HOST = 'utwente-tcs-bsc'
 
 export default function App() {
   const [programmes, setProgrammes] = useState<ProgrammeSummary[]>([])
@@ -54,13 +55,13 @@ export default function App() {
         setStrategies(s)
         setHealth(h)
         if (p.length >= 2) {
-          // Open on the case the app is for: our own bachelor's against Twente TCS, when
-          // both are loaded. Otherwise the first two, which may be two master's programmes.
+          // Open on the case the app is for: our own bachelor's against the best-ranked
+          // bachelor's partner. A master's catalogue is not what a bachelor student picks,
+          // so it is skipped unless there is nothing else.
           const has = (id: string) => p.some((x) => x.programme_id === id)
           const home0 = has(DEFAULT_HOME) ? DEFAULT_HOME : p[0].programme_id
-          const host0 = has(DEFAULT_HOST) && DEFAULT_HOST !== home0
-            ? DEFAULT_HOST
-            : p.find((x) => x.programme_id !== home0)!.programme_id
+          const others = p.filter((x) => x.programme_id !== home0)
+          const host0 = (others.find((x) => x.level === 'bachelor') ?? others[0]).programme_id
           setHome(home0)
           setHost(host0)
         } else if (p.length === 1) {

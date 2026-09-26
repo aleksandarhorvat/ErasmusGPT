@@ -365,7 +365,7 @@ def slide_demo(deck):
         "Home UNS PMF Informatics, host TU Delft, strategy hybrid: 50 courses in about 0.1 s.",
         "Open Computer networks: the evidence sentence pair explains the match.",
         "Recognition panel: expected ECTS carried over, with likely and borderline bands.",
-        "Switch the host to TU Delft, never evaluated or tuned on: it still matches.",
+        "No suitable match: under 20 % it says so instead of showing a weak top hit.",
         "Compare one row against hybrid+ce, then open the evaluation page behind the choice.",
     ]
     for index, step in enumerate(steps):
@@ -375,8 +375,8 @@ def slide_demo(deck):
              size=18, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
     slide.notes_slide.notes_text_frame.text = (
         "B drives, A narrates the matches. Rehearsed offline (S7-AB2), script in "
-        "docs/07-demo-script.md. If the demo fails, the screenshots taken during the "
-        "rehearsal, in docs/screenshots/, are the fallback.")
+        "docs/07-demo-script.md. If the demo fails, say what should have happened and "
+        "go on to the evaluation slides.")
 
 
 def slide_gold(deck, provisional):
