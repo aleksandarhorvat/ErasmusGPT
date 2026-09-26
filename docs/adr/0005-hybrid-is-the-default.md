@@ -93,3 +93,31 @@ Two things have not changed:
   calibration is refitted on checked labels.
 - The reason for the default is cost, not quality: the two strategies are level on the
   provisional labels. If the human pass separates them, this ADR is revisited.
+
+## Amendment, 2026-09-26: the final numbers
+
+The gold set is complete: 1142 pairs, 680 checked by a person and 462 labelled by a
+second model at Person A's decision (`data/gold/provenance.json`). `run_eval.py` also now
+counts only home courses with something relevant at the host, which is why the query
+counts dropped from 40 to 27 and 19. Final table:
+
+| Strategy | TCS P@1 | TCS Recall@5 | TCS MRR@10 | AM P@1 | AM Recall@5 | ms/query |
+|---|---|---|---|---|---|---|
+| `bm25` | 0.85 | 0.74 | 0.89 | 0.79 | 0.78 | 3 |
+| `dense-minilm` (baseline) | 0.78 | 0.83 | 0.85 | 0.84 | 0.82 | <1 |
+| `dense-bge` | 0.70 | 0.78 | 0.78 | 0.89 | 0.95 | <1 |
+| **`hybrid`** | 0.78 | 0.83 | 0.85 | 0.84 | 0.95 | 3 |
+| `hybrid+ce` | 0.78 | 0.82 | 0.85 | 0.84 | 0.84 | about 860 |
+
+The decision stands, on firmer ground than either amendment above had:
+
+- Against TCS, `hybrid` and `hybrid+ce` are level on every metric, and neither beats
+  the baseline significantly.
+- Against AM, `hybrid` beats the baseline on Recall@5 (+0.13, p = 0.021) and `hybrid+ce`
+  does not. It is the only significant difference in either table.
+- The reranker costs about 300 times as much per query as `hybrid` (868 ms against
+  3 ms against TCS). The "about 400" above was measured on the development runs.
+
+What would reopen this ADR: a human check of the 462 model-labelled rows that changes
+the AM result, or a reranker fine-tuned on the gold set (`S6-A3`, which Person A
+proposes to close as not worth reporting on 46 queries).

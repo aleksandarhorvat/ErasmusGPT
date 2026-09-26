@@ -56,8 +56,10 @@ export default function RecognitionPanel({ data }: { data: RecognitionResponse }
 
       {data.calibrated && data.provisional && (
         <p className="warn">
-          Provisional. The calibration behind these probabilities was fitted on machine labels,
-          not on the human-checked gold set. The shape is right, the exact number is not final.
+          Provisional. The calibration behind these probabilities was fitted on a gold set that
+          is partly model-labelled: some of its labels come from a second model rather than a
+          human check (the evaluation page gives the split). Read the total as an estimate of
+          the right size, not as a measured figure.
         </p>
       )}
       <p className="hint">

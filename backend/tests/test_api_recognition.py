@@ -117,6 +117,27 @@ def test_a_partial_human_pass_is_still_provisional() -> None:
     assert is_provisional(0, 0), "no gold set at all is not a finished one"
 
 
+def test_evaluation_says_who_labelled_the_gold_set() -> None:
+    """checked=yes means labelled, not labelled by a person; the page must split them."""
+    body = client.get("/api/v1/evaluation").json()
+    assert body["gold_human"] + body["gold_model"] == body["gold_checked"]
+    assert body["gold_model"] >= 0
+
+
+def test_without_a_provenance_file_every_checked_row_is_human(tmp_path) -> None:
+    from app.api.routes_evaluation import label_sources
+    from app.core.config import Settings
+
+    settings = Settings(data_dir=tmp_path)
+    assert label_sources(settings, 504) == (504, 0)
+    (tmp_path / "gold").mkdir()
+    (tmp_path / "gold" / "provenance.json").write_text(
+        '{"counts": {"human": 680, "model": 462, "total": 1142}}', encoding="utf-8")
+    assert label_sources(settings, 1142) == (680, 462)
+    (tmp_path / "gold" / "provenance.json").write_text("not json", encoding="utf-8")
+    assert label_sources(settings, 10) == (10, 0)
+
+
 def test_evaluation_lists_the_reports_that_exist() -> None:
     assert "ablations.md" in client.get("/api/v1/evaluation").json()["reports"]
 

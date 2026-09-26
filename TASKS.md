@@ -14,13 +14,13 @@ lanes have passed their gate.
 
 | | |
 |---|---|
-| **Current stage** | **Stage 5 - Gold set + evaluation** (stages 2 to 4 closed; 6 and 7 pulled early) |
+| **Current stage** | **Stage 7 - Defence** (stages 0 to 6 closed) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
-| **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`). Cold slice and his half of `S5-A1` are done (504 of 504) |
-| **Blocked on** | nothing. Stage 5 needs B's gate tick; `Request to B` in PROGRESS lists what the final labels change on his side |
-| **Last updated** | 2026-09-26 - A: final gold set, real results, lane A gate for stage 5 ticked, Delft and Polimi added |
+| **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`, now with a TU Delft step). Lane B code and labelling are done |
+| **Blocked on** | nothing. Left: `S7-AB2` rehearsal and screenshots (B), `S7-AB1` final read of the deck (both), optional `S6-A3` (A) |
+| **Last updated** | 2026-09-26 - B: label split on the evaluation page, final numbers in ADR-0005, README and deck, lane B gates ticked, stages 5 and 6 closed |
 
 ### Stage ladder
 
@@ -31,8 +31,8 @@ lanes have passed their gate.
 | 2 - Dense retrieval | done (early) | done | closed |
 | 3 - Lexical + hybrid | done (early) | done | closed |
 | 4 - Cross-encoder rerank | done (early) | done | closed |
-| 5 - Gold set + evaluation | wip | wip | todo |
-| 6 - Scale out + polish | wip | wip | todo |
+| 5 - Gold set + evaluation | done | done | closed |
+| 6 - Scale out + polish | done | done | closed |
 | 7 - Defence | wip | wip | todo |
 
 Status values: `todo`, `wip`, `blocked`, `done`, `early` (pulled forward from a later stage).
@@ -114,9 +114,9 @@ finds *Theory of Computation* in the top 5 (rank 1, cosine 0.878, verified 2026-
 | `S2-B2` | done | Real loading UX: a progress indicator that survives a 60 s request, and a clear timeout message. Raise the nginx/axios timeouts to 180 s | a 60 s match does not look like a hang | - |
 | `S2-B3` | done | SQLite persistence of ingested programmes (`app/db/models.py`), `content_hash` bookkeeping so A's cache invalidation has a home | restarting the container does not re-ingest unchanged files | - |
 
-**Lane B gate:** [ ] the UI can drive every strategy and survives a slow request.
+**Lane B gate:** [x] the UI can drive every strategy and survives a slow request (selector from `/strategies`, progress timer, 150 s timeout under nginx's 180 s).
 
-**Stage gate:** [x] A   [ ] B - the demo produces real semantic matches end to end.
+**Stage gate:** [x] A   [x] B - the demo produces real semantic matches end to end.
 
 ---
 
@@ -143,9 +143,9 @@ as the candidate generator that feeds the reranker.
 | `S3-B2` | done | "Export to CSV" button - the artefact a student actually emails to their coordinator (home course, ECTS, top-5 host courses, scores, links) | the downloaded file opens cleanly in Excel | `S1-B1` |
 | `S3-B3` | done | Per-row "re-match this course" using `POST /api/v1/match/course`, so a single row can be retried with another strategy without re-running the whole programme | one row updates in place | - |
 
-**Lane B gate:** [ ] results are interpretable and exportable.
+**Lane B gate:** [x] results are interpretable and exportable (`lib/score.ts`, evidence under "why", CSV export).
 
-**Stage gate:** [x] A   [ ] B.
+**Stage gate:** [x] A   [x] B.
 
 ---
 
@@ -172,9 +172,9 @@ as the candidate generator that feeds the reranker.
 | `S4-B2` | done | Side-by-side compare mode: same home course, two strategies, two columns. This is the screenshot for the README and the slides | toggling compare shows `dense` vs `hybrid+ce` next to each other | `S3-B3` |
 | `S4-B3` | done | Show `took_ms` and the active model names in the footer (`/health` already carries them) | the demo can answer "what is it actually running?" without opening a terminal | - |
 
-**Lane B gate:** [ ] the improvement is visible on screen, not only in the eval table.
+**Lane B gate:** [x] the difference is visible on screen, not only in the eval table (per-row compare against another strategy). Measured, the reranker is level rather than better; see ADR-0005.
 
-**Stage gate:** [x] A   [ ] B.
+**Stage gate:** [x] A   [x] B.
 
 ---
 
@@ -203,9 +203,9 @@ as the candidate generator that feeds the reranker.
 | `S5-B2` | done | CI green: `ruff`, `pytest` with `MATCHER_IMPL=stub`, frontend build, curriculum validator | the badge is green on `main` | `S1-A3` |
 | `S5-B3` | done | Serve the evaluation table in the UI (read `eval/report/results.csv`) as an "About / how well does this work" page | the numbers are one click away during the defence | `S5-A2` |
 
-**Lane B gate:** [ ] CI green, kappa slice annotated, numbers visible in the app.
+**Lane B gate:** [x] CI checks green locally, kappa slice annotated (30 of 30), numbers and the human/model label split visible in the app.
 
-**Stage gate:** [x] A   [ ] B - you can answer "how do you know it works?" with a table.
+**Stage gate:** [x] A   [x] B - you can answer "how do you know it works?" with a table.
 
 ---
 
@@ -240,9 +240,9 @@ after `S5-A1`); [x] recognition estimate calibrated.
 | `S6-B3` | done | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
 | `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |
 
-**Lane B gate:** [ ] verified clean-machine run + README + recognition summary.
+**Lane B gate:** [x] verified clean-machine run (297 s, README) + README + recognition summary.
 
-**Stage gate:** [x] A   [ ] B.
+**Stage gate:** [x] A   [x] B.
 
 ---
 

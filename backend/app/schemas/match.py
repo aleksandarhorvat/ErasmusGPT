@@ -140,8 +140,12 @@ class EvaluationResponse(BaseModel):
     provisional: bool = Field(
         description="the human pass has not checked every gold row yet"
     )
-    gold_checked: int
+    gold_checked: int = Field(description="rows with a final label, from a person or a model")
     gold_total: int
+    gold_human: int = Field(default=0, description="checked rows labelled by a person")
+    gold_model: int = Field(
+        default=0, description="checked rows labelled by a model, per data/gold/provenance.json"
+    )
     columns: list[str] = Field(default_factory=list)
     rows: list[dict[str, str]] = Field(default_factory=list)
     reports: list[str] = Field(default_factory=list, description="markdown files in eval/report")

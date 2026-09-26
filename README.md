@@ -111,28 +111,35 @@ before you push: a docstring one character too long fails the build.
 
 ## What we found
 
-The project set out to show that cross-encoder reranking beats naive retrieval. It does
-not, at least not the way we first built it. Over the pooled labels against Twente
-Technical Computer Science, 28 queries:
+The project set out to show that cross-encoder reranking beats naive retrieval. On the
+final gold set it does not. Against Twente Technical Computer Science (TCS, 27 queries)
+and Twente Applied Mathematics (AM, 19 queries):
 
-| Strategy | P@1 | Recall@5 | MRR@10 | ms/query |
-|---|---|---|---|---|
-| `bm25` | 0.86 | 0.75 | 0.91 | 2 |
-| `dense` | 0.75 | 0.77 | 0.81 | <1 |
-| **`hybrid`** (default) | **0.86** | 0.80 | **0.90** | **2** |
-| `hybrid+ce`, reranker replaces the order | 0.68 | 0.72 | 0.77 | 979 |
-| `hybrid+ce`, reranker fused by RRF | 0.82 | **0.82** | 0.88 | 979 |
+| Strategy | TCS P@1 | TCS Recall@5 | TCS MRR@10 | AM P@1 | AM Recall@5 | ms/query |
+|---|---|---|---|---|---|---|
+| `bm25` | 0.85 | 0.74 | 0.89 | 0.79 | 0.78 | 3 |
+| `dense-minilm` (baseline) | 0.78 | 0.83 | 0.85 | 0.84 | 0.82 | <1 |
+| `dense-bge` | 0.70 | 0.78 | 0.78 | 0.89 | 0.95 | <1 |
+| **`hybrid`** (default) | 0.78 | 0.83 | 0.85 | 0.84 | 0.95 | 3 |
+| `hybrid+ce` | 0.78 | 0.82 | 0.85 | 0.84 | 0.84 | about 860 |
 
-Letting the cross-encoder overrule retrieval made it the worst of the four. Fusing its
-opinion with the retrieval order instead, the way BM25 and dense are fused, makes it
-level. So the finding is about **how** to combine a reranker rather than whether to have
-one, and `hybrid` is the default because it is level and about three hundred times
-cheaper. Reasoning: `docs/adr/0005-hybrid-is-the-default.md`. Full ablations:
-`eval/report/ablations.md`.
+- **One significant result:** `hybrid` beats the `dense-minilm` baseline on Recall@5
+  against AM, +0.13, paired bootstrap p = 0.021. Everything else is level within the
+  95 % intervals.
+- **The reranker buys nothing measurable** at about 300 times the cost of `hybrid`.
+  During development, letting it replace the retrieval order made it the worst strategy;
+  fused by RRF like BM25 and dense, it is level. So the finding is about **how** to
+  combine a reranker, and `hybrid` is the default because it is level and cheaper.
 
-**These numbers are provisional.** They come from labels a model wrote about our own
-retrieval. They become results when the human pass over `data/gold/gold_pairs.csv` is
-done; the app's "how well does this work?" panel reports how far that has got.
+Full tables with intervals: `eval/report/results.md` and
+`eval/report/utwente-am-bsc/results.md`. Reasoning: `docs/adr/0005-hybrid-is-the-default.md`.
+
+**How the labels were made.** Of the 1142 gold pairs, 680 were checked by a person with
+the model's proposal shown. For lack of time, the other 462 were labelled by a second
+model (Claude) and not checked by a person; `data/gold/provenance.json` records which.
+The two humans agree at weighted kappa 0.73, on only 8 shared pairs; Claude against a
+human on the 30 cold pairs is 0.52 (`eval/report/kappa.md`). Every report and the app's
+"how well does this work?" panel state the split.
 
 ## How it works
 
@@ -154,10 +161,9 @@ in the API, and the evaluation harness runs the identical code path.
 
 **The default is `hybrid`.** The project set out to show that cross-encoder reranking beats
 naive retrieval. Measured, it only helps when fused with the other two rankings rather
-than replacing them, and fused it is level with plain `hybrid` at about 400 times the
-cost per query. That comparison is the main result rather than a footnote. Ablations:
-`eval/report/ablations.md`. Reasoning: ADR-0005. All numbers are provisional until the
-human labelling pass is done.
+than replacing them, and fused it is level with plain `hybrid` at about 300 times the
+cost per query. That comparison is the main result rather than a footnote. See "What we
+found" above and ADR-0005.
 
 ## Repository map
 

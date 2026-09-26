@@ -142,11 +142,17 @@ estimate. 404 for an unknown programme, 422 for an unknown strategy or a budget 
 ## `GET /api/v1/evaluation`
 What `eval/report/` holds and how far the human labelling pass has got (S5-B3).
 ```json
-{ "available": false, "provisional": true, "gold_checked": 0, "gold_total": 1142,
-  "columns": [], "rows": [], "reports": ["ablations.md", "errors.md", "smoke.md"] }
+{ "available": true, "provisional": false, "gold_checked": 1142, "gold_total": 1142,
+  "gold_human": 680, "gold_model": 462,
+  "columns": ["config", "Recall@5", "..."], "rows": [ { "config": "hybrid", "...": "..." } ],
+  "reports": ["ablations.md", "errors.md", "kappa.md", "results.md", "smoke.md"] }
 ```
 - `available`: `eval/report/results.csv` exists and has rows. `columns` and `rows` are
   that file as strings, so the harness can add a metric without a contract change.
+- `gold_human`, `gold_model` (added 2026-09-26): how the checked rows got their label,
+  from `data/gold/provenance.json`. `checked=yes` means "has its final label", which
+  since that date is not the same as "a person checked it". Without the file every
+  checked row counts as human.
 - `provisional`: true until **every** row of `data/gold/gold_pairs.csv` is checked. A
   partial pass is still provisional, because `run_eval.py` scores only checked rows and
   those cover whichever home courses were labelled first.

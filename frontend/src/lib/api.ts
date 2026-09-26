@@ -77,6 +77,8 @@ export interface EvaluationResponse {
   provisional: boolean
   gold_checked: number
   gold_total: number
+  gold_human: number
+  gold_model: number
   columns: string[]
   rows: Record<string, string>[]
   reports: string[]

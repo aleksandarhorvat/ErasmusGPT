@@ -14,6 +14,59 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [B] Final numbers on B's side, label split in the app, stages 5 and 6 closed
+
+**Who:** Person B
+**Stage:** 5, 6 and 7
+**Commit:** `[B] show who labelled the gold set and put the final numbers in`
+**Tasks touched:** A's "Request to B" of 2026-09-26, lane B gates of stages 2 to 6,
+`S7-AB1`, `S7-AB2`
+
+### Decision
+Aleksandar accepts A's completion of the gold set as it is: 680 rows checked by a person,
+462 labelled by Claude and not checked. Everything below reports that split rather than
+hiding it.
+
+### CONTRACT CHANGE
+`EvaluationResponse` gains `gold_human` and `gold_model` (both default 0), read from
+`data/gold/provenance.json`. `checked=yes` now means "has its final label", not "a
+person checked it". No field removed; `provisional` keeps its meaning. Documented in
+`docs/04-api-contract.md`, typed in `frontend/src/lib/api.ts`.
+
+### Done
+- Evaluation page: "680 checked by a person, 462 labelled by a second model (Claude) and
+  not checked by a person", with a warning under it, instead of "1142 of 1142 pairs
+  checked by a human". Headline text now states the final finding. Two tests, one for a
+  missing or unreadable provenance file.
+- Recognition panel and score tooltip: provisional because the gold set is partly
+  model-labelled, not because it is machine-labelled.
+- Deck (shared): the tag on numbers slides reads PARTLY MODEL-LABELLED when every row is
+  labelled but some by a model; the reranker slide keeps PROVISIONAL LABELS because its
+  replace-against-fuse numbers exist only on the pre-labels. Fixed a regression: the
+  gold slide showed kappa "pending" because `kappa.md` renamed the "A vs B" row. Cost
+  ratio and query count are read from `results.csv` (about 300 times, 27 queries). The
+  problem slide counts 6 hosts and 378 courses from `data/curricula/`. Demo slide gains
+  the TU Delft step. Rendered and read.
+- Final numbers: ADR-0005 third amendment with the final table (decision stands, one
+  significant result, `hybrid` over `dense-minilm` on AM Recall@5), README "What we
+  found" rewritten with both hosts and the provenance paragraph, `docs/06-defence-notes-b.md`,
+  CONTEXT.md (shared, one sentence: final labels, about 300 times).
+- Demo: `docs/07-demo-script.md` step 5 switches the host to TU Delft, step 4 shows a "no
+  suitable match" row, 7 screenshots. `scripts/rehearse_demo.py` checks that Operating
+  systems 1 finds Delft's Operating Systems, and reports the human/model split.
+- Lane B gates of stages 2 to 6 ticked, each with what satisfies it. Stages 5 and 6
+  closed; current stage is 7.
+
+### Checks
+ruff, check_style, check_gold, validate_curricula, pytest, frontend build (tsc and vite),
+rehearsal script against a stub backend.
+
+### Next
+- **Aleksandar:** `S7-AB2`, the offline rehearsal and the 7 screenshots.
+- **Both:** read the deck once end to end (`S7-AB1`).
+
+---
+
 ## 2026-09-26 - [A] Gold set complete, real results, Delft and Polimi added
 
 **Who:** Person A

@@ -89,10 +89,31 @@ def load_results() -> tuple[dict[str, dict[str, float]], bool]:
     return PROVISIONAL, False
 
 
+def label_counts() -> tuple[int, int]:
+    """(rows labelled by a person, rows labelled by a model), from provenance.json."""
+    record = GOLD_PAIRS.parent / "provenance.json"
+    checked, _ = gold_progress()
+    if not record.exists():
+        return checked, 0
+    counts = json.loads(record.read_text(encoding="utf-8")).get("counts", {})
+    return int(counts.get("human", checked)), int(counts.get("model", 0))
+
+
+def badge_text(provisional: bool) -> str | None:
+    """What the gold tag on a numbers slide says, or None for no tag."""
+    if provisional:
+        return "PROVISIONAL LABELS"
+    if label_counts()[1]:
+        return "PARTLY MODEL-LABELLED"
+    return None
+
+
 def load_kappa() -> str:
     if not KAPPA.exists():
         return "pending"
-    match = re.search(r"\| A vs B \| (\d+) \| [\d.]+ \| ([-\d.]+) \| ([-\d.]+) \|",
+    # The human-against-human row: "A vs B" before provenance, named people after it.
+    match = re.search(r"\| (?:A vs B|Luka \(human\) vs Aleksandar \(human\)) \| (\d+) \| "
+                      r"[\d.]+ \| ([-\d.]+) \| ([-\d.]+) \|",
                       KAPPA.read_text(encoding="utf-8"))
     if not match:
         return "pending"
@@ -170,15 +191,18 @@ def title(slide, words, colour=NAVY):
          color=colour, bold=True, font=HEAD_FONT)
 
 
-def badge(slide, provisional):
-    """Gold tag on every slide that shows numbers not yet backed by checked labels."""
-    if not provisional:
+def badge(slide, label):
+    """Gold tag on every slide whose numbers are not fully backed by human labels.
+
+    `label` is the tag text, or None for no tag (see `badge_text`).
+    """
+    if not label:
         return
     tag = box(slide, Inches(10.35), Inches(0.5), Inches(2.4), Inches(0.42), GOLD)
     frame = tag.text_frame
     frame.margin_top = frame.margin_bottom = 0
     run = frame.paragraphs[0].add_run()
-    run.text = "PROVISIONAL LABELS"
+    run.text = label
     run.font.size, run.font.bold, run.font.name = Pt(12), True, BODY_FONT
     run.font.color.rgb = NAVY
     frame.paragraphs[0].alignment = PP_ALIGN.CENTER
@@ -237,6 +261,12 @@ def slide_title(deck):
         "Both. One sentence each on who built what, then straight to the problem.")
 
 
+def courses_indexed() -> int:
+    """Every course in data/curricula/, home programme included."""
+    return sum(len(json.loads(path.read_text(encoding="utf-8")).get("courses", []))
+               for path in sorted((REPO_ROOT / "data" / "curricula").glob("*.json")))
+
+
 def slide_problem(deck):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
@@ -250,8 +280,8 @@ def slide_problem(deck):
         "many ECTS of the degree would carry over.",
     ], size=18)
     stats = [("50", "home courses, UNS PMF BSc Informatics"),
-             ("4", "host programmes: Twente x2, EPFL, KTH"),
-             ("298", "courses indexed, English descriptions")]
+             ("6", "host programmes: Twente x2, Delft, Milan, EPFL, KTH"),
+             (str(courses_indexed()), "courses indexed, English descriptions")]
     for index, (number, label) in enumerate(stats):
         top = Inches(1.6 + index * 1.75)
         box(slide, Inches(7.5), top, Inches(5.2), Inches(1.45), PALE)
@@ -264,7 +294,16 @@ def slide_problem(deck):
         "that exists today, all in data/curricula.")
 
 
-def slide_pipeline(deck):
+def cost_ratio(results) -> str:
+    """How many times slower hybrid+ce is than hybrid, rounded for a slide."""
+    try:
+        ratio = results["hybrid+ce"]["ms_per_query"] / results["hybrid"]["ms_per_query"]
+    except (KeyError, ZeroDivisionError):
+        return "several hundred"
+    return f"about {round(ratio, -2):.0f}"
+
+
+def slide_pipeline(deck, results):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
     title(slide, "The pipeline")
@@ -308,7 +347,7 @@ def slide_pipeline(deck):
         "One code path: the web service and the evaluation harness import the same "
         "app.matching module, so the numbers describe the system being demonstrated.",
         "Default strategy is hybrid (ADR-0005): level with hybrid+ce on quality, "
-        "about 400 times cheaper per query.",
+        f"{cost_ratio(results)} times cheaper per query.",
     ], size=16)
     slide.notes_slide.notes_text_frame.text = (
         "A. Why two retrievers: BM25 catches exact course vocabulary, the bi-encoder "
@@ -326,10 +365,11 @@ def slide_demo(deck):
         "Home UNS PMF Informatics, host Twente TCS, strategy hybrid: 50 courses in about 0.1 s.",
         "Open Computer networks: the evidence sentence pair explains the match.",
         "Recognition panel: expected ECTS carried over, with likely and borderline bands.",
+        "Switch the host to TU Delft, never evaluated or tuned on: it still matches.",
         "Compare one row against hybrid+ce, then open the evaluation page behind the choice.",
     ]
     for index, step in enumerate(steps):
-        top = Inches(1.65 + index * 1.0)
+        top = Inches(1.55 + index * 0.9)
         circle_number(slide, Inches(0.8), top, index + 1)
         text(slide, Inches(1.65), top + Inches(0.05), Inches(10.8), Inches(0.6), step,
              size=18, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
@@ -373,6 +413,11 @@ def slide_gold(deck, provisional):
         "A. Why a human pass at all: an unchecked model label would make every number "
         "measure agreement with that model (Clarke and Dietz 2024). The correction rate "
         "is the evidence the pass was real.")
+
+
+def queries_of(results) -> str:
+    counts = {int(row["queries"]) for row in results.values() if "queries" in row}
+    return str(counts.pop()) if len(counts) == 1 else "about 40"
 
 
 def slide_results(deck, results, provisional):
@@ -421,15 +466,20 @@ def slide_results(deck, results, provisional):
          "hybrid+ce stays selectable.", size=14, color=INK, italic=True)
     slide.notes_slide.notes_text_frame.text = (
         "A. The confidence intervals and the paired test are in eval/report/results.md. "
-        "At 40 queries a 95 % interval is about plus or minus 0.10, so quote the paired "
-        "test, which works on per-query differences.")
+        f"At {queries_of(results)} queries a 95 % interval is about plus or minus 0.10, so "
+        "quote the paired test, which works on per-query differences. The one significant "
+        "gain is hybrid over dense-minilm on Recall@5 against Twente Applied Mathematics, "
+        "eval/report/utwente-am-bsc/results.md.")
 
 
 def slide_reranker(deck, provisional):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
     title(slide, "The reranker: veto or opinion")
-    badge(slide, provisional)
+    # Replace against fuse was measured once, during development, on the model's
+    # pre-labels (ablations.md). The final table has only the fused version, so this
+    # slide keeps the provisional tag whatever the other slides say.
+    badge(slide, "PROVISIONAL LABELS")
     data = CategoryChartData()
     data.categories = ["P@1", "Recall@5", "MRR@10"]
     data.add_series("hybrid, no reranker", (0.86, 0.80, 0.90))
@@ -462,7 +512,8 @@ def slide_reranker(deck, provisional):
     slide.notes_slide.notes_text_frame.text = (
         "A. If asked whether the project failed because the reranker did not win: the "
         "comparison is the result, and it is measured and explained. Numbers from "
-        "eval/report/ablations.md sections 1 and 1b.")
+        "eval/report/ablations.md sections 1 and 1b, on the pre-labels; on the final "
+        "labels the fused reranker is level with hybrid (previous slide).")
 
 
 def slide_recognition(deck, provisional):
@@ -472,7 +523,10 @@ def slide_recognition(deck, provisional):
     calibration = json.loads(CALIBRATION.read_text(encoding="utf-8"))
     # The chart is the calibration file, which stays provisional until it is refitted on
     # checked labels, even after the results table stops being provisional.
-    badge(slide, provisional or "PROVISIONAL" in calibration.get("label_source", ""))
+    source = calibration.get("label_source", "")
+    if provisional or "PROVISIONAL" in source:
+        badge(slide, "PARTLY MODEL-LABELLED" if "model-labelled" in source
+              else "PROVISIONAL LABELS")
     table = calibration["reliability"]
     data = CategoryChartData()
     data.categories = [row["bin"] for row in table]
@@ -515,6 +569,12 @@ def slide_honest_ui(deck):
     background(slide, WHITE)
     title(slide, "An interface that does not overstate")
     checked, total = gold_progress()
+    human, model = label_counts()
+    counted = (f"It says how many of the {total} gold labels a person gave ({human}) and "
+               f"how many a second model gave ({model}), instead of calling them all checked."
+               if model else
+               f"It shows how many of the {total} gold pairs a human has checked "
+               f"({checked} today) and stays provisional until every one is.")
     cards = [
         ("Two kinds of score", "A calibrated strategy shows a percentage and a likely, "
          "borderline or unlikely band. The others show a bare relative number and a "
@@ -522,12 +582,11 @@ def slide_honest_ui(deck):
         ("No sum without a calibration", "The recognition panel will not add up "
          "ECTS for a strategy without a fitted calibration. Summing display values "
          "would be arithmetic on the wrong thing."),
-        ("Provisional says so", "While a calibration rests on machine labels, every "
+        ("Provisional says so", "While a calibration rests on labels that are not all "
+         "a person's, every "
          "probability and the ECTS estimate carry a warning. The flag is read from "
          "the calibration file, not typed into the interface."),
-        ("The evaluation page counts", f"It shows how many of the {total} gold pairs "
-         f"a human has checked ({checked} today) and stays provisional until every "
-         "one is."),
+        ("The evaluation page counts", counted),
     ]
     for index, (name, detail) in enumerate(cards):
         col, row = index % 2, index // 2
@@ -627,24 +686,25 @@ def slide_limits(deck):
 
 
 def main() -> int:
-    results, human = load_results()
-    provisional = not human
+    results, complete = load_results()
+    provisional = not complete
+    tag = badge_text(provisional)
     deck = Presentation()
     deck.slide_width, deck.slide_height = Emu(12192000), Emu(6858000)  # 16:9
     slide_title(deck)
     slide_problem(deck)
-    slide_pipeline(deck)
+    slide_pipeline(deck, results)
     slide_demo(deck)
-    slide_gold(deck, provisional)
-    slide_results(deck, results, provisional)
-    slide_reranker(deck, provisional)
+    slide_gold(deck, tag)
+    slide_results(deck, results, tag)
+    slide_reranker(deck, tag)
     slide_recognition(deck, provisional)
     slide_honest_ui(deck)
-    slide_errors(deck, provisional)
+    slide_errors(deck, tag)
     slide_engineering(deck)
     slide_limits(deck)
     deck.save(OUT)
-    state = "PROVISIONAL numbers" if provisional else "numbers from checked labels"
+    state = tag or "numbers from human labels"
     print(f"wrote {OUT.relative_to(REPO_ROOT)} with {state}")
     return 0
 

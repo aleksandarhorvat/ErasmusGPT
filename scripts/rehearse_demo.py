@@ -9,10 +9,10 @@ or let the script start the stack and time the boot itself:
     python scripts/rehearse_demo.py --start
 
 It goes through nginx on :8080, the same path the browser takes, and runs the steps of
-docs/07-demo-script.md in order: the page loads, the API reports the real matcher with
-its models, a whole programme matches with `hybrid`, the evidence for Computer networks
-is there, the recognition estimate is calibrated, `hybrid+ce` finishes inside the UI's
-timeout, and the evaluation page has its reports.
+docs/07-demo-script.md: the page loads, the API reports the real matcher with its
+models, a whole programme matches with `hybrid`, the evidence for Computer networks is
+there, TU Delft matches too, the recognition estimate is calibrated, `hybrid+ce`
+finishes inside the UI's timeout, and the evaluation page has its reports.
 
 It also tries to reach huggingface.co. For the rehearsal that is supposed to fail: if it
 succeeds the network is up, and a demo that works with the network up proves nothing
@@ -33,6 +33,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 HOME = "uns-pmf-informatics-bsc"
 HOST = "utwente-tcs-bsc"
+UNSEEN_HOST = "tudelft-cse-bsc"          # never evaluated or tuned on: demo step 5
+UNSEEN_PAIR = ("Operating systems 1", "Operating Systems")
 EVIDENCE_COURSE = "Computer networks"
 FAST_LIMIT_S = 5.0     # hybrid over a whole programme; measured at about 0.1 s
 UI_TIMEOUT_S = 150.0   # MATCH_TIMEOUT_MS in frontend/src/lib/api.ts
@@ -146,6 +148,22 @@ def run(base: str, start: bool, wait_s: float) -> list[Step]:
     evidence.detail = (f"top match {top['host_course']['title']!r}" if top
                        else "course or match missing")
 
+    unseen = step("match against TU Delft, never evaluated or tuned on")
+    if UNSEEN_HOST in programmes:
+        body = {"home_programme_id": HOME, "host_programme_id": UNSEEN_HOST,
+                "strategy": "hybrid", "top_k": 5}
+        began = time.perf_counter()
+        delft = get_json(f"{api}/match", body)
+        unseen.seconds = time.perf_counter() - began
+        home_title, expected = UNSEEN_PAIR
+        row = next((r for r in delft["results"] if r["home_course"]["title"] == home_title),
+                   None)
+        titles = [m["host_course"]["title"] for m in row["matches"]] if row else []
+        unseen.ok = expected in titles[:1] and unseen.seconds < FAST_LIMIT_S
+        unseen.detail = f"{home_title} -> {titles[0] if titles else 'nothing'}"
+    else:
+        unseen.detail = f"{UNSEEN_HOST} is not loaded"
+
     recognition = step("recognition estimate on the default strategy")
     body = {"home_programme_id": HOME, "host_programme_id": HOST, "strategy": "hybrid",
             "ects_budget": home.get("total_ects") or 180}
@@ -171,8 +189,9 @@ def run(base: str, start: bool, wait_s: float) -> list[Step]:
     page_body = get_json(f"{api}/evaluation")
     evaluation.seconds = time.perf_counter() - began
     evaluation.ok = bool(page_body["reports"])
-    evaluation.detail = (f"{', '.join(page_body['reports'])}; gold "
-                         f"{page_body['gold_checked']}/{page_body['gold_total']} checked")
+    evaluation.detail = (f"{len(page_body['reports'])} reports; gold "
+                         f"{page_body.get('gold_human', 0)} human + "
+                         f"{page_body.get('gold_model', 0)} model of {page_body['gold_total']}")
     return steps
 
 

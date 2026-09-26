@@ -9,11 +9,15 @@ be worse than no page.
 from __future__ import annotations
 
 import csv
+import json
+import logging
 
 from fastapi import APIRouter, Depends
 
 from app.api.deps import Settings, get_settings
 from app.schemas import EvaluationResponse
+
+log = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/evaluation", tags=["evaluation"])
 
@@ -43,9 +47,31 @@ def is_provisional(checked: int, total: int) -> bool:
     return total == 0 or checked < total
 
 
+def label_sources(settings: Settings, checked: int) -> tuple[int, int]:
+    """(rows labelled by a person, rows labelled by a model) among the checked rows.
+
+    `checked=yes` only says a row has its final label, not who gave it. Since
+    2026-09-26 part of the gold set was labelled by a second model at Person A's
+    decision, recorded in data/gold/provenance.json. Without that file every checked
+    row is a human one, which was true before it existed.
+    """
+    path = settings.data_dir / "gold" / "provenance.json"
+    if not path.is_file():
+        return (checked, 0)
+    try:
+        counts = json.loads(path.read_text(encoding="utf-8")).get("counts", {})
+        model = int(counts.get("model", 0))
+    except (OSError, ValueError, TypeError, AttributeError):
+        log.warning("ignoring unreadable %s", path)
+        return (checked, 0)
+    model = max(0, min(model, checked))
+    return (checked - model, model)
+
+
 @router.get("", response_model=EvaluationResponse)
 def evaluation(settings: Settings = Depends(get_settings)) -> EvaluationResponse:
     checked, total = _gold_progress(settings)
+    human, model = label_sources(settings, checked)
     reports = sorted(p.name for p in settings.report_dir.glob("*.md")) \
         if settings.report_dir.is_dir() else []
 
@@ -63,6 +89,8 @@ def evaluation(settings: Settings = Depends(get_settings)) -> EvaluationResponse
         provisional=is_provisional(checked, total),
         gold_checked=checked,
         gold_total=total,
+        gold_human=human,
+        gold_model=model,
         columns=columns,
         rows=rows,
         reports=reports,

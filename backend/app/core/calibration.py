@@ -42,9 +42,10 @@ def calibrated_strategies(settings: Settings) -> set[Strategy]:
 def provisional_strategies(settings: Settings) -> set[Strategy]:
     """Calibrations fitted on machine labels rather than human-checked ones.
 
-    `fit_calibration.py` stamps `label_source` into the file. Until Person A's reading
-    pass lands, every calibration is provisional and the UI has to say so, or we present
-    a model's own guesses as a measured probability.
+    `fit_calibration.py` stamps `label_source` into the file and starts it with
+    PROVISIONAL while any of its labels are not a person's: first the pre-labels, then a
+    partial human pass, and since 2026-09-26 a gold set partly labelled by a second model.
+    The UI has to say so, or it presents a model's judgement as a measured probability.
     """
     directory = settings.data_dir / "calibration"
     if not directory.is_dir():

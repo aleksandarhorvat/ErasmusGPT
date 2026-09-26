@@ -54,21 +54,30 @@ display values is arithmetic on the wrong thing.
 
 ## Why is `hybrid` the default when the proposal promised a cross-encoder?
 
-ADR-0005, and it was amended once. The reranker originally replaced the retrieval order
-and measured worst of four. Person A found that fusing it by RRF instead, the same way
-BM25 and dense are fused, makes it level. `hybrid` stays the default because it is level
-and about 400 times cheaper per query (2 ms against about 850 ms), not because the
-reranker is bad.
+ADR-0005, amended as the numbers came in. The reranker originally replaced the retrieval
+order and measured worst of four. Person A found that fusing it by RRF instead, the same
+way BM25 and dense are fused, makes it level, and the final labels confirm it: against
+Twente TCS both have P@1 0.78 and Recall@5 0.83 and 0.82. `hybrid` stays the default
+because it is level and about 300 times cheaper per query (3 ms against about 860 ms),
+not because the reranker is bad.
 
 The honest framing is that the finding is about **how** to combine a reranker rather than
 whether to have one, and that is a better result than the one we set out to get.
 
 ## How do you know the numbers are not made up?
 
-We do not claim them yet. `GET /api/v1/evaluation` and the "how well does this work?"
-panel report how far the human labelling pass has got. Today that is 0 of 1142 pairs, and
-the panel says every figure in `eval/report/` came from labels a model wrote about our own
-retrieval, so they can choose between settings but cannot be reported as results.
+They rest on a gold set of 1142 pooled pairs, and we say exactly who labelled it: 680
+rows checked by one of us with the model's proposal shown, and 462 labelled by a second
+model (Claude) and not checked by a person, because we ran out of time. That split is in
+`data/gold/provenance.json`, in every report, on the evaluation page and on the limits
+slide. `GET /api/v1/evaluation` returns it as `gold_human` and `gold_model`, so the page
+cannot say "checked by a human" about rows no human checked.
+
+The expected follow-up is "then how good is the model as a labeller?". On the 30 pairs
+Aleksandar labelled blind, Claude agrees with him at weighted kappa 0.52; the two of us
+agree at 0.73, but on only 8 shared pairs. And with the proposal visible Aleksandar
+changed 2.2 % of labels, against 33 % disagreement when he labelled blind, which is
+anchoring. We report both instead of choosing the flattering one.
 
 The gold set is built the other way round from how it looks: a model pre-labels, a human
 reads every row and corrects it, and the two files are kept separate so the correction
@@ -92,5 +101,6 @@ app work from a checkout and serve an empty list inside the image.
 Fine-tune the reranker on the gold set, which is the version where the original claim
 could still hold. Add a host university outside the two Twente catalogues, because the
 gold set currently measures generalisation across programmes rather than across
-institutions. And refit both calibrations on the checked labels: today they are fitted
-on the model's pre-labels, so the probabilities are flagged as provisional.
+institutions. And finish the human check of the 462 model-labelled rows (about an hour)
+plus the 22 cold pairs only a model has labelled, so kappa covers all 30 pairs and the
+calibration stops being flagged as provisional.

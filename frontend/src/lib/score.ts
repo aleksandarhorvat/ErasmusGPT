@@ -52,7 +52,7 @@ export function scoreTitle(kind: ScoreKind, pct: number, provisional: boolean): 
   }
   const base = `Estimated ${pct}% chance a coordinator would recognise this pair.`
   return provisional
-    ? `${base} Fitted on machine labels so far, not on checked ones.`
+    ? `${base} Fitted on a gold set that is partly model-labelled, so provisional.`
     : base
 }
 

@@ -68,7 +68,7 @@ evaluation story is "the cross-encoder measurably beats the naive approach":
 
 **`hybrid` is the default** (ADR-0005). The proposal expected `hybrid+ce` to win. Since
 the reranker is fused into the ranking by RRF rather than replacing it, it is level with
-`hybrid` on the provisional labels, and it costs about 400 times more per query, so the
+`hybrid` on the final labels, and it costs about 300 times more per query, so the
 cheaper one is served. The reranker stays selectable because that comparison is the
 project's main result. See `eval/report/ablations.md` and ADR-0005.
 
