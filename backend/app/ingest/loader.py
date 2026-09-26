@@ -45,7 +45,13 @@ class CurriculumStore:
             log.error("no *.json curricula found in %s", self.dir)
             return
         for path in files:
-            self._load_file(path)
+            # One malformed file must not stop the service booting: skip it, loudly,
+            # and serve the rest (B's audit, 2026-09-26).
+            try:
+                self._load_file(path)
+            except (OSError, ValueError, KeyError, TypeError) as error:
+                log.error("skipping curriculum %s: %s", path.name, error)
+        self._order_programmes()
         log.info(
             "loaded %d programmes (%d courses) from %s",
             len(self._programmes),
@@ -55,6 +61,9 @@ class CurriculumStore:
 
     def _load_file(self, path: Path) -> None:
         data = json.loads(path.read_text(encoding="utf-8"))
+        if data["programme_id"] in self._programmes:
+            raise ValueError(f"programme_id {data['programme_id']!r} is already loaded "
+                             "from another file")
         institution_id = data["institution_id"]
         courses: list[CourseSummary] = []
         for raw in data.get("courses", []):
@@ -83,6 +92,31 @@ class CurriculumStore:
             total_ects=data.get("total_ects"),
         )
         self._programmes[summary.programme_id] = Programme(summary, courses, data)
+
+    def _order_programmes(self) -> None:
+        """List the home programme first, then partners in the order of partners.json.
+
+        `data/partners.json` ranks partners by ARWU band and then by distance from Novi
+        Sad. File order used to decide it, which put whatever sorted first on top.
+        Institutions the file does not name go last, alphabetically.
+        """
+        path = self.dir.parent / "partners.json"
+        home: list[str] = []
+        ranked: list[str] = []
+        if path.exists():
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+                home = list(data.get("home", []))
+                ranked = [p["institution_id"] for p in data.get("partners", [])]
+            except (OSError, ValueError, KeyError, TypeError) as error:
+                log.error("ignoring unreadable %s: %s", path, error)
+        order = {institution: index for index, institution in enumerate(home + ranked)}
+
+        def key(item: tuple[str, Programme]) -> tuple[int, str]:
+            institution = item[1].raw.get("institution_id", "")
+            return (order.get(institution, len(order)), item[0])
+
+        self._programmes = dict(sorted(self._programmes.items(), key=key))
 
     # --- read API -----------------------------------------------------------
     def list_programmes(self) -> list[ProgrammeSummary]:

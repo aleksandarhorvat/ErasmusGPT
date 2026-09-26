@@ -143,9 +143,29 @@ def test_pair_budget_is_per_request_and_bounds_a_whole_programme(
     assert matcher.reranker._model.pairs_seen - before <= MAX_PAIRS_PER_REQUEST
 
 
-def test_exhausted_budget_still_returns_top_k(matcher: PipelineMatcher) -> None:
-    matcher._pair_budget = 0
+def test_no_rerank_allowance_still_returns_top_k(matcher: PipelineMatcher) -> None:
     home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
-    candidates = matcher._match_one(home.course_uid, "utwente-tcs-bsc", "hybrid+ce", 5)
+    candidates = matcher._match_one(home.course_uid, "utwente-tcs-bsc", "hybrid+ce", 5,
+                                    rerank_limit=0)
     assert len(candidates) == 5
     assert [c.rank for c in candidates] == [1, 2, 3, 4, 5]
+
+
+def test_a_course_past_the_budget_scores_like_one_within_it(
+    matcher: PipelineMatcher,
+) -> None:
+    """Unreranked candidates keep their retrieval rank in both lists, so the fused score
+    of an unreranked course is on the same scale as a reranked one, not half of it."""
+    home = matcher.get_courses("uns-pmf-informatics-bsc")[0]
+    full = matcher._match_one(home.course_uid, "utwente-tcs-bsc", "hybrid+ce", 5)
+    none = matcher._match_one(home.course_uid, "utwente-tcs-bsc", "hybrid+ce", 5,
+                              rerank_limit=0)
+    assert none[0].score > 0.5 * full[0].score + 1e-9
+    assert none[0].score <= full[0].score * 1.5
+
+
+def test_blended_scores_never_rise_down_the_list(matcher: PipelineMatcher) -> None:
+    for home in matcher.get_courses("uns-pmf-informatics-bsc")[:10]:
+        scores = [c.score for c in matcher._match_one(home.course_uid, "utwente-tcs-bsc",
+                                                      "hybrid+ce", 25)]
+        assert scores == sorted(scores, reverse=True)

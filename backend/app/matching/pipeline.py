@@ -179,8 +179,6 @@ class PipelineMatcher:
         self.documents: dict[str, dict[str, str]] = {}
         # course_uid -> (sentences, one L2-normalised row each), for evidence (S4-A3).
         self.sentences: dict[str, tuple[list[str], np.ndarray]] = {}
-        # Reranker pairs left in the current request; reset by the two public entry points.
-        self._pair_budget = MAX_PAIRS_PER_REQUEST
         self._warm()
 
     def _warm(self) -> None:
@@ -270,9 +268,15 @@ class PipelineMatcher:
         raise KeyError(course_uid)
 
     def _retrieve(
-        self, home_uid: str, host_programme_id: str, strategy: Strategy, n: int
+        self, home_uid: str, host_programme_id: str, strategy: Strategy, n: int,
+        rerank_limit: int | None = None,
     ) -> list[tuple[str, float]]:
-        """Ranked (course_uid, score) for one home course, before any reranking."""
+        """Ranked (course_uid, score) for one home course, reranked for `hybrid+ce`.
+
+        `rerank_limit` caps how many of this course's candidates the cross-encoder
+        scores; None means all of them. It is an argument rather than state on the
+        matcher, so concurrent requests cannot spend each other's allowance.
+        """
         dense_index = self.indexes[host_programme_id]
         bm25_index = self.lexical[host_programme_id]
         if strategy == "dense":
@@ -300,13 +304,14 @@ class PipelineMatcher:
         # three, not a veto (eval/report/ablations.md).
         pairs = [(uid, self.documents[host_programme_id][uid]) for uid, _ in fused]
         query = rerank_query(self.store.get_course(home_uid).title, self._document(home_uid))
-        if self._pair_budget < len(pairs):
-            # Over budget: keep the fused order for the rest rather than risk a timeout.
-            kept = self.reranker.rerank(query, pairs[:self._pair_budget], len(pairs))
-            self._pair_budget = 0
-            return self._blend(fused, kept, n)
-        self._pair_budget -= len(pairs)
-        reranked = self.reranker.rerank(query, pairs, len(pairs))
+        limit = len(pairs) if rerank_limit is None else max(0, min(rerank_limit, len(pairs)))
+        reranked = self.reranker.rerank(query, pairs[:limit], limit) if limit else []
+        # Candidates past the limit keep their retrieval order in the reranker's list, as
+        # if the reranker agreed with retrieval. Leaving them out would score them on
+        # one list instead of two, halve their fused score, and collapse the calibrated
+        # probability for every course past the budget (B's audit, 2026-09-26).
+        seen = {uid for uid, _ in reranked}
+        reranked += [(uid, 0.0) for uid, _ in fused if uid not in seen]
         return self._blend(fused, reranked, n)
 
     def _blend(
@@ -321,17 +326,22 @@ class PipelineMatcher:
         cross-encoder logit are not on a comparable scale.
         """
         lists = [[uid for uid, _ in retrieved], [uid for uid, _ in reranked]]
-        fused = reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=n)
+        fused = reciprocal_rank_fusion(lists, k=self.settings.rrf_k, top_n=len(retrieved))
 
-        # RRF scores are coarse: two candidates that swap one rank differ by about
-        # 0.0003, and candidates at the same pair of ranks are exactly equal. The API
-        # then shows three matches at the same percentage and the ECTS estimate treats
-        # them as equally likely. Add a thousandth of the reranker's own score to break
-        # ties, small enough never to reorder the fusion.
+        # RRF scores are coarse: candidates at the same pair of ranks are exactly equal,
+        # and the API would show three matches at the same percentage. Ties are broken by
+        # the reranker's own score, by sorting on it, and the nudge added to the score is
+        # capped by the previous row so the list stays monotone: an additive nudge alone
+        # was larger than the RRF gaps deep in the list (B's audit, 2026-09-26).
         scores = dict(reranked)
-        return [
-            (uid, score + 1e-4 * scores.get(uid, 0.0)) for uid, score in fused
-        ]
+        ordered = sorted(fused, key=lambda item: (-item[1], -scores.get(item[0], 0.0)))
+        blended: list[tuple[str, float]] = []
+        for uid, score in ordered[:n]:
+            nudged = score + 1e-6 * scores.get(uid, 0.0)
+            if blended:
+                nudged = min(nudged, blended[-1][1])
+            blended.append((uid, nudged))
+        return blended
 
     def _candidate(
         self, home: CourseSummary, host_uid: str, score: float, rank: int, pct: int
@@ -361,7 +371,6 @@ class PipelineMatcher:
             raise NotImplementedError(f"strategy {strategy!r} lands in a later stage")
         if host_programme_id not in self.indexes:
             raise KeyError(host_programme_id)
-        self._pair_budget = MAX_PAIRS_PER_REQUEST
         return self._match_one(home_course_uid, host_programme_id, strategy, top_k)
 
     def _match_one(
@@ -370,11 +379,13 @@ class PipelineMatcher:
         host_programme_id: str,
         strategy: Strategy,
         top_k: int,
+        rerank_limit: int | None = None,
     ) -> list[MatchCandidate]:
-        """One home course against one programme. Spends the current pair budget."""
+        """One home course against one programme, reranking at most `rerank_limit`."""
         home = self.store.get_course(home_course_uid)
         started = time.perf_counter()
-        hits = self._retrieve(home_course_uid, host_programme_id, strategy, top_k)
+        hits = self._retrieve(home_course_uid, host_programme_id, strategy, top_k,
+                              rerank_limit)
         log.debug("%s query for %s took %.0f ms", strategy, home_course_uid,
                   (time.perf_counter() - started) * 1000)
         best = hits[0][1] if hits else 0.0
@@ -410,16 +421,19 @@ class PipelineMatcher:
         if host_programme_id not in self.indexes:
             raise KeyError(host_programme_id)
 
-        # One budget for the whole request, shared by every home course in it.
-        self._pair_budget = MAX_PAIRS_PER_REQUEST
+        # The request's pair budget is split evenly over its home courses, so every
+        # course gets the reranker on its best candidates instead of the first 60
+        # courses taking it all and the rest getting none.
+        per_course = max(top_k, MAX_PAIRS_PER_REQUEST // max(len(homes), 1))
         started = time.perf_counter()
         rows = [
-            (home, self._match_one(home.course_uid, host_programme_id, strategy, top_k))
+            (home, self._match_one(home.course_uid, host_programme_id, strategy, top_k,
+                                   per_course))
             for home in homes
         ]
         elapsed = (time.perf_counter() - started) * 1000
         log.info(
-            "%s: %d home courses in %.0f ms (%.0f ms/query, %d rerank pairs left)",
-            strategy, len(rows), elapsed, elapsed / max(len(rows), 1), self._pair_budget,
+            "%s: %d home courses in %.0f ms (%.0f ms/query, rerank limit %d per course)",
+            strategy, len(rows), elapsed, elapsed / max(len(rows), 1), per_course,
         )
         return rows
