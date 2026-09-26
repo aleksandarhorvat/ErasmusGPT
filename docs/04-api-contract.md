@@ -17,7 +17,7 @@ Base path: `/api/v1`. All responses are JSON. Errors follow FastAPI's
   { "programme_id": "uns-pmf-informatics-bsc",
     "institution_name": "University of Novi Sad, Faculty of Sciences",
     "programme_name": "BSc Informatics", "country": "RS",
-    "level": "bachelor", "course_count": 54, "total_ects": 180 }
+    "level": "bachelor", "course_count": 50, "total_ects": 180 }
 ]
 ```
 
@@ -68,7 +68,9 @@ Response:
 ```
 
 Rules:
-- `results` is ordered like the home programme (year, semester, code), not by score.
+- `results` is in the order of the home curriculum file, not by score. (Earlier text
+  said year, semester, code; neither matcher ever sorted, and study_path() picks
+  electives in file order, so the file order is the contract.)
 - `matches` is ordered by `rank` ascending, length <= `top_k`, possibly 0.
 - `score` is whatever the active strategy produces (cosine, RRF, or cross-encoder
   logit passed through a sigmoid). Never compare raw scores across strategies in the
@@ -93,7 +95,7 @@ Rules:
   likely, borderline and unlikely when summarising a whole programme; the mapping is
   `BUCKET_OF_CONFIDENCE`. One threshold, two vocabularies, no third set of cut-offs.
 - `evidence` may be `null` until S4-A3 lands.
-- Long requests: matching a full 54-course programme with `hybrid+ce` on CPU can take
+- Long requests: matching a full 50-course programme with `hybrid+ce` on CPU can take
   ~10-30 s. The UI must show progress; do not add a timeout below 120 s.
 
 ## `POST /api/v1/match/course`

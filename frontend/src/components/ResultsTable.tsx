@@ -67,7 +67,9 @@ function Compare({
 }) {
   const other = strategies.find((s) => s.id !== current)?.id ?? 'dense'
   const [against, setAgainst] = useState<Strategy>(other)
-  const [result, setResult] = useState<MatchCandidate[] | null>(null)
+  // The result keeps the strategy it was produced by, so its scores are always formatted
+  // for that strategy and never for whatever the selector shows now.
+  const [result, setResult] = useState<{ strategy: Strategy; matches: MatchCandidate[] } | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -75,15 +77,15 @@ function Compare({
     setAgainst(strategy)
     setBusy(true)
     setError(null)
+    setResult(null)
     try {
-      setResult(
-        await api.matchCourse({
-          home_course_uid: row.home_course.course_uid,
-          host_programme_id: hostProgrammeId,
-          strategy,
-          top_k: 5,
-        }),
-      )
+      const matches = await api.matchCourse({
+        home_course_uid: row.home_course.course_uid,
+        host_programme_id: hostProgrammeId,
+        strategy,
+        top_k: 5,
+      })
+      setResult({ strategy, matches })
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -107,14 +109,26 @@ function Compare({
         </button>
       </div>
       {error && <p className="error">{error}</p>}
-      {result && (
-        <ol className="matches">
-          {result.length === 0 && <li><em className="hint">no candidate</em></li>}
-          {result.map((m) => (
-            <Candidate key={m.host_course.course_uid} m={m} info={strategies.find((s) => s.id === against)} />
-          ))}
-        </ol>
-      )}
+      {result && (() => {
+        const info = strategies.find((s) => s.id === result.strategy)
+        const weak = noSuitableMatch(scoreKind(info), result.matches.map((m) => m.score_pct))
+        return (
+          <>
+            {weak && (
+              <p>
+                <span className="nomatch">no suitable match</span>{' '}
+                <span className="hint">under {result.strategy} either</span>
+              </p>
+            )}
+            <ol className="matches">
+              {result.matches.length === 0 && <li><em className="hint">no candidate</em></li>}
+              {result.matches.map((m) => (
+                <Candidate key={m.host_course.course_uid} m={m} info={info} />
+              ))}
+            </ol>
+          </>
+        )
+      })()}
     </div>
   )
 }

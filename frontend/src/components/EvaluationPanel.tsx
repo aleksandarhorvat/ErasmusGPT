@@ -23,9 +23,10 @@ export default function EvaluationPanel() {
 
       {data.gold_model > 0 ? (
         <p className="hint">
-          Gold set: all {data.gold_checked} of {data.gold_total} pairs labelled.{' '}
-          <b>{data.gold_human}</b> were checked by a person, <b>{data.gold_model}</b> were
-          labelled by a second model (Claude) and not checked by a person.
+          Gold set: {data.gold_checked === data.gold_total ? 'all ' : ''}{data.gold_checked} of{' '}
+          {data.gold_total} pairs labelled. <b>{data.gold_human}</b> were checked by a person,{' '}
+          <b>{data.gold_model}</b> were labelled by a second model (Claude) and not checked by a
+          person.
         </p>
       ) : (
         <p className="hint">
@@ -46,7 +47,7 @@ export default function EvaluationPanel() {
 
       {data.provisional && data.gold_checked > 0 && (
         <p className="warn">
-          Human pass in progress. Any table below scores only the {data.gold_checked} checked
+          Labelling in progress. Any table below scores only the {data.gold_checked} labelled
           rows, which cover whichever home courses were labelled first, so it is not yet the
           number the report will quote. It becomes final when all {data.gold_total} rows are
           checked and the harness is re-run.

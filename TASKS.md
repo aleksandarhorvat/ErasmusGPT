@@ -20,7 +20,7 @@ lanes have passed their gate.
 | **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
 | **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`, now with a TU Delft step). Lane B code and labelling are done |
 | **Blocked on** | nothing. Left: `S7-AB2` rehearsal and screenshots (B), `S7-AB1` final read of the deck (both), optional `S6-A3` (A) |
-| **Last updated** | 2026-09-26 - B: label split on the evaluation page, final numbers in ADR-0005, README and deck, lane B gates ticked, stages 5 and 6 closed |
+| **Last updated** | 2026-09-26 - B: whole-repo audit, lane B bugs fixed, lane A findings listed in PROGRESS "For A" |
 
 ### Stage ladder
 
@@ -235,7 +235,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
-| `S6-B1` | done | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
+| `S6-B1` | done (screenshots move to `S7-AB2`) | README final pass: screenshots, the evaluation table, one-command run instructions verified on a clean machine | someone who has never seen the repo runs it without asking you anything | Stage 5 |
 | `S6-B2` | done | Clean-machine test: `docker system prune -a`, fresh clone, `docker compose up --build`, time it, record the number in the README | the recorded time is real | `S6-B1` |
 | `S6-B3` | done | Accessibility/robustness sweep: empty results, unknown programme, backend down, very long course titles | no unhandled error in the console | - |
 | `S6-B4` | done | **Recognition summary panel.** Above the table: "about X of your 180 ECTS would likely be recognised, Y borderline, Z with no match", from `ects x p` over the rows. Colour-code each row by confidence band and show a "no suitable match" state instead of a weak top hit | the panel matches a hand-computed sum for one programme | `S6-A4`, `S3-B1` |

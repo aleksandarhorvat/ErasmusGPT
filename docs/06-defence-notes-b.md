@@ -21,7 +21,7 @@ That is not a hypothetical benefit. When the real pipeline first appeared it rai
 
 ## Why SQLite and not Postgres?
 
-ADR-0002. The dataset is five study programmes and 298 courses. The grading criterion is
+ADR-0002. The dataset is seven study programmes and 378 courses. The grading criterion is
 that somebody else can run this with minimal effort, and two compose services beat three.
 The curriculum JSON files are the source of truth, so the database is bookkeeping, not
 data: deleting the volume loses nothing. `app/db/ingest_log.py` uses it to tell "the same

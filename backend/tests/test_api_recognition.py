@@ -204,3 +204,55 @@ def test_a_budget_smaller_than_any_course_does_not_divide_by_zero() -> None:
     if response.status_code == 200:
         body = response.json()
         assert 0.0 <= body["expected_share"] <= 1.0
+
+
+# --- audit fixes, 2026-09-26 -------------------------------------------------
+
+
+def test_an_unknown_study_path_is_400_not_a_silent_whole_programme() -> None:
+    for module in ("No Such Module", "computer science"):
+        response = client.post("/api/v1/recognition", json={
+            "home_programme_id": HOME, "host_programme_id": HOST, "module": module,
+        })
+        assert response.status_code == 400, module
+    ok = post(module="Computer Science", ects_budget=180)
+    assert ok["module"] == "Computer Science"
+
+
+def test_an_empty_course_list_still_checks_the_host() -> None:
+    response = client.post("/api/v1/match", json={
+        "home_programme_id": HOME, "host_programme_id": "nope", "course_uids": [],
+    })
+    assert response.status_code == 404
+
+
+def test_the_root_answers_without_needing_a_cdn() -> None:
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code == 200
+    assert response.json()["health"].endswith("/health")
+
+
+def test_evaluation_survives_messy_files(tmp_path) -> None:
+    from app.api.deps import get_settings
+    from app.core.config import Settings
+
+    gold = tmp_path / "gold"
+    gold.mkdir()
+    # BOM, a short row with no checked cell, and an unreadable provenance file
+    (gold / "gold_pairs.csv").write_text(
+        "\ufeffhome_uid,host_uid,label,checked\na,b,1,yes\na,c,0\n", encoding="utf-8")
+    (gold / "provenance.json").write_text('{"counts": {"model": 1e999}}', encoding="utf-8")
+    report = tmp_path / "report"
+    report.mkdir()
+    (report / "results.csv").write_text("config,P@1\nhybrid\nbm25,0.8,extra\n",
+                                        encoding="utf-8")
+    app = client.app
+    app.dependency_overrides[get_settings] = lambda: Settings(
+        data_dir=tmp_path, report_dir=report)
+    try:
+        body = client.get("/api/v1/evaluation").json()
+    finally:
+        app.dependency_overrides.clear()
+    assert (body["gold_checked"], body["gold_total"]) == (1, 2)
+    assert body["gold_model"] == 0
+    assert body["rows"] == [{"config": "hybrid", "P@1": ""}, {"config": "bm25", "P@1": "0.8"}]

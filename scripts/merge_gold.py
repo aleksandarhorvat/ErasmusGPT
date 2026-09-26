@@ -20,6 +20,7 @@ so nothing done before the split is lost.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 from collections import Counter
 from pathlib import Path
@@ -50,6 +51,8 @@ def is_checked(row: dict[str, str]) -> bool:
 
 
 def main() -> int:
+    # No options; parsing exists so that --help prints this text instead of running.
+    argparse.ArgumentParser(description=__doc__.split("\n\n")[0]).parse_args()
     missing = [name for name, path in HALVES.items() if not path.exists()]
     if missing:
         print(f"no half for {', '.join(missing)}: run scripts/split_gold.py first")

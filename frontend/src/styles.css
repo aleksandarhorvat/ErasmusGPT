@@ -34,6 +34,10 @@ small { color: #7a7a85; }
 .badge.high { background: #d8f3dc; color: #1b4332; }
 .badge.medium { background: #fff3cd; color: #665200; }
 .badge.low { background: #f8d7da; color: #6b1f24; }
+/* Calibrated strategies: recognition bands from lib/score.ts bandOf(). */
+.badge.likely { background: #d8f3dc; color: #1b4332; }
+.badge.borderline { background: #fff3cd; color: #665200; }
+.badge.unlikely { background: #f8d7da; color: #6b1f24; }
 details summary { cursor: pointer; font-size: .8rem; color: #55555f; }
 .desc { font-size: .88rem; color: #3c3c46; margin: .35rem 0; max-width: 70ch; }
 
@@ -61,6 +65,11 @@ button.linkish { border: 0; background: none; padding: 0; text-align: left; colo
   .badge.high { background: #17362a; color: #86d9a8; }
   .badge.medium { background: #33290f; color: #e3c069; }
   .badge.low { background: #3a1d1f; color: #ef9b95; }
+  .badge.likely { background: #17362a; color: #86d9a8; }
+  .badge.borderline { background: #33290f; color: #e3c069; }
+  .badge.unlikely { background: #3a1d1f; color: #ef9b95; }
+  label, details summary { color: #b4bccb; }
+  select { color: #e6e9ef; }
 }
 
 /* --- recognition summary (S6-B4) --- */

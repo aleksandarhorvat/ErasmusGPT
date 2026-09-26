@@ -44,6 +44,12 @@ def match_programme(
                 ),
             )
         if not request.course_uids:
+            try:
+                matcher.get_courses(request.host_programme_id)
+            except KeyError as exc:
+                raise HTTPException(
+                    status_code=404, detail=f"Unknown programme: {request.host_programme_id}"
+                ) from exc
             return MatchResponse(
                 home_programme_id=request.home_programme_id,
                 host_programme_id=request.host_programme_id,

@@ -41,6 +41,10 @@ export default function App() {
   const [browsing, setBrowsing] = useState<string | null>(null)
   const [showEval, setShowEval] = useState(false)
   const [elapsed, setElapsed] = useState(0)
+  const [recognising, setRecognising] = useState(false)
+  // Bumped whenever the inputs change or a new run starts, so a late answer for an
+  // earlier run (the recognition request in particular) is dropped instead of shown.
+  const run = useRef(0)
   const timer = useRef<number | null>(null)
 
   useEffect(() => {
@@ -101,10 +105,12 @@ export default function App() {
   }, [phase])
 
   async function runMatch() {
+    const id = ++run.current
     setPhase('matching')
     setError(null)
     setResult(null)
     setRecognition(null)
+    setRecognising(false)
     setBrowsing(null)
     try {
       const matched = await api.match({
@@ -113,32 +119,34 @@ export default function App() {
         strategy,
         top_k: 5,
       })
+      if (id !== run.current) return
       setResult(matched)
-      try {
-        setRecognition(
-          await api.recognition({
-            home_programme_id: home,
-            host_programme_id: host,
-            strategy,
-            module: module || null,
-            ects_budget: programmes.find((p) => p.programme_id === home)?.total_ects ?? null,
-          }),
-        )
-      } catch {
-        setRecognition(null) // the table is the deliverable; the summary is a bonus
-      }
       setPhase('ready')
     } catch (e) {
+      if (id !== run.current) return
       setError((e as Error).message)
       setPhase('ready')
+      return
     }
+    // The table is the deliverable and is already on screen; the summary follows on its
+    // own, without holding the controls or the "Matching" timer.
+    setRecognising(true)
+    api.recognition({
+      home_programme_id: home,
+      host_programme_id: host,
+      strategy,
+      module: module || null,
+      ects_budget: programmes.find((p) => p.programme_id === home)?.total_ects ?? null,
+    })
+      .then((summary) => { if (id === run.current) setRecognition(summary) })
+      .catch(() => { if (id === run.current) setRecognition(null) })
+      .finally(() => { if (id === run.current) setRecognising(false) })
   }
 
   function swap() {
     setHome(host)
     setHost(home)
-    setResult(null)
-    setRecognition(null)
+    clear()
   }
 
   function exportCsv() {
@@ -149,9 +157,12 @@ export default function App() {
   }
 
   const browsed = programmes.find((p) => p.programme_id === browsing) ?? null
-  const clear = () => {
+  function clear() {
+    run.current++
     setResult(null)
     setRecognition(null)
+    setRecognising(false)
+    setError(null)
   }
 
   return (
@@ -214,6 +225,7 @@ export default function App() {
         </p>
       )}
 
+      {recognising && <p className="hint">Working out the recognition estimate...</p>}
       {recognition && <RecognitionPanel data={recognition} />}
 
       {result && (

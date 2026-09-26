@@ -32,6 +32,7 @@ and is still unchecked there, so checks done before the split are not lost.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 from pathlib import Path
 
@@ -127,6 +128,8 @@ def minutes(rows: list[dict[str, str]]) -> int:
 
 
 def main() -> int:
+    # No options; parsing exists so that --help prints this text instead of running.
+    argparse.ArgumentParser(description=__doc__.split("\n\n")[0]).parse_args()
     if HALF_A.exists() and HALF_B.exists():
         gold = {key(r): r for r in read(GOLD)}
         half_a, half_b = read(HALF_A), read(HALF_B)
@@ -144,7 +147,8 @@ def main() -> int:
     for path, half, extra in ((HALF_A, half_a, 0), (HALF_B, half_b, cold)):
         homes = len({r["home_uid"] for r in half})
         positives = sum(r["llm_label"] in {"1", "2"} for r in half)
-        note = f" + {cold} cold pairs, about {round(extra * SECONDS_COLD / 60)} min" if extra else ""
+        cold_min = round(extra * SECONDS_COLD / 60)
+        note = f" + {cold} cold pairs, about {cold_min} min" if extra else ""
         print(f"{path.name}: {len(half)} rows over {homes} home courses, "
               f"{positives} proposed 1 or 2, about {minutes(half)} min{note}")
     return 0

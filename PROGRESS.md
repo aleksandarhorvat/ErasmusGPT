@@ -14,6 +14,96 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [B] Whole-repo audit: lane B bugs fixed, lane A findings listed
+
+**Who:** Person B
+**Stage:** 7
+**Commit:** `[B] fix what the repo audit found in lane b`
+**Tasks touched:** `S7-AB2` (prep), fixes across lane B
+
+### How it was checked
+Four independent reviews (backend and packaging, matching and eval, frontend and
+annotator, docs against data), then a fresh clone on Python 3.11 with the pinned ruff,
+the full test suite, and the UI driven headlessly in Chromium against the stub backend,
+light and dark. The real models could not be downloaded there, so the real pipeline was
+exercised only with patched encoders; the offline Docker run is still `S7-AB2`.
+
+### CONTRACT CHANGE
+- `POST /recognition` answers 400 for a `module` that is not a study path of the home
+  programme. It used to accept it (including a wrong capitalisation), estimate over every
+  course, and echo the module back as if applied.
+- `results` order: `docs/04-api-contract.md` now says curriculum-file order, which is
+  what both matchers always did. The old "year, semester, code" was never implemented.
+- `GET /` answers with a small JSON instead of redirecting to `/docs`, whose page loads
+  from a CDN and was blank offline.
+
+### Fixed (lane B)
+- Score badges for calibrated strategies had no colour: `styles.css` styled
+  high/medium/low but not likely/borderline/unlikely, which is what the default `hybrid`
+  uses. Light and dark rules added.
+- Recognition no longer holds the page: the table appears and the controls are enabled again when
+  `/match` returns; the summary loads on its own. A late answer for an earlier run is
+  dropped. `/recognition` asks for 5 candidates instead of 1, because `summarise()` takes
+  the most probable, which is not always rank 1.
+- Compare kept the previous strategy's scores and formatted them for the new one after a
+  failed run; the result now carries its strategy. Compare also applies the 20 % floor.
+- 422 errors showed as "[object Object]"; the list is joined into a sentence.
+- CSV export: a `no_suitable_match` column, and a lone carriage return is quoted.
+- An old error stayed on screen after the inputs changed.
+- Dark mode: labels, dropdown text and "why" toggles were grey on dark (about 2.4:1).
+- Evaluation page said "all" pairs labelled while labelling was still partial.
+- `/evaluation`: a short CSV row, a BOM, an unreadable file or an overflowing number in
+  `provenance.json` gave a 500; each now degrades to what it can read. `/match` with an
+  empty `course_uids` now still returns 404 for an unknown host.
+- `last_seen` in the ingest log never moved for unchanged files.
+- `split_gold.py --help` and `merge_gold.py --help` ran the scripts; `merge_gold` rewrote
+  `gold_pairs.csv`. They now print help.
+- CI smoke test also checks nginx's `/api` proxy. Inline empty favicon, so the offline
+  page has no failing request.
+- `.env.example` and README: model names and candidate depth are pinned in
+  `docker-compose.yml` (the calibration was fitted with them), so `.env` only carries the
+  two switches for Docker. README boot numbers (756 course vectors, about 4100
+  sentences), a copy-paste bug in the pre-commit commands, 7 programmes and 378 courses
+  in the defence notes, CONTEXT.md's "three configurations" and "~300 pairs/s" (measured
+  about 30), the stage 4 and 5 descriptions.
+
+Six new tests. 139 passed, ruff 0.8.4 clean, style and gold checks pass, frontend builds.
+
+### For A (found in your zone, not changed)
+Most important first. Numbers are from reproductions with patched encoders.
+1. **Rerank pair budget runs out mid-programme** (`pipeline.py` around 303). 1500 pairs
+   at 25 per course is 60 courses; from course 61 the reranker gets zero pairs and the
+   calibrated p collapses. KTH (79) and EPFL (78) hit it, PMF (50) does not. The budget
+   is also one mutable attribute on a shared matcher, so two concurrent `hybrid+ce`
+   requests drain each other's. Per-request or per-course budget fixes both.
+2. **Calibration fitted at a different depth than served** (`fit_calibration.py` around
+   195 against `pipeline.py` around 287): fitting ranks the whole host catalogue,
+   serving uses `candidate_top_n=25`. Small for `hybrid`, larger for `hybrid+ce`.
+3. **`dense-minilm` is not in the pool** (`make_pool.py` around 37), so its unjudged hits
+   count as 0. It is the baseline in the paired test, so the test is tilted towards the
+   pooled strategies. Worth one sentence in the report at least.
+4. **Calibration reliability is in-sample** and the docstring quotes grouped CV numbers
+   the code does not compute. `hybrid.json`'s 0.4-0.6 bin is 0.498 predicted against
+   0.342 observed (38 pairs); `docs/05-evaluation.md` quotes 0.48 against 0.48.
+5. **`_blend` tie-break** adds `1e-4 * ce` after sorting and never re-sorts; 1e-4 is also
+   larger than RRF gaps deep in the list, so a few rows come out non-monotone.
+6. **One malformed curriculum file stops the backend booting** (`ingest/loader.py`, no
+   per-file error handling); two files with one `programme_id` overwrite silently.
+7. Docs still saying every row was human-checked: `docs/05-evaluation.md` around 159,
+   `docs/03-data-schema.md` around 106 and 129, `docs/06-defence-notes-a.md` (still
+   provisional numbers throughout: 0.82/0.86, "28 queries", only `hybrid+ce` calibrated,
+   floor as future work), `docs/02-models.md` (400 times, "on provisional labels"),
+   `data/README.md` (3 curricula, no halves or provenance), `eval/report/errors.md` (the
+   floor is shipped, and one banned word is used there), `eval/README.md` (`--host-programmes`
+   and the AM run undocumented), TASKS `S6-A2` still says re-run pending.
+
+### Next
+- **Aleksandar:** `S7-AB2` on the demo laptop.
+- **Luka:** items 1 and 7 before the defence; 2 to 5 are at least worth a line in the
+  limits.
+
+---
+
 ## 2026-09-26 - [B] Final numbers on B's side, label split in the app, stages 5 and 6 closed
 
 **Who:** Person B

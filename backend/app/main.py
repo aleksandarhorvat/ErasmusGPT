@@ -6,7 +6,6 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
 
 from app.api.router import api_router
 from app.core.config import get_settings
@@ -58,6 +57,16 @@ app.include_router(api_router, prefix=settings.api_prefix)
 
 
 @app.get("/", include_in_schema=False)
-def root() -> RedirectResponse:
-    """Port 8000 is the API. Anyone who opens it in a browser wants the docs."""
-    return RedirectResponse(url="/docs")
+def root() -> dict[str, str]:
+    """Port 8000 is the API; the app is on :8080.
+
+    This used to redirect to /docs, but FastAPI's Swagger page loads its scripts from a
+    CDN, so on the offline demo laptop it rendered blank. A plain answer works anywhere.
+    """
+    return {
+        "service": "ErasmusGPT API",
+        "app": "http://localhost:8080",
+        "health": f"{settings.api_prefix}/health",
+        "openapi": "/openapi.json",
+        "docs": "/docs (needs a network connection for its scripts)",
+    }

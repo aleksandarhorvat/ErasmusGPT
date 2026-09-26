@@ -15,7 +15,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.core.config import Settings
-from app.db.models import IngestedProgramme
+from app.db.models import IngestedProgramme, _now
 from app.db.session import Base
 
 log = logging.getLogger(__name__)
@@ -60,6 +60,9 @@ def record_curricula(settings: Settings) -> dict[str, str]:
                     row.total_ects = float(data.get("total_ects") or 0.0)
                     outcome[data["programme_id"]] = "changed"
                 else:
+                    # onupdate only fires for a dirty row, so an unchanged file has to
+                    # touch last_seen itself or it would stay at the first boot's time.
+                    row.last_seen = _now()
                     outcome[data["programme_id"]] = "same"
             session.commit()
     except Exception:  # noqa: BLE001 - bookkeeping must never stop the app booting

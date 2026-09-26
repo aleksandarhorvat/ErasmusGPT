@@ -67,5 +67,7 @@ jobs:
           test "$count" -ge 2 || { docker compose logs backend; exit 1; }
       - name: The frontend must be served
         run: curl -fsS -o /dev/null http://localhost:8080/
+      - name: nginx must proxy /api to the backend, as the browser uses it
+        run: curl -fsS http://localhost:8080/api/v1/health
       - if: always()
         run: docker compose down -v

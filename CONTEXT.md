@@ -58,8 +58,9 @@ home course (title + description + outcomes + topics)
         highlight the best-matching sentence pair as evidence
 ```
 
-Three retrieval configurations must remain runnable side by side, because the whole
-evaluation story is "the cross-encoder measurably beats the naive approach":
+Four retrieval configurations must remain runnable side by side, because the evaluation
+compares them. The proposal's story was "the cross-encoder measurably beats the naive
+approach"; the measured result is below and in ADR-0005:
 
 - `bm25` - lexical only (naive baseline #1)
 - `dense` - bi-encoder only (naive baseline #2)
@@ -82,7 +83,7 @@ hit exactly the same code path.
 | Bi-encoder (primary) | `BAAI/bge-small-en-v1.5` | 33 M | 384-dim, strong BEIR score per MB, ~130 MB on disk, fast on CPU |
 | Bi-encoder (baseline) | `sentence-transformers/all-MiniLM-L6-v2` | 22.7 M | The obvious naive choice - we beat it, and say by how much |
 | Bi-encoder (optional, quality run) | `Alibaba-NLP/gte-modernbert-base` | 149 M | 8192-token context, MTEB 64.4 / BEIR 55.3, Apache-2.0 |
-| Cross-encoder (reranker) | `cross-encoder/ms-marco-MiniLM-L6-v2` | 22.7 M | The standard cheap reranker; ~300 pairs/s on a laptop CPU |
+| Cross-encoder (reranker) | `cross-encoder/ms-marco-MiniLM-L6-v2` | 22.7 M | The standard cheap reranker; measured about 30 pairs/s in the CPU container (25 pairs in about 860 ms) |
 | Cross-encoder (optional) | `mixedbread-ai/mxbai-rerank-base-v2` | 0.5 B | Stronger, Apache-2.0 - only for the Colab evaluation run, not the Docker demo |
 
 Hardware reality: one of us has an AMD RX 6700 XT (no CUDA), the other unknown, plus
@@ -196,8 +197,8 @@ file is authoritative, this is the one-paragraph summary.
 | 1 - Real data, real surface | two real curricula, one-command offline Docker run, a table in the browser (matches still fake) |
 | 2 - Dense retrieval | the first real NLP: bi-encoder embeddings + cosine, `strategy=dense` |
 | 3 - Lexical + hybrid | BM25 baseline, RRF fusion, calibrated scores, CSV export |
-| 4 - Cross-encoder rerank | `hybrid+ce` as the default, evidence sentences, side-by-side compare |
-| 5 - Gold set + evaluation | ~500 checked pairs over 40 home courses, metrics with confidence intervals, kappa, green CI |
+| 4 - Cross-encoder rerank | `hybrid+ce` built (the default became `hybrid`, ADR-0005), evidence sentences, side-by-side compare |
+| 5 - Gold set + evaluation | 1142 pooled pairs over 40 home courses (680 checked by a person, 462 labelled by a second model), metrics with confidence intervals, kappa, green CI |
 | 6 - Scale out + polish | >=4 host programmes, error analysis, verified clean-machine run |
 | 7 - Defence | slides, offline demo rehearsal, who answers which questions |
 

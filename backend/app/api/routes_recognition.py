@@ -33,6 +33,15 @@ def recognition(
         ) from exc
     if not courses:
         raise HTTPException(status_code=400, detail="That programme has no courses.")
+    modules = sorted({c.module for c in courses if c.module})
+    if request.module is not None and request.module not in modules:
+        # Accepting it would silently estimate over every course while echoing the
+        # module back, which reads as if the filter had been applied.
+        raise HTTPException(
+            status_code=400,
+            detail=(f"{request.module!r} is not a study path of {request.home_programme_id}. "
+                    f"Known: {', '.join(modules) or 'none'}."),
+        )
 
     # Match everything, then let Person A's study_path() pick the degree out of it: it
     # keeps the compulsory courses, then the chosen module, then electives up to the
@@ -42,7 +51,9 @@ def recognition(
             home_programme_id=request.home_programme_id,
             host_programme_id=request.host_programme_id,
             strategy=request.strategy,
-            top_k=1,
+            # summarise() takes the most probable candidate, which with the
+            # cosine-aware calibration is not always rank 1, so it needs more than one.
+            top_k=5,
         )
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=f"Unknown programme or course: {exc}") from exc

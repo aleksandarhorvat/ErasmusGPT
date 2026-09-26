@@ -133,6 +133,19 @@ export interface MatchBody {
 /** Matching a whole programme with a cross-encoder takes tens of seconds on CPU. */
 const MATCH_TIMEOUT_MS = 150_000
 
+/** FastAPI sends a string for our own errors and a list of {loc, msg} for 422s. */
+function detailText(detail: unknown): string | null {
+  if (typeof detail === 'string') return detail
+  if (Array.isArray(detail)) {
+    const parts = detail.map((d) =>
+      d && typeof d === 'object' && 'msg' in d
+        ? `${Array.isArray((d as { loc?: unknown }).loc) ? (d as { loc: unknown[] }).loc.slice(1).join('.') + ': ' : ''}${String((d as { msg: unknown }).msg)}`
+        : String(d))
+    return parts.length ? `Invalid request. ${parts.join('; ')}` : null
+  }
+  return null
+}
+
 async function request<T>(path: string, init?: RequestInit, timeoutMs = 20_000): Promise<T> {
   const abort = new AbortController()
   const timer = setTimeout(() => abort.abort(), timeoutMs)
@@ -143,8 +156,8 @@ async function request<T>(path: string, init?: RequestInit, timeoutMs = 20_000):
       ...init,
     })
     if (!response.ok) {
-      const body = (await response.json().catch(() => null)) as { detail?: string } | null
-      throw new Error(body?.detail ?? `HTTP ${response.status} ${response.statusText}`)
+      const body = (await response.json().catch(() => null)) as { detail?: unknown } | null
+      throw new Error(detailText(body?.detail) ?? `HTTP ${response.status} ${response.statusText}`)
     }
     return (await response.json()) as T
   } catch (e) {

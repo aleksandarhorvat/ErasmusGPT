@@ -19,11 +19,14 @@ docker compose up --build
 ```
 
 - UI: <http://localhost:8080>
-- API docs: <http://localhost:8000/docs>
+- API: <http://localhost:8000/api/v1/health>. The interactive docs at `/docs` load their
+  scripts from a CDN, so they need a network connection; `/openapi.json` does not.
 
-Everything is configured in `.env`. Compose reads that file by itself, so you never put
-variables in front of the command: `VAR=x docker compose up` is bash syntax and does
-nothing in PowerShell or CMD.
+The two switches, `MATCHER_IMPL` and `BAKE_MODELS`, are set in `.env`. Compose reads that
+file by itself, so you never put variables in front of the command: `VAR=x docker
+compose up` is bash syntax and does nothing in PowerShell or CMD. The model names and
+candidate depth are pinned in `docker-compose.yml`, because the calibration was fitted
+with them.
 
 `.env.example` ships with the fast settings, `MATCHER_IMPL=stub` and `BAKE_MODELS=0`:
 the build takes about a minute, skips the model download, and the app returns fake but
@@ -45,7 +48,8 @@ are 30 s. Builds after that are cached.
 
 First **startup** is slower than the one you will usually see. `data/.cache/` holds the
 embeddings and is git-ignored, so a fresh clone has none and the first boot encodes about
-596 course vectors and 3096 sentence vectors before the API answers. The healthcheck
+756 course vectors (378 courses, document and query side) and about 4100 sentence
+vectors before the API answers. The healthcheck
 allows five minutes for that. Later starts read the cache and are immediate.
 
 ### Offline
@@ -102,8 +106,8 @@ python scripts/check_style.py                  # writing style, CONTEXT.md secti
 ruff check backend eval scripts                # lint, including the 100-character line limit
 python backend/scripts/validate_curricula.py   # curricula parse and carry the fields
 python scripts/check_gold.py                   # gold set is well formed
-cd backend && pytest tests -q
-cd frontend && npm run build
+(cd backend && pytest tests -q)
+(cd frontend && npm run build)
 ```
 
 CI runs exactly these six, plus a smoke test that starts the whole stack. Run them all

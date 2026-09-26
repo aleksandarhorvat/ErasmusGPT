@@ -30,10 +30,16 @@ def _gold_progress(settings: Settings) -> tuple[int, int]:
     if not path.exists():
         return (0, 0)
     checked = total = 0
-    with path.open(encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            total += 1
-            checked += (row.get("checked", "").strip().lower() == "yes")
+    try:
+        # utf-8-sig: a file saved by Excel starts with a BOM, which would otherwise glue
+        # itself to the first column name.
+        with path.open(encoding="utf-8-sig") as handle:
+            for row in csv.DictReader(handle):
+                total += 1
+                checked += ((row.get("checked") or "").strip().lower() == "yes")
+    except (OSError, UnicodeDecodeError, csv.Error):
+        log.warning("cannot read %s; reporting the gold set as empty", path)
+        return (0, 0)
     return (checked, total)
 
 
@@ -61,7 +67,7 @@ def label_sources(settings: Settings, checked: int) -> tuple[int, int]:
     try:
         counts = json.loads(path.read_text(encoding="utf-8")).get("counts", {})
         model = int(counts.get("model", 0))
-    except (OSError, ValueError, TypeError, AttributeError):
+    except (OSError, ValueError, TypeError, AttributeError, OverflowError):
         log.warning("ignoring unreadable %s", path)
         return (checked, 0)
     model = max(0, min(model, checked))
@@ -79,10 +85,16 @@ def evaluation(settings: Settings = Depends(get_settings)) -> EvaluationResponse
     columns: list[str] = []
     path = settings.report_dir / RESULTS
     if path.is_file():
-        with path.open(encoding="utf-8") as handle:
-            reader = csv.DictReader(handle)
-            columns = list(reader.fieldnames or [])
-            rows = [dict(r) for r in reader]
+        try:
+            with path.open(encoding="utf-8-sig") as handle:
+                reader = csv.DictReader(handle)
+                columns = [c for c in (reader.fieldnames or []) if c]
+                # A short row gives None values and a long one a None key; the page wants
+                # a plain table of strings either way.
+                rows = [{c: (r.get(c) or "") for c in columns} for r in reader]
+        except (OSError, UnicodeDecodeError, csv.Error):
+            log.warning("cannot read %s; showing no results table", path)
+            columns, rows = [], []
 
     return EvaluationResponse(
         available=bool(rows),

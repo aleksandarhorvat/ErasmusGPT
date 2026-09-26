@@ -72,7 +72,7 @@ class Settings(BaseSettings):
 
     # pipeline knobs (also swept by eval/run_eval.py)
     candidate_top_n: int = 25
-    default_top_k: int = 5
+    default_top_k: int = 5  # unused; kept so an older .env that sets it still loads
     rrf_k: int = 60
     encode_batch_size: int = 32
     rerank_batch_size: int = 32

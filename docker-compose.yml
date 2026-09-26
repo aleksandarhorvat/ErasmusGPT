@@ -9,8 +9,10 @@ services:
     environment:
       # stub = instant fake matches (no models). real = the actual pipeline.
       MATCHER_IMPL: "${MATCHER_IMPL:-real}"
+      # Pinned, not read from .env: data/calibration/ was fitted with these models.
       BI_ENCODER: "bge-small"
       CROSS_ENCODER: "ms-marco-l6"
+      CANDIDATE_TOP_N: "25"
       # Must match the ./data mount below. Pinned so the two cannot drift apart.
       DATA_DIR: "/srv/data"
       REPORT_DIR: "/srv/eval-report"
