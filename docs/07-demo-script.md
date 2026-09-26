@@ -55,7 +55,10 @@ and switch to the screenshots.
 
 ## Fallback screenshots
 
-Save them as PNG in `docs/screenshots/` during the rehearsal, one per demo step:
+In `docs/screenshots/`, one per demo step. 1 to 6 were taken from the live stack with the
+real models on 2026-09-26 (before the hybrid description was corrected from "about 2 ms"
+to "about 3 ms"); 7 is the evaluation panel, which reads only files and looks the same
+with either matcher. Retake them if the UI changes before the defence:
 
 1. `1-health.png`: the page footer, matcher real and models loaded.
 2. `2-matches.png`: the results table for UNS PMF Informatics against Twente TCS.

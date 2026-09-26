@@ -14,6 +14,40 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [B] Offline rehearsal passed, screenshots, readable evaluation table
+
+**Who:** Person B
+**Stage:** 7
+**Commit:** `[B] record the offline rehearsal and add the demo screenshots`
+**Tasks touched:** `S7-AB2` (done), `S7-AB1` (defence notes)
+
+### Done
+- `S7-AB2`: on the demo laptop, first online and then with the network off,
+  `scripts/rehearse_demo.py` passed every step with the real models (matcher real,
+  models loaded, huggingface.co unreachable). `hybrid` over a whole programme 66 ms,
+  TU Delft 70 ms, recognition 0.1 s, `hybrid+ce` over a whole programme 40 s. Timings
+  in the README; cold boot not timed on that run.
+- Clicked through the live app as well: defaults, the Computer Science path against
+  TCS (about 90 of 180 ECTS, 15 no suitable match), evidence on Computer networks,
+  compare against `hybrid+ce`, TU Delft (about 127 of 180), the evaluation page. No
+  console errors.
+- `docs/screenshots/`: the 7 fallback screenshots named in `docs/07-demo-script.md`.
+- Evaluation page: `results.csv` shown as a readable table (two decimals, the 95 %
+  interval under each value, best per column in bold) instead of 17 raw columns.
+- `docs/06-defence-notes-b.md`: why a lower-ranked candidate can show a higher
+  percentage (rank is fused retrieval order, the percentage also uses the cosine;
+  sorting by it would be a learned ranking scored on its own training labels).
+
+### CONTRACT CHANGE
+Text only: the `hybrid` description in `backend/app/matching/interface.py` says "about
+3 ms per query" (final measurement) instead of "about 2 ms". Luka asked for it.
+
+### Next
+- **Both:** read the deck once end to end and rehearse the talk.
+- **Luka:** the "For A" list in the audit entry below.
+
+---
+
 ## 2026-09-26 - [B] Whole-repo audit: lane B bugs fixed, lane A findings listed
 
 **Who:** Person B

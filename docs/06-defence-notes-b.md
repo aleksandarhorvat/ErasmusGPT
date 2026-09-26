@@ -52,6 +52,22 @@ tooltip saying so. For the same reason the recognition panel refuses to give a
 whole-programme ECTS estimate for an uncalibrated strategy: summing `ects x score` over
 display values is arithmetic on the wrong thing.
 
+## Why does a lower-ranked candidate sometimes show a higher percentage?
+
+Because the rank and the percentage answer two different questions. The rank is the
+fused retrieval order: how strongly BM25 and the bi-encoder agree that the host course
+is close to yours. The percentage is the calibrated probability that a coordinator would
+sign the pair off, and its model uses the fused score **and** the plain cosine similarity
+of the two descriptions (Person A added the cosine because rank agreement alone gave
+Calculus and Software Diamond the same 68 %). So against TU Delft, Introduction to
+algebra can show 29 % at rank 2 and 41 % at rank 3.
+
+We could sort by the percentage, but that is a learned ranking fitted on the gold labels,
+and the evaluation would then score it on the same labels it was fitted on. The honest
+version needs held-out folds and more labels than we have. What we did instead: the
+recognition estimate uses the most probable of the five candidates, not rank 1, and the
+table says "no suitable match" when even that one is under 20 %.
+
 ## Why is `hybrid` the default when the proposal promised a cross-encoder?
 
 ADR-0005, amended as the numbers came in. The reranker originally replaced the retrieval

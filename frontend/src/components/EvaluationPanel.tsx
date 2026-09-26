@@ -4,6 +4,85 @@ import { api, type EvaluationResponse } from '../lib/api'
 // S5-B3. "How well does this work" needs to be one click away at the defence, and it
 // has to be honest about who wrote the labels behind the numbers: a person, or a model.
 
+const NOT_METRICS = new Set(['config', 'queries', 'ms_per_query'])
+
+function asNumber(value: string | undefined): number | null {
+  if (value === undefined || value.trim() === '') return null
+  const x = Number(value)
+  return Number.isFinite(x) ? x : null
+}
+
+/** results.csv as a table someone can read off a projector: two decimals, the 95 %
+ *  interval under each value, the best value per metric in bold. Falls back to the raw
+ *  file when it does not have the columns run_eval.py writes. */
+function ResultsTable({ columns, rows }: { columns: string[]; rows: Record<string, string>[] }) {
+  const metrics = columns.filter(
+    (c) => !NOT_METRICS.has(c) && !c.endsWith('_ci_low') && !c.endsWith('_ci_high'),
+  )
+  if (!columns.includes('config') || metrics.length === 0) {
+    return (
+      <div className="tablewrap">
+        <table>
+          <thead><tr>{columns.map((c) => <th key={c}>{c}</th>)}</tr></thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i}>{columns.map((c) => <td key={c}>{row[c]}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+  const best = Object.fromEntries(metrics.map((m) => [
+    m, Math.max(...rows.map((r) => asNumber(r[m]) ?? -Infinity)),
+  ]))
+  const queries = rows.find((r) => r.queries)?.queries
+  const ms = (value: string | undefined) => {
+    const x = asNumber(value)
+    return x === null ? (value ?? '') : x < 1 ? '<1' : String(Math.round(x))
+  }
+  return (
+    <div className="tablewrap">
+      <table className="metrics">
+        <thead>
+          <tr>
+            <th>Config</th>
+            {metrics.map((m) => <th key={m} className="num">{m}</th>)}
+            <th className="num">ms/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.config}>
+              <td><code>{row.config}</code></td>
+              {metrics.map((m) => {
+                const value = asNumber(row[m])
+                const low = asNumber(row[`${m}_ci_low`])
+                const high = asNumber(row[`${m}_ci_high`])
+                return (
+                  <td key={m} className="num">
+                    {value === null ? (row[m] ?? '') : value === best[m]
+                      ? <b>{value.toFixed(2)}</b> : value.toFixed(2)}
+                    {low !== null && high !== null && (
+                      <small className="ci">[{low.toFixed(2)}, {high.toFixed(2)}]</small>
+                    )}
+                  </td>
+                )
+              })}
+              <td className="num">{ms(row.ms_per_query)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="hint">
+        {queries ? `${queries} queries. ` : ''}Brackets: 95 % bootstrap interval over queries.
+        Bold: best value per column; the intervals overlap for almost every difference, which
+        is why <code>results.md</code> reports a paired test as well.
+      </p>
+    </div>
+  )
+}
+
 export default function EvaluationPanel() {
   const [data, setData] = useState<EvaluationResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -64,18 +143,7 @@ export default function EvaluationPanel() {
       )}
 
       {data.available ? (
-        <div className="tablewrap">
-          <table>
-            <thead>
-              <tr>{data.columns.map((c) => <th key={c}>{c}</th>)}</tr>
-            </thead>
-            <tbody>
-              {data.rows.map((row, i) => (
-                <tr key={i}>{data.columns.map((c) => <td key={c}>{row[c]}</td>)}</tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ResultsTable columns={data.columns} rows={data.rows} />
       ) : (
         <p className="hint">
           <code>eval/report/results.csv</code> does not exist yet, so there is no table to

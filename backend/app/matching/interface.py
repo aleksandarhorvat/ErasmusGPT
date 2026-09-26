@@ -25,7 +25,7 @@ STRATEGIES: dict[Strategy, tuple[str, str]] = {
     "hybrid": (
         "Hybrid (BM25 + dense, RRF)",
         "Reciprocal Rank Fusion of the lexical and dense candidate lists. The default: "
-        "level with the reranked version on quality and about 2 ms per query.",
+        "level with the reranked version on quality and about 3 ms per query.",
     ),
     "hybrid+ce": (
         "Hybrid + cross-encoder rerank",

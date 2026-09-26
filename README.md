@@ -74,6 +74,21 @@ stack, times the boot, runs every step of the live demo against the API and fail
 huggingface.co is reachable. The full rehearsal, with the demo script and the fallback
 screenshots, is `docs/07-demo-script.md`.
 
+Rehearsed on 2026-09-26 on the demo laptop (Windows, Docker Desktop, CPU only) with the
+network off: every step passed. Measured, with the embedding cache already built:
+
+| Step | Time |
+|---|---|
+| UNS PMF against Twente TCS, whole programme, `hybrid` | 66 ms |
+| UNS PMF against TU Delft, whole programme, `hybrid` | 70 ms |
+| Recognition estimate, `hybrid` | 0.1 s |
+| One row compared against `hybrid+ce` | about 1 s (seen in the browser, not timed) |
+| Whole programme with `hybrid+ce` | 40 s |
+
+The last one is why the demo only uses the reranker on single rows. A cold first boot,
+with no `data/.cache/`, was not timed on that run.
+
+The screenshots in `docs/screenshots/` are the fallback if the live demo fails.
 ## Working on the code
 
 You need **Python 3.11** and Node 20. 3.10 no longer works: the scrapers and the

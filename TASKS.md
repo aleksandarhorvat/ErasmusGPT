@@ -18,9 +18,9 @@ lanes have passed their gate.
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
 | **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
-| **Person B is on** | `S7-AB2`, the offline rehearsal on the demo laptop (`docs/07-demo-script.md`, now with a TU Delft step). Lane B code and labelling are done |
-| **Blocked on** | nothing. Left: `S7-AB2` rehearsal and screenshots (B), `S7-AB1` final read of the deck (both), optional `S6-A3` (A) |
-| **Last updated** | 2026-09-26 - B: whole-repo audit, lane B bugs fixed, lane A findings listed in PROGRESS "For A" |
+| **Person B is on** | nothing open. `S7-AB2` done (offline rehearsal passed, 7 screenshots in `docs/screenshots/`); left is the talk itself |
+| **Blocked on** | nothing. Left: `S7-AB1` final read of the deck (both), lane A findings in PROGRESS "For A" (A), optional `S6-A3` (A) |
+| **Last updated** | 2026-09-26 - B: offline rehearsal passed on the demo laptop, screenshots, readable evaluation table |
 
 ### Stage ladder
 
@@ -251,7 +251,7 @@ after `S5-A1`); [x] recognition estimate calibrated.
 | ID | Owner | Status | Task |
 |---|---|---|---|
 | `S7-AB1` | both | wip (A and B slides in `docs/slides/`, rebuild after `S5-A1`) | Slides: problem -> pipeline diagram -> live demo -> evaluation table -> error analysis -> limitations |
-| `S7-AB2` | both | wip (`scripts/rehearse_demo.py` and `docs/07-demo-script.md` in; the run itself is on the demo laptop) | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
+| `S7-AB2` | both | done (2026-09-26: offline run passed, timings in README, screenshots in `docs/screenshots/`) | Rehearse the live demo **offline** (pull the network cable - the image must not need it) |
 | `S7-A1` | A | done | Own the NLP/IR questions: why RRF, why a cross-encoder, why those models, what the CIs mean |
 | `S7-B1` | B | done | Own the engineering questions: the contract, the stub/real split, why SQLite, why models are baked in |
 
