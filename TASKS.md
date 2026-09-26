@@ -17,10 +17,10 @@ lanes have passed their gate.
 | **Current stage** | **Stage 7 - Defence** (stages 0 to 6 closed) |
 | **Lane A** | Luka - curriculum domain, matching engine, evaluation |
 | **Lane B** | Aleksandar - service, front end, packaging |
-| **Person A is on** | lane A done: gold set complete (680 human, 462 labelled by Claude at Luka's decision), results, kappa, calibration and error analysis on final labels; Delft and Polimi ingested for the demo |
+| **Person A is on** | lane A done. Gold set, results, kappa, calibration (cross-validated), error analysis, B's audit fixes, partner order by ARWU and distance, silver set across all six hosts (`eval/report/silver.md`, model-labelled). Optional `S6-A3` left to Luka |
 | **Person B is on** | nothing open. `S7-AB2` done (offline rehearsal passed); left is the talk itself |
 | **Blocked on** | nothing. Left: `S7-AB1` final read of the deck and rehearsing the talk (both), optional `S6-A3` (A) |
-| **Last updated** | 2026-09-26 - B: demo opens on TU Delft (A's request), screenshots dropped |
+| **Last updated** | 2026-09-26 - A: silver set across every host, manual run of the app passed; note for B in `MESSAGE_FOR_ALEKSANDAR.md` |
 
 ### Stage ladder
 
