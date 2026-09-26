@@ -112,7 +112,8 @@ the other formats, and it fails the build if one model passes 200 MB or the set 
 
 ## What the measurements say about these choices (2026-09-20)
 
-`eval/report/ablations.md` has the tables. The short version, on provisional labels:
+`eval/report/ablations.md` has the tables, measured on the pre-labels while choosing settings;
+`eval/report/results.md` has the final numbers. The short version:
 
 - The **cross-encoder, used to replace the retrieval order, lost to plain hybrid
   retrieval** on both host programmes, by 0.18 of P@1 against Twente TCS. Fused into

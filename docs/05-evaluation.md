@@ -90,8 +90,11 @@ with these rules, each of them a judgement worth defending or attacking at the d
 - **`p` is a calibrated probability, not a similarity.** `eval/fit_calibration.py` fits
   `p = sigmoid(a * z(score) + c * z(cosine) + b)` on the gold labels, treating labels 1
   and 2 as matches, and writes `data/calibration/<strategy>.json`, which the pipeline
-  loads at startup. The reliability table in that file is the evidence: over the
-  current fit, pairs predicted at 0.48 were recognised 48 % of the time.
+  loads at startup. The evidence is the `cross_validated` block in that file:
+  10-fold, grouped by home course, fitted at the serving depth (`candidate_top_n`). For `hybrid` on the final
+  labels, pairs predicted near 0.29 were recognised 29 % of the time and near 0.68,
+  64 %; the 0.4 to 0.6 bin is optimistic (0.48 predicted, 0.33 observed, 39 pairs).
+  The `reliability` block is in-sample and only shows the fit converged.
 - **Why the cosine is in the fit.** The fused scores of `hybrid` and `hybrid+ce` are
   rank-based, so the top hit of a course with no equivalent abroad scores the same as
   the top hit of a perfect match. Fitted on the score alone, Calculus 1 against a
@@ -156,8 +159,8 @@ what breaks that loop.
    `0` `1` `2` change it and `Enter` accepts. Only `checked=yes` rows count.
 4. **Cold slice.** Person B labels about 30 of the same pairs without seeing any of the
    above, for Cohen's kappa. See `docs/03-data-schema.md`.
-5. **Disclose.** Name the model and the date, say that every row was human-checked, and
-   report the correction rate.
+5. **Disclose.** Name the model and the date, say which rows were human-checked (here
+   680 of 1142, see "What was actually done" below), and report the correction rate.
 
 ### The correction rate is a result, not an admission
 
@@ -234,7 +237,11 @@ separately, the same way a coordinator does.
 
 ### Limits to state in one sentence each
 
-- Pooled judgements favour the strategies that contributed to the pool.
+- Pooled judgements favour the strategies that contributed to the pool. `dense-minilm`,
+  the baseline of the paired test, did not feed the pool, so its unjudged hits count as
+  0 and the test leans towards the pooled strategies.
+- The calibration's reliability is reported out of sample, but its 0.4 to 0.6 band is
+  optimistic, and ties inside `hybrid+ce` are broken by the reranker score.
 - Labels come from students, not from the faculty office that signs the learning
   agreement.
 - 462 of 1142 gold rows were labelled by a second model rather than checked by a

@@ -222,7 +222,7 @@ probability until it has been calibrated against real labels.
 | ID | Status | Task | Done when | Needs |
 |---|---|---|---|---|
 | `S6-A1` | done (early) | Ingest 2-3 more curricula (Masaryk, then TU Wien / Ljubljana / DTU - see `docs/01-universities.md`) | `/programmes` lists >= 4 host programmes | Stage 5 |
-| `S6-A2` | done (re-run on the final labels) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
+| `S6-A2` | done (on the final labels) | Error analysis: the 10 worst queries, classified into the failure categories in `docs/01-universities.md`, written into `eval/report/errors.md` | the table exists with counts per category | `S6-A1` |
 | `S6-A3` | todo | *Optional, Colab:* fine-tune the bi-encoder on the gold set (`MultipleNegativesRankingLoss`) and report the delta; also run `gte-modernbert-base` and `mxbai-rerank-base-v2` for the ceiling row | an extra row in `results.md`, or a documented decision not to | `S5-A2` |
 
 | `S6-A4` | done | **Recognition estimate, part 1: make the score mean something.** Fit a calibration (Platt or isotonic) on the gold set so `score_pct` is the probability that a human recognises the pair, not an arbitrary display number. Expose the same mapping to `eval/` and report calibration error | `score_pct` of 70 means roughly 70 % of such pairs were labelled 1 or 2 in the gold set | `S5-A1` |

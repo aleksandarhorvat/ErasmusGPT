@@ -103,7 +103,9 @@ uns-pmf:I102,utwente:TCS-M8,0,yes
 
 - `label`: the authoritative judgement, and the only column the metrics read.
   `2` = would be recognised outright, `1` = partial or arguable, `0` = not a match.
-- `checked`: `yes` once a human has read the row and accepted or corrected the label.
+- `checked`: `yes` once the row has a final label. For 680 rows that is a human who
+  read it; for 462 rows of Luka's half it is a second model, Claude, as decided on
+  2026-09-26. `data/gold/provenance.json` and `claude_labels_a.csv` say which.
   **Rows with `checked=no` are excluded from every reported number**, so an unfinished
   pass can never silently contaminate the results.
 
@@ -127,7 +129,8 @@ collections, not a flaw specific to this project.
 
 Person B labels an overlapping slice of about 30 pairs **cold**, from
 `data/gold/gold_pairs_b.csv`, without seeing the LLM labels or Person A's file. Cohen's
-kappa is computed against Person A's final labels on those rows.
+kappa is computed against Person A's final labels on those rows, and separately against
+Luka's own checks and Claude's labels (`eval/kappa.py`).
 
 This slice has to stay cold. If both people review the same LLM suggestions, kappa
 measures how similarly two humans anchor on a machine, which is not a useful number.

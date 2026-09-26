@@ -44,7 +44,24 @@ recognised too. Notes for whoever re-scrapes:
 - `mandatory` is true for status C (whole programme) and CM (its module). `module` is set
   only for courses that belong to exactly one module.
 
-## Recommended partner shortlist (MVP = the first two, then add outward)
+## Priority order (2026-09-26)
+
+The app lists partners in this order, from `data/partners.json`: ShanghaiRanking ARWU
+2026 band first, distance from Novi Sad second.
+
+| # | Institution | ARWU 2026 | km from Novi Sad | In the app |
+|---|---|---|---|---|
+| 1 | EPFL | 43 | 1035 | MSc Computer Science |
+| 2 | TU Delft | 151-200 | 1356 | BSc Computer Science and Engineering |
+| 3 | Politecnico di Milano | 201-300 | 828 | BSc Engineering of Computing Systems |
+| 4 | KTH | 201-300 | 1570 | MSc Computer Science |
+| 5 | University of Twente | 501-600 | 1225 | BSc TCS, BSc Applied Mathematics |
+
+Twente is last, and stays in for one reason: it is the only host with gold labels, so
+every measured number in `eval/report/` is against it. It was chosen early because its
+catalogue was the easiest to scrape, not because it is a likely destination.
+
+## Recommended partner shortlist (the original plan, kept for the record)
 
 | # | Institution | Programme | Why it is a good test case | Catalogue |
 |---|---|---|---|---|

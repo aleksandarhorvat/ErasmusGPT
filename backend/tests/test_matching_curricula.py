@@ -68,3 +68,39 @@ def test_main_exits_non_zero_on_a_broken_file(tmp_path: Path, pmf: dict) -> None
     del pmf["courses"][0]["ects"]
     assert validator.main(["validate", str(_write(tmp_path, pmf))]) == 1
     assert validator.main(["validate", str(PMF)]) == 0
+
+
+# --- the loader keeps serving when one file is bad (B's audit, 2026-09-26) ----------
+
+def test_loader_skips_a_broken_file_and_a_duplicate_programme(tmp_path: Path,
+                                                               pmf: dict) -> None:
+    import copy
+
+    from app.ingest.loader import CurriculumStore
+
+    (tmp_path / "a-good.json").write_text(json.dumps(pmf), encoding="utf-8")
+    (tmp_path / "b-broken.json").write_text("{not json", encoding="utf-8")
+    twin = copy.deepcopy(pmf)
+    twin["programme_name"] = "a second file with the same programme_id"
+    (tmp_path / "c-twin.json").write_text(json.dumps(twin), encoding="utf-8")
+    store = CurriculumStore(tmp_path)
+    programmes = store.list_programmes()
+    assert [p.programme_id for p in programmes] == [pmf["programme_id"]]
+    assert programmes[0].programme_name == pmf["programme_name"]
+
+
+def test_programmes_are_listed_home_first_then_in_partner_order(tmp_path: Path,
+                                                                pmf: dict) -> None:
+    from app.ingest.loader import CurriculumStore
+
+    curricula = tmp_path / "curricula"
+    curricula.mkdir()
+    for institution in ("aaa", "zzz", "uns-pmf", "mmm"):
+        data = dict(pmf, institution_id=institution, programme_id=f"{institution}-x")
+        (curricula / f"{institution}-x.json").write_text(json.dumps(data), encoding="utf-8")
+    (tmp_path / "partners.json").write_text(json.dumps({
+        "home": ["uns-pmf"],
+        "partners": [{"institution_id": "zzz"}, {"institution_id": "mmm"}],
+    }), encoding="utf-8")
+    listed = [p.programme_id for p in CurriculumStore(curricula).list_programmes()]
+    assert listed == ["uns-pmf-x", "zzz-x", "mmm-x", "aaa-x"]

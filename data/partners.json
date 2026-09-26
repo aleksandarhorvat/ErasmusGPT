@@ -1,0 +1,12 @@
+{
+  "note": "Order in which programmes are listed: the home programme first, then partners by ShanghaiRanking ARWU 2026 band, ties broken by distance from Novi Sad. Read by backend/app/ingest/loader.py. Twente is last on both counts that matter here and is kept because it is the only host with gold labels, not because it is preferred.",
+  "home": ["uns-pmf"],
+  "source": "https://www.shanghairanking.com/institution/<name>, ARWU 2026, retrieved 2026-09-26; distances are great-circle km from Novi Sad",
+  "partners": [
+    {"institution_id": "epfl", "arwu_2026": "43", "distance_km": 1035},
+    {"institution_id": "tudelft", "arwu_2026": "151-200", "distance_km": 1356},
+    {"institution_id": "polimi", "arwu_2026": "201-300", "distance_km": 828},
+    {"institution_id": "kth", "arwu_2026": "201-300", "distance_km": 1570},
+    {"institution_id": "utwente", "arwu_2026": "501-600", "distance_km": 1225}
+  ]
+}
