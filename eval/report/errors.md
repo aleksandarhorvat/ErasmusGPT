@@ -45,7 +45,8 @@ Not in the original hazard list, and the one that matters most for a coordinator
   Labs, both English courses, Financial mathematics 1. The system still returns five
   candidates for each.
 
-**This is an argument for a confidence floor in the UI rather than a ranking fix.** The
+**This was an argument for a confidence floor in the UI rather than a ranking fix, and
+the floor has shipped:** below 20 % the UI shows "no suitable match". The
 ranking is doing its job: it orders the catalogue by similarity. Deciding that even the
 best candidate is not good enough is a threshold question, which is `S3-B1` and B's
 recognition panel.
@@ -70,7 +71,7 @@ of `ablations.md`.
 - **I331 Seminar paper A** fails on both hosts: rank 4 against TCS, nothing in the top
   10 against Applied Mathematics. Its description says "study a chosen discipline and
   present it", which is textually identical to every project, internship and thesis in
-  both catalogues. The system cannot distinguish them, and arguably neither can a
+  both catalogues. The system cannot distinguish them, and perhaps neither can a
   reader: the courses differ by supervision and subject, not by text.
 
 ### Level collision
@@ -90,7 +91,7 @@ home material in one of its two halves.
 
 | Failure | Fix | Owner | Cost |
 |---|---|---|---|
-| No equivalent exists | confidence floor and a "no suitable match" state | B, `S3-B1` | small |
+| No equivalent exists | confidence floor and a "no suitable match" state | B, `S3-B1` | done |
 | Granularity mismatch | fine-tune the bi-encoder on the gold set | A, `S6-A3` | a day, needs labels |
 | Project courses | nothing worth doing; note it as a limit | - | - |
 | Level collision | expose the level or sequence number to the ranker | A, ADR-0004 revisit | medium, reopens a decision |

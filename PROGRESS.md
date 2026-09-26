@@ -14,6 +14,62 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [A] B's audit worked through, partners ordered by ranking and distance
+
+**Who:** Person A
+**Stage:** 7
+**Commits:** `[A] fix the rerank budget, tie-break and loader from the audit`,
+`[A] fit calibration at serving depth with grouped cross-validation`,
+`[A] order partners by arwu band and distance, bring docs up to date`
+**Tasks touched:** B's "For A" list, items 1 to 7; `S6-A2` wording
+
+### B's audit, item by item
+1. **Rerank budget.** Gone as shared state. `match_programme` splits the request's 1500
+   pairs evenly over its home courses and passes the allowance down as an argument, so
+   no course is starved and concurrent requests cannot drain each other. Candidates past
+   a course's allowance keep their retrieval rank in the reranker's list, so their fused
+   score stays on the same scale instead of halving. Three tests.
+2. **Calibration depth.** `fit_calibration.py` now scores pairs at `candidate_top_n`,
+   what the app serves. 1116 of the 1142 labelled pairs fall inside that depth.
+3. **`dense-minilm` not pooled.** Stated in `results.md` (both hosts), the generator,
+   `docs/05-evaluation.md` limits and the defence notes.
+4. **In-sample reliability.** The calibration file now carries a `cross_validated`
+   block, 10-fold grouped by home course, standardisation refitted per fold. Docs quote
+   that one, including the optimistic 0.4 to 0.6 bin (0.48 predicted, 0.33 observed).
+5. **Tie-break.** `_blend` sorts on (fused score, reranker score) and caps the nudge by
+   the previous row, so scores never rise down the list. Test over 10 courses.
+6. **Loader.** A malformed file is logged and skipped; a second file with an existing
+   `programme_id` is rejected. Test with one of each.
+7. **Docs.** `docs/05` (disclose step, calibration, limits), `docs/03`, `docs/02`,
+   `data/README.md` (seven curricula, halves, provenance), `errors.md` (floor shipped,
+   banned word gone), `eval/README.md`, `docs/06-defence-notes-a.md` (final numbers
+   throughout, the model-labelled rows, the floor), TASKS `S6-A2`.
+
+Results re-run after 1, 2 and 5: unchanged at two decimals except nDCG@10 of
+`hybrid+ce` against TCS (0.814 to 0.813). The one significant result stands:
+`hybrid` over `dense-minilm` on Recall@5 against Applied Mathematics, +0.13, p = 0.021.
+
+### Partners ordered by ranking and distance, at Luka's request
+`data/partners.json` and `CurriculumStore._order_programmes()`: home programme first,
+then ShanghaiRanking ARWU 2026 band (checked on shanghairanking.com), ties by
+great-circle distance from Novi Sad. `/programmes` now lists UNS PMF, EPFL (43), TU Delft
+(151-200), Politecnico di Milano (201-300, 828 km), KTH (201-300, 1570 km), Twente
+(501-600). Twente stays only as the evaluation host. Deck slides 2, 4 and 6 and
+`docs/01-universities.md` follow the same order and say why Twente is in at all.
+
+### Request to B
+- `App.tsx` `DEFAULT_HOST = 'utwente-tcs-bsc'`: please drop it and default to the first
+  bachelor host in the `/programmes` order, which is now TU Delft. The list order is the
+  priority; EPFL is first but a master's.
+- `docs/07-demo-script.md`: the demo can run Novi Sad against TU Delft end to end; deck
+  slide 4 now says so. Twente only for the evaluation page.
+
+### Next
+- **A:** lane A is done. `S6-A3` stays optional; Luka to decide.
+- **B:** the two items above, `S7-AB2`.
+
+---
+
 ## 2026-09-26 - [B] Whole-repo audit: lane B bugs fixed, lane A findings listed
 
 **Who:** Person B

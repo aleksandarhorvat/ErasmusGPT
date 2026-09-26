@@ -280,7 +280,7 @@ def slide_problem(deck):
         "many ECTS of the degree would carry over.",
     ], size=18)
     stats = [("50", "home courses, UNS PMF BSc Informatics"),
-             ("6", "host programmes: Twente x2, Delft, Milan, EPFL, KTH"),
+             ("6", "host programmes: EPFL, Delft, Milan, KTH, Twente x2"),
              (str(courses_indexed()), "courses indexed, English descriptions")]
     for index, (number, label) in enumerate(stats):
         top = Inches(1.6 + index * 1.75)
@@ -362,7 +362,7 @@ def slide_demo(deck):
          color=WHITE, bold=True, font=HEAD_FONT)
     steps = [
         "docker compose up, network cable out: the models are baked into the image.",
-        "Home UNS PMF Informatics, host Twente TCS, strategy hybrid: 50 courses in about 0.1 s.",
+        "Home UNS PMF Informatics, host TU Delft, strategy hybrid: 50 courses in about 0.1 s.",
         "Open Computer networks: the evidence sentence pair explains the match.",
         "Recognition panel: expected ECTS carried over, with likely and borderline bands.",
         "Switch the host to TU Delft, never evaluated or tuned on: it still matches.",
@@ -423,7 +423,7 @@ def queries_of(results) -> str:
 def slide_results(deck, results, provisional):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
-    title(slide, "Results against Twente TCS")
+    title(slide, "Measured results (labelled host: Twente TCS)")
     badge(slide, provisional)
     configs = [c for c in ("bm25", "dense-minilm", "dense-bge", "hybrid", "hybrid+ce")
                if c in results]

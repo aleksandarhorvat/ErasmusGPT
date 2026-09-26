@@ -6,7 +6,10 @@ Owner: **Person A**. Protocol: `docs/05-evaluation.md`.
 python eval/run_eval.py --host-programme utwente-tcs-bsc --out eval/report
 python eval/make_smoke.py            # 10 courses x 4 strategies -> report/smoke.md
 python eval/kappa.py                 # A against B on the cold slice -> report/kappa.md
-python eval/fit_calibration.py --host-programme utwente-tcs-bsc --strategy hybrid
+python eval/fit_calibration.py --host-programme utwente-tcs-bsc \
+    --host-programmes utwente-tcs-bsc utwente-am-bsc --strategy hybrid
+python eval/run_eval.py --host-programme utwente-am-bsc --out eval/report/utwente-am-bsc
+python eval/error_analysis.py --host-programme utwente-tcs-bsc
 ```
 
 `run_eval.py` needs a gold set with `checked=yes` rows and exits 1 with the task to run

@@ -323,7 +323,9 @@ def write_report(
         "Unchecked rows are excluded from every number above.",
         "",
         "Unlabelled pairs count as 0. That slightly favours the strategies that fed the",
-        "pool, which is a known property of pooled collections rather than a fault here.",
+        "pool (`dense` and `hybrid+ce`), a known property of pooled collections. The",
+        "baseline `dense-minilm` did not feed the pool, so the paired test leans towards",
+        "the pooled strategies.",
         "",
     ]
     (out_dir / "results.md").write_text("\n".join(lines), encoding="utf-8")
