@@ -48,6 +48,53 @@ backend (the stub-only failures are expected).
 
 ---
 
+## 2026-09-26 - [A] Silver set across all six hosts, and a manual run of the app
+
+**Who:** Person A
+**Stage:** 7
+**Commit:** `[A] add a model-labelled silver set across every host`
+**Tasks touched:** none on the board; breadth evaluation at Luka's request
+
+### Done
+- `eval/make_silver_pool.py`: 20 of 50 home courses stratified by subject type
+  (`data/silver/home_strata.csv`), the same 20 against all six hosts, pooled from the
+  top 5 of all five configurations, `dense-minilm` included. 1239 pairs.
+- `data/silver/silver_labels.csv`: labelled by Claude, blind to rankings, strategies and
+  the gold set. Not human-checked; zero human time, at Luka's request.
+- `eval/run_silver.py` -> `eval/report/silver.md` and `silver.csv`: @5 metrics only,
+  since every configuration is fully judged to rank 5. Three sampler tests.
+- Deck: new slide "All six host universities", tagged model-judged.
+- `docs/05-evaluation.md`, `docs/06-defence-notes-a.md`, `data/README.md`,
+  `eval/README.md` describe it. The defence notes also answer "why is rank 5 at 37 %
+  and rank 4 at 24 %".
+
+### Results (`eval/report/silver.md`)
+
+| | Recall@5 | P@1 |
+|---|---|---|
+| `bm25` | 0.91 | 0.84 |
+| `dense-minilm` | 0.92 | 0.62 |
+| `hybrid` | 0.88 | 0.70 |
+| `hybrid+ce` | 0.87 | 0.67 |
+
+61 queries over six hosts; nothing significant against the baseline. BM25 leads on P@1:
+standard course titles make keyword overlap a strong signal, and a model labeller may
+lean on the same overlap. Floor: declines 30 of 59 no-counterpart pairs, wrongly
+declines 6 of 61. Silver against human-checked gold rows: weighted kappa 0.63.
+
+### Manual run of the app
+Backend on the real models plus Vite: programme order as intended, a TU Delft match
+reads cleanly, "no suitable match" shows for 10 of 50 courses, bad input answers 400
+and 404, and a 79-course `hybrid+ce` request finishes in 46 s with late courses at the
+same probability scale as early ones (57 % against 61 % mean best). Docker is not
+installed on this machine, so the container run is untested here (`S7-AB2`).
+
+### Request to B
+See `MESSAGE_FOR_ALEKSANDAR.md` at the repo root: default host, demo on Delft, the
+silver report on the evaluation page, `S7-AB2`. Delete that file once read.
+
+---
+
 ## 2026-09-26 - [A] B's audit worked through, partners ordered by ranking and distance
 
 **Who:** Person A

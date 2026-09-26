@@ -57,6 +57,16 @@ whether this means the project failed:** no, the comparison is the project. An u
 claim that reranking helps would have been worth less than a measured demonstration of
 when it does not, with the reason.
 
+## "Does it work beyond Twente?"
+
+Yes, with a caveat on who judged it. The silver set (`eval/report/silver.md`) runs the
+same 20 stratified home courses against all six hosts, labelled blind by a model. Recall@5
+is 0.87 to 0.92 for every strategy; P@1 is best for plain BM25 (0.84) against 0.70 for
+`hybrid`, and nothing differs significantly from the baseline. The floor declines half
+of the (course, host) pairs that have no counterpart, and wrongly declines 6 of 61 that
+do. Silver labels agree with the human-checked gold rows at weighted kappa 0.63, about
+as well as the original pre-labels agreed with Aleksandar's blind labels.
+
 ## Why these models
 
 | Role | Model | Why |
@@ -106,6 +116,14 @@ cross-validated reliability in `data/calibration/hybrid.json`: 0.29 predicted, 0
 observed; 0.68 predicted, 0.64 observed. The 0.4 to 0.6 band is optimistic (0.48
 against 0.33), say so if asked. For `bm25` and `dense` the number is a display scale,
 and the API says so per strategy. Below 20 % the UI shows "no suitable match".
+
+**"Why does rank 5 show 37 % and rank 4 only 24 %?"** Because the two numbers answer
+different questions. The rank is the retrieval order, fused from BM25 and dense ranks;
+it is what Recall and MRR measure. The percentage is the calibrated chance that a
+coordinator accepts the pair, and it also weighs the absolute text similarity, which the
+ranks cannot see. Re-sorting by the percentage would be a new ranking trained on the
+same labels it is evaluated on, so it was not done. The recognition estimate uses the
+most probable of the five, not rank 1, for the same reason.
 
 The recognition estimate is then the sum over a study path of `p(best match) x ECTS`,
 with the path defined by a module and a 180 ECTS budget so the denominator is a degree

@@ -212,6 +212,28 @@ weighted kappa 0.52, Luka against Aleksandar 0.73 on the 8 cold pairs Luka check
 himself, and the pre-labels against Aleksandar 0.63. Claude is stricter than the
 pre-labels, mostly turning partial matches (1) into 0.
 
+### The silver set: every host, no human time (2026-09-26)
+
+The gold set covers Twente only. To say anything about the other hosts at no human cost,
+a second, separately reported set was built:
+
+- `eval/make_silver_pool.py`: 20 of the 50 home courses, stratified by subject type
+  (`data/silver/home_strata.csv`, eight strata, proportional allocation, fixed seed),
+  the same 20 against all six hosts. Pool: the top 5 of all five configurations,
+  `dense-minilm` included, so every configuration is fully judged to rank 5. 1239 pairs.
+- Labels: Claude, blind to the rankings, the strategies and the gold set
+  (`data/silver/silver_labels.csv`). No human checked them.
+- `eval/run_silver.py` writes `eval/report/silver.md`: @5 metrics per host and pooled,
+  paired tests, the "no suitable match" floor, and the silver labels' agreement with
+  the gold set on the Twente pairs both hold (weighted kappa 0.63 against the
+  human-checked rows).
+
+What it says: Recall@5 is level across strategies on all hosts, no difference against
+the baseline is significant, and BM25 has the best P@1 overall (0.84 against 0.70 for
+`hybrid`). Two readings, both worth saying: course titles are standard across Europe,
+so keyword overlap is a strong signal; and a model labeller may itself lean on the same
+overlap. The gold set remains the headline.
+
 ### Known weakness of this design
 
 Reviewing a suggested label is not the same as forming one. People agree with a proposed

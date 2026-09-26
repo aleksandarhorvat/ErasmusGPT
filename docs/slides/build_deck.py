@@ -472,6 +472,61 @@ def slide_results(deck, results, provisional):
         "eval/report/utwente-am-bsc/results.md.")
 
 
+def slide_silver(deck):
+    """Every host on the model-judged silver set, if eval/run_silver.py has run."""
+    path = REPO_ROOT / "eval" / "report" / "silver.csv"
+    if not path.exists():
+        return
+    with path.open(encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    background(slide, WHITE)
+    title(slide, "All six host universities")
+    tag = box(slide, Inches(9.35), Inches(0.5), Inches(3.4), Inches(0.42), GOLD)
+    run = tag.text_frame.paragraphs[0].add_run()
+    run.text = "MODEL-JUDGED (SILVER) LABELS"
+    run.font.size, run.font.bold, run.font.name = Pt(12), True, BODY_FONT
+    run.font.color.rgb = NAVY
+    tag.text_frame.paragraphs[0].alignment = PP_ALIGN.CENTER
+    configs = ["bm25", "dense-minilm", "hybrid", "hybrid+ce"]
+    hosts = [r["host"] for r in rows if r["config"] == "bm25" and r["host"] != "all"]
+    names = {"epfl-cs-msc": "EPFL", "tudelft-cse-bsc": "TU Delft",
+             "polimi-ecs-bsc": "Polimi", "kth-cs-msc": "KTH",
+             "utwente-am-bsc": "Twente AM", "utwente-tcs-bsc": "Twente TCS", "all": "All"}
+    value = {(r["config"], r["host"]): r for r in rows}
+    shape = slide.shapes.add_table(len(hosts) + 2, len(configs) + 2, Inches(0.6),
+                                   Inches(1.6), Inches(8.4), Inches(4.6))
+    table = shape.table
+    header = ["P@1 (Recall@5)", "Queries"] + configs
+    for column, text_value in enumerate(header):
+        table.cell(0, column).text = text_value
+    for row_index, host in enumerate(hosts + ["all"], start=1):
+        table.cell(row_index, 0).text = names.get(host, host)
+        table.cell(row_index, 1).text = value[("bm25", host)]["queries"]
+        for column, config in enumerate(configs, start=2):
+            row = value[(config, host)]
+            table.cell(row_index, column).text = (
+                f"{float(row['P@1']):.2f} ({float(row['Recall@5']):.2f})")
+    for cell_row in table.rows:
+        for cell in cell_row.cells:
+            for paragraph in cell.text_frame.paragraphs:
+                for text_run in paragraph.runs:
+                    text_run.font.size = Pt(13)
+                    text_run.font.name = BODY_FONT
+    text(slide, Inches(9.4), Inches(1.7), Inches(3.4), Inches(5.0), [
+        "20 home courses stratified by subject, the same against every host, pooled "
+        "from all five strategies and labelled blind by a model.",
+        "Recall is level everywhere. Plain BM25 has the best first answer: standard "
+        "course titles make keyword overlap a strong signal.",
+        "Silver against the human-checked gold rows: weighted kappa 0.63.",
+    ], size=14)
+    slide.notes_slide.notes_text_frame.text = (
+        "A. Say first that these labels are a model's, not a human's, and why they exist: "
+        "the gold set covers Twente only. Numbers from eval/report/silver.md. BM25's P@1 "
+        "lead is not tested for significance there; the paired tests against the "
+        "baseline are all non-significant.")
+
+
 def slide_reranker(deck, provisional):
     slide = deck.slides.add_slide(deck.slide_layouts[6])
     background(slide, WHITE)
@@ -697,6 +752,7 @@ def main() -> int:
     slide_demo(deck)
     slide_gold(deck, tag)
     slide_results(deck, results, tag)
+    slide_silver(deck)
     slide_reranker(deck, tag)
     slide_recognition(deck, provisional)
     slide_honest_ui(deck)

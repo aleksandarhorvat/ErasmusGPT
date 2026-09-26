@@ -10,6 +10,8 @@ python eval/fit_calibration.py --host-programme utwente-tcs-bsc \
     --host-programmes utwente-tcs-bsc utwente-am-bsc --strategy hybrid
 python eval/run_eval.py --host-programme utwente-am-bsc --out eval/report/utwente-am-bsc
 python eval/error_analysis.py --host-programme utwente-tcs-bsc
+python eval/make_silver_pool.py     # silver pool, every host (labels are a model's)
+python eval/run_silver.py           # -> report/silver.md
 ```
 
 `run_eval.py` needs a gold set with `checked=yes` rows and exits 1 with the task to run

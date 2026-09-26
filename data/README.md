@@ -12,6 +12,9 @@
 - `partners.json` - the order programmes are listed in: home first, then ARWU band, then
   distance from Novi Sad.
 - `calibration/*.json` - the fitted probability models, one per calibrated strategy.
+- `silver/` - the model-labelled breadth set across all six hosts: `home_strata.csv`,
+  `silver_pool.csv`, `silver_labels.csv`. Built by `eval/make_silver_pool.py`,
+  reported by `eval/run_silver.py`. Not human-checked.
 
   Schema for the gold files: `docs/03-data-schema.md` section Gold set.
   Protocol: `docs/05-evaluation.md`.
