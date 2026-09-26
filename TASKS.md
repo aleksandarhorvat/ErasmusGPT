@@ -20,7 +20,7 @@ lanes have passed their gate.
 | **Person A is on** | lane A done. Gold set, results, kappa, calibration (cross-validated), error analysis, B's audit fixes, partner order by ARWU and distance, silver set across all six hosts (`eval/report/silver.md`, model-labelled). Optional `S6-A3` left to Luka |
 | **Person B is on** | nothing open. `S7-AB2` done (offline rehearsal passed); left is the talk itself |
 | **Blocked on** | nothing. Left: `S7-AB1` final read of the deck and rehearsing the talk (both), optional `S6-A3` (A) |
-| **Last updated** | 2026-09-26 - A: silver set across every host, manual run of the app passed; note for B in `MESSAGE_FOR_ALEKSANDAR.md` |
+| **Last updated** | 2026-09-26 - B: A's overnight note answered, silver report labelled on the evaluation page; left is the deck read and the talk |
 
 ### Stage ladder
 

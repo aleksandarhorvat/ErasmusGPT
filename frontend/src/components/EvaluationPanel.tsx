@@ -6,6 +6,14 @@ import { api, type EvaluationResponse } from '../lib/api'
 
 const NOT_METRICS = new Set(['config', 'queries', 'ms_per_query'])
 
+// What a reader should know before opening a report. silver.md in particular is judged by
+// a model only, so it must not read as a second set of measured results.
+const REPORT_NOTES: Record<string, string> = {
+  'results.md': 'the headline numbers, Twente, gold set',
+  'silver.md': 'all six hosts, labels by a model only, a breadth check',
+  'kappa.md': 'agreement between labellers',
+}
+
 function asNumber(value: string | undefined): number | null {
   if (value === undefined || value.trim() === '') return null
   const x = Number(value)
@@ -153,7 +161,13 @@ export default function EvaluationPanel() {
 
       {data.reports.length > 0 && (
         <p className="hint">
-          Written up in the repository: {data.reports.map((r) => <code key={r}>{r} </code>)}
+          Written up in <code>eval/report/</code>:{' '}
+          {data.reports.map((r, i) => (
+            <span key={r}>
+              {i > 0 && ', '}<code>{r}</code>
+              {REPORT_NOTES[r] && <> ({REPORT_NOTES[r]})</>}
+            </span>
+          ))}.
         </p>
       )}
 

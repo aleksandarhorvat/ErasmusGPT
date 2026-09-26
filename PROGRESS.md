@@ -14,6 +14,35 @@ project is in and what to do next.
 
 ---
 
+## 2026-09-26 - [B] Luka's overnight note answered, silver report labelled
+
+**Who:** Person B
+**Stage:** 7
+**Commit:** `[B] label the silver report and remove the note for b`
+**Tasks touched:** A's `MESSAGE_FOR_ALEKSANDAR.md`, items 1 to 4
+
+### Done
+- Read and removed `MESSAGE_FOR_ALEKSANDAR.md`, as it asked.
+- Item 1 (default host, demo on Delft): already in `342b1dd`.
+- Item 2: the evaluation page lists every report in `eval/report/` with a short note;
+  `silver.md` reads "all six hosts, labels by a model only, a breadth check", so it does
+  not pass for a second set of measured results. `results.md` is marked as the headline.
+- Item 3 (`S7-AB2`): done before the note was written. Offline rehearsal passed on the
+  demo laptop, and again online after the Delft change (every step ok, `hybrid` 63 ms
+  against Delft, `hybrid+ce` whole programme 40 s). The screenshots were dropped on
+  purpose: if the live demo fails, we go on to the evaluation slides. The cold first
+  boot with seven curricula was not timed; the running stack had its cache.
+- Item 4 (read the deck, slides 6 and 7): for both of us, with the talk rehearsal.
+
+### Checked on Luka's two commits
+ruff, check_style, check_gold, pytest (147 passed), frontend build. Nothing in lane B
+needed changing for the silver set.
+
+### Next
+- **Both:** read the deck end to end and rehearse the talk.
+
+---
+
 ## 2026-09-26 - [B] Demo opens on TU Delft, screenshots dropped
 
 **Who:** Person B
